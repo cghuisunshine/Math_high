@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>不等式的证明方法｜大纲、例题与解答</title>
+  <script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    :root{--ink:#193b38;--muted:#61716e;--teal:#0c8f7f;--deep:#076c62;--mint:#dff4ed;--orange:#f39a3e;--pale:#fff3e4;--paper:#fffdf8;--line:#dbe6e1;--shadow:0 18px 55px rgba(19,69,62,.1)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",Arial,sans-serif}button,a{font:inherit}a{color:inherit;text-decoration:none}
+    .hero{position:relative;overflow:hidden;padding:0 max(22px,calc((100vw - 1180px)/2));color:#fff;background:radial-gradient(circle at 88% 8%,rgba(255,255,255,.2) 0 9%,transparent 9.2%),linear-gradient(135deg,#087b70,#11a08c 62%,#35b798)}
+    .hero:after{content:"";position:absolute;width:370px;height:370px;right:-115px;bottom:-250px;border:72px solid rgba(243,154,62,.72);border-radius:50%}
+    nav{position:relative;z-index:2;display:flex;min-height:76px;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.23)}.brand{display:flex;align-items:center;gap:11px;font-weight:800}.mark{display:grid;width:35px;height:35px;place-items:center;border-radius:10px;background:var(--orange);font:700 20px Georgia}.all{padding:10px 17px;border:1px solid rgba(255,255,255,.5);border-radius:99px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer}.all:hover{background:#fff;color:var(--deep)}
+    .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.35fr .85fr;gap:65px;align-items:center;padding:68px 0 84px}.overline{margin:0 0 17px;color:#caf7e9;font-size:13px;font-weight:800;letter-spacing:.15em}.hero h1{margin:0;font:700 clamp(45px,6vw,73px)/1.08 Georgia,"Noto Serif SC",serif;letter-spacing:-.04em}.hero h1 span{display:block;color:#ffe6bd}.intro{max-width:700px;margin:24px 0;color:#e7fff8;font-size:18px;line-height:1.85}.start{display:inline-flex;margin-top:8px;padding:13px 23px;border-radius:13px;background:var(--orange);color:#38230c;font-weight:800}
+    .route{padding:27px;border:1px solid rgba(255,255,255,.27);border-radius:23px;background:rgba(3,75,68,.38);backdrop-filter:blur(8px)}.route>p{margin:0 0 14px;color:#bff4e5;font-size:13px;font-weight:800;letter-spacing:.1em}.route div{display:grid;grid-template-columns:40px 1fr;gap:12px;padding:14px 0;border-top:1px solid rgba(255,255,255,.17);line-height:1.6}.route b{color:#ffc775;font:700 20px Georgia}
+    .position{position:relative;z-index:3;display:flex;max-width:1180px;margin:-27px auto 0;padding:21px 27px;align-items:center;justify-content:space-between;gap:25px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:var(--shadow)}.position ul{display:flex;flex-wrap:wrap;gap:10px 25px;margin:0;padding:0;list-style:none;color:var(--muted);font-size:14px}.position li:before{content:"✓";margin-right:7px;color:var(--teal);font-weight:900}
+    .content{max-width:1040px;margin:auto;padding:90px 24px 72px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:31px}.section-head small{color:var(--teal);font-weight:900;letter-spacing:.15em;text-transform:uppercase}.section-head h2{margin:7px 0 0;font:700 clamp(32px,4vw,44px) Georgia,"Noto Serif SC",serif}.section-head p{max-width:360px;margin:0;color:var(--muted);font-size:14px;line-height:1.7}
+    .methods{display:grid;grid-template-columns:repeat(2,1fr);gap:17px;margin-bottom:78px}.method{position:relative;padding:24px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 8px 26px rgba(18,67,60,.055)}.method:nth-child(5){grid-column:1/-1}.method .index{display:grid;width:36px;height:36px;place-items:center;border-radius:10px;background:var(--mint);color:var(--deep);font:700 17px Georgia}.method h3{margin:15px 0 9px;font-size:20px}.method p{margin:0;color:var(--muted);line-height:1.75}.method ol{margin:13px 0 0;padding-left:21px;color:#38534f;line-height:1.8}.method .key{display:inline-block;margin-top:14px;padding:6px 10px;border-radius:7px;background:var(--pale);color:#8a511a;font-size:12px;font-weight:800}
+    .toc{display:flex;flex-wrap:wrap;gap:9px;margin:-8px 0 28px}.toc a{padding:8px 12px;border:1px solid var(--line);border-radius:99px;background:#fff;color:var(--deep);font-size:13px;font-weight:750}.toc a:hover{border-color:#8dc9ba;background:var(--mint)}
+    .cards{display:grid;gap:27px}.card{overflow:hidden;border:1px solid var(--line);border-radius:21px;background:#fff;box-shadow:0 9px 32px rgba(18,67,60,.065)}.card.open{border-color:#9fcfc3;box-shadow:var(--shadow)}
+    .card-head{display:flex;justify-content:space-between;gap:20px;padding:26px 29px 19px}.badges{display:flex;flex-wrap:wrap;gap:8px}.badge{padding:6px 10px;border-radius:99px;background:var(--teal);color:#fff;font-size:12px;font-weight:800}.badge.method-tag{background:var(--mint);color:var(--deep)}.card h3{margin:12px 0 0;font:700 25px Georgia,"Noto Serif SC",serif}.difficulty{color:var(--orange);font-size:10px;letter-spacing:2px;white-space:nowrap}.difficulty span{display:block;margin-bottom:7px;color:#8a9895;font-size:11px;letter-spacing:0}
+    .question{margin:0 29px 23px;padding:21px 24px;border-left:4px solid var(--orange);border-radius:0 13px 13px 0;background:#fffbf4}.kicker{color:#a76019;font-size:11px;font-weight:900;letter-spacing:.13em}.question p{margin:9px 0;line-height:1.8}.math{overflow-x:auto;padding:1px 0;text-align:center}mjx-container[jax="SVG"]>svg{display:inline}
+    .toggle{display:flex;width:100%;align-items:center;justify-content:center;gap:8px;padding:15px;border:0;border-top:1px solid var(--line);background:#f5faf8;color:var(--deep);font-weight:800;cursor:pointer}.toggle:hover{background:#eaf6f2}.arrow{transition:.2s}.open .arrow{transform:rotate(180deg)}
+    .solution{display:none;padding:5px 29px 30px;border-top:1px solid var(--line)}.open .solution{display:block}.step{display:grid;grid-template-columns:33px 1fr;gap:14px;padding:26px 0 3px}.num{display:grid;width:31px;height:31px;place-items:center;border-radius:50%;background:var(--teal);color:#fff;font:700 16px Georgia}.step h4{margin:3px 0 8px;font-size:17px}.step p{margin:7px 0;color:#425b57;line-height:1.8}.answer{display:grid;grid-template-columns:auto 1fr;gap:5px 18px;align-items:center;margin-top:23px;padding:20px 22px;border-radius:14px;background:var(--mint)}.answer>span{grid-row:1/3;align-self:stretch;display:grid;place-items:center;padding-right:18px;border-right:1px solid #aed8cd;color:var(--deep);font-size:12px;font-weight:900}.answer strong{color:#084f47;font-size:20px}.answer p{margin:0;color:#4b6a65;font-size:14px;line-height:1.6}
+    .summary{max-width:1180px;margin:0 auto 60px;padding:44px 50px;border-radius:25px;background:#133f3a;color:#fff}.summary h2{margin:0 0 13px;font:700 31px Georgia,"Noto Serif SC",serif}.summary p{margin:0;color:#c9e2dd;line-height:1.8}.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:23px}.tip{padding:16px;border:1px solid rgba(255,255,255,.13);border-radius:12px}.tip b{display:block;margin-bottom:7px;color:#ffd191}footer{display:flex;max-width:1180px;margin:auto;padding:0 24px 40px;justify-content:space-between;color:#748682;font-size:13px}footer a{color:var(--deep);font-weight:800}
+    @media(max-width:820px){.hero-inner{grid-template-columns:1fr;gap:35px}.position,.section-head{align-items:flex-start;flex-direction:column}.position{margin-inline:18px}.position ul{display:grid;gap:8px}.methods{grid-template-columns:1fr}.method:nth-child(5){grid-column:auto}.tips{grid-template-columns:1fr}.summary{margin-inline:18px}}
+    @media(max-width:560px){.hero{padding-inline:18px}.brand{font-size:13px}.all{padding:8px 10px;font-size:12px}.hero-inner{padding:54px 0 68px}.hero h1{font-size:42px}.intro{font-size:16px}.route{padding:21px}.position{padding:19px}.content{padding:70px 14px 54px}.card-head{padding:22px 19px 16px}.card h3{font-size:21px}.difficulty{display:none}.question{margin:0 19px 19px;padding:18px}.solution{padding:3px 19px 24px}.step{grid-template-columns:27px 1fr;gap:10px}.num{width:27px;height:27px}.answer{grid-template-columns:1fr}.answer>span{grid-row:auto;justify-content:start;padding:0 0 8px;border:0;border-bottom:1px solid #aed8cd}.summary{padding:30px 22px}}
+    @media print{.hero{background:#fff;color:var(--ink);padding:0}.hero-inner{padding:25px 0}.intro,.overline{color:var(--ink)}nav,.start,.route,.position,.toggle,footer{display:none}.content{padding-top:25px}.solution{display:block!important}.card{break-inside:avoid;box-shadow:none}.summary{background:#fff;color:var(--ink);border:1px solid var(--line)}}
+  </style>
+</head>
+<body>
+  <header class="hero" id="top">
+    <nav><a class="brand" href="#top"><span class="mark">P</span><span>高中数学 · 不等式证明</span></a><button class="all" id="toggleAll">显示全部解答</button></nav>
+    <div class="hero-inner">
+      <section><p class="overline">高一数学 SS 班 · 暑假专题 04</p><h1>不等式证明<span>五种核心方法</span></h1><p class="intro">从比较法到构造法，系统整理证明思路、使用步骤与七道典型例题。</p><a class="start" href="#outline">查看方法大纲</a></section>
+      <aside class="route"><p>证明思路选择</p><div><b>01</b><span>先观察能否直接作差或作商</span></div><div><b>02</b><span>再判断正推、逆推或反证是否更自然</span></div><div><b>03</b><span>遇到和式与递推结构考虑放缩或构造</span></div></aside>
+    </div>
+  </header>
+  <section class="position"><strong>第 4 课 · 不等式的证明与解</strong><ul><li>比较法</li><li>综合法与分析法</li><li>反证法</li><li>放缩法</li><li>构造法</li></ul></section>
+
+  <main class="content">
+    <section id="outline">
+      <div class="section-head"><div><small>Lesson outline</small><h2>方法大纲</h2></div><p>每种方法都围绕同一个问题：如何把“要证明的结论”转化为已经知道正确的事实。</p></div>
+      <div class="methods">
+        <article class="method"><span class="index">01</span><h3>比较法</h3><p>通过比较两个式子的差或商来判断大小，是最基本的不等式证明方法。</p><ol><li>作差：左边减右边</li><li>变形：配方、通分或因式分解</li><li>判断差的正、负或零</li></ol><span class="key">两边为正时也可作商，与1比较</span></article>
+        <article class="method"><span class="index">02</span><h3>综合法与分析法</h3><p>综合法“执因索果”，从已知条件逐步推出结论；分析法“执果索因”，从结论倒推成立条件。</p><ol><li>综合法：已知 → 定理或恒等式 → 结论</li><li>分析法：结论 → 充分条件 → 显然事实</li></ol><span class="key">分析寻找路线，综合完成书写</span></article>
+        <article class="method"><span class="index">03</span><h3>反证法</h3><p>假设结论的否定成立，再结合条件推出矛盾，从而肯定原结论。</p><ol><li>假设结论不成立</li><li>从假设出发推理</li><li>得到与条件或已知事实的矛盾</li></ol><span class="key">适合“至少、至多、不能同时、唯一”等结论</span></article>
+        <article class="method"><span class="index">04</span><h3>放缩法</h3><p>利用不等式传递性，把复杂表达式适当放大或缩小，连接到目标结论。</p><ol><li>寻找易比较的中间式</li><li>保证每一步方向正确</li><li>让和式出现裂项相消或可求和结构</li></ol><span class="key">放缩的尺度决定证明是否简洁</span></article>
+        <article class="method"><span class="index">05</span><h3>构造法</h3><p>根据条件与结论之间的信息联系，构造恒等式、辅助变量、方程或数学模型。</p><ol><li>识别条件中的关键结构</li><li>构造与目标相连的恒等式或模型</li><li>研究模型并返回原问题</li></ol><span class="key">难点不在计算，而在“构造什么”</span></article>
+      </div>
+    </section>
+
+    <section id="examples">
+      <div class="section-head"><div><small>Worked examples</small><h2>问题与详细解答</h2></div><p>答案默认隐藏。建议先判断适合的方法，再展开解答。</p></div>
+      <nav class="toc" aria-label="例题目录"><a href="#p1">例题1</a><a href="#r1">阅读1</a><a href="#p2">例题2</a><a href="#r2">阅读2</a><a href="#p3">例题3</a><a href="#p4">例题4</a><a href="#p5">例题5</a></nav>
+      <div class="cards">
+        <article class="card" id="p1">
+          <header class="card-head"><div><div class="badges"><span class="badge">例题 1</span><span class="badge method-tag">作差比较法</span></div><h3>三元立方和不等式</h3></div><div class="difficulty"><span>难度</span>●●●○○○○</div></header>
+          <section class="question"><span class="kicker">题目</span><p>已知 \(a,b,c\) 都是非负实数，证明：</p><div class="math">\[a^3+b^3+c^3\geq3abc.\]</div></section>
+          <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+          <section class="solution"><div class="step"><span class="num">1</span><div><h4>作差并因式分解</h4><div class="math">\[\begin{aligned}a^3+b^3+c^3-3abc&=(a+b+c)(a^2+b^2+c^2-ab-bc-ca)\\&=\frac12(a+b+c)\big[(a-b)^2+(b-c)^2+(c-a)^2\big].\end{aligned}\]</div></div></div><div class="step"><span class="num">2</span><div><h4>判断符号</h4><p>因为 \(a+b+c\geq0\)，平方和也非负，所以整个差非负。</p></div></div><div class="answer"><span>结论</span><strong>\(a^3+b^3+c^3\geq3abc\)</strong><p>当且仅当 \(a=b=c\) 时等号成立。</p></div></section>
+        </article>
+
+        <article class="card" id="r1">
+          <header class="card-head"><div><div class="badges"><span class="badge">阅读 1</span><span class="badge method-tag">分析法与综合法</span></div><h3>根式大小比较</h3></div><div class="difficulty"><span>难度</span>●●○○○○○</div></header>
+          <section class="question"><span class="kicker">题目</span><p>证明：</p><div class="math">\[\sqrt3+\sqrt7<2\sqrt5.\]</div></section>
+          <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+          <section class="solution"><div class="step"><span class="num">1</span><div><h4>分析：从结论倒推</h4><p>两边都为正，原不等式只需证明</p><div class="math">\[(\sqrt3+\sqrt7)^2<(2\sqrt5)^2\iff10+2\sqrt{21}<20\iff\sqrt{21}<5\iff21<25.\]</div></div></div><div class="step"><span class="num">2</span><div><h4>综合：按相反方向书写</h4><p>由 \(21<25\)，得 \(\sqrt{21}<5\)，所以 \(10+2\sqrt{21}<20\)。两边均为正，开平方后得到目标结论。</p></div></div><div class="answer"><span>结论</span><strong>\(\sqrt3+\sqrt7<2\sqrt5\)</strong><p>分析法寻找证明路线，综合法把证明写成从已知到结论的形式。</p></div></section>
+        </article>
+
+        <article class="card" id="p2">
+          <header class="card-head"><div><div class="badges"><span class="badge">例题 2</span><span class="badge method-tag">反证法</span></div><h3>三个数量不能同时过大</h3></div><div class="difficulty"><span>难度</span>●●●●○○○</div></header>
+          <section class="question"><span class="kicker">题目</span><p>已知 \(a,b,c\) 是小于1的正数。证明：</p><div class="math">\[(1-a)b,\qquad(1-b)c,\qquad(1-c)a\]</div><p>不可能同时大于 \(\frac14\)。</p></section>
+          <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+          <section class="solution"><div class="step"><span class="num">1</span><div><h4>假设结论不成立</h4><p>假设三个数都大于 \(\frac14\)，相乘得到</p><div class="math">\[a(1-a)b(1-b)c(1-c)>\frac1{64}.\]</div></div></div><div class="step"><span class="num">2</span><div><h4>推出矛盾</h4><p>对 \(0<a<1\)，有</p><div class="math">\[a(1-a)=\frac14-\left(a-\frac12\right)^2\leq\frac14.\]</div><p>对 \(b,c\) 同理，所以乘积至多为 \(\left(\frac14\right)^3=\frac1{64}\)，与严格大于 \(\frac1{64}\) 矛盾。</p></div></div><div class="answer"><span>结论</span><strong>三个数不能同时大于 \(\frac14\)</strong><p>换言之，其中至少有一个不大于 \(\frac14\)。</p></div></section>
+        </article>
+
+        <article class="card" id="r2">
+          <header class="card-head"><div><div class="badges"><span class="badge">阅读 2</span><span class="badge method-tag">均值放缩</span></div><h3>经典数列的单调性</h3></div><div class="difficulty"><span>难度</span>●●●●○○○</div></header>
+          <section class="question"><span class="kicker">题目</span><p>对任意正整数 \(n\)，证明：</p><div class="math">\[\left(1+\frac1n\right)^n<\left(1+\frac1{n+1}\right)^{n+1}.\]</div></section>
+          <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+          <section class="solution"><div class="step"><span class="num">1</span><div><h4>转化为几何平均与算术平均</h4><p>对两边开 \(n+1\) 次方，只需证明</p><div class="math">\[\sqrt[n+1]{\left(1+\frac1n\right)^n}<1+\frac1{n+1}.\]</div><p>左边是 \(n\) 个 \(1+\frac1n\) 与一个 \(1\) 的几何平均数。</p></div></div><div class="step"><span class="num">2</span><div><h4>用算术平均放缩</h4><div class="math">\[\sqrt[n+1]{\left(1+\frac1n\right)^n}<\frac{n\left(1+\frac1n\right)+1}{n+1}=\frac{n+2}{n+1}=1+\frac1{n+1}.\]</div><p>这些数不全相等，因此严格不等号成立。</p></div></div><div class="answer"><span>结论</span><strong>\(\left(1+\frac1n\right)^n\) 严格递增</strong><p>证明的关键是补入一个因子 \(1\)，构造成 \(n+1\) 个数的几何平均。</p></div></section>
+        </article>
+
+        <article class="card" id="p3">
+          <header class="card-head"><div><div class="badges"><span class="badge">例题 3</span><span class="badge method-tag">裂项放缩</span></div><h3>平方根倒数和的双边估计</h3></div><div class="difficulty"><span>难度</span>●●●●●○○</div></header>
+          <section class="question"><span class="kicker">题目</span><p>对任意正整数 \(n\)，证明：</p><div class="math">\[2(\sqrt{n+1}-1)<1+\frac1{\sqrt2}+\frac1{\sqrt3}+\cdots+\frac1{\sqrt n}<2\sqrt n.\]</div></section>
+          <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+          <section class="solution"><div class="step"><span class="num">1</span><div><h4>下界：向右裂项</h4><p>对 \(k\geq1\)，</p><div class="math">\[2(\sqrt{k+1}-\sqrt k)=\frac2{\sqrt{k+1}+\sqrt k}<\frac1{\sqrt k}.\]</div><p>从 \(k=1\) 到 \(n\) 求和，得到</p><div class="math">\[2(\sqrt{n+1}-1)<\sum_{k=1}^n\frac1{\sqrt k}.\]</div></div></div><div class="step"><span class="num">2</span><div><h4>上界：向左裂项</h4><div class="math">\[\frac1{\sqrt k}<2(\sqrt k-\sqrt{k-1})=\frac2{\sqrt k+\sqrt{k-1}}.\]</div><p>求和后中间项相消：</p><div class="math">\[\sum_{k=1}^n\frac1{\sqrt k}<2\sqrt n.\]</div></div></div><div class="answer"><span>结论</span><strong>双边不等式成立</strong><p>构造相邻根式的差，使求和时出现望远镜式相消。</p></div></section>
+        </article>
+
+        <article class="card" id="p4">
+          <header class="card-head"><div><div class="badges"><span class="badge">例题 4</span><span class="badge method-tag">恒等式构造</span></div><h3>绝对值条件下的正性证明</h3></div><div class="difficulty"><span>难度</span>●●●●●○○</div></header>
+          <section class="question"><span class="kicker">题目</span><p>已知 \(a,b,c\in\mathbb R\)，且 \(|a|<1,\ |b|<1,\ |c|<1\)。证明：</p><div class="math">\[ab+bc+ca+1>0.\]</div></section>
+          <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+          <section class="solution"><div class="step"><span class="num">1</span><div><h4>把绝对值条件变成正因子</h4><p>由 \(|a|<1\)，有 \(1+a>0,\ 1-a>0\)。对 \(b,c\) 同理。</p></div></div><div class="step"><span class="num">2</span><div><h4>构造对称恒等式</h4><div class="math">\[\begin{aligned}1+ab+bc+ca=\frac12\big[&(1+a)(1+b)(1+c)\\+&(1-a)(1-b)(1-c)\big].\end{aligned}\]</div><p>右边两个乘积都严格为正，因此其平均数也严格为正。</p></div></div><div class="answer"><span>结论</span><strong>\(ab+bc+ca+1>0\)</strong><p>构造同时利用了条件中的 \(1+a\) 与 \(1-a\)。</p></div></section>
+        </article>
+
+        <article class="card" id="p5">
+          <header class="card-head"><div><div class="badges"><span class="badge">例题 5</span><span class="badge method-tag">二次方程构造</span></div><h3>由根的判别式确定范围</h3></div><div class="difficulty"><span>难度</span>●●●●●●●</div></header>
+          <section class="question"><span class="kicker">题目</span><p>设</p><div class="math">\[a>b>c,\qquad a+b+c=1,\qquad a^2+b^2+c^2=1.\]</div><p>证明：</p><div class="math">\[1<a+b<\frac43.\]</div></section>
+          <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+          <section class="solution"><div class="step"><span class="num">1</span><div><h4>先得到基本恒等式</h4><p>由 \((a+b+c)^2=a^2+b^2+c^2\)，得到</p><div class="math">\[ab+bc+ca=0.\]</div><p>若 \(c\geq0\)，则 \(a>b>c\geq0\)，从而 \(ab+bc+ca>0\)，矛盾。所以 \(c<0\)，于是</p><div class="math">\[a+b=1-c>1.\]</div></div></div><div class="step"><span class="num">2</span><div><h4>构造以 \(a,b\) 为根的二次方程</h4><p>令 \(s=a+b\)，则 \(c=1-s\)。由 \(ab+c(a+b)=0\)，得</p><div class="math">\[ab=s(s-1).\]</div><p>所以 \(a,b\) 是方程</p><div class="math">\[t^2-st+s(s-1)=0\]</div><p>的两个不等实根。</p></div></div><div class="step"><span class="num">3</span><div><h4>使用判别式</h4><div class="math">\[\Delta=s^2-4s(s-1)=s(4-3s)>0.\]</div><p>因为前面已经得到 \(s>1>0\)，所以 \(4-3s>0\)，即 \(s<\frac43\)。</p></div></div><div class="answer"><span>结论</span><strong>\(1<a+b<\frac43\)</strong><p>下界来自 \(c<0\)，上界来自二次方程有两个不等实根。</p></div></section>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <section class="summary"><h2>方法选择比计算更重要</h2><p>看到不等式证明题时，先问自己：能否作差？能否倒推？否定结论会不会更容易？能否裂项？能否构造一个熟悉的模型？</p><div class="tips"><div class="tip"><b>基础入口</b>优先尝试作差、因式分解和配方。</div><div class="tip"><b>逻辑路线</b>分析法找路，综合法书写；“不能同时”常用反证。</div><div class="tip"><b>结构突破</b>和式考虑裂项放缩，复杂条件考虑恒等式或方程构造。</div></div></section>
+  <footer><span>高一数学 · 不等式证明方法</span><a href="#top">返回顶部 ↑</a></footer>
+
+  <script>
+    const cards=[...document.querySelectorAll('.card')],all=document.getElementById('toggleAll');
+    function sync(){all.textContent=cards.every(c=>c.classList.contains('open'))?'隐藏全部解答':'显示全部解答'}
+    cards.forEach(card=>{const btn=card.querySelector('.toggle');btn.addEventListener('click',()=>{const open=card.classList.toggle('open');btn.setAttribute('aria-expanded',open);btn.childNodes[0].nodeValue=open?'隐藏解答 ':'显示解答 ';sync()})});
+    all.addEventListener('click',()=>{const open=!cards.every(c=>c.classList.contains('open'));cards.forEach(card=>{card.classList.toggle('open',open);const btn=card.querySelector('.toggle');btn.setAttribute('aria-expanded',open);btn.childNodes[0].nodeValue=open?'隐藏解答 ':'显示解答 '});sync()});
+  </script>
+</body>
+</html>

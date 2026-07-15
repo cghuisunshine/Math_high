@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>柯西不等式综合练习｜问题与详细解答</title>
+  <script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    :root{--ink:#163a37;--muted:#61716e;--teal:#0c8f7f;--deep:#076c62;--mint:#dff4ed;--orange:#f39a3e;--paper:#fffdf8;--line:#dbe6e1;--shadow:0 18px 55px rgba(19,69,62,.1)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",Arial,sans-serif}button,a{font:inherit}a{color:inherit;text-decoration:none}
+    .hero{position:relative;overflow:hidden;padding:0 max(22px,calc((100vw - 1180px)/2));color:#fff;background:radial-gradient(circle at 88% 8%,rgba(255,255,255,.2) 0 9%,transparent 9.2%),linear-gradient(135deg,#087b70,#11a08c 62%,#35b798)}
+    .hero:after{content:"";position:absolute;width:360px;height:360px;right:-110px;bottom:-245px;border:70px solid rgba(243,154,62,.7);border-radius:50%}
+    nav{position:relative;z-index:2;display:flex;min-height:76px;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.23)}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:800}.mark{display:grid;width:35px;height:35px;place-items:center;border-radius:10px;background:var(--orange);font:700 20px Georgia}.all{padding:10px 17px;border:1px solid rgba(255,255,255,.5);border-radius:99px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer}.all:hover{background:#fff;color:var(--deep)}
+    .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.35fr .85fr;gap:66px;align-items:center;padding:70px 0 84px}.overline{margin:0 0 17px;color:#caf7e9;font-size:13px;font-weight:800;letter-spacing:.15em}.hero h1{margin:0;font:700 clamp(46px,6vw,74px)/1.08 Georgia,"Noto Serif SC",serif;letter-spacing:-.04em}.hero h1 span{display:block;color:#ffe6bd}.intro{max-width:700px;margin:24px 0;color:#e7fff8;font-size:18px;line-height:1.85}.start{display:inline-flex;margin-top:8px;padding:13px 23px;border-radius:13px;background:var(--orange);color:#38230c;font-weight:800}
+    .strategy{padding:27px;border:1px solid rgba(255,255,255,.27);border-radius:23px;background:rgba(3,75,68,.38);backdrop-filter:blur(8px)}.strategy>p{margin:0 0 14px;color:#bff4e5;font-size:13px;font-weight:800;letter-spacing:.1em}.strategy div{display:grid;grid-template-columns:40px 1fr;gap:12px;padding:15px 0;border-top:1px solid rgba(255,255,255,.17);line-height:1.6}.strategy b{color:#ffc775;font:700 20px Georgia}
+    .position{position:relative;z-index:3;display:flex;max-width:1180px;margin:-27px auto 0;padding:21px 27px;align-items:center;justify-content:space-between;gap:25px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:var(--shadow)}.position ul{display:flex;flex-wrap:wrap;gap:10px 27px;margin:0;padding:0;list-style:none;color:var(--muted);font-size:14px}.position li:before{content:"✓";margin-right:7px;color:var(--teal);font-weight:900}
+    main{max-width:980px;margin:auto;padding:94px 24px 72px}.heading{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:32px}.heading small{color:var(--teal);font-weight:900;letter-spacing:.15em;text-transform:uppercase}.heading h2{margin:7px 0 0;font:700 clamp(32px,4vw,44px) Georgia,"Noto Serif SC",serif}.heading p{max-width:350px;margin:0;color:var(--muted);font-size:14px;line-height:1.7}
+    .notice{margin:0 0 24px;padding:14px 18px;border:1px solid #f2d2a9;border-radius:12px;background:#fff7ea;color:#7d4a17;font-size:14px;line-height:1.7}
+    .cards{display:grid;gap:27px}.card{overflow:hidden;border:1px solid var(--line);border-radius:21px;background:#fff;box-shadow:0 9px 32px rgba(18,67,60,.065)}.card.open{border-color:#9fcfc3;box-shadow:var(--shadow)}
+    .card-head{display:flex;justify-content:space-between;gap:20px;padding:26px 29px 19px}.badges{display:flex;flex-wrap:wrap;gap:8px}.badge{padding:6px 10px;border-radius:99px;background:var(--teal);color:#fff;font-size:12px;font-weight:800}.badge.method{background:var(--mint);color:var(--deep)}.card h3{margin:12px 0 0;font:700 25px Georgia,"Noto Serif SC",serif}.difficulty{color:var(--orange);font-size:10px;letter-spacing:2px;white-space:nowrap}.difficulty span{display:block;margin-bottom:7px;color:#8a9895;font-size:11px;letter-spacing:0}
+    .question{margin:0 29px 23px;padding:21px 24px;border-left:4px solid var(--orange);border-radius:0 13px 13px 0;background:#fffbf4}.kicker{color:#a76019;font-size:11px;font-weight:900;letter-spacing:.13em}.question p{margin:9px 0;line-height:1.8}.math{overflow-x:auto;padding:1px 0;text-align:center}mjx-container[jax="SVG"]>svg{display:inline}
+    .toggle{display:flex;width:100%;align-items:center;justify-content:center;gap:8px;padding:15px;border:0;border-top:1px solid var(--line);background:#f5faf8;color:var(--deep);font-weight:800;cursor:pointer}.toggle:hover{background:#eaf6f2}.arrow{transition:.2s}.open .arrow{transform:rotate(180deg)}
+    .solution{display:none;padding:5px 29px 30px;border-top:1px solid var(--line)}.open .solution{display:block}.step{display:grid;grid-template-columns:33px 1fr;gap:14px;padding:26px 0 3px}.num{display:grid;width:31px;height:31px;place-items:center;border-radius:50%;background:var(--teal);color:#fff;font:700 16px Georgia}.step h4{margin:3px 0 8px;font-size:17px}.step p{margin:7px 0;color:#425b57;line-height:1.8}.answer{display:grid;grid-template-columns:auto 1fr;gap:5px 18px;align-items:center;margin-top:23px;padding:20px 22px;border-radius:14px;background:var(--mint)}.answer>span{grid-row:1/3;align-self:stretch;display:grid;place-items:center;padding-right:18px;border-right:1px solid #aed8cd;color:var(--deep);font-size:12px;font-weight:900}.answer strong{color:#084f47;font-size:20px}.answer p{margin:0;color:#4b6a65;font-size:14px;line-height:1.6}
+    .summary{max-width:1180px;margin:0 auto 60px;padding:44px 50px;border-radius:25px;background:#133f3a;color:#fff}.summary h2{margin:0 0 13px;font:700 31px Georgia,"Noto Serif SC",serif}.summary p{margin:0;color:#c9e2dd;line-height:1.8}.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:23px}.tip{padding:16px;border:1px solid rgba(255,255,255,.13);border-radius:12px}.tip b{display:block;margin-bottom:7px;color:#ffd191}footer{display:flex;max-width:1180px;margin:auto;padding:0 24px 40px;justify-content:space-between;color:#748682;font-size:13px}footer a{color:var(--deep);font-weight:800}
+    @media(max-width:820px){.hero-inner{grid-template-columns:1fr;gap:35px}.position,.heading{align-items:flex-start;flex-direction:column}.position{margin-inline:18px}.position ul{display:grid;gap:8px}.tips{grid-template-columns:1fr}.summary{margin-inline:18px}}
+    @media(max-width:560px){.hero{padding-inline:18px}.brand{font-size:13px}.all{padding:8px 10px;font-size:12px}.hero-inner{padding:54px 0 68px}.hero h1{font-size:43px}.intro{font-size:16px}.strategy{padding:21px}.position{padding:19px}main{padding:72px 14px 55px}.card-head{padding:22px 19px 16px}.card h3{font-size:21px}.difficulty{display:none}.question{margin:0 19px 19px;padding:18px}.solution{padding:3px 19px 24px}.step{grid-template-columns:27px 1fr;gap:10px}.num{width:27px;height:27px}.answer{grid-template-columns:1fr}.answer>span{grid-row:auto;justify-content:start;padding:0 0 8px;border:0;border-bottom:1px solid #aed8cd}.summary{padding:30px 22px}}
+    @media print{.hero{background:#fff;color:var(--ink);padding:0}.hero-inner{padding:25px 0}.intro,.overline{color:var(--ink)}nav,.start,.strategy,.position,.toggle,footer{display:none}main{padding-top:25px}.solution{display:block!important}.card{break-inside:avoid;box-shadow:none}.summary{background:#fff;color:var(--ink);border:1px solid var(--line)}}
+  </style>
+</head>
+<body>
+  <header class="hero" id="top">
+    <nav><a class="brand" href="#top"><span class="mark">C</span><span>高中数学 · 柯西不等式</span></a><button class="all" id="toggleAll">显示全部解答</button></nav>
+    <div class="hero-inner">
+      <section><p class="overline">高一数学 SS 班 · 暑假专题 03</p><h1>柯西不等式<span>综合练习</span></h1><p class="intro">九道综合题覆盖线性最值、齐次代换、方程组、参数恒成立、几何证明与分式不等式。</p><a class="start" href="#problems">开始练习</a></section>
+      <aside class="strategy"><p>通用解题主线</p><div><b>01</b><span>把目标式改写成柯西可用的结构</span></div><div><b>02</b><span>选择合适的权或整体代换</span></div><div><b>03</b><span>同步检查每一步的取等条件</span></div></aside>
+    </div>
+  </header>
+  <section class="position"><strong>第 3 课 · 柯西不等式</strong><ul><li>柯西不等式</li><li>权方和不等式</li><li>配凑与齐次思想</li></ul></section>
+
+  <main id="problems">
+    <div class="heading"><div><small>Practice set</small><h2>问题与详细解答</h2></div><p>答案默认隐藏。建议先独立完成，再展开解答核对结构和取等条件。</p></div>
+    <div class="notice">原照片中没有第8题，因此本页收录第1—7题及第9—10题，共9题。</div>
+    <div class="cards">
+      <article class="card">
+        <header class="card-head"><div><div class="badges"><span class="badge">第 1 题</span><span class="badge method">加权柯西</span></div><h3>椭圆约束下的线性最值</h3></div><div class="difficulty"><span>难度</span>●●●○○○○</div></header>
+        <section class="question"><span class="kicker">题目</span><p>已知 \(x,y\in\mathbb R\)，且 \(3x^2+2y^2\leq6\)，求 \(2x+y\) 的最大值。</p></section>
+        <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+        <section class="solution">
+          <div class="step"><span class="num">1</span><div><h4>按约束中的系数配权</h4><div class="math">\[\begin{aligned}(2x+y)^2&=\left(\frac2{\sqrt3}\cdot\sqrt3x+\frac1{\sqrt2}\cdot\sqrt2y\right)^2\\&\leq\left(\frac43+\frac12\right)(3x^2+2y^2)\\&\leq\frac{11}{6}\cdot6=11.\end{aligned}\]</div></div></div>
+          <div class="answer"><span>答案</span><strong>\(\sqrt{11}\)</strong><p>当 \(x=\frac4{\sqrt{11}},\ y=\frac3{\sqrt{11}}\) 时等号成立。</p></div>
+        </section>
+      </article>
+
+      <article class="card">
+        <header class="card-head"><div><div class="badges"><span class="badge">第 2 题</span><span class="badge method">差量代换</span></div><h3>相邻差构成的分式最值</h3></div><div class="difficulty"><span>难度</span>●●●○○○○</div></header>
+        <section class="question"><span class="kicker">题目</span><p>若 \(a>b>c\)，求</p><div class="math">\[\frac{a-c}{a-b}+\frac{a-c}{b-c}\]</div><p>的最小值。</p></section>
+        <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+        <section class="solution">
+          <div class="step"><span class="num">1</span><div><h4>用相邻差换元</h4><p>令 \(x=a-b>0,\ y=b-c>0\)，则 \(a-c=x+y\)。</p><div class="math">\[\frac{x+y}{x}+\frac{x+y}{y}=2+\frac xy+\frac yx\geq4.\]</div></div></div>
+          <div class="answer"><span>答案</span><strong>\(4\)</strong><p>当 \(x=y\)，即 \(a-b=b-c\) 时等号成立。</p></div>
+        </section>
+      </article>
+
+      <article class="card">
+        <header class="card-head"><div><div class="badges"><span class="badge">第 3 题</span><span class="badge method">柯西取等</span></div><h3>由极值条件反求方程组</h3></div><div class="difficulty"><span>难度</span>●●●●○○○</div></header>
+        <section class="question"><span class="kicker">题目</span><p>在实数集内解方程组</p><div class="math">\[\begin{cases}x^2+9y^2+4z^2=9,\\-4x+6y-4z=6\sqrt6.\end{cases}\]</div></section>
+        <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+        <section class="solution">
+          <div class="step"><span class="num">1</span><div><h4>判断第二式已达到柯西上界</h4><div class="math">\[\begin{aligned}(-4x+6y-4z)^2&=[-4x+2(3y)-2(2z)]^2\\&\leq(16+4+4)(x^2+9y^2+4z^2)=216.\end{aligned}\]</div><p>题设左边恰为 \((6\sqrt6)^2=216\)，所以必须取等。</p></div></div>
+          <div class="step"><span class="num">2</span><div><h4>使用取等比例</h4><p>\((x,3y,2z)=\lambda(-4,2,-2)\)，由长度关系得 \(\lambda=\frac{\sqrt6}{4}\)。</p></div></div>
+          <div class="answer"><span>答案</span><strong>\(\left(-\sqrt6,\frac{\sqrt6}{6},-\frac{\sqrt6}{4}\right)\)</strong><p>这是方程组的唯一实数解。</p></div>
+        </section>
+      </article>
+
+      <article class="card">
+        <header class="card-head"><div><div class="badges"><span class="badge">第 4 题</span><span class="badge method">参数恒成立</span></div><h3>双变量分式的统一下界</h3></div><div class="difficulty"><span>难度</span>●●●●●●○</div></header>
+        <section class="question"><span class="kicker">题目</span><p>对任意实数 \(x>1,\ y>\frac12\)，不等式</p><div class="math">\[\frac{x^2}{a^2(2y-1)}+\frac{4y^2}{a^2(x-1)}\geq1\]</div><p>恒成立，求实数 \(a\) 的最大值。选项：A. \(2\)；B. \(4\)；C. \(\frac{\sqrt{14}}2\)；D. \(2\sqrt2\)。</p></section>
+        <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+        <section class="solution">
+          <div class="step"><span class="num">1</span><div><h4>平移变量</h4><p>令 \(u=x-1>0,\ v=2y-1>0\)，则</p><div class="math">\[\frac{x^2}{2y-1}+\frac{4y^2}{x-1}=\frac{(u+1)^2}{v}+\frac{(v+1)^2}{u}.\]</div></div></div>
+          <div class="step"><span class="num">2</span><div><h4>先用柯西，再用均值不等式</h4><div class="math">\[\begin{aligned}\frac{(u+1)^2}{v}+\frac{(v+1)^2}{u}&\geq\frac{(u+v+2)^2}{u+v}\\&=s+4+\frac4s\geq8,\quad s=u+v.\end{aligned}\]</div><p>当 \(u=v=1\)，即 \(x=2,\ y=1\) 时取等。</p></div></div>
+          <div class="answer"><span>答案</span><strong>\(a_{\max}=2\sqrt2\)</strong><p>需要 \(a^2\leq8\)，故选择 D。</p></div>
+        </section>
+      </article>
+
+      <article class="card">
+        <header class="card-head"><div><div class="badges"><span class="badge">第 5 题</span><span class="badge method">先消参数</span></div><h3>含参数分式的联合最小值</h3></div><div class="difficulty"><span>难度</span>●●●●●○○</div></header>
+        <section class="question"><span class="kicker">题目</span><p>已知 \(x>0,\ y>0,\ 0<\lambda<2\)，且 \(x+y=3\)，求</p><div class="math">\[\frac1x+\frac2{(2-\lambda)y}+\frac2{\lambda y}\]</div><p>的最小值。选项：A. \(\frac32\)；B. \(2\)；C. \(\frac83\)；D. \(3\)。</p></section>
+        <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+        <section class="solution">
+          <div class="step"><span class="num">1</span><div><h4>先处理参数</h4><div class="math">\[\frac2{(2-\lambda)y}+\frac2{\lambda y}=\frac4{\lambda(2-\lambda)y}\geq\frac4y,\]</div><p>因为 \(\lambda(2-\lambda)=1-(\lambda-1)^2\leq1\)。</p></div></div>
+          <div class="step"><span class="num">2</span><div><h4>再对 \(x,y\) 使用柯西</h4><div class="math">\[\frac1x+\frac4y\geq\frac{(1+2)^2}{x+y}=3.\]</div></div></div>
+          <div class="answer"><span>答案</span><strong>\(3\)</strong><p>当 \(\lambda=1,\ x=1,\ y=2\) 时取等，选择 D。</p></div>
+        </section>
+      </article>
+
+      <article class="card">
+        <header class="card-head"><div><div class="badges"><span class="badge">第 6 题</span><span class="badge method">几何面积 · Engel</span></div><h3>点到三边距离的不等式</h3></div><div class="difficulty"><span>难度</span>●●●●○○○</div></header>
+        <section class="question"><span class="kicker">题目</span><p>\(P\) 为 \(\triangle ABC\) 内一点，它到三边 \(BC,CA,AB\) 的距离分别为 \(d_1,d_2,d_3\)，对应边长分别为 \(a,b,c\)。证明：</p><div class="math">\[\frac a{d_1}+\frac b{d_2}+\frac c{d_3}\geq\frac{(a+b+c)^2}{2S},\]</div><p>其中 \(S\) 为 \(\triangle ABC\) 的面积。</p></section>
+        <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+        <section class="solution">
+          <div class="step"><span class="num">1</span><div><h4>把总面积拆成三个小三角形</h4><div class="math">\[S=\frac12ad_1+\frac12bd_2+\frac12cd_3,\qquad ad_1+bd_2+cd_3=2S.\]</div></div></div>
+          <div class="step"><span class="num">2</span><div><h4>使用 Engel 形式</h4><div class="math">\[\begin{aligned}\frac a{d_1}+\frac b{d_2}+\frac c{d_3}&=\frac{a^2}{ad_1}+\frac{b^2}{bd_2}+\frac{c^2}{cd_3}\\&\geq\frac{(a+b+c)^2}{ad_1+bd_2+cd_3}\\&=\frac{(a+b+c)^2}{2S}.\end{aligned}\]</div></div></div>
+          <div class="answer"><span>结论</span><strong>原不等式成立</strong><p>当 \(d_1=d_2=d_3\)，即 \(P\) 为内心时等号成立。</p></div>
+        </section>
+      </article>
+
+      <article class="card">
+        <header class="card-head"><div><div class="badges"><span class="badge">第 7 题</span><span class="badge method">对称分组</span></div><h3>三元倒数平方和</h3></div><div class="difficulty"><span>难度</span>●●●●●○○</div></header>
+        <section class="question"><span class="kicker">题目</span><p>正数 \(a,b,c\) 满足 \(a+b+c=1\)，求</p><div class="math">\[\left(a+\frac1a\right)^2+\left(b+\frac1b\right)^2+\left(c+\frac1c\right)^2\]</div><p>的最小值。</p></section>
+        <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+        <section class="solution">
+          <div class="step"><span class="num">1</span><div><h4>展开并分别估计</h4><div class="math">\[E=a^2+b^2+c^2+\frac1{a^2}+\frac1{b^2}+\frac1{c^2}+6.\]</div><p>有 \(a^2+b^2+c^2\geq\frac13\)，且</p><div class="math">\[\frac1a+\frac1b+\frac1c\geq\frac9{a+b+c}=9.\]</div></div></div>
+          <div class="step"><span class="num">2</span><div><h4>由倒数和推出倒数平方和</h4><div class="math">\[\frac1{a^2}+\frac1{b^2}+\frac1{c^2}\geq\frac13\left(\frac1a+\frac1b+\frac1c\right)^2\geq27.\]</div><p>所以 \(E\geq\frac13+27+6=\frac{100}{3}\)。</p></div></div>
+          <div class="answer"><span>答案</span><strong>\(\frac{100}{3}\)</strong><p>当 \(a=b=c=\frac13\) 时等号成立。</p></div>
+        </section>
+      </article>
+
+      <article class="card">
+        <header class="card-head"><div><div class="badges"><span class="badge">第 9 题</span><span class="badge method">相邻差 · 柯西</span></div><h3>数列相邻差约束下的最大值</h3></div><div class="difficulty"><span>难度</span>●●●●●●○</div></header>
+        <section class="question"><span class="kicker">题目</span><p>设实数 \(a_1,a_2,\ldots,a_{10}\) 满足</p><div class="math">\[\sum_{i=1}^{9}(a_{i+1}-a_i)^2=1,\]</div><p>求</p><div class="math">\[(a_1+a_2+a_3+a_4+a_5)-(a_6+a_7+a_8+a_9+a_{10})\]</div><p>的最大值。</p></section>
+        <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+        <section class="solution">
+          <div class="step"><span class="num">1</span><div><h4>改用相邻差表示</h4><p>令 \(d_i=a_{i+1}-a_i\)，则 \(\sum_{i=1}^9d_i^2=1\)，目标式为</p><div class="math">\[T=-d_1-2d_2-3d_3-4d_4-5d_5-4d_6-3d_7-2d_8-d_9.\]</div></div></div>
+          <div class="step"><span class="num">2</span><div><h4>使用柯西不等式</h4><div class="math">\[\begin{aligned}T^2&\leq(1^2+2^2+3^2+4^2+5^2+4^2+3^2+2^2+1^2)\sum d_i^2\\&=85.\end{aligned}\]</div></div></div>
+          <div class="answer"><span>答案</span><strong>\(\sqrt{85}\)</strong><p>取 \(d_i=-\frac1{\sqrt{85}}(1,2,3,4,5,4,3,2,1)_i\) 时取得最大值。</p></div>
+        </section>
+      </article>
+
+      <article class="card">
+        <header class="card-head"><div><div class="badges"><span class="badge">第 10 题</span><span class="badge method">高次 Engel · 放缩</span></div><h3>四元三次分式不等式</h3></div><div class="difficulty"><span>难度</span>●●●●●●●</div></header>
+        <section class="question"><span class="kicker">题目</span><p>设 \(a,b,c,d\) 为正实数，且 \(ab+bc+cd+da=1\)。证明：</p><div class="math">\[\frac{a^3}{b+c+d}+\frac{b^3}{c+d+a}+\frac{c^3}{d+a+b}+\frac{d^3}{a+b+c}\geq\frac13.\]</div></section>
+        <button class="toggle" aria-expanded="false">显示解答 <span class="arrow">⌄</span></button>
+        <section class="solution">
+          <div class="step"><span class="num">1</span><div><h4>对三次分式使用 Engel 形式</h4><p>记 \(Q=a^2+b^2+c^2+d^2\)，则</p><div class="math">\[\sum_{\rm cyc}\frac{a^3}{b+c+d}=\sum_{\rm cyc}\frac{a^4}{a(b+c+d)}\geq\frac{Q^2}{2(ab+ac+ad+bc+bd+cd)}.\]</div></div></div>
+          <div class="step"><span class="num">2</span><div><h4>估计分母并使用已知条件</h4><p>由 \((a+b+c+d)^2\leq4Q\)，可得</p><div class="math">\[2(ab+ac+ad+bc+bd+cd)\leq3Q.\]</div><p>同时，由 \(2xy\leq x^2+y^2\)，</p><div class="math">\[1=ab+bc+cd+da\leq Q.\]</div></div></div>
+          <div class="step"><span class="num">3</span><div><h4>合并结论</h4><div class="math">\[\sum_{\rm cyc}\frac{a^3}{b+c+d}\geq\frac{Q^2}{3Q}=\frac Q3\geq\frac13.\]</div></div></div>
+          <div class="answer"><span>结论</span><strong>原不等式成立</strong><p>当 \(a=b=c=d=\frac12\) 时等号成立。</p></div>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <section class="summary"><h2>柯西不等式的核心是“选对结构”</h2><p>先判断分母、约束和目标式之间的关系，再选择加权配凑、Engel 形式或相邻差代换。</p><div class="tips"><div class="tip"><b>线性目标</b>按照二次约束中的权重拆分系数。</div><div class="tip"><b>分式和</b>优先尝试 \(\sum\frac{x_i^2}{a_i}\geq\frac{(\sum x_i)^2}{\sum a_i}\)。</div><div class="tip"><b>取等检查</b>确保每一步不等式的等号条件能够同时成立。</div></div></section>
+  <footer><span>高一数学 · 柯西不等式综合练习</span><a href="#top">返回顶部 ↑</a></footer>
+
+  <script>
+    const cards=[...document.querySelectorAll('.card')],all=document.getElementById('toggleAll');
+    function sync(){all.textContent=cards.every(c=>c.classList.contains('open'))?'隐藏全部解答':'显示全部解答'}
+    cards.forEach(card=>{const btn=card.querySelector('.toggle');btn.addEventListener('click',()=>{const open=card.classList.toggle('open');btn.setAttribute('aria-expanded',open);btn.childNodes[0].nodeValue=open?'隐藏解答 ':'显示解答 ';sync()})});
+    all.addEventListener('click',()=>{const open=!cards.every(c=>c.classList.contains('open'));cards.forEach(card=>{card.classList.toggle('open',open);const btn=card.querySelector('.toggle');btn.setAttribute('aria-expanded',open);btn.childNodes[0].nodeValue=open?'隐藏解答 ':'显示解答 '});sync()});
+  </script>
+</body>
+</html>
