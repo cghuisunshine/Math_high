@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2010 浙大自主招生不等式证明</title>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)'], ['$', '$']],
+    displayMath: [['\\[','\\]']]
+  },
+  chtml: { scale: 1.02 }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --text:#243142;
+  --muted:#627083;
+  --blue:#2563eb;
+  --blue-dark:#1d4ed8;
+  --gold:#d97706;
+  --green:#15803d;
+  --border:#dbe3ee;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",Arial,sans-serif;
+  line-height:1.85;
+}
+.container{
+  width:min(920px, calc(100% - 28px));
+  margin:28px auto 56px;
+}
+.hero{
+  background:linear-gradient(135deg,#eef4ff,#ffffff);
+  border:1px solid #d8e4ff;
+  border-radius:18px;
+  padding:28px;
+  box-shadow:0 10px 28px rgba(37,99,235,.08);
+}
+h1{
+  margin:0 0 8px;
+  text-align:center;
+  font-size:clamp(25px,4vw,36px);
+}
+.subtitle{
+  text-align:center;
+  color:var(--muted);
+  margin:0;
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:26px;
+  margin-top:20px;
+  box-shadow:0 7px 20px rgba(15,23,42,.05);
+}
+h2{
+  margin-top:0;
+  font-size:24px;
+  border-left:5px solid var(--blue);
+  padding-left:12px;
+}
+h3{
+  margin-top:28px;
+  font-size:19px;
+  color:#1e3a8a;
+}
+.math{
+  overflow-x:auto;
+  padding:4px 0;
+}
+button{
+  appearance:none;
+  border:0;
+  border-radius:10px;
+  padding:11px 22px;
+  background:var(--blue);
+  color:white;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+button:hover{background:var(--blue-dark)}
+.button-row{
+  display:flex;
+  justify-content:center;
+  margin-top:18px;
+}
+.answer{display:none}
+.method-label{
+  display:inline-block;
+  padding:5px 12px;
+  border-radius:999px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+.method-one{background:#e8f0ff;color:#1d4ed8}
+.method-two{background:#ecfdf3;color:var(--green)}
+.note{
+  background:#fff8e8;
+  border-left:5px solid var(--gold);
+  border-radius:10px;
+  padding:16px 18px;
+  margin-top:22px;
+}
+.key{
+  background:#effcf3;
+  border-left:5px solid var(--green);
+  border-radius:10px;
+  padding:16px 18px;
+  margin-top:22px;
+}
+ol{padding-left:24px}
+.final{
+  text-align:center;
+  font-weight:700;
+  font-size:1.08rem;
+}
+@media (max-width:600px){
+  .hero,.card{padding:20px}
+}
+</style>
+
+<script>
+function toggleAnswer(){
+  const answer = document.getElementById("answer");
+  const button = document.getElementById("toggleBtn");
+  const hidden = answer.style.display === "" || answer.style.display === "none";
+  answer.style.display = hidden ? "block" : "none";
+  button.textContent = hidden ? "隐藏答案" : "显示答案";
+  if(hidden){
+    setTimeout(() => {
+      if(window.MathJax && MathJax.typesetPromise){
+        MathJax.typesetPromise([answer]);
+      }
+    }, 0);
+  }
+}
+</script>
+</head>
+
+<body>
+<main class="container">
+
+<section class="hero">
+  <h1>2010 浙大自主招生不等式证明</h1>
+  <p class="subtitle">两种方法：Engel 形式柯西不等式与直接估计</p>
+</section>
+
+<section class="card">
+  <h2>题目</h2>
+  <p>设 \(0&lt;x_1,x_2,\ldots,x_n&lt;1\)，且</p>
+
+  <div class="math">
+  \[
+  x_1+x_2+\cdots+x_n=1.
+  \]
+  </div>
+
+  <p>证明：</p>
+
+  <div class="math">
+  \[
+  \frac{1}{x_1-x_1^3}
+  +\frac{1}{x_2-x_2^3}
+  +\cdots+
+  \frac{1}{x_n-x_n^3}>4.
+  \]
+  </div>
+
+  <div class="button-row">
+    <button id="toggleBtn" onclick="toggleAnswer()">显示答案</button>
+  </div>
+</section>
+
+<div id="answer" class="answer">
+
+<section class="card">
+  <span class="method-label method-one">方法一：Engel 形式柯西不等式</span>
+  <h2>证明</h2>
+
+  <p>对任意 \(i\)，因为 \(0&lt;x_i&lt;1\)，所以</p>
+
+  <div class="math">
+  \[
+  1+x_i<2.
+  \]
+  </div>
+
+  <p>因此</p>
+
+  <div class="math">
+  \[
+  x_i-x_i^3
+  =x_i(1-x_i)(1+x_i)
+  <2x_i(1-x_i).
+  \]
+  </div>
+
+  <p>两边均为正数，取倒数得</p>
+
+  <div class="math">
+  \[
+  \frac{1}{x_i-x_i^3}
+  >
+  \frac{1}{2x_i(1-x_i)}.
+  \]
+  </div>
+
+  <p>又因为</p>
+
+  <div class="math">
+  \[
+  \frac{1}{x_i(1-x_i)}
+  =
+  \frac{1}{x_i}+\frac{1}{1-x_i},
+  \]
+  </div>
+
+  <p>所以</p>
+
+  <div class="math">
+  \[
+  \frac{1}{x_i-x_i^3}
+  >
+  \frac12\left(
+  \frac1{x_i}+\frac1{1-x_i}
+  \right).
+  \]
+  </div>
+
+  <p>对 \(i=1,2,\ldots,n\) 求和：</p>
+
+  <div class="math">
+  \[
+  \sum_{i=1}^{n}\frac1{x_i-x_i^3}
+  >
+  \frac12\left(
+  \sum_{i=1}^{n}\frac1{x_i}
+  +
+  \sum_{i=1}^{n}\frac1{1-x_i}
+  \right).
+  \]
+  </div>
+
+  <h3>第一部分：估计 \(\displaystyle\sum_{i=1}^{n}\frac1{x_i}\)</h3>
+
+  <p>由 Engel 形式的柯西不等式，</p>
+
+  <div class="math">
+  \[
+  \sum_{i=1}^{n}\frac1{x_i}
+  \ge
+  \frac{(1+1+\cdots+1)^2}{x_1+x_2+\cdots+x_n}
+  =
+  \frac{n^2}{1}
+  =
+  n^2.
+  \]
+  </div>
+
+  <h3>第二部分：估计 \(\displaystyle\sum_{i=1}^{n}\frac1{1-x_i}\)</h3>
+
+  <p>因为</p>
+
+  <div class="math">
+  \[
+  \sum_{i=1}^{n}(1-x_i)
+  =
+  n-\sum_{i=1}^{n}x_i
+  =
+  n-1,
+  \]
+  </div>
+
+  <p>所以再次使用 Engel 形式的柯西不等式，得到</p>
+
+  <div class="math">
+  \[
+  \sum_{i=1}^{n}\frac1{1-x_i}
+  \ge
+  \frac{(1+1+\cdots+1)^2}
+  {(1-x_1)+(1-x_2)+\cdots+(1-x_n)}
+  =
+  \frac{n^2}{n-1}.
+  \]
+  </div>
+
+  <h3>第三部分：合并估计</h3>
+
+  <div class="math">
+  \[
+  \sum_{i=1}^{n}\frac1{x_i-x_i^3}
+  >
+  \frac12\left(
+  n^2+\frac{n^2}{n-1}
+  \right)
+  =
+  \frac{n^3}{2(n-1)}.
+  \]
+  </div>
+
+  <p>
+  由于每个 \(x_i&lt;1\)，而所有 \(x_i\) 的和等于 \(1\)，所以至少需要两个数，即 \(n\ge2\)。
+  </p>
+
+  <p>当 \(n\ge2\) 时，</p>
+
+  <div class="math">
+  \[
+  \frac{n^3}{2(n-1)}\ge4.
+  \]
+  </div>
+
+  <p>结合前面的严格不等式可得</p>
+
+  <div class="math final">
+  \[
+  \boxed{\displaystyle
+  \sum_{i=1}^{n}\frac1{x_i-x_i^3}>4}.
+  \]
+  </div>
+
+  <div class="note">
+    <strong>方法一的关键：</strong>
+    先把原分式拆成与
+    \(\frac1{x_i}\) 和 \(\frac1{1-x_i}\)
+    有关的形式，再分别使用 Engel 形式的柯西不等式。
+  </div>
+</section>
+
+<section class="card">
+  <span class="method-label method-two">方法二：直接估计（更简洁）</span>
+  <h2>证明</h2>
+
+  <p>对任意 \(i\)，由 \(0&lt;x_i&lt;1\)，有</p>
+
+  <div class="math">
+  \[
+  1+x_i<2.
+  \]
+  </div>
+
+  <p>因此</p>
+
+  <div class="math">
+  \[
+  x_i-x_i^3
+  =
+  x_i(1-x_i)(1+x_i)
+  <
+  2x_i(1-x_i).
+  \]
+  </div>
+
+  <p>又因为</p>
+
+  <div class="math">
+  \[
+  x_i(1-x_i)
+  \le
+  \left(\frac{x_i+(1-x_i)}2\right)^2
+  =
+  \frac14,
+  \]
+  </div>
+
+  <p>所以</p>
+
+  <div class="math">
+  \[
+  x_i-x_i^3
+  <
+  2x_i(1-x_i)
+  \le
+  \frac12.
+  \]
+  </div>
+
+  <p>分母为正，取倒数可得</p>
+
+  <div class="math">
+  \[
+  \frac1{x_i-x_i^3}>2.
+  \]
+  </div>
+
+  <p>于是</p>
+
+  <div class="math">
+  \[
+  \sum_{i=1}^{n}\frac1{x_i-x_i^3}
+  >
+  2n.
+  \]
+  </div>
+
+  <p>又因为 \(n\ge2\)，故</p>
+
+  <div class="math">
+  \[
+  2n\ge4.
+  \]
+  </div>
+
+  <p>从而</p>
+
+  <div class="math final">
+  \[
+  \boxed{\displaystyle
+  \sum_{i=1}^{n}\frac1{x_i-x_i^3}>4}.
+  \]
+  </div>
+
+  <div class="key">
+    <strong>为什么最后一定是严格大于 \(4\)？</strong><br>
+    虽然 \(2n\ge4\)，但前面已经得到每一项都严格大于 \(2\)，因此总和严格大于 \(2n\)，最终必有原式 \(>4\)。
+  </div>
+</section>
+
+<section class="card">
+  <h2>方法比较</h2>
+  <ol>
+    <li><strong>方法一</strong>展示了如何构造 Engel 形式，适合练习柯西不等式。</li>
+    <li><strong>方法二</strong>只需估计单项下界，步骤更少，是本题更简洁的解法。</li>
+    <li>两种方法都利用了关键条件 \(0&lt;x_i&lt;1\) 和 \(n\ge2\)。</li>
+  </ol>
+</section>
+
+</div>
+</main>
+</body>
+</html>
