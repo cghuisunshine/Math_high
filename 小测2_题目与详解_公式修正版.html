@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小测2｜题目与详解</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']],
+    processEscapes: true,
+    packages: {'[+]': ['ams']}
+  },
+  chtml: {scale: 1, matchFontHeight: false},
+  startup: {typeset: true}
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" onerror="this.onerror=null;this.src='https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js'"></script>
+<style>
+:root{--ink:#172033;--muted:#64748b;--paper:#fff;--bg:#eef3f8;--primary:#2563eb;--light:#eff6ff;--ok:#047857;--border:#dbe4ee}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans SC","Microsoft YaHei",Arial,sans-serif;line-height:1.8}
+.wrap{max-width:980px;margin:0 auto;padding:32px 18px 72px}.hero{background:linear-gradient(135deg,#172554,#2563eb);color:#fff;padding:34px;border-radius:22px;box-shadow:0 15px 38px #1e3a8a30}.hero h1{margin:0 0 8px;font-size:clamp(28px,5vw,44px)}.hero p{margin:0;opacity:.9}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.toolbar button{border:0;border-radius:10px;padding:10px 16px;background:#fff;color:#1d4ed8;font-weight:700;cursor:pointer;box-shadow:0 3px 12px #0001}.card{background:var(--paper);border:1px solid var(--border);border-radius:18px;margin:18px 0;overflow:hidden;box-shadow:0 8px 24px #0f172a0b}.q{padding:22px 24px}.q h2{font-size:20px;margin:0 0 10px;color:#1e3a8a}.answer{border-top:1px dashed var(--border);background:#fbfdff;padding:22px 24px}.answer[hidden]{display:none}.ans-title{font-weight:800;color:var(--ok);margin-bottom:8px}.toggle{margin-top:15px;border:0;background:var(--light);color:#1d4ed8;border-radius:9px;padding:8px 13px;font-weight:700;cursor:pointer}.result{border-left:4px solid #10b981;background:#ecfdf5;padding:10px 14px;border-radius:8px;margin-top:12px;font-weight:700}.step{margin:8px 0}.note{color:var(--muted);font-size:14px}.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:7px;margin-top:8px}.q p,.answer p{overflow-wrap:anywhere}.q mjx-container,.answer mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%;padding:3px 0}.footer{text-align:center;color:var(--muted);margin-top:28px;font-size:14px}@media print{body{background:#fff}.wrap{max-width:none;padding:0}.hero{box-shadow:none;border-radius:0}.toolbar,.toggle{display:none}.answer[hidden]{display:block}.card{break-inside:avoid;box-shadow:none}}
+</style>
+</head>
+<body><main class="wrap">
+<section class="hero"><h1>小测 2：题目与详解</h1><p>不等式、集合、参数与区间长度综合练习</p></section>
+<div class="toolbar"><button onclick="setAll(true)">展开全部解答</button><button onclick="setAll(false)">收起全部解答</button><button onclick="window.print()">打印 / 保存为 PDF</button></div>
+
+<section class="card"><div class="q"><h2>1．解下列不等式</h2>
+<p>（1）\(\dfrac1{x^2-3x-4}>\dfrac16\)</p>
+<p>（2）\(|3x-4|>1+2x\)</p>
+<p>（3）\(\sqrt{x^2-5x+6}>x-1\)</p><button class="toggle">查看解答</button></div><div class="answer" hidden>
+<div class="ans-title">解答</div>
+<p><b>（1）</b></p>\[\frac1{(x-4)(x+1)}-\frac16=\frac{-(x-5)(x+2)}{6(x-4)(x+1)}>0.\]
+<p>临界点为 \(-2,-1,4,5\)，由符号表得：</p><div class="result">\(x\in(-2,-1)\cup(4,5)\)</div>
+<p><b>（2）</b> 分两种情况：</p>
+<p>当 \(3x-4\ge0\) 时，\(3x-4>1+2x\Rightarrow x>5\)。</p>
+<p>当 \(3x-4<0\) 时，\(4-3x>1+2x\Rightarrow x<\frac35\)。</p><div class="result">\(x\in(-\infty,\frac35)\cup(5,+\infty)\)</div>
+<p><b>（3）</b> 定义域为 \(x\le2\) 或 \(x\ge3\)。当 \(x<1\) 时右边为负，原不等式自动成立；当 \(x\ge1\) 时两边平方：</p>
+\[x^2-5x+6>(x-1)^2\iff x<\frac53.\]
+<div class="result">\(x\in(-\infty,\frac53)\)</div></div></section>
+
+<section class="card"><div class="q"><h2>2．集合非空</h2><p>设集合 \(\{x\mid |x-3|+|x-4|<m\}\neq\varnothing\)，求实数 \(m\) 的取值范围。</p><button class="toggle">查看解答</button></div><div class="answer" hidden><div class="ans-title">解答</div><p>由两点间距离关系：</p>\[|x-3|+|x-4|\ge |4-3|=1.\]<p>最小值 \(1\) 在 \(3\le x\le4\) 时取得。因为题中是不等式“\(<m\)”，存在解的条件是 \(m>1\)。</p><div class="result">\(m\in(1,+\infty)\)</div></div></section>
+
+<section class="card"><div class="q"><h2>3．集合交集为空</h2><p>已知 \(A=\{x\mid |x-a|\le1\}\)，\(B=\{x\mid x^2-5x+4\ge0\}\)。若 \(A\cap B=\varnothing\)，求 \(a\) 的范围。</p><button class="toggle">查看解答</button></div><div class="answer" hidden><div class="ans-title">解答</div>
+\[A=[a-1,a+1],\qquad B=(-\infty,1]\cup[4,+\infty).\]
+<p>要使两集合没有公共元素，必须使闭区间 \(A\) 完全落在开区间 \((1,4)\) 内：</p>\[a-1>1,\qquad a+1<4.\]
+<div class="result">\(2<a<3\)</div></div></section>
+
+<section class="card"><div class="q"><h2>4．由解集确定参数</h2><p>不等式 \(\dfrac{(x+a)(x-b)}{x-c}\ge0\) 的解集为 \([-2,3)\cup[7,+\infty)\)，求 \(a-b+c\)。</p><button class="toggle">查看解答</button></div><div class="answer" hidden><div class="ans-title">解答</div><p>端点 \(-2,7\) 被取到，因此是分子零点；\(3\) 不被取到，因此是分母零点。</p>\[\{-a,b\}=\{-2,7\},\qquad c=3.\]<p>无论两个分子零点怎样对应，都有</p>\[a-b=(-(-a))-b=-[(-a)+b]=-5.\]<div class="result">\(a-b+c=-5+3=-2\)</div></div></section>
+
+<section class="card"><div class="q"><h2>5．绝对值不等式中的整数解</h2><p>若 \(|3x-b|<4\) 的解集中的整数有且仅有 \(1,2,3\)，求 \(b\) 的范围。</p><button class="toggle">查看解答</button></div><div class="answer" hidden><div class="ans-title">解答</div>
+\[\frac{b-4}{3}<x<\frac{b+4}{3}.\]
+<p>整数 \(1\) 和 \(3\) 必须在区间内：</p>\[\frac{b-4}{3}<1\Rightarrow b<7,\qquad \frac{b+4}{3}>3\Rightarrow b>5.\]
+<p>在该范围内，\(0\) 与 \(4\) 均不在区间内。</p><div class="result">\(5<b<7\)</div></div></section>
+
+<section class="card"><div class="q"><h2>6．充分条件与必要条件</h2><p>设两个二次不等式 \(a_1x^2+b_1x+c_1>0\) 与 \(a_2x^2+b_2x+c_2>0\) 的解集分别为 \(P,Q\)。判断</p>\[\frac{a_1}{a_2}=\frac{b_1}{b_2}=\frac{c_1}{c_2}\]
+<p>是 \(P=Q\) 的什么条件？</p><button class="toggle">查看解答</button></div><div class="answer" hidden><div class="ans-title">解答</div><p>若公共比为正数，两个多项式同号，解集相同；但公共比也可能为负数，此时不等号方向对应的正值区域通常不同，因此该条件不充分。</p><p>反过来，不同的二次式也可能都恒正，使 \(P=Q=\mathbb{R}\)，但系数并不成比例，因此该条件也不必要。</p><div class="result">既不充分也不必要条件</div></div></section>
+
+<section class="card"><div class="q"><h2>7．恒成立问题</h2><p>不等式 \(|x+3|-|x-1|\le a^2-3a\) 对任意实数 \(x\) 恒成立，求 \(a\) 的范围。</p><div class="options"><span>A. \((-\infty,-1]\cup[4,+\infty)\)</span><span>B. \((-\infty,-2]\cup[5,+\infty)\)</span><span>C. \([1,2]\)</span><span>D. \((-\infty,1]\cup[2,+\infty)\)</span></div><button class="toggle">查看解答</button></div><div class="answer" hidden><div class="ans-title">解答</div><p>由绝对值差的性质：</p>\[|x+3|-|x-1|\le |(-3)-1|=4,\]<p>且当 \(x\ge1\) 时等号成立，所以左边最大值为 \(4\)。故</p>\[a^2-3a\ge4\iff(a-4)(a+1)\ge0.\]<div class="result">\(a\le-1\) 或 \(a\ge4\)，选择 A</div></div></section>
+
+<section class="card"><div class="q"><h2>8．解含参数的不等式</h2><p>解关于 \(x\) 的不等式 \(x+\dfrac1x>a+\dfrac1a\quad(a\neq 0)\)。</p><button class="toggle">查看解答</button></div><div class="answer" hidden><div class="ans-title">解答</div>
+\[x+\frac1x-a-\frac1a=\frac{(x-a)(ax-1)}{ax}>0.\]
+<p>按 \(a,\frac1a,0\) 的相对位置分类：</p>
+<p>① \(a>1\)：\(x\in(0,\frac1a)\cup(a,+\infty)\)。</p>
+<p>② \(0<a<1\)：\(x\in(0,a)\cup(\frac1a,+\infty)\)。</p>
+<p>③ \(a=1\)：\(x\in(0,1)\cup(1,+\infty)\)。</p>
+<p>④ \(a<-1\)：\(x\in(a,\frac1a)\cup(0,+\infty)\)。</p>
+<p>⑤ \(-1<a<0\)：\(x\in(\frac1a,a)\cup(0,+\infty)\)。</p>
+<p>⑥ \(a=-1\)：\(x\in(0,+\infty)\)。</p></div></section>
+
+<section class="card"><div class="q"><h2>9．换元法</h2><p>已知关于 \(x\) 的不等式</p>\[\frac{k}{x+a}+\frac{x+b}{x+c}<0\]
+<p>的解集为 \((-2,-1)\cup(2,3)\)，求不等式</p>\[\frac{kx}{ax-1}+\frac{bx-1}{cx-1}<0\]
+<p>的解集。</p><button class="toggle">查看解答</button></div><div class="answer" hidden><div class="ans-title">解答</div><p>令原不等式中的自变量为 \(t\)，取</p>\[t=-\frac1x.\]
+<p>则</p>\[\frac{k}{t+a}+\frac{t+b}{t+c}=\frac{kx}{ax-1}+\frac{bx-1}{cx-1}.\]
+<p>所以要求 \(-\frac1x\in(-2,-1)\cup(2,3)\)。分别映射：</p>\[(-2,-1)\mapsto\left(\frac12,1\right),\qquad(2,3)\mapsto\left(-\frac12,-\frac13\right).\]
+<div class="result">\(x\in(-\frac12,-\frac13)\cup(\frac12,1)\)</div></div></section>
+
+<section class="card"><div class="q"><h2>10．整数解个数</h2><p>已知 \(0<b<1+a\)，若不等式 \((x-b)^2>(ax)^2\) 的解集中整数恰有 3 个，则（　）</p><div class="options"><span>A. \(-1<a<0\)</span><span>B. \(0<a<1\)</span><span>C. \(1<a<3\)</span><span>D. \(3<a<6\)</span></div><button class="toggle">查看解答</button></div><div class="answer" hidden><div class="ans-title">解答</div>
+\[((1-a)x-b)((1+a)x-b)>0.\]
+<p>若 \(-1<a\le1\)，解集无界，整数解会有无穷多个，因此必须 \(a>1\)。此时解集为</p>\[\frac{b}{1-a}<x<\frac{b}{1+a},\]
+<p>而 \(0<\frac{b}{1+a}<1\)，所以三个整数只能是 \(-2,-1,0\)。于是</p>\[-3\le\frac{b}{1-a}<-2\iff2(a-1)<b\le3(a-1).\]
+<p>又 \(b<a+1\)，要存在这样的 \(b\)，必须</p>\[2(a-1)<a+1\iff a<3.\]
+<div class="result">\(1<a<3\)，选择 C</div></div></section>
+
+<section class="card"><div class="q"><h2>11．区间长度和</h2><p>设关于 \(x\) 的不等式</p>
+\[\frac{x^2+(2a^2+2)x-a^2+4a-7}{x^2+(a^2+4a-5)x-a^2+4a-7}<0\]
+<p>的解集是一些区间的并集，且这些区间的长度和不小于 \(4\)，求 \(a\) 的范围。</p><button class="toggle">查看解答</button></div><div class="answer" hidden><div class="ans-title">解答</div>
+<p>记</p>\[q=a^2-4a+7=(a-2)^2+3>0.\]
+<p>分子、分母都为首项系数为 1、常数项为 \(-q\) 的二次式，因此各有一负一正两个实根。设分子根为 \(n_-<0<n_+\)，分母根为 \(d_-<0<d_+\)。</p>
+<p>分子减分母为</p>\[qx.\]
+<p>由此可确定根的次序：</p>\[n_-<d_-<0<n_+<d_+.\]
+<p>不等式解集为 \((n_-,d_-)\cup(n_+,d_+)\)，长度和为</p>
+\[(d_--n_-)+(d_+-n_+)=(d_-+d_+)-(n_-+n_+).\]
+<p>利用韦达定理：</p>
+\[d_-+d_+=-(a^2+4a-5),\qquad n_-+n_+=-(2a^2+2),\]
+<p>所以长度和为</p>\[a^2-4a+7=q.\]
+<p>题意要求</p>\[a^2-4a+7\ge4\iff(a-1)(a-3)\ge0.\]
+<div class="result">\(a\in(-\infty,1]\cup[3,+\infty)\)</div></div></section>
+
+<p class="footer">题目依据上传的《小测2》整理；数学公式使用 MathJax 渲染。</p>
+</main>
+<script>
+document.querySelectorAll('.toggle').forEach(btn=>btn.addEventListener('click',()=>{const ans=btn.closest('.card').querySelector('.answer');ans.hidden=!ans.hidden;btn.textContent=ans.hidden?'查看解答':'收起解答'}));
+function setAll(show){document.querySelectorAll('.answer').forEach(a=>a.hidden=!show);document.querySelectorAll('.toggle').forEach(b=>b.textContent=show?'收起解答':'查看解答')}
+</script></body></html>
