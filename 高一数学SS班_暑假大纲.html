@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>高一数学 SS 班暑假大纲</title>
+  <style>
+    :root{
+      --teal:#18a999;
+      --teal-dark:#0e7f74;
+      --teal-light:#e9f8f6;
+      --orange:#ff9b2f;
+      --text:#20252b;
+      --line:#9aa3aa;
+      --white:#fff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Arial,sans-serif;
+      color:var(--text);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.08) 25%, transparent 25%) 0 0/120px 120px,
+        linear-gradient(45deg, #ffad32, #ff902e);
+      min-height:100vh;
+      padding:32px 14px;
+    }
+    .page{
+      max-width:1080px;
+      margin:auto;
+      background:var(--white);
+      border-radius:28px;
+      padding:34px 24px 42px;
+      box-shadow:0 18px 45px rgba(89,52,0,.22);
+    }
+    header{
+      text-align:center;
+      margin-bottom:18px;
+    }
+    .banner{
+      background:linear-gradient(90deg,var(--teal),#33bca9);
+      color:white;
+      padding:11px 18px;
+      font-size:clamp(22px,4vw,34px);
+      font-weight:800;
+      letter-spacing:1px;
+      border-radius:10px 10px 0 0;
+    }
+    h1{
+      margin:10px 0 0;
+      font-size:clamp(24px,4vw,38px);
+    }
+    .subtitle{
+      margin:8px 0 0;
+      color:#5c6872;
+      font-size:15px;
+    }
+    .toolbar{
+      display:flex;
+      justify-content:flex-end;
+      margin:16px 0 12px;
+    }
+    button{
+      border:0;
+      border-radius:8px;
+      background:var(--teal-dark);
+      color:white;
+      padding:10px 16px;
+      font-size:15px;
+      cursor:pointer;
+    }
+    button:hover{filter:brightness(1.08)}
+    .table-wrap{
+      overflow-x:auto;
+      border:1px solid var(--line);
+      border-radius:8px;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:780px;
+      table-layout:fixed;
+      background:#fff;
+    }
+    th,td{
+      border:1px solid var(--line);
+      padding:9px 10px;
+      text-align:center;
+      vertical-align:middle;
+      line-height:1.35;
+    }
+    thead th{
+      background:var(--teal-light);
+      font-size:17px;
+      font-weight:800;
+    }
+    tbody tr:nth-child(even) td:not(.lesson):not(.topic):not(.book){
+      background:#fbfdfd;
+    }
+    .lesson{
+      width:8%;
+      font-size:18px;
+      font-weight:800;
+      background:#f8fbfb;
+    }
+    .topic{
+      width:26%;
+      font-size:18px;
+      font-weight:800;
+      background:#fcfefe;
+    }
+    .subtopic{width:36%}
+    .difficulty{
+      width:9%;
+      font-weight:700;
+    }
+    .book{
+      width:17%;
+      font-size:18px;
+      font-weight:800;
+      color:var(--teal-dark);
+      background:#f6fffd;
+    }
+    .note{
+      margin-top:18px;
+      padding:14px 16px;
+      background:#fff7eb;
+      border-left:5px solid var(--orange);
+      border-radius:8px;
+      font-size:14px;
+      color:#5a4a33;
+    }
+    @media(max-width:650px){
+      body{padding:12px 7px}
+      .page{padding:18px 10px 24px;border-radius:18px}
+      .toolbar{justify-content:center}
+    }
+    @media print{
+      body{background:white;padding:0}
+      .page{box-shadow:none;max-width:none;border-radius:0;padding:0}
+      .toolbar,.note{display:none}
+      table{min-width:0;font-size:11px}
+      th,td{padding:5px 4px}
+      .banner{font-size:22px}
+      h1{font-size:24px}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="banner">高一数学 SS 班</div>
+      <h1>暑假大纲</h1>
+      <p class="subtitle">依据图片内容整理 · 对应教材：必修第一册</p>
+    </header>
+
+    <div class="toolbar">
+      <button onclick="window.print()">打印 / 保存为 PDF</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:8%">课次</th>
+            <th style="width:26%">大标题</th>
+            <th style="width:36%">小标题</th>
+            <th style="width:9%">难度</th>
+            <th style="width:17%">对应课本内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="lesson" rowspan="4">1</td><td class="topic" rowspan="4">集合与逻辑</td><td class="subtopic">集合的概念、子交并补</td><td class="difficulty">2</td><td class="book" rowspan="48">必修第一册</td></tr>
+          <tr><td>命题与逻辑</td><td class="difficulty">3</td></tr>
+          <tr><td>数域的概念与性质</td><td class="difficulty">4</td></tr>
+          <tr><td>新高考新定义例题</td><td class="difficulty">5</td></tr>
+
+          <tr><td class="lesson" rowspan="5">2</td><td class="topic" rowspan="5">均值不等式</td><td>n 元均值不等式</td><td class="difficulty">3</td></tr>
+          <tr><td>幂平均不等式</td><td class="difficulty">3</td></tr>
+          <tr><td>均值不等式的配凑技巧</td><td class="difficulty">5</td></tr>
+          <tr><td>重要代数思想</td><td class="difficulty">7</td></tr>
+          <tr><td>对称性与齐次性</td><td class="difficulty">6</td></tr>
+
+          <tr><td class="lesson" rowspan="4">3</td><td class="topic" rowspan="4">柯西不等式</td><td>柯西不等式</td><td class="difficulty">4</td></tr>
+          <tr><td>权方和不等式</td><td class="difficulty">3</td></tr>
+          <tr><td>排序原理</td><td class="difficulty">4</td></tr>
+          <tr><td>切比雪夫不等式</td><td class="difficulty">6</td></tr>
+
+          <tr><td class="lesson" rowspan="3">4</td><td class="topic" rowspan="3">不等式的证明与解</td><td>反证法</td><td class="difficulty">5</td></tr>
+          <tr><td>放缩法</td><td class="difficulty">7</td></tr>
+          <tr><td>构造法</td><td class="difficulty">7</td></tr>
+
+          <tr><td class="lesson" rowspan="4">5</td><td class="topic" rowspan="4">解不等式</td><td>二次不等式</td><td class="difficulty">3</td></tr>
+          <tr><td>高次不等式</td><td class="difficulty">2</td></tr>
+          <tr><td>绝对值不等式</td><td class="difficulty">2</td></tr>
+          <tr><td>根式不等式</td><td class="difficulty">3</td></tr>
+
+          <tr><td class="lesson" rowspan="4">6</td><td class="topic" rowspan="4">函数的概念</td><td>映射</td><td class="difficulty">5</td></tr>
+          <tr><td>函数的概念</td><td class="difficulty">3</td></tr>
+          <tr><td>函数的初等运算</td><td class="difficulty">4</td></tr>
+          <tr><td>简单的函数方程</td><td class="difficulty">6</td></tr>
+
+          <tr><td class="lesson" rowspan="4">7</td><td class="topic" rowspan="4">函数的单调性与奇偶性</td><td>双钩双撇函数</td><td class="difficulty">2</td></tr>
+          <tr><td>函数的单调性</td><td class="difficulty">3</td></tr>
+          <tr><td>函数的奇偶性</td><td class="difficulty">3</td></tr>
+          <tr><td>分段与含参函数性质</td><td class="difficulty">4</td></tr>
+
+          <tr><td class="lesson" rowspan="2">8</td><td class="topic" rowspan="2">函数的对称性与周期性</td><td>函数的对称性</td><td class="difficulty">4</td></tr>
+          <tr><td>函数的周期性</td><td class="difficulty">2</td></tr>
+
+          <tr><td class="lesson" rowspan="3">9</td><td class="topic" rowspan="3">幂函数与指数函数</td><td>基本初等函数</td><td class="difficulty">1</td></tr>
+          <tr><td>幂函数</td><td class="difficulty">3</td></tr>
+          <tr><td>指数函数</td><td class="difficulty">2</td></tr>
+
+          <tr><td class="lesson" rowspan="3">10</td><td class="topic" rowspan="3">对数与反函数</td><td>对数运算</td><td class="difficulty">2</td></tr>
+          <tr><td>反函数</td><td class="difficulty">4</td></tr>
+          <tr><td>反函数方程解定理</td><td class="difficulty">6</td></tr>
+
+          <tr><td class="lesson" rowspan="2">11</td><td class="topic" rowspan="2">对数函数的性质</td><td>对数的应用</td><td class="difficulty">3</td></tr>
+          <tr><td>对数函数的性质</td><td class="difficulty">3</td></tr>
+
+          <tr><td class="lesson" rowspan="2">12</td><td class="topic" rowspan="2">诱导公式</td><td>弧度制与任意角的三角比</td><td class="difficulty">2</td></tr>
+          <tr><td>诱导公式</td><td class="difficulty">2</td></tr>
+
+          <tr><td class="lesson" rowspan="4">13</td><td class="topic" rowspan="4">和差倍半角公式</td><td>和差角公式</td><td class="difficulty">2</td></tr>
+          <tr><td>二倍角公式</td><td class="difficulty">2</td></tr>
+          <tr><td>辅助角公式</td><td class="difficulty">3</td></tr>
+          <tr><td>三倍角公式</td><td class="difficulty">2</td></tr>
+
+          <tr><td class="lesson" rowspan="3">14</td><td class="topic" rowspan="3">和差化积与积化和差</td><td>和差化积与积化和差公式</td><td class="difficulty">4</td></tr>
+          <tr><td>万能公式</td><td class="difficulty">3</td></tr>
+          <tr><td>结课测试</td><td class="difficulty">/</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      说明：网页内容根据原图人工整理。原图中“对应课本内容”为“必修第一册”。
+    </div>
+  </main>
+</body>
+</html>
