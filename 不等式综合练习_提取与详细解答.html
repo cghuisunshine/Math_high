@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>不等式综合练习：题目提取与详细解答</title>
+<style>
+:root{
+  --bg:#f5f7fb;--card:#fff;--ink:#1f2937;--muted:#64748b;
+  --blue:#2563eb;--blue2:#dbeafe;--green:#047857;--green2:#d1fae5;
+  --orange:#b45309;--orange2:#fef3c7;--line:#dbe2ea;--red:#b91c1c;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.75}
+header{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;padding:42px 20px}
+.wrap{max-width:1000px;margin:auto}
+h1{margin:0 0 8px;font-size:clamp(28px,5vw,44px)}
+header p{margin:0;opacity:.9}
+nav{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);padding:10px 15px;overflow:auto;white-space:nowrap}
+nav a{display:inline-block;color:#1d4ed8;text-decoration:none;margin:0 10px;font-weight:650}
+main{max-width:1000px;margin:24px auto;padding:0 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:18px 0;box-shadow:0 5px 18px rgba(15,23,42,.05)}
+h2{margin-top:0;color:#1e3a8a;border-left:5px solid var(--blue);padding-left:12px}
+h3{color:#1d4ed8;margin-bottom:8px}
+.problem{background:#f8fafc;border-left:4px solid #64748b;padding:14px 16px;border-radius:8px}
+.answer{margin-top:14px;background:#f0fdf4;border-left:4px solid #10b981;padding:16px;border-radius:8px}
+.tip{background:var(--orange2);border-left:4px solid #f59e0b;padding:13px 15px;border-radius:8px}
+.result{font-weight:800;color:var(--red)}
+.eq{overflow-x:auto;margin:10px 0;padding:9px 12px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;font-family:"Times New Roman","Cambria Math",serif;font-size:1.06rem;white-space:nowrap}
+.frac{display:inline-flex;vertical-align:middle;flex-direction:column;text-align:center;line-height:1.15;margin:0 .12em}
+.frac .top{border-bottom:1.5px solid currentColor;padding:0 .18em .08em}
+.frac .bottom{padding:.08em .18em 0}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+button{border:0;border-radius:9px;padding:10px 15px;font-weight:700;cursor:pointer;background:#2563eb;color:white}
+button.secondary{background:#475569}
+.hidden-answer .answer{display:none}
+.small{color:var(--muted);font-size:.94rem}
+table{border-collapse:collapse;width:100%;margin:12px 0}
+th,td{border:1px solid var(--line);padding:9px;text-align:center}
+th{background:#eff6ff}
+footer{text-align:center;color:var(--muted);padding:25px}
+@media print{nav,.btns{display:none}body{background:#fff}.card{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>不等式综合练习</h1>
+    <p>图片内容提取 · 分类方法 · 详细解答 · 可本地打开</p>
+  </div>
+</header>
+
+<nav>
+<a href="#knowledge">知识点</a>
+<a href="#examples">例题</a>
+<a href="#q1">第1题</a>
+<a href="#q2">第2题</a>
+<a href="#q3">第3题</a>
+<a href="#q4">第4题</a>
+<a href="#q5">第5题</a>
+<a href="#q6">第6题</a>
+<a href="#weighted">加权中位数</a>
+</nav>
+
+<main>
+<div class="btns">
+  <button onclick="showAll()">显示全部解答</button>
+  <button class="secondary" onclick="hideAll()">隐藏全部解答</button>
+  <button class="secondary" onclick="window.print()">打印 / 保存为 PDF</button>
+</div>
+
+<section id="knowledge" class="card">
+<h2>一、相关知识点</h2>
+<h3>1. 根式不等式</h3>
+<div class="eq">√f(x) &lt; g(x) ⇔ f(x) ≥ 0，g(x) &gt; 0，并且 f(x) &lt; [g(x)]²</div>
+<div class="eq">√f(x) &gt; g(x) ⇔
+① f(x) ≥ 0，g(x) &lt; 0；或
+② f(x) ≥ 0，g(x) ≥ 0，且 f(x) &gt; [g(x)]²</div>
+<div class="tip">平方前必须先判断两边的符号，不能直接平方。</div>
+
+<h3>2. 分式不等式</h3>
+<p>先移到同一边并通分，再用“零点、无定义点、符号表”求解。分母为零的点永远不能取。</p>
+
+<h3>3. 含绝对值函数的最值</h3>
+<p>形如 Σaᵢ|x−xᵢ|（aᵢ&gt;0）的函数，在其“加权中位数”处取得最小值。</p>
+</section>
+
+<section id="examples" class="card hidden-answer">
+<h2>二、图片中的例题</h2>
+
+<h3>例题3</h3>
+<div class="problem">解不等式：(x−3)(x−8)(x+2)(x+4)² ≥ 0。</div>
+<div class="answer">
+<p>(x+4)²≥0，并且只在 x=−4 时等于0。除 x=−4 外，原式符号由</p>
+<div class="eq">(x−3)(x−8)(x+2)</div>
+<p>决定。三个一次因式的零点依次为 −2、3、8，作符号表：</p>
+<table><tr><th>区间</th><th>(−∞,−2)</th><th>(−2,3)</th><th>(3,8)</th><th>(8,+∞)</th></tr>
+<tr><td>符号</td><td>−</td><td>+</td><td>−</td><td>+</td></tr></table>
+<p class="result">解集：{−4} ∪ [−2,3] ∪ [8,+∞)。</p>
+</div>
+
+<h3>例题7</h3>
+<div class="problem">
+已知 a&gt;b，求不等式
+<span class="frac"><span class="top">1</span><span class="bottom">x−a</span></span>
++
+<span class="frac"><span class="top">1</span><span class="bottom">x−b</span></span>
+≥1 的解所构成区间的长度之和。
+</div>
+<div class="answer">
+<p>移项并通分：</p>
+<div class="eq">
+<span class="frac"><span class="top">1</span><span class="bottom">x−a</span></span>
++
+<span class="frac"><span class="top">1</span><span class="bottom">x−b</span></span>−1
+=
+<span class="frac"><span class="top">−x²+(a+b+2)x−(ab+a+b)</span><span class="bottom">(x−a)(x−b)</span></span>
+</div>
+<p>设分子两根为 r₁&lt;r₂，则</p>
+<div class="eq">r₁,₂ = [a+b+2 ∓ √((a−b)²+4)]/2</div>
+<p>可验证其顺序为 b&lt;r₁&lt;a&lt;r₂。符号分析得解集：</p>
+<div class="eq">(b,r₁] ∪ (a,r₂]</div>
+<p>区间长度之和：</p>
+<div class="eq">(r₁−b)+(r₂−a)=(r₁+r₂)−(a+b)=2</div>
+<p class="result">答案：2。</p>
+</div>
+</section>
+
+<section id="q1" class="card hidden-answer">
+<h2>三、课后练习第1题</h2>
+
+<h3>（1）解不等式 |x²−5x+6| &lt; x²−4</h3>
+<div class="problem">|x²−5x+6| &lt; x²−4。</div>
+<div class="answer">
+<p>因为绝对值非负，所以右边必须为正：</p>
+<div class="eq">x²−4&gt;0 ⇔ x&lt;−2 或 x&gt;2</div>
+<p>利用 |A|&lt;B ⇔ −B&lt;A&lt;B（其中 B&gt;0）：</p>
+<div class="eq">−(x²−4)&lt;x²−5x+6&lt;x²−4</div>
+<p>右侧不等式：</p>
+<div class="eq">x²−5x+6&lt;x²−4 ⇔ −5x&lt;−10 ⇔ x&gt;2</div>
+<p>左侧不等式：</p>
+<div class="eq">x²−5x+6&gt;−x²+4 ⇔ 2x²−5x+2&gt;0</div>
+<div class="eq">(2x−1)(x−2)&gt;0 ⇔ x&lt;1/2 或 x&gt;2</div>
+<p>综合所有条件，得到：</p>
+<p class="result">解集：(2,+∞)。</p>
+</div>
+
+<h3>（2）解不等式 (x²−x−2)(√(2x+1)+1) ≤ 0</h3>
+<div class="problem">(x²−x−2)(√(2x+1)+1) ≤ 0。</div>
+<div class="answer">
+<p>定义域：</p><div class="eq">2x+1≥0 ⇔ x≥−1/2</div>
+<p>在定义域内，√(2x+1)+1&gt;0，因此只需：</p>
+<div class="eq">x²−x−2≤0 ⇔ (x−2)(x+1)≤0 ⇔ −1≤x≤2</div>
+<p>与定义域取交集：</p>
+<p class="result">解集：[−1/2,2]。</p>
+</div>
+
+<h3>（3）解分式不等式</h3>
+<div class="problem">
+<span class="frac"><span class="top">1</span><span class="bottom">x+4</span></span>
++
+<span class="frac"><span class="top">1</span><span class="bottom">x+5</span></span>
+&gt;
+<span class="frac"><span class="top">1</span><span class="bottom">x+6</span></span>
++
+<span class="frac"><span class="top">1</span><span class="bottom">x+3</span></span>。
+</div>
+<div class="answer">
+<p>两边分别配对：</p>
+<div class="eq">
+[1/(x+4)−1/(x+3)] + [1/(x+5)−1/(x+6)] &gt; 0
+</div>
+<div class="eq">
+−1/[(x+4)(x+3)] + 1/[(x+5)(x+6)] &gt;0
+</div>
+<p>通分后分子为：</p>
+<div class="eq">(x+3)(x+4)−(x+5)(x+6)=−4x−18=−2(2x+9)</div>
+<p>所以：</p>
+<div class="eq">
+<span class="frac"><span class="top">−2(2x+9)</span><span class="bottom">(x+3)(x+4)(x+5)(x+6)</span></span>&gt;0
+</div>
+<p>临界点依次为 −6、−5、−9/2、−4、−3。作符号表可得：</p>
+<p class="result">解集：(−∞,−6) ∪ (−5,−9/2) ∪ (−4,−3)。</p>
+</div>
+</section>
+
+<section id="q2" class="card hidden-answer">
+<h2>四、第2题：解集为 R 的参数范围</h2>
+<div class="problem">不等式 (m²−2m−3)x²−(m−3)x−1&lt;0 的解集为 R，求实数 m 的范围。</div>
+<div class="answer">
+<p>记二次项系数：</p>
+<div class="eq">A=m²−2m−3=(m−3)(m+1)</div>
+<p>当 A&lt;0 时，二次函数开口向下。要使其对所有实数恒小于0，还需判别式 Δ≤0：</p>
+<div class="eq">−1&lt;m&lt;3</div>
+<div class="eq">Δ=[−(m−3)]²−4(m²−2m−3)(−1)</div>
+<div class="eq">Δ=(m−3)²+4(m−3)(m+1)=(m−3)(5m+1)</div>
+<p>在 −1&lt;m&lt;3 内，m−3&lt;0，因此 Δ≤0 等价于：</p>
+<div class="eq">5m+1≥0 ⇔ m≥−1/5</div>
+<p>另需检查退化情形：m=3 时，原不等式变为 −1&lt;0，对所有 x 成立；m=−1 时变为一次不等式，不能对所有 x 成立。</p>
+<p class="result">m∈[−1/5,3]。</p>
+</div>
+</section>
+
+<section id="q3" class="card hidden-answer">
+<h2>五、第3题：解集关系</h2>
+<div class="problem">已知不等式 x²−ax+2&lt;0 的解集为 A，求满足下列条件的 a：<br>
+（1）A=(1,2)；（2）(1,2)⊆A；（3）A⊆(1,2)。</div>
+<div class="answer">
+<p>若方程 x²−ax+2=0 的两根为 r₁&lt;r₂，则：</p>
+<div class="eq">A=(r₁,r₂)，r₁+r₂=a，r₁r₂=2</div>
+
+<h3>（1）A=(1,2)</h3>
+<p>两根就是1和2，因此 a=1+2=3。</p>
+<p class="result">a=3。</p>
+
+<h3>（2）(1,2)⊆A</h3>
+<p>要使整个开区间 (1,2) 都落在负值区间内，只需端点处函数值不大于0：</p>
+<div class="eq">f(1)=3−a≤0，f(2)=6−2a≤0</div>
+<p>两者均给出 a≥3。</p>
+<p class="result">a≥3。</p>
+
+<h3>（3）A⊆(1,2)</h3>
+<p>要求两根满足 1≤r₁&lt;r₂≤2，并且 r₁r₂=2。</p>
+<p>令 r₁=t，则 r₂=2/t，其中 1≤t&lt;√2。于是：</p>
+<div class="eq">a=t+2/t</div>
+<p>该式在区间 [1,√2) 上从3递减趋近2√2，但不能取2√2（否则两根重合，解集为空）。</p>
+<p class="result">2√2&lt;a≤3。</p>
+</div>
+</section>
+
+<section id="q4" class="card hidden-answer">
+<h2>六、第4题：含参数二次不等式</h2>
+<div class="problem">解关于 x 的不等式：kx²+kx+1≤0（k∈R）。</div>
+<div class="answer">
+<p>判别式：</p>
+<div class="eq">Δ=k²−4k=k(k−4)</div>
+
+<h3>① k=0</h3>
+<div class="eq">1≤0</div>
+<p class="result">无解。</p>
+
+<h3>② k&gt;0</h3>
+<p>抛物线开口向上，必须 Δ≥0，即 k≥4。</p>
+<div class="eq">x₁=[−k−√(k²−4k)]/(2k)，x₂=[−k+√(k²−4k)]/(2k)</div>
+<p class="result">当 k≥4 时，x∈[x₁,x₂]；当 0&lt;k&lt;4 时无解。</p>
+
+<h3>③ k&lt;0</h3>
+<p>此时 Δ&gt;0，抛物线开口向下，“≤0”在两根外侧成立。由于分母2k&lt;0，较小的根为：</p>
+<div class="eq">x₁=[−k+√(k²−4k)]/(2k)，x₂=[−k−√(k²−4k)]/(2k)</div>
+<p class="result">x∈(−∞,x₁]∪[x₂,+∞)。</p>
+</div>
+</section>
+
+<section id="q5" class="card hidden-answer">
+<h2>七、第5题：含参数分式不等式</h2>
+<div class="problem">解关于 x 的不等式：
+a(x−1)/(x−2)&gt;1（a≠1）。</div>
+<div class="answer">
+<p>移项通分：</p>
+<div class="eq">
+<span class="frac"><span class="top">a(x−1)</span><span class="bottom">x−2</span></span>−1
+=
+<span class="frac"><span class="top">(a−1)x+(2−a)</span><span class="bottom">x−2</span></span>&gt;0
+</div>
+<p>分子零点：</p>
+<div class="eq">x₀=(a−2)/(a−1)</div>
+<p>并比较 x₀ 与2：</p>
+<div class="eq">x₀−2=−a/(a−1)</div>
+
+<table>
+<tr><th>a 的范围</th><th>x₀与2的顺序</th><th>解集</th></tr>
+<tr><td>a&lt;0</td><td>x₀&lt;2</td><td>(x₀,2)</td></tr>
+<tr><td>a=0</td><td>—</td><td>∅</td></tr>
+<tr><td>0&lt;a&lt;1</td><td>2&lt;x₀</td><td>(2,x₀)</td></tr>
+<tr><td>a&gt;1</td><td>x₀&lt;2</td><td>(−∞,x₀)∪(2,+∞)</td></tr>
+</table>
+<p class="small">其中 x=2 始终无定义，x=x₀ 使分子为0，也不能取。</p>
+</div>
+</section>
+
+<section id="q6" class="card hidden-answer">
+<h2>八、第6题：绝对值和的最小值</h2>
+<div class="problem">（2011北京）求 f(x)=|x−1|+|2x−1|+⋯+|2011x−1| 的最小值。</div>
+<div class="answer">
+<p>将每一项改写：</p>
+<div class="eq">|ix−1|=i|x−1/i|</div>
+<p>所以：</p>
+<div class="eq">f(x)=Σ(i=1到2011) i|x−1/i|</div>
+<p>这是加权距离和。点 1/i 的权重为 i，最小值在加权中位数处取得。</p>
+<p>总权重：</p>
+<div class="eq">1+2+⋯+2011=2011×2012/2=2,023,066</div>
+<p>总权重的一半为1,011,533。寻找整数 k，使点 x=1/k 两侧的权重都不超过这一半：</p>
+<div class="eq">1+2+⋯+1421=1,010,331 </div>
+<p>精确计算：</p>
+<div class="eq">1+2+⋯+1421=1,010,331；1423+⋯+2011=1,011,313</div>
+<p>两侧权重均不超过1,011,533，因此加权中位数为：</p>
+<div class="eq">x=1/1422</div>
+<p>此时：</p>
+<div class="eq">f(1/1422)=Σ|i−1422|/1422</div>
+<div class="eq">=[1+2+⋯+1421 + 1+2+⋯+589]/1422</div>
+<div class="eq">=[1421×1422/2 + 589×590/2]/1422</div>
+<div class="eq">=592043/711</div>
+<p class="result">最小值为 592043/711，约等于 832.691。</p>
+</div>
+</section>
+
+<section id="weighted" class="card">
+<h2>九、例题11：加权绝对值函数的最值规律</h2>
+<div class="problem">探索 f(x)=a₁|x−x₁|+a₂|x−x₂|+⋯+aₙ|x−xₙ|（aᵢ&gt;0）的最小值。</div>
+<div class="answer" style="display:block">
+<p>把 x 看成数轴上的活动点，每一项 aᵢ|x−xᵢ| 表示“距离 × 权重”。</p>
+<p><strong>结论：</strong>当 x 位于这些点的加权中位数处时，函数取得最小值。</p>
+<div class="tip">
+加权中位数的判断方法：该点左侧所有权重之和不超过总权重的一半，右侧所有权重之和也不超过总权重的一半。
+</div>
+<p>原因是：x 向右移动一个很小距离时，左边各点对应的距离增加，右边各点对应的距离减少。只有当左右两侧的总权重达到平衡时，继续向任一方向移动都不会使总和下降。</p>
+</div>
+</section>
+
+<div class="tip">
+<strong>说明：</strong>原图第6题的计算部分在此网页中已按加权中位数方法完整展开。页面不依赖外部数学公式库，下载后可直接离线打开。
+</div>
+</main>
+
+<footer>不等式综合练习 · 本地离线网页</footer>
+<script>
+function showAll(){document.querySelectorAll('.hidden-answer').forEach(x=>x.classList.remove('hidden-answer'))}
+function hideAll(){document.querySelectorAll('section.card').forEach(x=>{if(x.id!=='knowledge'&&x.id!=='weighted')x.classList.add('hidden-answer')})}
+</script>
+</body>
+</html>
