@@ -3,198 +3,885 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="高中数学第七讲：函数的奇偶性与单调性课程大纲、奇偶性知识整理及例题解答。">
-  <title>函数的奇偶性与单调性｜知识大纲与问题解答</title>
+  <meta name="description" content="高中数学第七讲：双钩双撇函数、函数单调性、奇偶性、分段与含参函数性质的完整教程与例题解答。">
+  <title>函数的单调性与奇偶性｜完整知识大纲与问题解答</title>
   <style>
     :root{
       --ink:#18243b;--muted:#657087;--paper:#f8f6f0;--card:#fff;
       --navy:#19345a;--teal:#15877f;--teal-soft:#e2f3ef;
       --orange:#f3a23a;--purple:#7252a8;--line:#ddd9cf;
+      --blue-soft:#edf3fb;--rose-soft:#f9ecef;
       --shadow:0 16px 42px rgba(22,38,62,.10);--radius:24px;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;color:var(--ink);background:var(--paper);font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif;line-height:1.75}
+    body{
+      margin:0;color:var(--ink);background:var(--paper);
+      font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif;
+      line-height:1.75
+    }
     button,a{font:inherit}
     a{color:inherit;text-decoration:none}
-    .hero{position:relative;overflow:hidden;padding:68px max(6vw,24px) 58px;color:#fff;background:linear-gradient(125deg,#173359 0%,#17606c 58%,#20a08b 100%)}
-    .hero:after{content:"f(−x)";position:absolute;right:5vw;top:-36px;color:rgba(255,255,255,.08);font-family:Georgia,serif;font-size:clamp(100px,17vw,240px);font-style:italic}
+    .hero{
+      position:relative;overflow:hidden;padding:68px max(6vw,24px) 58px;color:#fff;
+      background:linear-gradient(125deg,#173359 0%,#17606c 58%,#20a08b 100%)
+    }
+    .hero:after{
+      content:"f(−x)";position:absolute;right:4vw;top:-45px;color:rgba(255,255,255,.075);
+      font-family:Georgia,serif;font-size:clamp(100px,17vw,240px);font-style:italic
+    }
     .hero-inner{position:relative;z-index:1;max-width:1180px;margin:auto}
-    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid rgba(255,255,255,.28);border-radius:99px;font-size:14px;letter-spacing:.06em}
-    h1{max-width:880px;margin:18px 0 12px;font-size:clamp(38px,6vw,72px);line-height:1.08;letter-spacing:-.04em}
-    .lead{max-width:830px;margin:0;color:rgba(255,255,255,.86);font-size:clamp(16px,2vw,20px)}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;padding:6px 14px;
+      border:1px solid rgba(255,255,255,.28);border-radius:99px;
+      font-size:14px;letter-spacing:.06em
+    }
+    h1{
+      max-width:930px;margin:18px 0 12px;font-size:clamp(38px,6vw,72px);
+      line-height:1.08;letter-spacing:-.04em
+    }
+    .lead{max-width:900px;margin:0;color:rgba(255,255,255,.88);font-size:clamp(16px,2vw,20px)}
     .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:27px}
     .badge{padding:7px 12px;border-radius:9px;background:rgba(7,31,51,.34);font-size:14px}
-    .layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:34px;max-width:1180px;margin:0 auto;padding:38px 24px 70px}
-    .nav{position:sticky;top:22px;align-self:start;padding:22px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.93);box-shadow:var(--shadow)}
+
+    .layout{
+      display:grid;grid-template-columns:238px minmax(0,1fr);gap:34px;
+      max-width:1180px;margin:0 auto;padding:38px 24px 70px
+    }
+    .nav{
+      position:sticky;top:22px;align-self:start;padding:22px;
+      border:1px solid var(--line);border-radius:20px;
+      background:rgba(255,255,255,.94);box-shadow:var(--shadow)
+    }
     .nav strong{display:block;margin-bottom:13px;color:var(--teal);letter-spacing:.08em}
-    .nav a{display:block;padding:9px 0;border-bottom:1px dashed var(--line);color:#4e596b}
-    .nav button,.all-btn{width:100%;margin-top:18px;padding:11px 14px;border:0;border-radius:12px;color:#fff;background:var(--teal);cursor:pointer}
+    .nav a{
+      display:block;padding:8px 0;border-bottom:1px dashed var(--line);
+      color:#4e596b;font-size:14px
+    }
+    .nav a:hover{color:var(--teal)}
+    .nav button,.all-btn{
+      width:100%;margin-top:18px;padding:11px 14px;border:0;border-radius:12px;
+      color:#fff;background:var(--teal);cursor:pointer
+    }
+
     main{min-width:0}
     section{scroll-margin-top:20px;margin-bottom:48px}
     .kicker{margin:0 0 4px;color:var(--purple);font-size:13px;font-weight:800;letter-spacing:.16em}
-    .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:18px}
+    .section-head{
+      display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:18px
+    }
     h2{margin:0;font-size:clamp(29px,4vw,42px);line-height:1.2;letter-spacing:-.03em}
+    h3{line-height:1.35}
     .section-note{margin:0;color:var(--muted)}
-    .course-card{display:grid;grid-template-columns:300px 1fr;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow)}
+
+    .course-card{
+      display:grid;grid-template-columns:300px 1fr;overflow:hidden;
+      border:1px solid var(--line);border-radius:var(--radius);
+      background:var(--card);box-shadow:var(--shadow)
+    }
     .course-title{padding:27px;color:#fff;background:linear-gradient(145deg,var(--navy),#215c72)}
     .course-title small{display:block;color:rgba(255,255,255,.72)}
     .course-title h3{margin:5px 0 3px;font-size:26px}
     .course-list{display:flex;align-content:center;align-items:center;flex-wrap:wrap;gap:11px;padding:25px}
     .pill{padding:9px 13px;border-radius:999px;background:var(--teal-soft);color:#285a59}
     .pill.active{color:#fff;background:var(--purple)}
-    .scope{margin-top:14px;padding:12px 16px;border-left:4px solid var(--orange);border-radius:4px 13px 13px 4px;background:#fff6e6;color:#6c522d}
+    .scope{
+      margin-top:14px;padding:12px 16px;border-left:4px solid var(--orange);
+      border-radius:4px 13px 13px 4px;background:#fff6e6;color:#6c522d
+    }
+
+    .overview-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+    .overview-item{
+      padding:20px;border:1px solid var(--line);border-radius:18px;background:var(--card);
+      box-shadow:0 8px 24px rgba(22,38,62,.055)
+    }
+    .overview-item b{display:block;margin-bottom:7px;color:var(--navy);font-size:18px}
+    .overview-item span{color:var(--muted);font-size:14px}
+
     .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-    .topic{padding:24px;border:1px solid var(--line);border-radius:20px;background:var(--card);box-shadow:0 9px 25px rgba(22,38,62,.06)}
+    .topic{
+      padding:24px;border:1px solid var(--line);border-radius:20px;background:var(--card);
+      box-shadow:0 9px 25px rgba(22,38,62,.06)
+    }
+    .topic.wide{grid-column:1/-1}
     .topic h3{display:flex;align-items:center;gap:10px;margin:0 0 10px;font-size:21px}
-    .num{display:grid;place-items:center;width:35px;height:35px;flex:none;border-radius:10px;color:#fff;background:var(--purple)}
+    .num{
+      display:grid;place-items:center;width:35px;height:35px;flex:none;
+      border-radius:10px;color:#fff;background:var(--purple)
+    }
     .topic p{margin:7px 0;color:#485368}
-    .formula{display:block;margin:11px 0;padding:11px 14px;border-radius:11px;background:#f1f5f8;color:var(--navy);font-family:Cambria,"Times New Roman",serif;font-size:19px}
+    .formula{
+      display:block;margin:11px 0;padding:11px 14px;border-radius:11px;
+      background:#f1f5f8;color:var(--navy);
+      font-family:Cambria,"Times New Roman",serif;font-size:19px;overflow-x:auto
+    }
+    .formula.center{text-align:center;font-size:21px}
     .checklist{margin:9px 0 0;padding-left:1.25em;color:#485368}
-    .callout{margin-top:18px;padding:18px 20px;border:1px solid #cbe4df;border-radius:17px;background:#edf8f5}
+    .callout{
+      margin-top:18px;padding:18px 20px;border:1px solid #cbe4df;
+      border-radius:17px;background:#edf8f5
+    }
     .callout strong{color:#08766f}
-    .symmetry{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .warning{
+      margin-top:16px;padding:15px 18px;border-left:4px solid #d27648;
+      border-radius:4px 13px 13px 4px;background:#fff0e9;color:#71452f
+    }
+    .method{
+      margin-top:16px;padding:15px 18px;border-left:4px solid var(--purple);
+      border-radius:4px 13px 13px 4px;background:#f2edf9;color:#51406e
+    }
+
+    .symmetry,.graph-pair{
+      display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px
+    }
     figure{margin:0;padding:14px;border-radius:15px;background:#f7f9fb;text-align:center}
-    figure svg{display:block;width:100%;height:150px}
+    figure svg{display:block;width:100%;height:190px}
     figcaption{color:var(--muted);font-size:14px}
-    .axis{stroke:#9aa5b4;stroke-width:1.5}.curve{fill:none;stroke:var(--teal);stroke-width:4;stroke-linecap:round}.mark{fill:var(--orange)}
-    .question{margin-bottom:18px;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:var(--card);box-shadow:0 10px 30px rgba(22,38,62,.07)}
+    .axis{stroke:#9aa5b4;stroke-width:1.5}
+    .gridline{stroke:#dce2ea;stroke-width:1;stroke-dasharray:4 5}
+    .curve{fill:none;stroke:var(--teal);stroke-width:4;stroke-linecap:round}
+    .curve2{fill:none;stroke:var(--purple);stroke-width:4;stroke-linecap:round}
+    .mark{fill:var(--orange)}
+    .label{fill:#647084;font-size:12px;font-family:Arial,sans-serif}
+
+    table{
+      width:100%;border-collapse:collapse;margin:14px 0;background:#fff;
+      border-radius:14px;overflow:hidden
+    }
+    th,td{padding:11px 12px;border:1px solid var(--line);vertical-align:top}
+    th{background:#eef4f5;color:#214d50;text-align:left}
+    .flow{
+      display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:13px 0
+    }
+    .flow span{
+      padding:8px 11px;border-radius:10px;background:var(--blue-soft);
+      color:#334b6a;font-weight:700
+    }
+    .flow b{color:var(--orange)}
+
+    .example{
+      margin-top:18px;overflow:hidden;border:1px solid var(--line);
+      border-radius:18px;background:#fff
+    }
+    .example-head{
+      padding:12px 17px;color:#fff;background:linear-gradient(120deg,var(--purple),#8d6abc);
+      font-weight:800
+    }
+    .example-body{padding:17px 19px}
+    .step{display:grid;grid-template-columns:30px 1fr;gap:10px;margin:11px 0}
+    .step i{
+      display:grid;place-items:center;width:28px;height:28px;border-radius:50%;
+      color:#fff;background:var(--teal);font-style:normal;font-weight:800
+    }
+    .result{
+      display:inline-block;margin-top:7px;padding:6px 11px;border-radius:9px;
+      color:#fff;background:var(--teal);font-weight:800
+    }
+
+    .question{
+      margin-bottom:18px;overflow:hidden;border:1px solid var(--line);
+      border-radius:20px;background:var(--card);box-shadow:0 10px 30px rgba(22,38,62,.07)
+    }
     .q-body{padding:23px 24px 18px}
-    .q-label{display:inline-block;margin-bottom:9px;padding:4px 10px;border-radius:99px;color:#5a408c;background:#eee7f8;font-size:13px;font-weight:700}
+    .q-label{
+      display:inline-block;margin-bottom:9px;padding:4px 10px;border-radius:99px;
+      color:#5a408c;background:#eee7f8;font-size:13px;font-weight:700
+    }
     .question h3{margin:0 0 9px;font-size:21px}
     .question p{margin:7px 0}
     .options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:13px 0 0}
     .option{padding:10px 12px;border-radius:10px;background:#f4f5f7}
-    .toggle{width:100%;padding:12px 22px;border:0;border-top:1px solid var(--line);color:var(--teal);background:#fafcfb;font-weight:700;text-align:left;cursor:pointer}
+    .toggle{
+      width:100%;padding:12px 22px;border:0;border-top:1px solid var(--line);
+      color:var(--teal);background:#fafcfb;font-weight:700;text-align:left;cursor:pointer
+    }
     .answer{display:none;padding:20px 24px 23px;border-top:1px solid #cfe6e1;background:#eff8f6}
     .answer.open{display:block}
     .answer h4{margin:0 0 8px;color:#08766f;font-size:18px}
     .reason{margin:11px 0;padding:10px 13px;border-left:3px solid var(--teal);background:#fff}
-    .result{display:inline-block;margin-top:8px;padding:6px 12px;border-radius:9px;color:#fff;background:var(--teal);font-weight:700}
-    footer{padding:25px;text-align:center;color:#778091;background:#ebe8e0;font-size:14px}
-    @media(max-width:860px){.layout{display:block}.nav{position:static;margin-bottom:32px}.course-card{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.section-head{display:block}.section-note{margin-top:5px}}
-    @media(max-width:560px){.hero{padding:48px 20px 40px}.layout{padding:28px 15px 52px}.options,.symmetry{grid-template-columns:1fr}.q-body,.answer{padding-left:18px;padding-right:18px}}
-    @media print{.nav,.toggle,.all-btn{display:none!important}.layout{display:block;padding:0}.hero{padding:30px;background:#fff;color:#000}.hero .lead{color:#333}.hero:after,.badges{display:none}.answer{display:block!important}.question,.topic,.course-card{break-inside:avoid;box-shadow:none}section{margin-bottom:28px}}
+
+    footer{
+      padding:28px 24px;text-align:center;color:var(--muted);
+      border-top:1px solid var(--line);background:#fff
+    }
+
+    @media(max-width:960px){
+      .layout{grid-template-columns:1fr}
+      .nav{position:static}
+      .overview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:720px){
+      .course-card,.grid,.symmetry,.graph-pair,.options{grid-template-columns:1fr}
+      .course-title{padding:22px}
+      .overview-grid{grid-template-columns:1fr}
+      .topic.wide{grid-column:auto}
+      .section-head{display:block}
+      .section-note{margin-top:5px}
+      figure svg{height:170px}
+    }
+    @media print{
+      .nav,.toggle{display:none!important}
+      .layout{display:block;max-width:none;padding:24px}
+      .answer{display:block!important}
+      .hero{padding:35px 28px}
+      section,.question,.topic,.example{break-inside:avoid}
+      body{background:#fff}
+    }
   </style>
 </head>
 <body>
   <header class="hero">
     <div class="hero-inner">
       <span class="eyebrow">高中数学 · 第七讲</span>
-      <h1>函数的奇偶性与单调性</h1>
-      <p class="lead">从定义域的对称性出发，掌握奇函数、偶函数的定义、代数判断和图像特征，并用反例识别常见错误。</p>
-      <div class="badges"><span class="badge">课程大纲定位</span><span class="badge">4 个核心知识块</span><span class="badge">3 组问题</span><span class="badge">答案可折叠</span><span class="badge">完全离线</span></div>
+      <h1>函数的单调性与奇偶性</h1>
+      <p class="lead">
+        按课程大纲完整扩展：双钩双撇函数、函数的单调性、函数的奇偶性，
+        以及分段与含参函数性质。每个板块均配有定义、图像、方法、例题与练习。
+      </p>
+      <div class="badges">
+        <span class="badge">4 个核心知识块</span>
+        <span class="badge">图像与代数结合</span>
+        <span class="badge">8 组问题</span>
+        <span class="badge">答案可折叠</span>
+        <span class="badge">完全离线</span>
+      </div>
     </div>
   </header>
 
   <div class="layout">
     <aside class="nav" aria-label="页面目录">
       <strong>本页目录</strong>
-      <a href="#position">课程定位</a><a href="#outline">知识大纲</a><a href="#questions">问题与解答</a>
+      <a href="#position">课程定位</a>
+      <a href="#map">完整知识地图</a>
+      <a href="#hook">双钩双撇函数</a>
+      <a href="#monotonicity">函数的单调性</a>
+      <a href="#parity">函数的奇偶性</a>
+      <a href="#piecewise">分段与含参函数</a>
+      <a href="#questions">综合问题与解答</a>
       <button id="toggleAll" type="button">展开全部解答</button>
     </aside>
+
     <main>
       <section id="position">
         <p class="kicker">COURSE MAP</p>
-        <div class="section-head"><h2>课程定位</h2><p class="section-note">对应必修第一册 · 第 7 课</p></div>
-        <div class="course-card">
-          <div class="course-title"><small>大标题</small><h3>函数的单调性与奇偶性</h3><small>本组图片重点：函数的奇偶性</small></div>
-          <div class="course-list"><span class="pill">双钩函数 · 难度 2</span><span class="pill">函数的单调性 · 难度 3</span><span class="pill active">函数的奇偶性 · 难度 3</span><span class="pill">分段与含参函数性质 · 难度 4</span></div>
+        <div class="section-head">
+          <h2>课程定位</h2>
+          <p class="section-note">对应必修第一册 · 第 7 课</p>
         </div>
-        <div class="scope">说明：总大纲列出本课四个板块；所给教材图片为第 62—63 页，具体内容集中在“函数的奇偶性”，因此下方知识与例题按图片范围整理。</div>
+        <div class="course-card">
+          <div class="course-title">
+            <small>大标题</small>
+            <h3>函数的单调性与奇偶性</h3>
+            <small>由局部变化、整体对称到参数综合</small>
+          </div>
+          <div class="course-list">
+            <span class="pill active">双钩双撇函数 · 难度 2</span>
+            <span class="pill active">函数的单调性 · 难度 3</span>
+            <span class="pill active">函数的奇偶性 · 难度 3</span>
+            <span class="pill active">分段与含参函数性质 · 难度 4</span>
+          </div>
+        </div>
+        <div class="scope">
+          本页在原有“函数奇偶性”内容的基础上，按照课程图片中的四个板块补全整课：
+          先认识典型函数图像，再学习单调性与奇偶性的定义，最后进入分段函数和含参数函数的综合讨论。
+        </div>
       </section>
 
-      <section id="outline">
-        <p class="kicker">KNOWLEDGE OUTLINE</p>
-        <div class="section-head"><h2>奇偶性知识大纲</h2><p class="section-note">先看定义域，再验证等式</p></div>
+      <section id="map">
+        <p class="kicker">LEARNING PATH</p>
+        <div class="section-head">
+          <h2>完整知识地图</h2>
+          <p class="section-note">四个板块不是孤立的</p>
+        </div>
+        <div class="overview-grid">
+          <div class="overview-item">
+            <b>① 双钩双撇</b>
+            <span>从典型图像观察增减、对称、最值和间断点。</span>
+          </div>
+          <div class="overview-item">
+            <b>② 单调性</b>
+            <span>用定义法、图像法及基本函数性质研究“随 x 如何变化”。</span>
+          </div>
+          <div class="overview-item">
+            <b>③ 奇偶性</b>
+            <span>研究定义域对称及 f(−x) 与 f(x) 的关系。</span>
+          </div>
+          <div class="overview-item">
+            <b>④ 分段含参</b>
+            <span>在分界点、对称点和参数临界值处进行分类讨论。</span>
+          </div>
+        </div>
+        <div class="flow">
+          <span>先看定义域</span><b>→</b>
+          <span>再看图像特征</span><b>→</b>
+          <span>用代数证明</span><b>→</b>
+          <span>找临界点</span><b>→</b>
+          <span>分类讨论参数</span>
+        </div>
+      </section>
+
+      <section id="hook">
+        <p class="kicker">TYPICAL FUNCTIONS</p>
+        <div class="section-head">
+          <h2>一、双钩双撇函数</h2>
+          <p class="section-note">典型模型：一次项与反比例项的叠加</p>
+        </div>
+
+        <div class="grid">
+          <article class="topic">
+            <h3><span class="num">1</span>统一形式与定义域</h3>
+            <span class="formula center">f(x)=ax+b/x　（x≠0）</span>
+            <p>它由一次函数 <i>ax</i> 与反比例函数 <i>b/x</i> 相加得到，定义域为
+              <i>(−∞,0)∪(0,+∞)</i>。</p>
+            <p>由于两个部分都是奇函数，所以：</p>
+            <span class="formula">f(−x)=−ax−b/x=−f(x)</span>
+            <p>因此此类函数的图像通常关于原点中心对称。</p>
+          </article>
+
+          <article class="topic">
+            <h3><span class="num">2</span>先判断 ab 的符号</h3>
+            <table>
+              <tr><th>条件</th><th>典型形式</th><th>主要特征</th></tr>
+              <tr><td><i>ab&gt;0</i></td><td><i>ax+b/x</i></td><td>每一支出现转折，常称双钩（对勾）型</td></tr>
+              <tr><td><i>ab&lt;0</i></td><td><i>ax−b/x</i></td><td>两支分别持续上升或下降，常称双撇型</td></tr>
+            </table>
+            <div class="warning">名称帮助识图，但解题时应以定义域、单调区间和参数符号为准。</div>
+          </article>
+
+          <article class="topic wide">
+            <h3><span class="num">3</span>标准双钩函数：a&gt;0，b&gt;0</h3>
+            <span class="formula center">f(x)=ax+b/x</span>
+            <p>正半轴上的转折点横坐标为：</p>
+            <span class="formula center">x=√(b/a)</span>
+            <p>当 <i>x&gt;0</i> 时，由基本不等式：</p>
+            <span class="formula center">ax+b/x ≥ 2√(ab)</span>
+            <p>等号成立当且仅当 <i>ax=b/x</i>，即 <i>x=√(b/a)</i>。</p>
+            <table>
+              <tr><th>区间</th><th>单调性</th><th>关键值</th></tr>
+              <tr><td>(−∞,−√(b/a)]</td><td>递增</td><td>在 x=−√(b/a) 处取得该支最大值 −2√(ab)</td></tr>
+              <tr><td>[−√(b/a),0)</td><td>递减</td><td>x→0⁻ 时 f(x)→−∞</td></tr>
+              <tr><td>(0,√(b/a)]</td><td>递减</td><td>在 x=√(b/a) 处取得该支最小值 2√(ab)</td></tr>
+              <tr><td>[√(b/a),+∞)</td><td>递增</td><td>x→+∞ 时 f(x)→+∞</td></tr>
+            </table>
+            <div class="callout">
+              <strong>值域：</strong>(−∞,−2√(ab)]∪[2√(ab),+∞)。
+            </div>
+          </article>
+
+          <article class="topic">
+            <h3><span class="num">4</span>标准双撇函数</h3>
+            <span class="formula center">g(x)=ax−b/x　（a&gt;0，b&gt;0）</span>
+            <p>在同一支上取 <i>x₁&lt;x₂</i>，则：</p>
+            <span class="formula">
+              g(x₂)−g(x₁)=(x₂−x₁)[a+b/(x₁x₂)]
+            </span>
+            <p>当 <i>x₁,x₂</i> 同号时，<i>x₁x₂&gt;0</i>，所以差为正。</p>
+            <p>因此它在 (−∞,0) 和 (0,+∞) 上分别严格递增。</p>
+          </article>
+
+          <article class="topic">
+            <h3><span class="num">5</span>平移后的识别</h3>
+            <span class="formula center">F(x)=a(x−h)+b/(x−h)+k</span>
+            <ul class="checklist">
+              <li>定义域：x≠h；</li>
+              <li>图像中心由原点移到 (h,k)；</li>
+              <li>先令 t=x−h，转化为基本模型；</li>
+              <li>双钩型转折点横坐标为 h±√(b/a)。</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="graph-pair">
+          <figure>
+            <svg viewBox="0 0 320 210" role="img" aria-label="双钩函数 y=x+4/x 图像">
+              <line class="axis" x1="15" y1="105" x2="305" y2="105"/>
+              <line class="axis" x1="160" y1="12" x2="160" y2="198"/>
+              <line class="gridline" x1="205" y1="12" x2="205" y2="198"/>
+              <line class="gridline" x1="115" y1="12" x2="115" y2="198"/>
+              <path class="curve" d="M169 20 C174 50 185 70 205 76 C230 84 265 64 300 30"/>
+              <path class="curve" d="M20 180 C55 146 90 126 115 134 C135 140 146 162 151 190"/>
+              <circle class="mark" cx="205" cy="76" r="5"/>
+              <circle class="mark" cx="115" cy="134" r="5"/>
+              <text class="label" x="211" y="69">x=2</text>
+              <text class="label" x="82" y="150">x=−2</text>
+            </svg>
+            <figcaption>双钩型示例：y=x+4/x，正半轴先减后增。</figcaption>
+          </figure>
+          <figure>
+            <svg viewBox="0 0 320 210" role="img" aria-label="双撇函数 y=x-4/x 图像">
+              <line class="axis" x1="15" y1="105" x2="305" y2="105"/>
+              <line class="axis" x1="160" y1="12" x2="160" y2="198"/>
+              <path class="curve2" d="M168 190 C174 152 186 125 208 105 C235 79 267 55 301 30"/>
+              <path class="curve2" d="M19 180 C53 155 85 131 112 105 C134 85 146 58 152 20"/>
+            </svg>
+            <figcaption>双撇型示例：y=x−4/x，在 0 的两侧分别递增。</figcaption>
+          </figure>
+        </div>
+
+        <div class="example">
+          <div class="example-head">例 1　求 f(x)=2x+8/x（x&gt;0）的最小值</div>
+          <div class="example-body">
+            <div class="step"><i>1</i><div>识别为标准双钩函数，a=2，b=8。</div></div>
+            <div class="step"><i>2</i><div>由基本不等式，2x+8/x≥2√(2x·8/x)=8。</div></div>
+            <div class="step"><i>3</i><div>等号成立时 2x=8/x，得到 x=2。</div></div>
+            <span class="result">最小值为 8，在 x=2 时取得</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="monotonicity">
+        <p class="kicker">MONOTONICITY</p>
+        <div class="section-head">
+          <h2>二、函数的单调性</h2>
+          <p class="section-note">研究函数值随自变量变化的方向</p>
+        </div>
+
+        <div class="grid">
+          <article class="topic">
+            <h3><span class="num">1</span>单调递增</h3>
+            <p>设区间 <i>I</i> 包含于函数定义域。对任意 <i>x₁,x₂∈I</i>，若：</p>
+            <span class="formula center">x₁&lt;x₂ ⇒ f(x₁)&lt;f(x₂)</span>
+            <p>则函数在区间 <i>I</i> 上严格单调递增。</p>
+          </article>
+
+          <article class="topic">
+            <h3><span class="num">2</span>单调递减</h3>
+            <p>设区间 <i>I</i> 包含于函数定义域。对任意 <i>x₁,x₂∈I</i>，若：</p>
+            <span class="formula center">x₁&lt;x₂ ⇒ f(x₁)&gt;f(x₂)</span>
+            <p>则函数在区间 <i>I</i> 上严格单调递减。</p>
+          </article>
+
+          <article class="topic">
+            <h3><span class="num">3</span>定义法标准步骤</h3>
+            <div class="flow">
+              <span>任取 x₁&lt;x₂</span><b>→</b>
+              <span>作差</span><b>→</b>
+              <span>变形分解</span><b>→</b>
+              <span>判断符号</span><b>→</b>
+              <span>得出结论</span>
+            </div>
+            <p>常用作差形式：</p>
+            <span class="formula">f(x₂)−f(x₁)</span>
+            <p>差为正则递增；差为负则递减。</p>
+          </article>
+
+          <article class="topic">
+            <h3><span class="num">4</span>四种判断方法</h3>
+            <ul class="checklist">
+              <li><strong>图像法：</strong>从左向右观察上升或下降；</li>
+              <li><strong>定义法：</strong>比较 f(x₂) 与 f(x₁)；</li>
+              <li><strong>基本函数法：</strong>配方、平移或复合；</li>
+              <li><strong>导数法：</strong>学过导数后用 f′(x) 的符号。</li>
+            </ul>
+          </article>
+
+          <article class="topic wide">
+            <h3><span class="num">5</span>单调性必须在区间上讨论</h3>
+            <p>函数 <i>f(x)=1/x</i> 在 (−∞,0) 上递减，也在 (0,+∞) 上递减，
+              但不能说它在 (−∞,0)∪(0,+∞) 上递减。</p>
+            <div class="warning">
+              原因：单调区间必须是连续的区间。若跨过 x=0，函数没有定义，而且任取一负一正两个数时，
+              函数值的大小关系也不符合统一的递减规律。
+            </div>
+          </article>
+        </div>
+
+        <div class="example">
+          <div class="example-head">例 2　用定义法证明 f(x)=x+4/x 在 [2,+∞) 上递增</div>
+          <div class="example-body">
+            <p>任取 2≤x₁&lt;x₂，则：</p>
+            <span class="formula center">
+              f(x₂)−f(x₁)=(x₂−x₁)[1−4/(x₁x₂)]
+            </span>
+            <p>因为 x₂−x₁&gt;0，且 x₁x₂&gt;4，所以 1−4/(x₁x₂)&gt;0。</p>
+            <span class="result">f(x₂)−f(x₁)&gt;0，因此 f 在 [2,+∞) 上递增</span>
+          </div>
+        </div>
+
+        <div class="example">
+          <div class="example-head">例 3　含参数二次函数的单调性</div>
+          <div class="example-body">
+            <p>函数 f(x)=x²−2ax+3 在 [1,+∞) 上单调递增，求 a 的范围。</p>
+            <div class="step"><i>1</i><div>开口向上，对称轴为 x=a。</div></div>
+            <div class="step"><i>2</i><div>开口向上的抛物线在对称轴右侧递增。</div></div>
+            <div class="step"><i>3</i><div>要使 [1,+∞) 全部在对称轴右侧，必须 a≤1。</div></div>
+            <span class="result">a≤1</span>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>复合函数口诀：</strong>在相应定义区间内，“同增异减”：
+          增函数复合增函数仍增；一增一减则减；两个减函数复合后增。
+        </div>
+      </section>
+
+      <section id="parity">
+        <p class="kicker">PARITY</p>
+        <div class="section-head">
+          <h2>三、函数的奇偶性</h2>
+          <p class="section-note">先看定义域，再验证等式</p>
+        </div>
+
         <div class="grid">
           <article class="topic">
             <h3><span class="num">1</span>定义与必要条件</h3>
-            <p>设函数 <i>f(x)</i> 的定义域为 <i>D</i>。必须先保证：若 <i>x∈D</i>，则 <i>−x∈D</i>，即定义域关于原点对称。</p>
-            <span class="formula">f(−x)=f(x)（对所有 x∈D）⟹ 偶函数</span>
-            <span class="formula">f(−x)=−f(x)（对所有 x∈D）⟹ 奇函数</span>
-            <p>等式必须对定义域内<strong>每一个</strong> <i>x</i> 成立，只验证个别数值不能得出结论。</p>
+            <p>设函数 <i>f(x)</i> 的定义域为 <i>D</i>。必须先保证：
+              若 <i>x∈D</i>，则 <i>−x∈D</i>，即定义域关于原点对称。</p>
+            <span class="formula">f(−x)=f(x)（对所有 x∈D）⇒ 偶函数</span>
+            <span class="formula">f(−x)=−f(x)（对所有 x∈D）⇒ 奇函数</span>
+            <p>等式必须对定义域内<strong>每一个</strong> x 成立。</p>
           </article>
+
           <article class="topic">
             <h3><span class="num">2</span>判断函数奇偶性的步骤</h3>
             <ol class="checklist">
               <li>求函数的定义域；</li>
-              <li>判断定义域是否关于原点对称；若不对称，函数既非奇函数也非偶函数；</li>
-              <li>对任意 <i>x</i>，计算 <i>f(−x)</i>，与 <i>f(x)</i> 或 <i>−f(x)</i> 比较。</li>
+              <li>判断定义域是否关于原点对称；</li>
+              <li>计算 f(−x)；</li>
+              <li>与 f(x) 或 −f(x) 比较。</li>
             </ol>
-            <span class="formula">f(x)−f(−x)=0 ⟹ 偶函数</span>
-            <span class="formula">f(x)+f(−x)=0 ⟹ 奇函数</span>
-            <p>证明“非奇非偶”时，只要找到一个反例，或指出定义域不对称即可。</p>
+            <span class="formula">f(x)−f(−x)=0 ⇒ 偶函数</span>
+            <span class="formula">f(x)+f(−x)=0 ⇒ 奇函数</span>
           </article>
+
           <article class="topic">
             <h3><span class="num">3</span>图像的对称性质</h3>
-            <p>奇函数图像关于<strong>原点</strong>中心对称；偶函数图像关于 <strong>y 轴</strong>轴对称。反过来也成立。</p>
+            <p>奇函数图像关于<strong>原点</strong>中心对称；偶函数图像关于
+              <strong>y 轴</strong>轴对称。反过来也成立。</p>
             <div class="symmetry">
               <figure>
-                <svg viewBox="0 0 220 150" role="img" aria-label="奇函数关于原点对称示意图"><line class="axis" x1="14" y1="75" x2="206" y2="75"/><line class="axis" x1="110" y1="10" x2="110" y2="140"/><path class="curve" d="M25 126 C70 122 77 94 103 79 C117 71 130 49 194 25"/><circle class="mark" cx="157" cy="40" r="5"/><circle class="mark" cx="63" cy="110" r="5"/></svg>
-                <figcaption>奇函数：点 (a,f(a)) 与 (−a,−f(a)) 关于原点对称</figcaption>
+                <svg viewBox="0 0 220 150" role="img" aria-label="奇函数关于原点对称示意图">
+                  <line class="axis" x1="14" y1="75" x2="206" y2="75"/>
+                  <line class="axis" x1="110" y1="10" x2="110" y2="140"/>
+                  <path class="curve" d="M25 126 C70 122 77 94 103 79 C117 71 130 49 194 25"/>
+                  <circle class="mark" cx="157" cy="40" r="5"/>
+                  <circle class="mark" cx="63" cy="110" r="5"/>
+                </svg>
+                <figcaption>奇函数：(a,f(a)) 与 (−a,−f(a)) 关于原点对称</figcaption>
               </figure>
               <figure>
-                <svg viewBox="0 0 220 150" role="img" aria-label="偶函数关于y轴对称示意图"><line class="axis" x1="14" y1="120" x2="206" y2="120"/><line class="axis" x1="110" y1="10" x2="110" y2="140"/><path class="curve" d="M28 28 C65 70 82 91 110 96 C138 91 155 70 192 28"/><circle class="mark" cx="158" cy="68" r="5"/><circle class="mark" cx="62" cy="68" r="5"/></svg>
-                <figcaption>偶函数：点 (a,f(a)) 与 (−a,f(a)) 关于 y 轴对称</figcaption>
+                <svg viewBox="0 0 220 150" role="img" aria-label="偶函数关于y轴对称示意图">
+                  <line class="axis" x1="14" y1="120" x2="206" y2="120"/>
+                  <line class="axis" x1="110" y1="10" x2="110" y2="140"/>
+                  <path class="curve" d="M28 28 C65 70 82 91 110 96 C138 91 155 70 192 28"/>
+                  <circle class="mark" cx="158" cy="68" r="5"/>
+                  <circle class="mark" cx="62" cy="68" r="5"/>
+                </svg>
+                <figcaption>偶函数：(a,f(a)) 与 (−a,f(a)) 关于 y 轴对称</figcaption>
               </figure>
             </div>
           </article>
+
           <article class="topic">
             <h3><span class="num">4</span>易错点与特殊结论</h3>
             <ul class="checklist">
-              <li>偶函数图像不一定与 y 轴相交，因为定义域未必含 0。</li>
-              <li>奇函数图像不一定经过原点；只有当 0 在定义域内时，才有 f(0)=0。</li>
-              <li>“定义域关于原点对称”只是奇偶性的必要条件，不是充分条件。</li>
+              <li>偶函数图像不一定与 y 轴相交，因为定义域未必含 0；</li>
+              <li>奇函数图像不一定经过原点；只有 0 在定义域内时，才有 f(0)=0；</li>
+              <li>定义域关于原点对称只是必要条件，不是充分条件；</li>
+              <li>在固定的对称定义域上，既奇又偶的函数只有零函数。</li>
             </ul>
-            <div class="callout"><strong>既是奇函数又是偶函数：</strong>由 <i>f(−x)=f(x)</i> 与 <i>f(−x)=−f(x)</i> 得 <i>f(x)=0</i>。因此在一个固定的、关于原点对称的定义域上，只有零函数。</div>
           </article>
+
+          <article class="topic wide">
+            <h3><span class="num">5</span>由任意函数构造奇函数与偶函数</h3>
+            <p>设 f(x) 的定义域关于原点对称，则：</p>
+            <table>
+              <tr><th>构造</th><th>奇偶性</th><th>验证</th></tr>
+              <tr><td>f(x)+f(−x)</td><td>偶函数</td><td>将 x 换成 −x，两个加数交换次序</td></tr>
+              <tr><td>f(x)−f(−x)</td><td>奇函数</td><td>将 x 换成 −x，整体变为相反数</td></tr>
+              <tr><td>f(x)f(−x)</td><td>偶函数</td><td>两个因子交换次序，乘积不变</td></tr>
+            </table>
+            <div class="method">
+              任意函数还可以分解为“偶部分 + 奇部分”：
+              <span class="formula center">
+                f(x)=[f(x)+f(−x)]/2 + [f(x)−f(−x)]/2
+              </span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="piecewise">
+        <p class="kicker">PIECEWISE & PARAMETERS</p>
+        <div class="section-head">
+          <h2>四、分段与含参函数性质</h2>
+          <p class="section-note">关键在分界点、对称点和参数临界值</p>
+        </div>
+
+        <div class="grid">
+          <article class="topic">
+            <h3><span class="num">1</span>分段函数的单调性</h3>
+            <p>要证明分段函数在整个区间上递增，需要同时检查：</p>
+            <ol class="checklist">
+              <li>每一段内部都递增；</li>
+              <li>跨越分界点时，左边函数值不超过右边函数值；</li>
+              <li>分界点的取值属于哪一段必须看清楚。</li>
+            </ol>
+          </article>
+
+          <article class="topic">
+            <h3><span class="num">2</span>分段函数的奇偶性</h3>
+            <p>先确认定义域关于原点对称，再把正半轴的一段与负半轴对应的一段进行比较。</p>
+            <span class="formula">
+              偶函数：f(−x)=f(x)；奇函数：f(−x)=−f(x)
+            </span>
+            <p>分界点 x=0 单独检查；若函数为奇函数且 0 有定义，必须 f(0)=0。</p>
+          </article>
+
+          <article class="topic">
+            <h3><span class="num">3</span>含参数问题的一般流程</h3>
+            <div class="flow">
+              <span>找定义域限制</span><b>→</b>
+              <span>找关键点</span><b>→</b>
+              <span>列参数条件</span><b>→</b>
+              <span>找临界值</span><b>→</b>
+              <span>分类讨论</span>
+            </div>
+            <p>关键点通常包括：二次函数对称轴、双钩函数转折点、分段点、绝对值零点和分母零点。</p>
+          </article>
+
+          <article class="topic">
+            <h3><span class="num">4</span>参数讨论为什么要分类</h3>
+            <p>参数改变后，关键点可能落在给定区间的左侧、内部或右侧，
+              函数的单调区间与最值就会改变。</p>
+            <div class="warning">
+              不要一开始就机械计算。先画参数位置示意图，比较“关键点”与“区间端点”的大小关系。
+            </div>
+          </article>
+        </div>
+
+        <div class="example">
+          <div class="example-head">例 4　分段函数为奇函数时求参数</div>
+          <div class="example-body">
+            <p>设：</p>
+            <span class="formula center">
+              f(x)={ x+a，x≥0； bx−a，x&lt;0 }
+            </span>
+            <p>若 f(x) 是奇函数，求 a、b。</p>
+            <div class="step"><i>1</i><div>0 在定义域内，奇函数必须满足 f(0)=0，所以 a=0。</div></div>
+            <div class="step"><i>2</i><div>取 x&gt;0，则 −x&lt;0，f(−x)=−bx−a。</div></div>
+            <div class="step"><i>3</i><div>由 f(−x)=−f(x)，代入 a=0：−bx=−x，所以 b=1。</div></div>
+            <span class="result">a=0，b=1</span>
+          </div>
+        </div>
+
+        <div class="example">
+          <div class="example-head">例 5　分段函数在 R 上严格递增</div>
+          <div class="example-body">
+            <p>设：</p>
+            <span class="formula center">
+              f(x)={ x+1，x&lt;0； ax+2，x≥0 }
+            </span>
+            <p>求 f(x) 在 R 上严格递增时 a 的范围。</p>
+            <div class="step"><i>1</i><div>左段 x+1 本身严格递增。</div></div>
+            <div class="step"><i>2</i><div>右段 ax+2 严格递增要求 a&gt;0。</div></div>
+            <div class="step"><i>3</i><div>当 x&lt;0 时，x+1&lt;1；而 f(0)=2，所以跨分界点时仍保持严格增大。</div></div>
+            <span class="result">a&gt;0</span>
+          </div>
+        </div>
+
+        <div class="example">
+          <div class="example-head">例 6　偶函数中的分段参数</div>
+          <div class="example-body">
+            <p>设：</p>
+            <span class="formula center">
+              f(x)={ x²+ax+1，x≥0； x²−bx+1，x&lt;0 }
+            </span>
+            <p>若 f(x) 是偶函数，求 a、b 的关系。</p>
+            <p>取 x&gt;0，则 f(−x)=x²+bx+1。由 f(−x)=f(x)，得：</p>
+            <span class="formula center">x²+bx+1=x²+ax+1</span>
+            <span class="result">a=b</span>
+          </div>
         </div>
       </section>
 
       <section id="questions">
         <p class="kicker">PRACTICE</p>
-        <div class="section-head"><h2>问题与完整解答</h2><p class="section-note">建议先作答，再展开答案</p></div>
+        <div class="section-head">
+          <h2>综合问题与完整解答</h2>
+          <p class="section-note">建议先作答，再展开答案</p>
+        </div>
 
         <article class="question">
-          <div class="q-body"><span class="q-label">思考题</span><h3>是否存在既奇又偶的函数？</h3><p>这样的函数有什么特征？有多少个？</p></div>
+          <div class="q-body">
+            <span class="q-label">双钩函数</span>
+            <h3>问题 1：求最值与取值点</h3>
+            <p>求 f(x)=3x+12/x 在 x&gt;0 时的最小值及取得最小值时的 x。</p>
+          </div>
           <button class="toggle" type="button" aria-expanded="false">查看解答</button>
-          <div class="answer"><h4>解答</h4><p>若 <i>f</i> 同时为奇函数和偶函数，则对定义域中的任意 <i>x</i>：</p><span class="formula">f(−x)=f(x)，同时 f(−x)=−f(x)</span><p>所以 <i>f(x)=−f(x)</i>，从而 <i>2f(x)=0</i>，即 <i>f(x)=0</i>。</p><div class="reason">在<strong>固定的、关于原点对称的定义域</strong>上，只有一个这样的函数——零函数。若不固定定义域，则可在不同的原点对称定义域上分别定义零函数，因此可以有无穷多个“定义域不同”的函数。</div><span class="result">结论：固定定义域时只有零函数</span></div>
+          <div class="answer">
+            <h4>解答</h4>
+            <span class="formula center">3x+12/x ≥ 2√(3x·12/x)=12</span>
+            <p>等号成立时 3x=12/x，所以 x²=4。由 x&gt;0 得 x=2。</p>
+            <span class="result">最小值 12，在 x=2 时取得</span>
+          </div>
         </article>
 
         <article class="question">
-          <div class="q-body"><span class="q-label">口答 1</span><h3>四个结论中，正确命题有几个？</h3>
-            <div class="options"><div class="option">① 偶函数的图像一定与 y 轴相交</div><div class="option">② 奇函数的图像一定通过原点</div><div class="option">③ 偶函数的图像关于 y 轴对称</div><div class="option">④ 既是奇函数又是偶函数的函数一定是 f(x)=0（x∈R）</div></div>
-            <p>选项：A. 1　 B. 2　 C. 3　 D. 4</p>
+          <div class="q-body">
+            <span class="q-label">双撇函数</span>
+            <h3>问题 2：证明单调性</h3>
+            <p>证明 g(x)=2x−8/x 在 (0,+∞) 上严格递增。</p>
           </div>
           <button class="toggle" type="button" aria-expanded="false">查看解答</button>
-          <div class="answer"><h4>逐项判断</h4>
-            <div class="reason"><strong>① 错。</strong>偶函数的定义域可以不含 0。例如定义域为 {−1,1}，令 f(−1)=f(1)=1，它是偶函数，但图像不与 y 轴相交。</div>
-            <div class="reason"><strong>② 错。</strong>奇函数的定义域也可以不含 0。例如 f(x)=1/x 是奇函数，但 x=0 无定义，图像不通过原点。</div>
+          <div class="answer">
+            <h4>解答</h4>
+            <p>任取 0&lt;x₁&lt;x₂，则：</p>
+            <span class="formula center">
+              g(x₂)−g(x₁)=(x₂−x₁)[2+8/(x₁x₂)]
+            </span>
+            <p>两个因子都为正，所以 g(x₂)−g(x₁)&gt;0。</p>
+            <span class="result">g 在 (0,+∞) 上严格递增</span>
+          </div>
+        </article>
+
+        <article class="question">
+          <div class="q-body">
+            <span class="q-label">单调性</span>
+            <h3>问题 3：二次函数参数范围</h3>
+            <p>函数 f(x)=x²−4ax+1 在 [3,+∞) 上单调递增，求 a 的范围。</p>
+          </div>
+          <button class="toggle" type="button" aria-expanded="false">查看解答</button>
+          <div class="answer">
+            <h4>解答</h4>
+            <p>抛物线开口向上，对称轴为 x=2a。要使 [3,+∞) 全部位于对称轴右侧，应有：</p>
+            <span class="formula center">2a≤3</span>
+            <span class="result">a≤3/2</span>
+          </div>
+        </article>
+
+        <article class="question">
+          <div class="q-body">
+            <span class="q-label">奇偶性</span>
+            <h3>问题 4：先看定义域</h3>
+            <p>判断 f(x)=√(1−x)+√(1+x) 的奇偶性。</p>
+          </div>
+          <button class="toggle" type="button" aria-expanded="false">查看解答</button>
+          <div class="answer">
+            <h4>解答</h4>
+            <p>定义域由 1−x≥0 且 1+x≥0 得 [−1,1]，关于原点对称。</p>
+            <span class="formula center">
+              f(−x)=√(1+x)+√(1−x)=f(x)
+            </span>
+            <span class="result">f(x) 是偶函数</span>
+          </div>
+        </article>
+
+        <article class="question">
+          <div class="q-body">
+            <span class="q-label">思考题</span>
+            <h3>问题 5：是否存在既奇又偶的函数？</h3>
+            <p>这样的函数有什么特征？有多少个？</p>
+          </div>
+          <button class="toggle" type="button" aria-expanded="false">查看解答</button>
+          <div class="answer">
+            <h4>解答</h4>
+            <p>若 f 同时为奇函数和偶函数，则：</p>
+            <span class="formula center">f(−x)=f(x)，同时 f(−x)=−f(x)</span>
+            <p>所以 f(x)=−f(x)，从而 f(x)=0。</p>
+            <div class="reason">
+              在<strong>固定的、关于原点对称的定义域</strong>上，只有一个这样的函数——零函数。
+              若不固定定义域，则可以在不同的原点对称定义域上分别定义零函数。
+            </div>
+            <span class="result">固定定义域时只有零函数</span>
+          </div>
+        </article>
+
+        <article class="question">
+          <div class="q-body">
+            <span class="q-label">判断题</span>
+            <h3>问题 6：四个结论中，正确命题有几个？</h3>
+            <div class="options">
+              <div class="option">① 偶函数的图像一定与 y 轴相交</div>
+              <div class="option">② 奇函数的图像一定通过原点</div>
+              <div class="option">③ 偶函数的图像关于 y 轴对称</div>
+              <div class="option">④ 既奇又偶的函数一定定义在 R 上</div>
+            </div>
+            <p>选项：A. 1　B. 2　C. 3　D. 4</p>
+          </div>
+          <button class="toggle" type="button" aria-expanded="false">查看解答</button>
+          <div class="answer">
+            <h4>逐项判断</h4>
+            <div class="reason"><strong>① 错。</strong>偶函数的定义域可能不含 0。</div>
+            <div class="reason"><strong>② 错。</strong>例如 1/x 是奇函数，但 x=0 无定义。</div>
             <div class="reason"><strong>③ 对。</strong>这是偶函数图像的基本性质。</div>
-            <div class="reason"><strong>④ 错。</strong>同时奇偶必有 f(x)=0，但题干把定义域限定成了 R；零函数也可以定义在其他关于原点对称的集合上，所以不能断定定义域一定是 R。</div>
-            <p>只有第 ③ 个结论正确。</p><span class="result">答案：A（1 个）</span>
+            <div class="reason"><strong>④ 错。</strong>零函数可以定义在任意关于原点对称的定义域上。</div>
+            <span class="result">答案：A（1 个）</span>
           </div>
         </article>
 
         <article class="question">
-          <div class="q-body"><span class="q-label">口答 2</span><h3>由任意函数构造奇函数或偶函数</h3><p>设 <i>f(x)</i> 是 R 上的任意函数，下列叙述正确的是：</p>
-            <div class="options"><div class="option">A. f(x)f(−x) 是奇函数</div><div class="option">B. f(x)|f(−x)| 是奇函数</div><div class="option">C. f(x)−f(−x) 是偶函数</div><div class="option">D. f(x)+f(−x) 是偶函数</div></div>
+          <div class="q-body">
+            <span class="q-label">函数构造</span>
+            <h3>问题 7：由任意函数构造奇函数或偶函数</h3>
+            <p>设 f(x) 是 R 上任意函数，下列叙述正确的是：</p>
+            <div class="options">
+              <div class="option">A. f(x)f(−x) 是奇函数</div>
+              <div class="option">B. f(x)|f(−x)| 是奇函数</div>
+              <div class="option">C. f(x)−f(−x) 是偶函数</div>
+              <div class="option">D. f(x)+f(−x) 是偶函数</div>
+            </div>
           </div>
           <button class="toggle" type="button" aria-expanded="false">查看解答</button>
-          <div class="answer"><h4>解答</h4><p>令 <i>G(x)=f(x)+f(−x)</i>，则：</p><span class="formula">G(−x)=f(−x)+f(x)=G(x)</span><p>所以 <i>G(x)</i> 一定是偶函数，D 正确。</p><div class="reason"><strong>进一步理解：</strong><br>f(x)f(−x) 也恒为偶函数；<br>f(x)−f(−x) 恒为奇函数；<br>f(x)|f(−x)| 一般没有固定奇偶性。</div><span class="result">答案：D</span></div>
+          <div class="answer">
+            <h4>解答</h4>
+            <p>令 G(x)=f(x)+f(−x)，则：</p>
+            <span class="formula center">G(−x)=f(−x)+f(x)=G(x)</span>
+            <p>所以 G(x) 一定是偶函数。进一步：</p>
+            <ul>
+              <li>f(x)f(−x) 恒为偶函数；</li>
+              <li>f(x)−f(−x) 恒为奇函数；</li>
+              <li>f(x)|f(−x)| 一般没有固定奇偶性。</li>
+            </ul>
+            <span class="result">答案：D</span>
+          </div>
+        </article>
+
+        <article class="question">
+          <div class="q-body">
+            <span class="q-label">分段含参</span>
+            <h3>问题 8：分段函数为奇函数</h3>
+            <p>设 f(x)={ 2x+a，x≥0； bx−a，x&lt;0 }。若 f 为奇函数，求 a、b。</p>
+          </div>
+          <button class="toggle" type="button" aria-expanded="false">查看解答</button>
+          <div class="answer">
+            <h4>解答</h4>
+            <p>因为 0 在定义域内且 f 为奇函数，所以 f(0)=a=0。</p>
+            <p>对 x&gt;0，有 f(−x)=−bx，而 −f(x)=−2x，因此 b=2。</p>
+            <span class="result">a=0，b=2</span>
+          </div>
         </article>
       </section>
     </main>
   </div>
-  <footer>根据所给课程大纲及教材第 62—63 页整理 · 单文件离线网页 · 打印时自动展开全部解答</footer>
+
+  <footer>
+    根据课程图片中的四个板块扩展 · 单文件离线网页 · 打印时自动展开全部解答
+  </footer>
+
   <script>
-    const answerBlocks=[...document.querySelectorAll('.answer')];
-    const toggles=[...document.querySelectorAll('.toggle')];
-    const allButton=document.getElementById('toggleAll');
-    function setAnswer(button,answer,open){answer.classList.toggle('open',open);button.setAttribute('aria-expanded',String(open));button.textContent=open?'收起解答':'查看解答'}
-    toggles.forEach((button)=>button.addEventListener('click',()=>setAnswer(button,button.nextElementSibling,!button.nextElementSibling.classList.contains('open'))));
-    allButton.addEventListener('click',()=>{const open=!answerBlocks.every(a=>a.classList.contains('open'));answerBlocks.forEach((answer,i)=>setAnswer(toggles[i],answer,open));allButton.textContent=open?'收起全部解答':'展开全部解答'});
+    const toggles = [...document.querySelectorAll('.toggle')];
+    toggles.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const answer = btn.nextElementSibling;
+        const open = answer.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open);
+        btn.textContent = open ? '收起解答' : '查看解答';
+      });
+    });
+
+    const allBtn = document.getElementById('toggleAll');
+    let allOpen = false;
+    allBtn.addEventListener('click', () => {
+      allOpen = !allOpen;
+      toggles.forEach(btn => {
+        const answer = btn.nextElementSibling;
+        answer.classList.toggle('open', allOpen);
+        btn.setAttribute('aria-expanded', allOpen);
+        btn.textContent = allOpen ? '收起解答' : '查看解答';
+      });
+      allBtn.textContent = allOpen ? '收起全部解答' : '展开全部解答';
+    });
   </script>
 </body>
 </html>
