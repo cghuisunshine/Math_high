@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>加权绝对值函数的最小值：加权中位数</title>
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      chtml: { matchFontHeight: false },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <style>
+    :root{
+      --bg:#f6f8fc;
+      --paper:#ffffff;
+      --ink:#1f2937;
+      --muted:#64748b;
+      --primary:#3157d5;
+      --primary-soft:#eef2ff;
+      --green:#087f5b;
+      --green-soft:#eafaf4;
+      --amber:#b45309;
+      --amber-soft:#fff7e6;
+      --red:#b42318;
+      --border:#dbe3f0;
+      --shadow:0 14px 40px rgba(31,41,55,.08);
+      --radius:20px;
+    }
+
+    *{box-sizing:border-box}
+
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(49,87,213,.10), transparent 34rem),
+        linear-gradient(180deg,#f8faff 0%,var(--bg) 100%);
+      font-family:
+        -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",
+        "Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
+      line-height:1.75;
+    }
+
+    .hero{
+      padding:64px 20px 42px;
+    }
+
+    .hero-inner,
+    .layout{
+      width:min(1120px, calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .hero-card{
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(49,87,213,.15);
+      border-radius:28px;
+      background:linear-gradient(135deg,#ffffff 0%,#f2f5ff 100%);
+      box-shadow:var(--shadow);
+      padding:44px;
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      right:-90px;
+      top:-100px;
+      width:280px;
+      height:280px;
+      border-radius:50%;
+      background:rgba(49,87,213,.08);
+    }
+
+    .eyebrow{
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      color:var(--primary);
+      background:var(--primary-soft);
+      font-weight:700;
+      font-size:.9rem;
+      letter-spacing:.04em;
+    }
+
+    h1{
+      margin:18px 0 12px;
+      font-size:clamp(2rem,5vw,3.65rem);
+      line-height:1.18;
+      letter-spacing:-.03em;
+    }
+
+    .subtitle{
+      max-width:800px;
+      margin:0;
+      color:var(--muted);
+      font-size:1.08rem;
+    }
+
+    .formula-banner{
+      margin-top:28px;
+      padding:18px 20px;
+      background:#101828;
+      color:#fff;
+      border-radius:16px;
+      overflow:auto;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:250px minmax(0,1fr);
+      gap:28px;
+      padding-bottom:70px;
+    }
+
+    aside{
+      position:sticky;
+      top:20px;
+      align-self:start;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(10px);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 8px 24px rgba(31,41,55,.05);
+    }
+
+    aside strong{
+      display:block;
+      margin-bottom:10px;
+      color:#111827;
+    }
+
+    aside a{
+      display:block;
+      color:var(--muted);
+      text-decoration:none;
+      padding:8px 10px;
+      border-radius:10px;
+      font-size:.95rem;
+    }
+
+    aside a:hover{
+      color:var(--primary);
+      background:var(--primary-soft);
+    }
+
+    main{
+      min-width:0;
+    }
+
+    section{
+      margin-bottom:24px;
+      padding:30px;
+      background:var(--paper);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:0 8px 26px rgba(31,41,55,.045);
+    }
+
+    h2{
+      margin:0 0 16px;
+      font-size:1.55rem;
+      line-height:1.35;
+    }
+
+    h3{
+      margin-top:24px;
+      margin-bottom:10px;
+      font-size:1.12rem;
+    }
+
+    p{margin:10px 0}
+
+    ul,ol{padding-left:1.4rem}
+
+    li{margin:.38rem 0}
+
+    .lead{
+      font-size:1.08rem;
+    }
+
+    .callout{
+      margin:20px 0;
+      padding:18px 20px;
+      border-radius:14px;
+      border-left:5px solid var(--primary);
+      background:var(--primary-soft);
+    }
+
+    .callout.green{
+      border-left-color:var(--green);
+      background:var(--green-soft);
+    }
+
+    .callout.amber{
+      border-left-color:var(--amber);
+      background:var(--amber-soft);
+    }
+
+    .boxed{
+      text-align:center;
+      margin:24px 0;
+      padding:20px;
+      border:2px solid var(--primary);
+      border-radius:16px;
+      background:#fbfcff;
+      font-weight:700;
+      color:#172554;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin:18px 0;
+    }
+
+    .mini-card{
+      padding:16px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+    }
+
+    .mini-card strong{
+      display:block;
+      color:var(--primary);
+      margin-bottom:5px;
+    }
+
+    .numberline{
+      margin:20px 0 10px;
+      padding:26px 16px 16px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow-x:auto;
+    }
+
+    .line-wrap{
+      min-width:620px;
+      position:relative;
+      height:105px;
+    }
+
+    .axis{
+      position:absolute;
+      left:35px;
+      right:35px;
+      top:50px;
+      height:3px;
+      background:#475569;
+    }
+
+    .axis::after{
+      content:"";
+      position:absolute;
+      right:-1px;
+      top:-5px;
+      border-left:11px solid #475569;
+      border-top:6px solid transparent;
+      border-bottom:6px solid transparent;
+    }
+
+    .point{
+      position:absolute;
+      top:38px;
+      width:15px;
+      height:15px;
+      border-radius:50%;
+      background:var(--primary);
+      transform:translateX(-50%);
+    }
+
+    .point span{
+      position:absolute;
+      top:22px;
+      left:50%;
+      transform:translateX(-50%);
+      white-space:nowrap;
+      font-size:.9rem;
+      color:#334155;
+    }
+
+    .moving{
+      position:absolute;
+      top:18px;
+      width:3px;
+      height:65px;
+      background:var(--amber);
+      transform:translateX(-50%);
+    }
+
+    .moving::before{
+      content:"活动点 x";
+      position:absolute;
+      top:-25px;
+      left:50%;
+      transform:translateX(-50%);
+      white-space:nowrap;
+      color:var(--amber);
+      font-weight:700;
+      font-size:.9rem;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:18px 0;
+      overflow:hidden;
+      border-radius:14px;
+    }
+
+    th,td{
+      border:1px solid var(--border);
+      padding:12px 14px;
+      text-align:center;
+    }
+
+    th{
+      background:#f1f5f9;
+      color:#334155;
+    }
+
+    .steps{
+      counter-reset:step;
+      list-style:none;
+      padding:0;
+    }
+
+    .steps li{
+      position:relative;
+      padding:14px 16px 14px 52px;
+      margin:10px 0;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      border-radius:14px;
+    }
+
+    .steps li::before{
+      counter-increment:step;
+      content:counter(step);
+      position:absolute;
+      left:15px;
+      top:14px;
+      width:25px;
+      height:25px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:var(--primary);
+      color:white;
+      font-weight:700;
+    }
+
+    .footer{
+      text-align:center;
+      color:var(--muted);
+      padding:5px 20px 42px;
+      font-size:.92rem;
+    }
+
+    @media (max-width:860px){
+      .layout{grid-template-columns:1fr}
+      aside{position:static}
+      .grid-3{grid-template-columns:1fr}
+      .hero-card{padding:30px 24px}
+      section{padding:24px 20px}
+    }
+
+    @media print{
+      body{background:#fff}
+      .hero{padding-top:20px}
+      aside{display:none}
+      .layout{display:block}
+      section,.hero-card{box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-card">
+        <span class="eyebrow">绝对值 · 数轴 · 最优化</span>
+        <h1>加权绝对值函数的最小值</h1>
+        <p class="subtitle">
+          探索
+          \(f(x)=a_1|x-x_1|+a_2|x-x_2|+\cdots+a_n|x-x_n|\)
+          在 \(a_i&gt;0\) 时的最小值位置，并理解为什么答案是“加权中位数”。
+        </p>
+        <div class="formula-banner">
+          \[
+          \boxed{\text{最小值点不是让左右距离相等，而是让左右总权重达到平衡。}}
+          \]
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside>
+      <strong>目录</strong>
+      <a href="#idea">1. 问题与直观解释</a>
+      <a href="#move">2. 移动观点</a>
+      <a href="#criterion">3. 严格判定</a>
+      <a href="#interval">4. 区间最小值</a>
+      <a href="#slope">5. 分段线性与斜率</a>
+      <a href="#method">6. 实际寻找方法</a>
+      <a href="#example">7. 例题</a>
+      <a href="#summary">8. 核心总结</a>
+    </aside>
+
+    <main>
+      <section id="idea">
+        <h2>1. 问题与直观解释</h2>
+        <p class="lead">
+          设
+        </p>
+        \[
+        f(x)=\sum_{i=1}^{n}a_i|x-x_i|,\qquad a_i>0.
+        \]
+        <p>
+          把 \(x\) 看成数轴上的活动点。每一项
+          \(a_i|x-x_i|\) 表示：
+        </p>
+        <div class="boxed">
+          距离 × 权重
+        </div>
+        <p>
+          因而 \(f(x)\) 表示活动点 \(x\) 到所有固定点 \(x_i\) 的
+          <strong>加权距离总和</strong>。
+        </p>
+
+        <div class="numberline" aria-label="数轴示意图">
+          <div class="line-wrap">
+            <div class="axis"></div>
+            <div class="point" style="left:18%"><span>\(x_1\)</span></div>
+            <div class="point" style="left:39%"><span>\(x_2\)</span></div>
+            <div class="moving" style="left:56%"></div>
+            <div class="point" style="left:72%"><span>\(x_3\)</span></div>
+            <div class="point" style="left:88%"><span>\(x_n\)</span></div>
+          </div>
+        </div>
+
+        <div class="callout green">
+          <strong>基本结论：</strong>
+          当 \(x\) 位于这些点的加权中位数处时，函数取得最小值。
+        </div>
+
+        <p>
+          但要注意：<strong>加权中位数不一定唯一</strong>。最小值点可能是一个点，
+          也可能是一整个区间。
+        </p>
+      </section>
+
+      <section id="move">
+        <h2>2. 移动观点：向右移动时函数怎样变化？</h2>
+        <p>
+          设总权重为
+        </p>
+        \[
+        W=\sum_{i=1}^{n}a_i.
+        \]
+
+        <p>
+          当活动点 \(x\) 向右移动一个很小的距离 \(\Delta x\) 时：
+        </p>
+
+        <div class="grid-3">
+          <div class="mini-card">
+            <strong>左侧的点</strong>
+            距离增加 \(\Delta x\)，所以函数值增加。
+          </div>
+          <div class="mini-card">
+            <strong>右侧的点</strong>
+            距离减少 \(\Delta x\)，所以函数值减少。
+          </div>
+          <div class="mini-card">
+            <strong>比较关键</strong>
+            比较左右两侧的总权重，而不是点的个数。
+          </div>
+        </div>
+
+        <p>定义</p>
+        \[
+        L(x)=\sum_{x_i\lt x}a_i,\qquad
+        R(x)=\sum_{x_i>x}a_i.
+        \]
+
+        <p>
+          如果移动过程中没有越过任何固定点 \(x_i\)，那么
+        </p>
+        \[
+        \Delta f=\bigl(L(x)-R(x)\bigr)\Delta x,
+        \]
+        <p>因此，在 \(x\ne x_i\) 时，</p>
+        \[
+        f'(x)=L(x)-R(x).
+        \]
+
+        <div class="callout">
+          <ul>
+            <li>若 \(L(x)&lt;R(x)\)，则 \(f'(x)&lt;0\)，向右移动会使 \(f(x)\) 减小；</li>
+            <li>若 \(L(x)&gt;R(x)\)，则 \(f'(x)&gt;0\)，向右移动会使 \(f(x)\) 增大；</li>
+            <li>最小值出现在斜率由非正变为非负的位置。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="criterion">
+        <h2>3. 加权中位数的严格判定</h2>
+
+        <p>
+          一个点 \(m\) 是最小值点，当且仅当
+        </p>
+
+        \[
+        \sum_{x_i\lt m}a_i\le \frac W2
+        \]
+        <p>并且</p>
+        \[
+        \sum_{x_i>m}a_i\le \frac W2.
+        \]
+
+        <div class="boxed">
+          \(m\) 左侧的总权重不超过总权重的一半，右侧的总权重也不超过总权重的一半。
+        </div>
+
+        <p>
+          注意：这里的“左侧”和“右侧”都不包括恰好位于 \(m\) 的点。
+        </p>
+
+        <p>设位于 \(m\) 处的总权重为</p>
+        \[
+        E(m)=\sum_{x_i=m}a_i,
+        \]
+        <p>那么最小值条件也可以写成</p>
+        \[
+        L(m)\le \frac W2\le L(m)+E(m).
+        \]
+
+        <div class="callout amber">
+          这表示：从左向右累加权重时，当累计权重经过位置 \(m\)，第一次达到或超过总权重的一半。
+        </div>
+      </section>
+
+      <section id="interval">
+        <h2>4. 为什么最小值可能是一整个区间？</h2>
+
+        <p>考虑</p>
+        \[
+        f(x)=|x|+|x-2|.
+        \]
+
+        <p>对于任意 \(x\in[0,2]\)，都有</p>
+        \[
+        f(x)=x+(2-x)=2.
+        \]
+
+        <p>因此，所有</p>
+        \[
+        x\in[0,2]
+        \]
+        <p>都是最小值点。</p>
+
+        <div class="callout green">
+          在区间 \((0,2)\) 内，左侧权重和右侧权重相等：
+          \[
+          L(x)=R(x)=1.
+          \]
+          所以
+          \[
+          f'(x)=0,
+          \]
+          函数在整个区间内保持不变。
+        </div>
+
+        <p>
+          一般地，如果在某个位置之后的累计权重恰好等于 \(W/2\)，
+          而下一个有正权重的点还没有到达，那么这两个位置之间的整个区间
+          都是最小值区间。
+        </p>
+      </section>
+
+      <section id="slope">
+        <h2>5. 分段线性函数与斜率变化</h2>
+
+        <p>每一项</p>
+        \[
+        a_i|x-x_i|
+        =
+        \begin{cases}
+        a_i(x_i-x), & x\lt x_i,\\[2mm]
+        a_i(x-x_i), & x>x_i.
+        \end{cases}
+        \]
+
+        <p>所以它在 \(x_i\) 左侧的斜率为 \(-a_i\)，右侧的斜率为 \(a_i\)。</p>
+
+        <p>
+          当 \(x\) 从左向右经过 \(x_i\) 时，总函数的斜率增加
+        </p>
+        \[
+        2a_i.
+        \]
+
+        <p>
+          在所有固定点的最左侧，
+        </p>
+        \[
+        f'(x)=-W;
+        \]
+        <p>在所有固定点的最右侧，</p>
+        \[
+        f'(x)=W.
+        \]
+
+        <p>
+          因此，斜率随着 \(x\) 向右移动不断增大。最小值正好出现在
+        </p>
+        \[
+        f'_-(m)\le 0\le f'_+(m).
+        \]
+
+        <p>设</p>
+        \[
+        L(m)=\sum_{x_i\lt m}a_i,\qquad
+        E(m)=\sum_{x_i=m}a_i,\qquad
+        R(m)=\sum_{x_i>m}a_i,
+        \]
+        <p>则</p>
+        \[
+        f'_-(m)=L(m)-E(m)-R(m),
+        \]
+        \[
+        f'_+(m)=L(m)+E(m)-R(m).
+        \]
+
+        <p>
+          条件
+          \[
+          f'_-(m)\le0\le f'_+(m)
+          \]
+          与加权中位数的判定条件完全等价。
+        </p>
+      </section>
+
+      <section id="method">
+        <h2>6. 实际寻找最小值点的方法</h2>
+
+        <ol class="steps">
+          <li>将所有 \(x_i\) 按从小到大的顺序排列。</li>
+          <li>如果多个点位置相同，把这些点的权重合并。</li>
+          <li>计算总权重 \(W=\sum a_i\)。</li>
+          <li>从左向右累加权重。</li>
+          <li>找到累计权重第一次达到或超过 \(W/2\) 的位置。</li>
+        </ol>
+
+        <div class="callout">
+          如果在某个位置 \(x_k\) 处，累计权重恰好等于 \(W/2\)，
+          那么从 \(x_k\) 到下一个有正权重的位置 \(x_{k+1}\) 之间的整个区间，
+          都可能是最小值点。
+        </div>
+      </section>
+
+      <section id="example">
+        <h2>7. 例题</h2>
+
+        <p>求函数</p>
+        \[
+        f(x)=2|x-1|+3|x-4|+|x-7|
+        \]
+        <p>的最小值。</p>
+
+        <h3>第一步：计算总权重</h3>
+        \[
+        W=2+3+1=6,\qquad \frac W2=3.
+        \]
+
+        <h3>第二步：从左向右累计权重</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>位置</th>
+              <th>该点权重</th>
+              <th>累计权重</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>\(1\)</td>
+              <td>\(2\)</td>
+              <td>\(2\)</td>
+            </tr>
+            <tr>
+              <td>\(4\)</td>
+              <td>\(3\)</td>
+              <td>\(5\)</td>
+            </tr>
+            <tr>
+              <td>\(7\)</td>
+              <td>\(1\)</td>
+              <td>\(6\)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          累计权重在 \(x=4\) 处第一次达到或超过 \(3\)，所以加权中位数为
+        </p>
+        \[
+        x=4.
+        \]
+
+        <h3>第三步：计算最小值</h3>
+        \[
+        \begin{aligned}
+        f(4)
+        &=2|4-1|+3|4-4|+|4-7|\\
+        &=2\cdot3+0+3\\
+        &=9.
+        \end{aligned}
+        \]
+
+        <div class="boxed">
+          \[
+          \boxed{x=4\text{ 时，}f_{\min}=9}
+          \]
+        </div>
+      </section>
+
+      <section id="summary">
+        <h2>8. 核心总结</h2>
+
+        <p>
+          对于
+        </p>
+        \[
+        f(x)=\sum_{i=1}^{n}a_i|x-x_i|,\qquad a_i>0,
+        \]
+        <p>
+          最小值点由“左右总权重是否平衡”决定，而不是由左右点数或距离是否相等决定。
+        </p>
+
+        <div class="boxed">
+          \[
+          \sum_{x_i\lt m}a_i\le \frac W2,
+          \qquad
+          \sum_{x_i>m}a_i\le \frac W2.
+          \]
+        </div>
+
+        <p>
+          满足这一条件的 \(m\) 就是加权中位数，也是函数的最小值点。
+          当左右权重在某一区间内始终相等时，最小值点可以是一整个区间。
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    加权绝对值函数最小值教学页 · 可直接打印或保存为 PDF
+  </footer>
+</body>
+</html>
