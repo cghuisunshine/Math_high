@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="高中数学第七讲：函数的奇偶性与单调性课程大纲、奇偶性知识整理及例题解答。">
+  <title>函数的奇偶性与单调性｜知识大纲与问题解答</title>
+  <style>
+    :root{
+      --ink:#18243b;--muted:#657087;--paper:#f8f6f0;--card:#fff;
+      --navy:#19345a;--teal:#15877f;--teal-soft:#e2f3ef;
+      --orange:#f3a23a;--purple:#7252a8;--line:#ddd9cf;
+      --shadow:0 16px 42px rgba(22,38,62,.10);--radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;color:var(--ink);background:var(--paper);font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif;line-height:1.75}
+    button,a{font:inherit}
+    a{color:inherit;text-decoration:none}
+    .hero{position:relative;overflow:hidden;padding:68px max(6vw,24px) 58px;color:#fff;background:linear-gradient(125deg,#173359 0%,#17606c 58%,#20a08b 100%)}
+    .hero:after{content:"f(−x)";position:absolute;right:5vw;top:-36px;color:rgba(255,255,255,.08);font-family:Georgia,serif;font-size:clamp(100px,17vw,240px);font-style:italic}
+    .hero-inner{position:relative;z-index:1;max-width:1180px;margin:auto}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid rgba(255,255,255,.28);border-radius:99px;font-size:14px;letter-spacing:.06em}
+    h1{max-width:880px;margin:18px 0 12px;font-size:clamp(38px,6vw,72px);line-height:1.08;letter-spacing:-.04em}
+    .lead{max-width:830px;margin:0;color:rgba(255,255,255,.86);font-size:clamp(16px,2vw,20px)}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:27px}
+    .badge{padding:7px 12px;border-radius:9px;background:rgba(7,31,51,.34);font-size:14px}
+    .layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:34px;max-width:1180px;margin:0 auto;padding:38px 24px 70px}
+    .nav{position:sticky;top:22px;align-self:start;padding:22px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.93);box-shadow:var(--shadow)}
+    .nav strong{display:block;margin-bottom:13px;color:var(--teal);letter-spacing:.08em}
+    .nav a{display:block;padding:9px 0;border-bottom:1px dashed var(--line);color:#4e596b}
+    .nav button,.all-btn{width:100%;margin-top:18px;padding:11px 14px;border:0;border-radius:12px;color:#fff;background:var(--teal);cursor:pointer}
+    main{min-width:0}
+    section{scroll-margin-top:20px;margin-bottom:48px}
+    .kicker{margin:0 0 4px;color:var(--purple);font-size:13px;font-weight:800;letter-spacing:.16em}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:18px}
+    h2{margin:0;font-size:clamp(29px,4vw,42px);line-height:1.2;letter-spacing:-.03em}
+    .section-note{margin:0;color:var(--muted)}
+    .course-card{display:grid;grid-template-columns:300px 1fr;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow)}
+    .course-title{padding:27px;color:#fff;background:linear-gradient(145deg,var(--navy),#215c72)}
+    .course-title small{display:block;color:rgba(255,255,255,.72)}
+    .course-title h3{margin:5px 0 3px;font-size:26px}
+    .course-list{display:flex;align-content:center;align-items:center;flex-wrap:wrap;gap:11px;padding:25px}
+    .pill{padding:9px 13px;border-radius:999px;background:var(--teal-soft);color:#285a59}
+    .pill.active{color:#fff;background:var(--purple)}
+    .scope{margin-top:14px;padding:12px 16px;border-left:4px solid var(--orange);border-radius:4px 13px 13px 4px;background:#fff6e6;color:#6c522d}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .topic{padding:24px;border:1px solid var(--line);border-radius:20px;background:var(--card);box-shadow:0 9px 25px rgba(22,38,62,.06)}
+    .topic h3{display:flex;align-items:center;gap:10px;margin:0 0 10px;font-size:21px}
+    .num{display:grid;place-items:center;width:35px;height:35px;flex:none;border-radius:10px;color:#fff;background:var(--purple)}
+    .topic p{margin:7px 0;color:#485368}
+    .formula{display:block;margin:11px 0;padding:11px 14px;border-radius:11px;background:#f1f5f8;color:var(--navy);font-family:Cambria,"Times New Roman",serif;font-size:19px}
+    .checklist{margin:9px 0 0;padding-left:1.25em;color:#485368}
+    .callout{margin-top:18px;padding:18px 20px;border:1px solid #cbe4df;border-radius:17px;background:#edf8f5}
+    .callout strong{color:#08766f}
+    .symmetry{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    figure{margin:0;padding:14px;border-radius:15px;background:#f7f9fb;text-align:center}
+    figure svg{display:block;width:100%;height:150px}
+    figcaption{color:var(--muted);font-size:14px}
+    .axis{stroke:#9aa5b4;stroke-width:1.5}.curve{fill:none;stroke:var(--teal);stroke-width:4;stroke-linecap:round}.mark{fill:var(--orange)}
+    .question{margin-bottom:18px;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:var(--card);box-shadow:0 10px 30px rgba(22,38,62,.07)}
+    .q-body{padding:23px 24px 18px}
+    .q-label{display:inline-block;margin-bottom:9px;padding:4px 10px;border-radius:99px;color:#5a408c;background:#eee7f8;font-size:13px;font-weight:700}
+    .question h3{margin:0 0 9px;font-size:21px}
+    .question p{margin:7px 0}
+    .options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:13px 0 0}
+    .option{padding:10px 12px;border-radius:10px;background:#f4f5f7}
+    .toggle{width:100%;padding:12px 22px;border:0;border-top:1px solid var(--line);color:var(--teal);background:#fafcfb;font-weight:700;text-align:left;cursor:pointer}
+    .answer{display:none;padding:20px 24px 23px;border-top:1px solid #cfe6e1;background:#eff8f6}
+    .answer.open{display:block}
+    .answer h4{margin:0 0 8px;color:#08766f;font-size:18px}
+    .reason{margin:11px 0;padding:10px 13px;border-left:3px solid var(--teal);background:#fff}
+    .result{display:inline-block;margin-top:8px;padding:6px 12px;border-radius:9px;color:#fff;background:var(--teal);font-weight:700}
+    footer{padding:25px;text-align:center;color:#778091;background:#ebe8e0;font-size:14px}
+    @media(max-width:860px){.layout{display:block}.nav{position:static;margin-bottom:32px}.course-card{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.section-head{display:block}.section-note{margin-top:5px}}
+    @media(max-width:560px){.hero{padding:48px 20px 40px}.layout{padding:28px 15px 52px}.options,.symmetry{grid-template-columns:1fr}.q-body,.answer{padding-left:18px;padding-right:18px}}
+    @media print{.nav,.toggle,.all-btn{display:none!important}.layout{display:block;padding:0}.hero{padding:30px;background:#fff;color:#000}.hero .lead{color:#333}.hero:after,.badges{display:none}.answer{display:block!important}.question,.topic,.course-card{break-inside:avoid;box-shadow:none}section{margin-bottom:28px}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">高中数学 · 第七讲</span>
+      <h1>函数的奇偶性与单调性</h1>
+      <p class="lead">从定义域的对称性出发，掌握奇函数、偶函数的定义、代数判断和图像特征，并用反例识别常见错误。</p>
+      <div class="badges"><span class="badge">课程大纲定位</span><span class="badge">4 个核心知识块</span><span class="badge">3 组问题</span><span class="badge">答案可折叠</span><span class="badge">完全离线</span></div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="nav" aria-label="页面目录">
+      <strong>本页目录</strong>
+      <a href="#position">课程定位</a><a href="#outline">知识大纲</a><a href="#questions">问题与解答</a>
+      <button id="toggleAll" type="button">展开全部解答</button>
+    </aside>
+    <main>
+      <section id="position">
+        <p class="kicker">COURSE MAP</p>
+        <div class="section-head"><h2>课程定位</h2><p class="section-note">对应必修第一册 · 第 7 课</p></div>
+        <div class="course-card">
+          <div class="course-title"><small>大标题</small><h3>函数的单调性与奇偶性</h3><small>本组图片重点：函数的奇偶性</small></div>
+          <div class="course-list"><span class="pill">双钩函数 · 难度 2</span><span class="pill">函数的单调性 · 难度 3</span><span class="pill active">函数的奇偶性 · 难度 3</span><span class="pill">分段与含参函数性质 · 难度 4</span></div>
+        </div>
+        <div class="scope">说明：总大纲列出本课四个板块；所给教材图片为第 62—63 页，具体内容集中在“函数的奇偶性”，因此下方知识与例题按图片范围整理。</div>
+      </section>
+
+      <section id="outline">
+        <p class="kicker">KNOWLEDGE OUTLINE</p>
+        <div class="section-head"><h2>奇偶性知识大纲</h2><p class="section-note">先看定义域，再验证等式</p></div>
+        <div class="grid">
+          <article class="topic">
+            <h3><span class="num">1</span>定义与必要条件</h3>
+            <p>设函数 <i>f(x)</i> 的定义域为 <i>D</i>。必须先保证：若 <i>x∈D</i>，则 <i>−x∈D</i>，即定义域关于原点对称。</p>
+            <span class="formula">f(−x)=f(x)（对所有 x∈D）⟹ 偶函数</span>
+            <span class="formula">f(−x)=−f(x)（对所有 x∈D）⟹ 奇函数</span>
+            <p>等式必须对定义域内<strong>每一个</strong> <i>x</i> 成立，只验证个别数值不能得出结论。</p>
+          </article>
+          <article class="topic">
+            <h3><span class="num">2</span>判断函数奇偶性的步骤</h3>
+            <ol class="checklist">
+              <li>求函数的定义域；</li>
+              <li>判断定义域是否关于原点对称；若不对称，函数既非奇函数也非偶函数；</li>
+              <li>对任意 <i>x</i>，计算 <i>f(−x)</i>，与 <i>f(x)</i> 或 <i>−f(x)</i> 比较。</li>
+            </ol>
+            <span class="formula">f(x)−f(−x)=0 ⟹ 偶函数</span>
+            <span class="formula">f(x)+f(−x)=0 ⟹ 奇函数</span>
+            <p>证明“非奇非偶”时，只要找到一个反例，或指出定义域不对称即可。</p>
+          </article>
+          <article class="topic">
+            <h3><span class="num">3</span>图像的对称性质</h3>
+            <p>奇函数图像关于<strong>原点</strong>中心对称；偶函数图像关于 <strong>y 轴</strong>轴对称。反过来也成立。</p>
+            <div class="symmetry">
+              <figure>
+                <svg viewBox="0 0 220 150" role="img" aria-label="奇函数关于原点对称示意图"><line class="axis" x1="14" y1="75" x2="206" y2="75"/><line class="axis" x1="110" y1="10" x2="110" y2="140"/><path class="curve" d="M25 126 C70 122 77 94 103 79 C117 71 130 49 194 25"/><circle class="mark" cx="157" cy="40" r="5"/><circle class="mark" cx="63" cy="110" r="5"/></svg>
+                <figcaption>奇函数：点 (a,f(a)) 与 (−a,−f(a)) 关于原点对称</figcaption>
+              </figure>
+              <figure>
+                <svg viewBox="0 0 220 150" role="img" aria-label="偶函数关于y轴对称示意图"><line class="axis" x1="14" y1="120" x2="206" y2="120"/><line class="axis" x1="110" y1="10" x2="110" y2="140"/><path class="curve" d="M28 28 C65 70 82 91 110 96 C138 91 155 70 192 28"/><circle class="mark" cx="158" cy="68" r="5"/><circle class="mark" cx="62" cy="68" r="5"/></svg>
+                <figcaption>偶函数：点 (a,f(a)) 与 (−a,f(a)) 关于 y 轴对称</figcaption>
+              </figure>
+            </div>
+          </article>
+          <article class="topic">
+            <h3><span class="num">4</span>易错点与特殊结论</h3>
+            <ul class="checklist">
+              <li>偶函数图像不一定与 y 轴相交，因为定义域未必含 0。</li>
+              <li>奇函数图像不一定经过原点；只有当 0 在定义域内时，才有 f(0)=0。</li>
+              <li>“定义域关于原点对称”只是奇偶性的必要条件，不是充分条件。</li>
+            </ul>
+            <div class="callout"><strong>既是奇函数又是偶函数：</strong>由 <i>f(−x)=f(x)</i> 与 <i>f(−x)=−f(x)</i> 得 <i>f(x)=0</i>。因此在一个固定的、关于原点对称的定义域上，只有零函数。</div>
+          </article>
+        </div>
+      </section>
+
+      <section id="questions">
+        <p class="kicker">PRACTICE</p>
+        <div class="section-head"><h2>问题与完整解答</h2><p class="section-note">建议先作答，再展开答案</p></div>
+
+        <article class="question">
+          <div class="q-body"><span class="q-label">思考题</span><h3>是否存在既奇又偶的函数？</h3><p>这样的函数有什么特征？有多少个？</p></div>
+          <button class="toggle" type="button" aria-expanded="false">查看解答</button>
+          <div class="answer"><h4>解答</h4><p>若 <i>f</i> 同时为奇函数和偶函数，则对定义域中的任意 <i>x</i>：</p><span class="formula">f(−x)=f(x)，同时 f(−x)=−f(x)</span><p>所以 <i>f(x)=−f(x)</i>，从而 <i>2f(x)=0</i>，即 <i>f(x)=0</i>。</p><div class="reason">在<strong>固定的、关于原点对称的定义域</strong>上，只有一个这样的函数——零函数。若不固定定义域，则可在不同的原点对称定义域上分别定义零函数，因此可以有无穷多个“定义域不同”的函数。</div><span class="result">结论：固定定义域时只有零函数</span></div>
+        </article>
+
+        <article class="question">
+          <div class="q-body"><span class="q-label">口答 1</span><h3>四个结论中，正确命题有几个？</h3>
+            <div class="options"><div class="option">① 偶函数的图像一定与 y 轴相交</div><div class="option">② 奇函数的图像一定通过原点</div><div class="option">③ 偶函数的图像关于 y 轴对称</div><div class="option">④ 既是奇函数又是偶函数的函数一定是 f(x)=0（x∈R）</div></div>
+            <p>选项：A. 1　 B. 2　 C. 3　 D. 4</p>
+          </div>
+          <button class="toggle" type="button" aria-expanded="false">查看解答</button>
+          <div class="answer"><h4>逐项判断</h4>
+            <div class="reason"><strong>① 错。</strong>偶函数的定义域可以不含 0。例如定义域为 {−1,1}，令 f(−1)=f(1)=1，它是偶函数，但图像不与 y 轴相交。</div>
+            <div class="reason"><strong>② 错。</strong>奇函数的定义域也可以不含 0。例如 f(x)=1/x 是奇函数，但 x=0 无定义，图像不通过原点。</div>
+            <div class="reason"><strong>③ 对。</strong>这是偶函数图像的基本性质。</div>
+            <div class="reason"><strong>④ 错。</strong>同时奇偶必有 f(x)=0，但题干把定义域限定成了 R；零函数也可以定义在其他关于原点对称的集合上，所以不能断定定义域一定是 R。</div>
+            <p>只有第 ③ 个结论正确。</p><span class="result">答案：A（1 个）</span>
+          </div>
+        </article>
+
+        <article class="question">
+          <div class="q-body"><span class="q-label">口答 2</span><h3>由任意函数构造奇函数或偶函数</h3><p>设 <i>f(x)</i> 是 R 上的任意函数，下列叙述正确的是：</p>
+            <div class="options"><div class="option">A. f(x)f(−x) 是奇函数</div><div class="option">B. f(x)|f(−x)| 是奇函数</div><div class="option">C. f(x)−f(−x) 是偶函数</div><div class="option">D. f(x)+f(−x) 是偶函数</div></div>
+          </div>
+          <button class="toggle" type="button" aria-expanded="false">查看解答</button>
+          <div class="answer"><h4>解答</h4><p>令 <i>G(x)=f(x)+f(−x)</i>，则：</p><span class="formula">G(−x)=f(−x)+f(x)=G(x)</span><p>所以 <i>G(x)</i> 一定是偶函数，D 正确。</p><div class="reason"><strong>进一步理解：</strong><br>f(x)f(−x) 也恒为偶函数；<br>f(x)−f(−x) 恒为奇函数；<br>f(x)|f(−x)| 一般没有固定奇偶性。</div><span class="result">答案：D</span></div>
+        </article>
+      </section>
+    </main>
+  </div>
+  <footer>根据所给课程大纲及教材第 62—63 页整理 · 单文件离线网页 · 打印时自动展开全部解答</footer>
+  <script>
+    const answerBlocks=[...document.querySelectorAll('.answer')];
+    const toggles=[...document.querySelectorAll('.toggle')];
+    const allButton=document.getElementById('toggleAll');
+    function setAnswer(button,answer,open){answer.classList.toggle('open',open);button.setAttribute('aria-expanded',String(open));button.textContent=open?'收起解答':'查看解答'}
+    toggles.forEach((button)=>button.addEventListener('click',()=>setAnswer(button,button.nextElementSibling,!button.nextElementSibling.classList.contains('open'))));
+    allButton.addEventListener('click',()=>{const open=!answerBlocks.every(a=>a.classList.contains('open'));answerBlocks.forEach((answer,i)=>setAnswer(toggles[i],answer,open));allButton.textContent=open?'收起全部解答':'展开全部解答'});
+  </script>
+</body>
+</html>
