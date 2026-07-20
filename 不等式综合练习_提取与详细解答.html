@@ -39,7 +39,31 @@ table{border-collapse:collapse;width:100%;margin:12px 0}
 th,td{border:1px solid var(--line);padding:9px;text-align:center}
 th{background:#eff6ff}
 footer{text-align:center;color:var(--muted);padding:25px}
-@media print{nav,.btns{display:none}body{background:#fff}.card{box-shadow:none;break-inside:avoid}}
+.excalidraw-panel{
+  position:fixed;inset:0 0 0 auto;z-index:20;width:min(56vw,920px);min-width:560px;
+  display:flex;flex-direction:column;background:#fff;border-left:1px solid var(--line);
+  box-shadow:-3px 0 12px rgba(15,23,42,.12);transform:translateX(100%);
+  transition:transform .18s ease;
+}
+.excalidraw-panel.is-open{transform:translateX(0)}
+.excalidraw-panel__bar{height:48px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 16px;border-bottom:1px solid var(--line);background:#fff}
+.excalidraw-panel__bar strong{font-size:.95rem}
+.excalidraw-panel__close{width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);font-size:22px;line-height:1}
+.excalidraw-panel__close:hover{background:#f1f5f9}
+.excalidraw-panel iframe{width:100%;height:100%;border:0;background:#f8fafc}
+.excalidraw-toggle{
+  position:fixed;z-index:21;right:0;top:50%;width:40px;min-height:104px;padding:10px 7px;
+  border:1px solid #334155;border-right:0;border-radius:8px 0 0 8px;background:#334155;color:#fff;
+  box-shadow:0 2px 8px rgba(15,23,42,.16);writing-mode:vertical-rl;letter-spacing:.08em;
+  transition:right .18s ease;
+}
+.excalidraw-toggle:hover{background:#1e293b}
+.excalidraw-toggle.is-open{right:min(56vw,920px)}
+@media(max-width:700px){
+  .excalidraw-panel{width:100vw;min-width:0}
+  .excalidraw-toggle.is-open{right:calc(100vw - 40px);top:56px}
+}
+@media print{nav,.btns,.excalidraw-panel,.excalidraw-toggle{display:none}body{background:#fff}.card{box-shadow:none;break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -61,6 +85,15 @@ footer{text-align:center;color:var(--muted);padding:25px}
 <a href="#q6">第6题</a>
 <a href="#weighted">加权中位数</a>
 </nav>
+
+<button id="excalidrawToggle" class="excalidraw-toggle" type="button" aria-controls="excalidrawPanel" aria-expanded="false">打开协作画板</button>
+<aside id="excalidrawPanel" class="excalidraw-panel" aria-hidden="true">
+  <div class="excalidraw-panel__bar">
+    <strong>Excalidraw 协作画板</strong>
+    <button id="excalidrawClose" class="excalidraw-panel__close" type="button" aria-label="关闭协作画板">×</button>
+  </div>
+  <iframe id="excalidrawFrame" title="Excalidraw 协作画板" allow="clipboard-read; clipboard-write; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+</aside>
 
 <main>
 <div class="btns">
@@ -326,6 +359,30 @@ a(x−1)/(x−2)&gt;1（a≠1）。</div>
 <script>
 function showAll(){document.querySelectorAll('.hidden-answer').forEach(x=>x.classList.remove('hidden-answer'))}
 function hideAll(){document.querySelectorAll('section.card').forEach(x=>{if(x.id!=='knowledge'&&x.id!=='weighted')x.classList.add('hidden-answer')})}
+
+const EXCALIDRAW_SERVER='https://lakesideart.gochatus.org:9443/';
+const EXCALIDRAW_ROOM_ID='79df0f1ead9b5c7a2e15';
+const EXCALIDRAW_ROOM_KEY='EYL-XZmo342VIgo5jZ4zuQ';
+const excalidrawPanel=document.getElementById('excalidrawPanel');
+const excalidrawToggle=document.getElementById('excalidrawToggle');
+const excalidrawFrame=document.getElementById('excalidrawFrame');
+let excalidrawLoaded=false;
+
+function setExcalidrawOpen(open){
+  if(open&&!excalidrawLoaded){
+    excalidrawFrame.src=`${EXCALIDRAW_SERVER}#room=${EXCALIDRAW_ROOM_ID},${EXCALIDRAW_ROOM_KEY}`;
+    excalidrawLoaded=true;
+  }
+  excalidrawPanel.classList.toggle('is-open',open);
+  excalidrawToggle.classList.toggle('is-open',open);
+  excalidrawPanel.setAttribute('aria-hidden',String(!open));
+  excalidrawToggle.setAttribute('aria-expanded',String(open));
+  excalidrawToggle.textContent=open?'收起画板':'打开协作画板';
+}
+
+excalidrawToggle.addEventListener('click',()=>setExcalidrawOpen(!excalidrawPanel.classList.contains('is-open')));
+document.getElementById('excalidrawClose').addEventListener('click',()=>setExcalidrawOpen(false));
+document.addEventListener('keydown',event=>{if(event.key==='Escape')setExcalidrawOpen(false)});
 </script>
 </body>
 </html>
