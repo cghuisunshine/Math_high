@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>幂函数与指数函数｜知识大纲与例题全解</title>
+  <style>
+    :root{
+      --ink:#18233b;--muted:#667085;--paper:#fbfaf7;--card:#fff;
+      --purple:#6d4aff;--purple2:#9b70ff;--orange:#ff9f43;--teal:#18a999;
+      --line:#e5e7eb;--soft:#f3f0ff;--yellow:#fff6d8;--shadow:0 18px 55px rgba(35,27,78,.11)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;line-height:1.72}
+    .hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(125deg,#1d244c 0%,#5f3fe1 54%,#f08d49 125%);padding:64px 22px 54px}
+    .hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(2px);opacity:.18;background:#fff}
+    .hero:before{width:300px;height:300px;right:-90px;top:-150px}.hero:after{width:180px;height:180px;left:-70px;bottom:-100px}
+    .wrap{width:min(1120px,calc(100% - 34px));margin:auto}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 13px;border:1px solid rgba(255,255,255,.35);border-radius:999px;font-size:14px;background:rgba(255,255,255,.08)}
+    h1{font-size:clamp(38px,7vw,72px);letter-spacing:-.045em;line-height:1.05;margin:22px 0 16px}
+    .lead{font-size:18px;max-width:780px;color:rgba(255,255,255,.84);margin:0}
+    .stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}.stat{padding:8px 13px;background:rgba(14,20,51,.28);border:1px solid rgba(255,255,255,.1);border-radius:12px;font-size:14px}
+    .nav{position:sticky;top:0;z-index:8;background:rgba(251,250,247,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .nav-inner{min-height:64px;display:flex;align-items:center;gap:18px;justify-content:space-between}
+    .links{display:flex;gap:4px;overflow:auto}.links a{white-space:nowrap;color:#475467;text-decoration:none;padding:9px 10px;border-radius:9px;font-size:14px}.links a:hover{background:#f1effa;color:var(--purple)}
+    button{font:inherit}.toggle{border:0;border-radius:11px;background:var(--purple);color:#fff;font-weight:700;padding:10px 15px;cursor:pointer;white-space:nowrap}
+    main{padding:54px 0 80px}.section{margin-bottom:70px;scroll-margin-top:86px}
+    .kicker{color:var(--purple);font-size:13px;font-weight:850;letter-spacing:.16em;margin:0 0 5px}.section h2{font-size:clamp(30px,4.5vw,46px);line-height:1.15;margin:0 0 22px;letter-spacing:-.03em}
+    .course{display:grid;grid-template-columns:1fr 2fr;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+    .course-title{padding:30px;background:linear-gradient(145deg,#26345f,#5e42d6);color:#fff}.course-title small{opacity:.72}.course-title h3{font-size:28px;margin:14px 0 8px}.course-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:30px}.pill{display:inline-flex;padding:9px 13px;border-radius:999px;font-weight:750}.pill.p{background:#efe9ff;color:#5f3dcc}.pill.o{background:#fff0e5;color:#c85a12}.tip{margin-top:14px;padding:13px 16px;border-left:4px solid var(--orange);background:#fff8e7;border-radius:0 12px 12px 0;color:#725933}
+    .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.knowledge{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:0 10px 32px rgba(32,28,66,.055)}
+    .knowledge h3{margin:0 0 14px;font-size:23px}.knowledge h4{margin:22px 0 8px}.knowledge ul{padding-left:20px}.knowledge li{margin:7px 0}
+    .formula{display:block;margin:12px 0;padding:12px 15px;border-radius:12px;background:var(--soft);color:#3c2a83;font-family:"Times New Roman",serif;font-size:20px;overflow:auto;white-space:nowrap}
+    .formula.inline{display:inline;padding:2px 6px;margin:0;font-size:1.03em;white-space:normal}
+    .compare{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid var(--line);border-radius:14px}.compare th,.compare td{padding:11px 13px;border-bottom:1px solid var(--line);text-align:left}.compare th{background:#f7f5ff}.compare tr:last-child td{border-bottom:0}
+    .visuals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px}.chart{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px}.chart h4{margin:0 0 8px}.chart svg{display:block;width:100%;height:auto}.axis{stroke:#9aa2b1;stroke-width:1.4}.grid{stroke:#ececf2;stroke-width:1}.curve-p{fill:none;stroke:var(--purple);stroke-width:3;stroke-linecap:round}.curve-o{fill:none;stroke:var(--orange);stroke-width:3;stroke-linecap:round}.dot{fill:var(--ink)}.chart text{font-family:inherit;fill:#667085;font-size:11px}
+    .answerbar{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 18px}.answerbar span{padding:6px 10px;border-radius:9px;background:#eeebff;color:#5838c4;font-size:13px;font-weight:750}
+    .problems{display:grid;gap:13px}.problem{background:#fff;border:1px solid var(--line);border-radius:17px;overflow:hidden;transition:.2s;box-shadow:0 8px 24px rgba(35,30,67,.04)}.problem[open]{border-color:#b8a7ff;box-shadow:0 14px 32px rgba(73,49,167,.1)}
+    summary{display:grid;grid-template-columns:42px 1fr 24px;gap:13px;align-items:center;padding:18px 20px;cursor:pointer;list-style:none}summary::-webkit-details-marker{display:none}.num{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:#eeeaff;color:#5939c5;font-weight:850}.qtitle{font-size:18px;font-weight:780}.qtext{font-size:14px;color:var(--muted);font-weight:450;margin-top:3px}.plus{font-size:24px;color:var(--purple);transition:.2s}.problem[open] .plus{transform:rotate(45deg)}
+    .solution{border-top:1px solid var(--line);padding:20px 24px 25px;background:linear-gradient(180deg,#fcfbff,#fff)}.solution h4{margin:0 0 8px;color:#4c31ae}.solution p{margin:8px 0}.solution ol,.solution ul{padding-left:22px}.result{margin-top:14px;padding:11px 14px;border-radius:11px;background:#eafaf5;color:#0b6c59;font-weight:800}.warn{padding:11px 14px;border-radius:11px;background:#fff4dd;color:#7a4d0b}.mapping{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.mapping span{padding:8px 10px;text-align:center;background:#f5f3ff;border-radius:9px}
+    footer{border-top:1px solid var(--line);padding:30px 0;color:#737b8c;text-align:center;font-size:14px;background:#fff}
+    @media(max-width:760px){.hero{padding-top:44px}.wrap{width:min(100% - 22px,1120px)}.grid2,.visuals,.course{grid-template-columns:1fr}.course-meta{padding:22px}.nav-inner{gap:8px}.links{gap:0}.links a{padding:8px}.toggle{padding:9px 11px;font-size:13px}summary{padding:16px 13px;grid-template-columns:36px 1fr 18px}.num{width:34px;height:34px}.qtitle{font-size:16px}.solution{padding:18px 16px 22px}.mapping{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media print{.nav,.toggle,.stats{display:none}.hero{padding:28px;background:#fff;color:#111;border-bottom:2px solid #111}.lead{color:#444}.problem{break-inside:avoid}.problem .solution{display:block}.section{margin-bottom:35px}body{background:#fff}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">高中数学 · 第九讲</div>
+      <h1>幂函数与指数函数</h1>
+      <p class="lead">根据暑假大纲与教材第 82–85 页整理：从“底数还是指数在变化”出发识别两类函数，再用定义域、奇偶性、单调性和典型图像完成判断与求解。</p>
+      <div class="stats"><span class="stat">2 个核心函数模型</span><span class="stat">11 组问题</span><span class="stat">逐题完整推导</span><span class="stat">内置函数图像</span><span class="stat">完全离线</span></div>
+    </div>
+  </header>
+  <nav class="nav"><div class="wrap nav-inner"><div class="links"><a href="#position">课程定位</a><a href="#outline">知识大纲</a><a href="#power">幂函数题目</a><a href="#exp">指数函数题目</a></div><button class="toggle" id="toggleAll">展开全部解答</button></div></nav>
+  <main class="wrap">
+    <section class="section" id="position">
+      <p class="kicker">COURSE MAP</p><h2>课程定位</h2>
+      <div class="course"><div class="course-title"><small>暑假大纲 · 第 9 课</small><h3>幂函数与指数函数</h3><p>对应课本：必修第一册</p></div><div class="course-meta"><span class="pill p">基本初等函数 · 难度 1</span><span class="pill p">幂函数 · 难度 3</span><span class="pill o">指数函数 · 难度 2</span></div></div>
+      <div class="tip">识别口诀：<strong>幂函数是底数 x 在变，指数 k 固定；指数函数是指数 x 在变，底数 a 固定。</strong></div>
+    </section>
+
+    <section class="section" id="outline">
+      <p class="kicker">KNOWLEDGE OUTLINE</p><h2>提取出的知识大纲</h2>
+      <div class="grid2">
+        <article class="knowledge"><h3>一、幂函数</h3><span class="formula">y=x<sup>k</sup>　（k 为常数，k∈Q）</span>
+          <ul><li>第一象限内一定经过 <strong>(1,1)</strong>。</li><li>k&gt;0：在 (0,+∞) 上递增；k&lt;0：在 (0,+∞) 上递减。</li><li>k=p/q（最简分数）时，定义域与奇偶性由 p、q 的奇偶决定。</li></ul>
+          <table class="compare"><tr><th>p、q</th><th>图像与奇偶性</th></tr><tr><td>p 奇，q 偶</td><td>第一、二象限，关于 y 轴对称，偶函数</td></tr><tr><td>p 奇，q 奇</td><td>第一、三象限，关于原点对称，奇函数</td></tr><tr><td>p 偶，q 奇</td><td>第一象限为主，一般非奇非偶</td></tr></table>
+        </article>
+        <article class="knowledge"><h3>二、指数函数</h3><span class="formula">y=a<sup>x</sup>　（a&gt;0 且 a≠1）</span>
+          <ul><li>定义域：R；值域：(0,+∞)。</li><li>恒过定点 <strong>(0,1)</strong>，图像永远在 x 轴上方。</li><li>a&gt;1 时在 R 上递增；0&lt;a&lt;1 时在 R 上递减。</li><li>既不是奇函数，也不是偶函数。</li><li>y=a<sup>x</sup> 与 y=(1/a)<sup>x</sup>=a<sup>−x</sup> 关于 y 轴对称。</li></ul>
+        </article>
+      </div>
+      <div class="visuals">
+        <div class="chart"><h4>幂函数的典型形状</h4><svg viewBox="0 0 520 260" role="img" aria-label="幂函数典型图像"><path class="grid" d="M40 55H500M40 115H500M40 175H500M120 20V235M260 20V235M400 20V235"/><path class="axis" d="M35 205H505M260 235V18"/><path class="curve-p" d="M260 205 C300 202 350 180 390 135 C430 90 458 48 486 25"/><path class="curve-o" d="M45 30 C82 58 120 108 165 160 C195 192 226 203 260 205 C294 207 325 219 355 235"/><circle class="dot" cx="330" cy="176" r="4"/><text x="338" y="171">(1,1)</text><text x="420" y="62">k&gt;1</text><text x="70" y="50">奇函数示意</text><text x="490" y="220">x</text><text x="270" y="28">y</text></svg></div>
+        <div class="chart"><h4>指数函数：底数决定增减</h4><svg viewBox="0 0 520 260" role="img" aria-label="指数函数增减图像"><path class="grid" d="M40 55H500M40 115H500M40 175H500M120 20V235M260 20V235M400 20V235"/><path class="axis" d="M35 205H505M260 235V18"/><path class="curve-p" d="M45 196 C130 190 210 174 260 150 C330 115 390 70 470 25"/><path class="curve-o" d="M50 26 C132 72 194 116 260 150 C325 181 402 194 492 198"/><circle class="dot" cx="260" cy="150" r="4"/><text x="270" y="145">(0,1)</text><text x="398" y="55">a&gt;1</text><text x="393" y="188">0&lt;a&lt;1</text><text x="490" y="220">x</text><text x="270" y="28">y</text></svg></div>
+      </div>
+    </section>
+
+    <section class="section" id="power">
+      <p class="kicker">POWER FUNCTIONS</p><h2>幂函数：问题与解答</h2>
+      <div class="answerbar"><span>识别：系数必须为 1</span><span>配图：G H C D E I A B F</span><span>计数题：16 个</span><span>不等式：分区间排除无定义点</span></div>
+      <div class="problems">
+        <details class="problem"><summary><span class="num">1</span><span><span class="qtitle">口答：哪些是幂函数？</span><span class="qtext">判断：2x，5/x，x<sup>1/2</sup>，(x+1)<sup>3</sup>，x<sup>3</sup>，x<sup>−2</sup>，x²+x，x，x²，x<sup>−4</sup>，x⁰。</span></span><span class="plus">＋</span></summary><div class="solution"><h4>判断依据</h4><p>幂函数必须恰好写成 <span class="formula inline">y=x<sup>k</sup></span>，x 前面的系数只能是 1，底数也必须就是 x。</p><ul><li>2x、5/x：系数不是 1。</li><li>(x+1)³：底数不是 x。</li><li>x²+x：不是单独一个幂。</li></ul><div class="result">答案：③ x<sup>1/2</sup>、⑤ x³、⑥ x<sup>−2</sup>、⑧ x、⑨ x²、⑩ x<sup>−4</sup>、⑪ x⁰。</div></div></details>
+
+        <details class="problem"><summary><span class="num">2</span><span><span class="qtitle">例题 1：幂函数与图像配对</span><span class="qtext">把 x<sup>4/3</sup>、x<sup>−1/2</sup>、x<sup>1/2</sup>、x<sup>−1</sup>、x<sup>1/3</sup>、x<sup>5/3</sup>、x<sup>2/3</sup>、x<sup>−2</sup>、x<sup>3/2</sup> 与图 A–I 对应。</span></span><span class="plus">＋</span></summary><div class="solution"><h4>先看定义域，再看奇偶与增减</h4><div class="mapping"><span>① x<sup>4/3</sup> → G</span><span>② x<sup>−1/2</sup> → H</span><span>③ x<sup>1/2</sup> → C</span><span>④ x<sup>−1</sup> → D</span><span>⑤ x<sup>1/3</sup> → E</span><span>⑥ x<sup>5/3</sup> → I</span><span>⑦ x<sup>2/3</sup> → A</span><span>⑧ x<sup>−2</sup> → B</span><span>⑨ x<sup>3/2</sup> → F</span></div><p>例如，x<sup>−2</sup> 为偶函数且 x=0 无定义，所以图像应是位于第一、二象限的两支曲线 B；x<sup>−1</sup> 为奇函数且 x=0 无定义，所以对应第一、三象限的双曲线 D。</p><div class="result">配对顺序：G，H，C，D，E，I，A，B，F。</div></div></details>
+
+        <details class="problem"><summary><span class="num">3</span><span><span class="qtitle">例题 2：含参数的幂函数</span><span class="qtext">f(x)=(m²−3m+3)x<sup>m²+2n−3</sup>（m,n∈Z）是幂函数；图像与坐标轴无公共点，且关于原点对称。求 m、n 及单调区间。</span></span><span class="plus">＋</span></summary><div class="solution"><h4>第一步：利用“幂函数”的系数条件</h4><span class="formula">m²−3m+3=1 ⇒ (m−1)(m−2)=0 ⇒ m=1 或 2</span><p>关于原点对称说明指数是奇数；与坐标轴无公共点说明 x=0 不在定义域，因此指数应为<strong>负奇整数</strong>。</p><p>m=1 时指数为 2n−2，是偶数，不合题意；故 m=2。此时指数为 2n+1，要小于 0：</p><span class="formula">2n+1&lt;0，n∈Z ⇒ n≤−1</span><p>负奇次幂在 (−∞,0) 与 (0,+∞) 上都单调递减，但由于 x=0 无定义，不能把两个区间合写成一个连续区间。</p><div class="result">m=2，n≤−1；单调递减区间为 (−∞,0) 和 (0,+∞)。</div></div></details>
+
+        <details class="problem"><summary><span class="num">4</span><span><span class="qtitle">例题 3：集合计数</span><span class="qtext">若干幂函数均至少满足：①奇函数；②R 上的增函数；③图像过原点之一。满足三条性质的函数数目分别为 12、10、14，共有多少个？</span></span><span class="plus">＋</span></summary><div class="solution"><h4>关键关系：②恰好等于①与③的交集</h4><p>幂函数在整个 R 上递增，必须既关于原点对称（奇函数），又在 x=0 有定义且过原点。反过来，一个既为奇函数又过原点的幂函数，其指数为正的“奇/奇”型，也在 R 上递增。</p><span class="formula">集合② = 集合① ∩ 集合③</span><p>所以总数就是集合①与集合③的并集：</p><span class="formula">12+14−10=16</span><div class="result">共有 16 个这样的幂函数。</div></div></details>
+
+        <details class="problem"><summary><span class="num">5</span><span><span class="qtitle">例题 4：负偶次幂不等式</span><span class="qtext">若 (a+1)<sup>−4</sup> &gt; (3−2a)<sup>−4</sup>，求实数 a 的取值范围。</span></span><span class="plus">＋</span></summary><div class="solution"><h4>先写定义域</h4><p>a≠−1 且 a≠3/2。因为 t<sup>−4</sup>=1/|t|⁴，所以：</p><span class="formula">1/|a+1|⁴ &gt; 1/|3−2a|⁴ ⇔ |a+1|&lt;|3−2a|</span><p>两边非负，可以平方：</p><span class="formula">(a+1)²&lt;(3−2a)² ⇔ (3a−2)(4−a)&lt;0</span><p>解得 a&lt;2/3 或 a&gt;4。最后排除使原式无意义的 a=−1。</p><div class="result">a∈(−∞,−1)∪(−1,2/3)∪(4,+∞)。</div></div></details>
+      </div>
+    </section>
+
+    <section class="section" id="exp">
+      <p class="kicker">EXPONENTIAL FUNCTIONS</p><h2>指数函数：问题与解答</h2>
+      <div class="answerbar"><span>定点：(0,1)</span><span>平移定点：(2,2)</span><span>减函数参数：1&lt;a&lt;2</span><span>|2ˣ−1|：0/1/2 个解</span></div>
+      <div class="problems">
+        <details class="problem"><summary><span class="num">6</span><span><span class="qtitle">口答：含系数的指数函数</span><span class="qtext">函数 y=(a²−3a+3)·a<sup>x</sup> 是指数函数，求 a。</span></span><span class="plus">＋</span></summary><div class="solution"><p>指数函数的标准形式是 y=b<sup>x</sup>，前面的系数必须是 1，而且底数 b&gt;0、b≠1。</p><span class="formula">a²−3a+3=1 ⇒ a=1 或 2</span><p>a=1 不满足底数不等于 1，因此只保留 a=2。</p><div class="result">a=2。</div></div></details>
+
+        <details class="problem"><summary><span class="num">7</span><span><span class="qtitle">基础判断：平移后的必过点</span><span class="qtext">函数 y=a<sup>x−2</sup>+1（a&gt;0，a≠1）的图像必经过哪个点？</span></span><span class="plus">＋</span></summary><div class="solution"><p>令指数 x−2=0，即取 x=2：</p><span class="formula">y=a⁰+1=2</span><div class="result">图像必经过点 (2,2)。</div></div></details>
+
+        <details class="problem"><summary><span class="num">8</span><span><span class="qtitle">基础判断：由单调性求参数</span><span class="qtext">若 f(x)=(a−1)<sup>x</sup> 是 R 上的减函数，求 a 的范围。</span></span><span class="plus">＋</span></summary><div class="solution"><p>指数函数 b<sup>x</sup> 递减的充要条件是 0&lt;b&lt;1。这里 b=a−1：</p><span class="formula">0&lt;a−1&lt;1</span><div class="result">1&lt;a&lt;2。</div></div></details>
+
+        <details class="problem"><summary><span class="num">9</span><span><span class="qtitle">图像关系：aˣ 与 (1/a)ˣ</span><span class="qtext">分别从“数”和“形”的角度说明 y=aˣ 与 y=(1/a)ˣ 的关系。</span></span><span class="plus">＋</span></summary><div class="solution"><h4>从“数”的角度</h4><span class="formula">(1/a)<sup>x</sup>=a<sup>−x</sup>=f(−x)，其中 f(x)=a<sup>x</sup></span><h4>从“形”的角度</h4><p>把 y=f(x) 中的 x 换成 −x，图像关于 y 轴对称。因此两条曲线关于 y 轴对称；若 a&gt;1，一条递增、一条递减，但都通过 (0,1)。</p><div class="result">两函数互为 f(x) 与 f(−x)，图像关于 y 轴对称。</div></div></details>
+
+        <details class="problem"><summary><span class="num">10</span><span><span class="qtitle">例题 5（1）：方程 |2ˣ−1|=m 的根数</span><span class="qtext">分别求方程无解、恰有一解、恰有两解时 m 的范围。</span></span><span class="plus">＋</span></summary><div class="solution"><p>设 t=2<sup>x</sup>&gt;0，则题目变为 |t−1|=m，但要注意 t=2<sup>x</sup> 能取遍所有正数。</p><ul><li>m&lt;0：绝对值不可能为负，无解。</li><li>m=0：t=1，对应 x=0，一解。</li><li>0&lt;m&lt;1：t=1−m 与 t=1+m 都为正，对应两解。</li><li>m≥1：1−m≤0 被排除，只剩 t=1+m，一解。</li></ul><div class="result">无解：m&lt;0；一解：m=0 或 m≥1；两解：0&lt;m&lt;1。</div></div></details>
+
+        <details class="problem"><summary><span class="num">11</span><span><span class="qtitle">例题 5（2）：绝对值指数图像变换</span><span class="qtext">已知 y=a<sup>|x|</sup>（a&gt;0，a≠1）的图像开口向上、最低点为 (0,1)，判断 y=(1/a)<sup>|x|</sup> 的图像。</span></span><span class="plus">＋</span></summary><div class="solution"><p>原图开口向上说明 a&gt;1。于是 0&lt;1/a&lt;1：</p><span class="formula">(1/a)<sup>|x|</sup>=a<sup>−|x|</sup></span><p>函数为偶函数，在 x=0 取得最大值 1；当 |x| 增大时函数值趋近于 0，但始终为正。因此图像关于 y 轴对称，呈向下的“圆顶”形，顶点是 (0,1)。</p><div class="result">选择 D。</div></div></details>
+      </div>
+    </section>
+  </main>
+  <footer>根据暑假大纲与教材图片整理 · 单文件离线网页 · 点击题目展开解答</footer>
+  <script>
+    const all=[...document.querySelectorAll('details.problem')];
+    const btn=document.getElementById('toggleAll');
+    btn.addEventListener('click',()=>{const shouldOpen=all.some(x=>!x.open);all.forEach(x=>x.open=shouldOpen);btn.textContent=shouldOpen?'收起全部解答':'展开全部解答'});
+    all.forEach(d=>d.addEventListener('toggle',()=>{const opened=all.filter(x=>x.open).length;btn.textContent=opened===all.length?'收起全部解答':'展开全部解答'}));
+  </script>
+</body>
+</html>
