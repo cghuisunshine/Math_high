@@ -9,9 +9,11 @@
   --bg:#f5f7fb;--card:#fff;--ink:#1f2937;--muted:#64748b;
   --blue:#2563eb;--blue2:#dbeafe;--green:#047857;--green2:#d1fae5;
   --orange:#b45309;--orange2:#fef3c7;--line:#dbe2ea;--red:#b91c1c;
+  --excalidraw-width:clamp(560px,56vw,920px);
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.75}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.75;transition:padding-right .18s ease}
+body.excalidraw-open{padding-right:var(--excalidraw-width)}
 header{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;padding:42px 20px}
 .wrap{max-width:1000px;margin:auto}
 h1{margin:0 0 8px;font-size:clamp(28px,5vw,44px)}
@@ -40,7 +42,7 @@ th,td{border:1px solid var(--line);padding:9px;text-align:center}
 th{background:#eff6ff}
 footer{text-align:center;color:var(--muted);padding:25px}
 .excalidraw-panel{
-  position:fixed;inset:0 0 0 auto;z-index:20;width:min(56vw,920px);min-width:560px;
+  position:fixed;inset:0 0 0 auto;z-index:20;width:var(--excalidraw-width);
   display:flex;flex-direction:column;background:#fff;border-left:1px solid var(--line);
   box-shadow:-3px 0 12px rgba(15,23,42,.12);transform:translateX(100%);
   transition:transform .18s ease;
@@ -58,12 +60,13 @@ footer{text-align:center;color:var(--muted);padding:25px}
   transition:right .18s ease;
 }
 .excalidraw-toggle:hover{background:#1e293b}
-.excalidraw-toggle.is-open{right:min(56vw,920px)}
+.excalidraw-toggle.is-open{right:var(--excalidraw-width)}
 @media(max-width:700px){
+  body.excalidraw-open{padding-right:0}
   .excalidraw-panel{width:100vw;min-width:0}
   .excalidraw-toggle.is-open{right:calc(100vw - 40px);top:56px}
 }
-@media print{nav,.btns,.excalidraw-panel,.excalidraw-toggle{display:none}body{background:#fff}.card{box-shadow:none;break-inside:avoid}}
+@media print{nav,.btns,.excalidraw-panel,.excalidraw-toggle{display:none}body,body.excalidraw-open{background:#fff;padding-right:0}.card{box-shadow:none;break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -375,6 +378,7 @@ function setExcalidrawOpen(open){
   }
   excalidrawPanel.classList.toggle('is-open',open);
   excalidrawToggle.classList.toggle('is-open',open);
+  document.body.classList.toggle('excalidraw-open',open);
   excalidrawPanel.setAttribute('aria-hidden',String(!open));
   excalidrawToggle.setAttribute('aria-expanded',String(open));
   excalidrawToggle.textContent=open?'收起画板':'打开协作画板';
