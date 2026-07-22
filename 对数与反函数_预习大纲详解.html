@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>对数与反函数｜预习大纲详解</title>
+<style>
+:root{--ink:#17201d;--muted:#64706b;--paper:#fffefa;--bg:#f3efe5;--line:#ddd5c5;--green:#174f45;--green2:#237668;--mint:#dcece5;--orange:#d26b31;--gold:#f0bb62;--red:#a94336;--blue:#315c89;--shadow:0 16px 50px rgba(40,48,43,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:radial-gradient(circle at 15% 0,#fff 0,transparent 32%),var(--bg);font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.78}button{font:inherit}.page{max-width:1180px;margin:auto;padding:24px}.hero{position:relative;overflow:hidden;padding:52px 56px;border-radius:30px;background:linear-gradient(135deg,#123f38,#236a5d 72%,#d17a3c);color:#fff;box-shadow:var(--shadow)}.hero:after{content:"f⁻¹";position:absolute;right:35px;bottom:-75px;font:900 190px Georgia;color:#ffffff12;transform:rotate(-8deg)}.eyebrow{font-size:13px;font-weight:800;letter-spacing:.22em;color:#bde2d7}.hero h1{max-width:760px;margin:12px 0 14px;font-size:clamp(36px,6vw,66px);line-height:1.08;letter-spacing:-.04em}.hero p{max-width:760px;margin:0;color:#e2f2ed;font-size:18px}.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}.chip{padding:7px 12px;border:1px solid #ffffff38;border-radius:999px;background:#ffffff14;font-size:13px;font-weight:700}.toolbar{position:sticky;top:10px;z-index:20;display:flex;gap:10px;align-items:center;margin:18px 0;padding:11px;border:1px solid var(--line);border-radius:18px;background:#fffefae8;box-shadow:0 8px 25px #27342e12;backdrop-filter:blur(12px)}.toolbar button,.toolbar a{border:0;border-radius:12px;padding:10px 14px;background:#e5eee9;color:#173f38;text-decoration:none;font-weight:800;cursor:pointer}.toolbar button:hover,.toolbar a:hover{background:#cfe2da}.toolbar .print{margin-left:auto;background:#173f38;color:white}.layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:22px}.toc{position:sticky;top:84px;align-self:start;padding:20px;border:1px solid var(--line);border-radius:22px;background:var(--paper);box-shadow:0 8px 30px #27342e0b}.toc h2{margin:0 0 10px;font-size:14px;color:var(--muted);letter-spacing:.12em}.toc a{display:block;padding:7px 10px;border-radius:9px;color:#31413b;text-decoration:none;font-size:14px}.toc a:hover{background:var(--mint);color:var(--green)}main{min-width:0}.section{margin-bottom:22px;padding:30px;border:1px solid var(--line);border-radius:25px;background:var(--paper);box-shadow:0 9px 32px #27342e09}.section h2{display:flex;align-items:center;gap:10px;margin:0 0 19px;font-size:29px;line-height:1.25}.num{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:12px;background:var(--green);color:white;font-size:16px}.lead{font-size:17px;color:#3e4d47}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{padding:19px;border:1px solid #e4ddcf;border-radius:16px;background:#fff}.card h3{margin:0 0 8px;font-size:18px}.card p:last-child{margin-bottom:0}.outline{width:100%;border-collapse:collapse;font-size:15px}.outline th,.outline td{padding:11px 12px;border:1px solid var(--line);text-align:left}.outline th{background:#e6efe9;color:#174f45}.outline .focus{background:#fff4df;font-weight:700}.math{margin:12px 0;padding:12px 16px;border-left:4px solid var(--gold);background:#fff8e8;border-radius:0 12px 12px 0;font-family:Georgia,"Times New Roman","Songti SC",serif;font-size:18px;overflow-x:auto}.frac{display:inline-flex;vertical-align:middle;flex-direction:column;text-align:center;line-height:1.15;margin:0 .12em}.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 .2em}.proof{padding:15px 17px;border-radius:14px;background:#edf5f1}.proof b{color:var(--green)}.note,.warn{margin:14px 0;padding:14px 16px;border-radius:14px}.note{background:#e9f1fa;border-left:4px solid var(--blue)}.warn{background:#fff0eb;border-left:4px solid var(--red)}.steps{counter-reset:step;display:grid;gap:10px}.step{position:relative;padding:12px 14px 12px 48px;border-radius:13px;background:#f7f5ef}.step:before{counter-increment:step;content:counter(step);position:absolute;left:13px;top:12px;display:grid;place-items:center;width:25px;height:25px;border-radius:8px;background:var(--green);color:#fff;font-weight:800;font-size:13px}.answer-key{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.answer-key div{padding:10px;border-radius:12px;background:#e9f1ed;text-align:center;font-weight:800;color:#174f45}.exercise{margin:14px 0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}.exercise>summary{list-style:none;display:flex;gap:13px;align-items:flex-start;padding:18px;cursor:pointer}.exercise>summary::-webkit-details-marker{display:none}.qno{flex:0 0 auto;display:grid;place-items:center;width:34px;height:34px;border-radius:11px;background:#243c36;color:white;font-weight:900}.qtext{flex:1}.qtext b{display:block;margin-bottom:3px}.tag{display:inline-block;margin-top:7px;padding:2px 8px;border-radius:99px;background:#f1e3ce;color:#7d4c1e;font-size:12px;font-weight:800}.chev{font-size:22px;color:#718079;transition:.2s}.exercise[open] .chev{transform:rotate(45deg)}.solution{padding:0 20px 20px 66px;border-top:1px dashed #ddd5c5}.idea{margin:15px 0;padding:12px 15px;border-radius:12px;background:#e8f1ed;color:#25483f}.result{margin-top:14px;padding:13px 15px;border-radius:12px;background:#173f38;color:white;font-weight:800}.result .math{color:var(--ink)}.check{margin-top:10px;color:#61706a;font-size:13px}.check input{accent-color:var(--green)}.footer{text-align:center;padding:12px 0 40px;color:#78837e;font-size:13px}sup{line-height:0}.mini{font-size:14px;color:var(--muted)}
+@media(max-width:850px){.page{padding:12px}.hero{padding:34px 25px;border-radius:22px}.hero:after{display:none}.layout{display:block}.toc{position:static;margin-bottom:18px}.toc nav{columns:2}.section{padding:21px;border-radius:20px}.grid2{grid-template-columns:1fr}.answer-key{grid-template-columns:repeat(2,1fr)}.solution{padding:0 15px 18px}.toolbar{top:4px;overflow-x:auto}.toolbar span{display:none}}
+@media print{body{background:#fff}.page{max-width:none;padding:0}.hero{box-shadow:none;border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}.toolbar,.toc,.check{display:none!important}.layout{display:block}.section{box-shadow:none;break-inside:avoid}.exercise{break-inside:avoid}.exercise>.solution{display:block!important}.exercise>summary .chev{display:none}}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="hero">
+  <div class="eyebrow">高一数学 SS 班 · 第 10 课 · 预习</div>
+  <h1>对数与反函数<br>预习大纲详解</h1>
+  <p>根据最后一张预习图片，系统讲解对数运算、反函数及反函数方程解定理；包含概念、条件、证明、例题与常见误区。</p>
+  <div class="chips"><span class="chip">完全离线</span><span class="chip">预习讲义</span><span class="chip">定理证明</span><span class="chip">4 道配套例题</span><span class="chip">适合打印</span></div>
+</header>
+<div class="toolbar"><span class="mini">预习工具</span><button onclick="toggleAll(true)">展开全部例题</button><button onclick="toggleAll(false)">收起全部</button><a href="#examples">配套例题</a><button class="print" onclick="window.print()">打印 / 存为 PDF</button></div>
+<div class="layout">
+<aside class="toc"><h2>本页目录</h2><nav>
+  <a href="#outline">① 预习大纲</a><a href="#log">② 对数运算</a><a href="#inverse">③ 反函数</a><a href="#theorem">④ 方程解定理</a><a href="#examples">⑤ 配套例题</a>
+</nav></aside>
+<main>
+<section class="section" id="outline"><h2><span class="num">1</span>从图片提取的课程大纲</h2>
+<p class="lead">暑假大纲第 10 课对应最后一张预习图片，主题为“对数与反函数”。</p>
+<table class="outline"><thead><tr><th>课次</th><th>大标题</th><th>小标题</th><th>难度</th><th>对应课本</th></tr></thead><tbody>
+<tr class="focus"><td rowspan="3">10</td><td rowspan="3">对数与反函数</td><td>对数运算</td><td>2</td><td rowspan="3">必修第一册</td></tr><tr class="focus"><td>反函数</td><td>4</td></tr><tr class="focus"><td>反函数方程解定理</td><td>6</td></tr>
+</tbody></table>
+<div class="note"><b>学习主线：</b>对数把指数运算反解；反函数把一个一一对应函数的输入与输出互换。理解“唯一性”与“定义域、值域互换”是本课核心。</div>
+</section>
+
+<section class="section" id="log"><h2><span class="num">2</span>对数运算：指数的反解</h2>
+<p>当 a&gt;0、a≠1、N&gt;0 时，若 a<sup>x</sup>=N，则 x=log<sub>a</sub>N。也就是说：</p>
+<div class="math">log<sub>a</sub>N=x ⇔ a<sup>x</sup>=N。</div>
+<div class="grid2"><div class="card"><h3>积、商、幂</h3><p>log<sub>a</sub>(MN)=log<sub>a</sub>M+log<sub>a</sub>N<br>log<sub>a</sub>(M/N)=log<sub>a</sub>M−log<sub>a</sub>N<br>log<sub>a</sub>(M<sup>r</sup>)=r log<sub>a</sub>M</p></div><div class="card"><h3>换底公式</h3><p>log<sub>a</sub>N=log<sub>b</sub>N / log<sub>b</sub>a，其中 b&gt;0 且 b≠1。</p></div></div>
+<div class="proof"><b>乘法公式证明：</b>设 u=log<sub>a</sub>M，v=log<sub>a</sub>N，则 M=a<sup>u</sup>，N=a<sup>v</sup>。于是 MN=a<sup>u+v</sup>，按定义 log<sub>a</sub>(MN)=u+v。商、幂公式同理由指数运算法则推出。</div>
+<div class="proof" style="margin-top:12px"><b>换底公式证明：</b>设 x=log<sub>a</sub>N，则 a<sup>x</sup>=N。两边取以 b 为底的对数：x log<sub>b</sub>a=log<sub>b</sub>N，所以 x=log<sub>b</sub>N/log<sub>b</sub>a。</div>
+</section>
+
+<section class="section" id="inverse"><h2><span class="num">3</span>反函数：定义、条件、步骤与性质</h2>
+<h3>3.1 定义</h3><p>设 y=f(x) 的定义域为 D、值域为 A。若对 A 中每个 y，都能在 D 中找到<b>唯一</b>的 x 使 y=f(x)，便可把 x 表成 y 的函数 x=f<sup>−1</sup>(y)。交换字母后写成 y=f<sup>−1</sup>(x)。</p>
+<div class="note"><b>f<sup>−1</sup>(x) 不是 1/f(x)。</b>前者表示反函数，后者表示函数值的倒数。</div>
+<h3>3.2 存在条件：一一对应</h3><p>反函数要存在，原函数必须在所讨论的定义域上是单射：x₁≠x₂ ⇒ f(x₁)≠f(x₂)。若把目标集合取为原函数值域，则单射就保证每个输出能唯一找回输入。</p>
+<div class="proof"><b>严格单调函数为什么必有反函数？</b><br>若 f 严格递增，x₁&lt;x₂ 必有 f(x₁)&lt;f(x₂)，所以不同输入绝不会产生相同输出；严格递减同理。因此严格单调函数必为单射，在其值域上存在反函数。</div>
+<h3>3.3 求反函数三步</h3><div class="steps"><div class="step">从 y=f(x) 中解出 x=f<sup>−1</sup>(y)。</div><div class="step">交换 x、y，得到 y=f<sup>−1</sup>(x)。</div><div class="step">把原函数的值域写成反函数的定义域。</div></div>
+<h3>3.4 四条基本性质及证明</h3>
+<div class="card"><h3>图像关于 y=x 对称</h3><p>若原图像有点 (a,b)，则 b=f(a)。反函数满足 a=f<sup>−1</sup>(b)，所以反图像有点 (b,a)。交换坐标正是关于 y=x 的轴对称。</p></div>
+<div class="card"><h3>单调性一致</h3><p>若 f 递增，取 y₁&lt;y₂，令 xᵢ=f<sup>−1</sup>(yᵢ)。若 x₁≥x₂，会由 f 递增推出 y₁≥y₂，矛盾。因此 x₁&lt;x₂，故 f<sup>−1</sup> 也递增；递减情形同理。</p></div>
+<div class="card"><h3>复合后还原</h3><p>对 x∈D，f<sup>−1</sup>(f(x))=x；对 x∈A，f(f<sup>−1</sup>(x))=x。这正是“先输出、再找回输入”。</p></div>
+<div class="card"><h3>定义域和值域互换</h3><p>原函数把 D 映到 A，反函数把 A 映回 D，因此反函数的定义域为 A、值域为 D。</p></div>
+<h3>3.5 常见结论</h3>
+<ul><li>若奇函数存在反函数，则其反函数仍为奇函数。因为 f(−x)=−f(x)，从 f(x)=y 可得 f(−x)=−y，即 f<sup>−1</sup>(−y)=−f<sup>−1</sup>(y)。</li><li>非零周期函数不可能是一一对应：f(x+T)=f(x) 而 x+T≠x。</li><li>定义域关于原点对称且含非零数的偶函数不可能是一一对应：f(x)=f(−x) 而 x≠−x。</li><li>指数函数 y=a<sup>x</sup> 与对数函数 y=log<sub>a</sub>x 互为反函数。</li></ul>
+</section>
+
+<section class="section" id="theorem"><h2><span class="num">4</span>反函数方程解定理</h2>
+<p><b>定理：</b>若 f 在区间上严格递增且存在反函数，则</p><div class="math">f(x)=f<sup>−1</sup>(x) ⇔ f(x)=x。</div>
+<div class="proof"><b>证明：</b>由 f(x)=f<sup>−1</sup>(x)，两边作用 f 得 f(f(x))=x。若 f(x)&gt;x，因为 f 递增，便有 f(f(x))&gt;f(x)&gt;x，与 f(f(x))=x 矛盾；若 f(x)&lt;x，同理得到 f(f(x))&lt;f(x)&lt;x，也矛盾。因此只能 f(x)=x。反方向显然成立。</div>
+<div class="warn"><b>递减函数不能照搬。</b>例如 f(x)=1−x 为严格递减函数且 f<sup>−1</sup>=f，于是 f(x)=f<sup>−1</sup>(x) 对所有 x 成立，但 f(x)=x 只有 x=1/2。</div>
+</section>
+
+
+<section class="section" id="examples"><h2><span class="num">5</span>配套例题：思路与详细步骤</h2>
+<p class="lead">以下例题用于检查预习效果，并非冒充图片原题。点击题目展开解答。</p>
+<details class="exercise"><summary><span class="qno">1</span><span class="qtext"><b>判断反函数是否存在</b>函数 f(x)=x² 在定义域 R 上是否存在反函数？若把定义域限制为 [0,+∞)，情况如何？</span><span class="chev">＋</span></summary><div class="solution"><div class="idea"><b>思路：</b>反函数存在的关键是一个输出只能对应一个输入，即原函数必须为单射。</div><div class="steps"><div class="step">在 R 上，f(1)=f(−1)=1，不同输入产生相同输出，因此 f 不是单射，不存在反函数。</div><div class="step">限制在 [0,+∞) 后，x² 严格递增，是从 [0,+∞) 到 [0,+∞) 的一一对应。</div><div class="step">由 y=x² 且 x≥0 解得 x=√y，交换字母得到反函数 f⁻¹(x)=√x，定义域为 [0,+∞)。</div></div><div class="result">在 R 上不存在反函数；限制到 [0,+∞) 后，f⁻¹(x)=√x。</div></div></details>
+<details class="exercise"><summary><span class="qno">2</span><span class="qtext"><b>求分式函数的反函数</b>求 f(x)=(2x−1)/(x+3) 的反函数，并写出原函数与反函数的定义域。</span><span class="chev">＋</span></summary><div class="solution"><div class="idea"><b>思路：</b>先从 y=f(x) 解出 x，再交换字母；同时跟踪不能取的值。</div><div class="steps"><div class="step">原函数分母不能为 0，所以定义域为 R∖{−3}。</div><div class="step">由 y=(2x−1)/(x+3)，得 yx+3y=2x−1，即 x(y−2)=−1−3y。</div><div class="step">当 y≠2 时，x=(1+3y)/(2−y)。因此原函数值域为 R∖{2}。</div><div class="step">交换 x、y，得到 f⁻¹(x)=(1+3x)/(2−x)，其定义域正是 R∖{2}，值域为 R∖{−3}。</div></div><div class="result">f⁻¹(x)=(1+3x)/(2−x)，x≠2。</div></div></details>
+<details class="exercise"><summary><span class="qno">3</span><span class="qtext"><b>指数函数与对数函数互为反函数</b>求 f(x)=3ˣ 的反函数，并说明两幅图像的关系。</span><span class="chev">＋</span></summary><div class="solution"><div class="idea"><b>思路：</b>对 y=3ˣ 用对数反解 x。</div><div class="steps"><div class="step">指数函数 f 的定义域为 R，值域为 (0,+∞)，并且严格递增，因此存在反函数。</div><div class="step">由 y=3ˣ 得 x=log₃y；交换 x、y，得到 f⁻¹(x)=log₃x。</div><div class="step">反函数的定义域为原函数值域 (0,+∞)，反函数值域为原函数定义域 R。</div><div class="step">原图像上一点 (a,3ᵃ) 对应反图像上的点 (3ᵃ,a)，因此两图像关于直线 y=x 对称。</div></div><div class="result">f⁻¹(x)=log₃x（x&gt;0）；两图像关于 y=x 对称。</div></div></details>
+<details class="exercise"><summary><span class="qno">4</span><span class="qtext"><b>运用反函数方程解定理</b>已知 f(x)=x³+x+1，求方程 f(x)=f⁻¹(x) 的解。</span><span class="chev">＋</span></summary><div class="solution"><div class="idea"><b>思路：</b>先验证 f 严格递增，再把方程化为 f(x)=x。</div><div class="steps"><div class="step">若 x₁&lt;x₂，则 x₁³&lt;x₂³ 且 x₁&lt;x₂，所以 f(x₁)&lt;f(x₂)。因此 f 在 R 上严格递增并存在反函数。</div><div class="step">由反函数方程解定理，f(x)=f⁻¹(x) 等价于 f(x)=x。</div><div class="step">解 x³+x+1=x，得到 x³+1=0，即 x=−1。</div><div class="step">检验：f(−1)=−1，所以 (−1,−1) 是原函数图像与直线 y=x 的交点，满足原方程。</div></div><div class="result">唯一解为 x=−1。</div></div></details>
+</section>
+</main></div>
+<footer class="footer">第 10 课预习网页 · 依据最后一张图片整理 · 可完全断网打开</footer>
+</div>
+<script>
+function toggleAll(open){document.querySelectorAll('details.exercise').forEach(d=>d.open=open)}
+document.querySelectorAll('.check input').forEach((box,i)=>{const k='math-progress-'+i;box.checked=localStorage.getItem(k)==='1';box.addEventListener('change',()=>localStorage.setItem(k,box.checked?'1':'0'))});
+</script>
+</body></html>
