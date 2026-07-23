@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>第12章 诱导公式｜4课时详细教程</title>
+  <style>
+    :root{
+      --bg:#f6f8fc;--panel:#fff;--panel2:#f1f5fb;--text:#172033;--muted:#5f6b7c;
+      --line:#dce3ee;--brand:#0f766e;--brand2:#0d9488;--accent:#f59e0b;
+      --blue:#2563eb;--red:#dc2626;--green:#15803d;--shadow:0 10px 30px rgba(21,38,65,.09);
+      --radius:18px;--formula:#edf6ff;--formula-line:#b8d8ff;--side:292px;
+    }
+    body.dark{
+      --bg:#0b1220;--panel:#121c2d;--panel2:#18253a;--text:#e8eef8;--muted:#a9b6c9;
+      --line:#2a3952;--brand:#5eead4;--brand2:#2dd4bf;--accent:#fbbf24;
+      --blue:#93c5fd;--red:#fca5a5;--green:#86efac;--shadow:0 12px 36px rgba(0,0,0,.28);
+      --formula:#10243c;--formula-line:#285581;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.78}
+    button,input{font:inherit}
+    a{color:inherit}
+    .skip{position:absolute;left:-9999px}.skip:focus{left:12px;top:12px;z-index:100;background:var(--panel);padding:8px 12px;border-radius:8px}
+    .layout{display:grid;grid-template-columns:var(--side) minmax(0,1fr);min-height:100vh}
+    aside{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--line);padding:22px 18px;z-index:20}
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:18px}
+    .brandmark{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;color:white;font-weight:900;font-size:22px;background:linear-gradient(135deg,#0f766e,#14b8a6);box-shadow:var(--shadow)}
+    .brand h1{font-size:18px;margin:0;line-height:1.25}.brand small{color:var(--muted)}
+    .search{width:100%;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:10px 12px;border-radius:12px;outline:none}
+    .search:focus{border-color:var(--brand2);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand2) 20%,transparent)}
+    nav{margin:16px 0}nav a{display:block;text-decoration:none;padding:9px 10px;border-radius:10px;color:var(--muted);font-size:14px}
+    nav a:hover,nav a.active{background:var(--panel2);color:var(--brand);font-weight:700}
+    .side-tools{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:8px 10px;border-radius:10px;cursor:pointer}
+    .btn:hover{border-color:var(--brand2);color:var(--brand)}
+    .progressBox{margin-top:18px;padding:12px;background:var(--panel2);border-radius:13px;font-size:13px}
+    .bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:8px}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:.3s}
+    main{min-width:0}
+    .hero{padding:58px max(5vw,28px) 42px;background:
+      radial-gradient(circle at 85% 10%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 28%),
+      radial-gradient(circle at 70% 70%,color-mix(in srgb,var(--brand2) 14%,transparent),transparent 35%),
+      linear-gradient(145deg,var(--panel),var(--bg));border-bottom:1px solid var(--line)}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;color:var(--brand);font-weight:800;letter-spacing:.08em;font-size:13px}
+    .hero h2{font-size:clamp(34px,5vw,62px);line-height:1.12;margin:14px 0 12px;letter-spacing:-.04em}
+    .hero p{max-width:780px;color:var(--muted);font-size:18px;margin:0}
+    .badges{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}.badge{padding:7px 11px;border-radius:99px;background:var(--panel);border:1px solid var(--line);font-size:13px;box-shadow:0 4px 12px rgba(30,50,80,.05)}
+    .content{max-width:1120px;margin:auto;padding:32px max(4vw,22px) 80px}
+    section{scroll-margin-top:20px;margin:0 0 34px}
+    .section-head{display:flex;gap:14px;align-items:flex-start;margin:10px 0 18px}
+    .num{flex:none;width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:var(--brand);color:var(--bg);font-weight:900}
+    .section-head h2{margin:0;font-size:27px}.section-head p{margin:3px 0 0;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 10px;font-size:19px}.card h4{margin:17px 0 7px}.card p:last-child{margin-bottom:0}
+    .label{font-size:12px;font-weight:900;letter-spacing:.08em;color:var(--brand);text-transform:uppercase}
+    .lesson{position:relative;overflow:hidden}.lesson::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--brand2)}
+    .lesson-time{color:var(--muted);font-size:13px}
+    .math,.formula{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+    .formula{position:relative;background:var(--formula);border:1px solid var(--formula-line);border-left:5px solid var(--blue);border-radius:12px;padding:14px 48px 14px 16px;margin:12px 0;font-size:clamp(17px,2.1vw,21px);overflow:auto}
+    .copy{position:absolute;right:8px;top:8px;border:0;background:transparent;color:var(--muted);cursor:pointer;font-family:inherit;font-size:16px}
+    .note,.warning,.tip{border-radius:12px;padding:13px 15px;margin:12px 0}
+    .note{background:color-mix(in srgb,var(--blue) 9%,var(--panel));border-left:4px solid var(--blue)}
+    .warning{background:color-mix(in srgb,var(--red) 9%,var(--panel));border-left:4px solid var(--red)}
+    .tip{background:color-mix(in srgb,var(--green) 9%,var(--panel));border-left:4px solid var(--green)}
+    table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:var(--panel);font-size:15px}
+    th,td{padding:11px 12px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+    th{background:var(--panel2);font-weight:800}tr:last-child td{border-bottom:0}th:last-child,td:last-child{border-right:0}
+    .table-wrap{overflow:auto}
+    details{border:1px solid var(--line);border-radius:13px;background:var(--panel);margin:10px 0;overflow:hidden}
+    summary{cursor:pointer;padding:13px 16px;font-weight:800;background:var(--panel2);list-style:none}
+    summary::-webkit-details-marker{display:none}summary::after{content:"＋";float:right;color:var(--brand)}details[open] summary::after{content:"－"}
+    .details-body{padding:4px 16px 16px}
+    .steps{counter-reset:step;list-style:none;padding:0}.steps li{counter-increment:step;position:relative;padding:0 0 14px 46px;min-height:36px}
+    .steps li::before{content:counter(step);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--brand);color:var(--bg);font-weight:900}
+    .example{border-top:4px solid var(--accent)}.example .question{font-weight:800;font-size:17px}
+    .checkline{display:flex;gap:10px;align-items:flex-start;margin:8px 0}.checkline input{margin-top:7px;accent-color:var(--brand)}
+    .unit-wrap{display:grid;grid-template-columns:minmax(300px,1.05fr) minmax(260px,.95fr);gap:18px;align-items:center}
+    .unit-svg{width:100%;height:auto;background:var(--panel2);border-radius:16px;border:1px solid var(--line)}
+    .controls label{display:block;font-weight:800}.controls input[type=range]{width:100%;accent-color:var(--brand)}
+    .readout{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px}.readout div{background:var(--panel2);padding:10px;border-radius:10px}.readout b{display:block;color:var(--brand);font-size:17px}
+    .mnemonic{font-size:clamp(24px,3vw,36px);font-weight:900;letter-spacing:.08em;text-align:center;color:var(--brand);padding:22px;background:var(--panel2);border-radius:16px}
+    .formula-map{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.formula-map div{padding:13px 8px;border:1px solid var(--line);border-radius:12px;text-align:center;background:var(--panel2)}
+    .exercise{padding:14px 0;border-bottom:1px dashed var(--line)}.exercise:last-child{border-bottom:0}.level{display:inline-block;padding:2px 8px;border-radius:99px;font-size:12px;font-weight:800;margin-right:6px}.basic{background:#dcfce7;color:#166534}.mid{background:#dbeafe;color:#1e40af}.hard{background:#ffedd5;color:#9a3412}
+    .answer{margin-top:9px}.answer summary{background:transparent;color:var(--brand);padding:7px 0}.answer .details-body{padding:0 0 8px}
+    .quiz-option{display:block;border:1px solid var(--line);border-radius:10px;padding:9px 11px;margin:7px 0;cursor:pointer}.quiz-option:hover{border-color:var(--brand2)}.quiz-result{font-weight:800;margin-top:9px}
+    .footer{text-align:center;color:var(--muted);padding:30px}
+    .topbar{display:none}
+    mark{background:#fde68a;color:#3b2f0b;border-radius:3px;padding:0 2px}
+    .hidden-by-search{display:none!important}
+    .toast{position:fixed;right:22px;bottom:22px;background:#111827;color:#fff;padding:10px 15px;border-radius:10px;opacity:0;transform:translateY(15px);transition:.25s;pointer-events:none;z-index:99}.toast.show{opacity:1;transform:none}
+    @media(max-width:900px){
+      .layout{display:block}.topbar{display:flex;position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--panel) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:10px 14px;justify-content:space-between;align-items:center}
+      .topbar b{color:var(--brand)}aside{position:fixed;left:0;top:0;transform:translateX(-105%);transition:.25s;width:min(88vw,320px);box-shadow:var(--shadow)}aside.open{transform:none}
+      .hero{padding-top:38px}.grid,.grid3,.unit-wrap{grid-template-columns:1fr}.formula-map{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:560px){.hero{padding-left:20px;padding-right:20px}.content{padding-left:15px;padding-right:15px}.card{padding:16px}.readout{grid-template-columns:1fr}.section-head h2{font-size:23px}.num{width:42px;height:42px}.formula{font-size:17px}.badges{gap:6px}}
+    @media print{aside,.topbar,.copy,.side-tools,.search,.toast{display:none!important}.layout{display:block}.hero{padding:24px;background:white}.content{max-width:none;padding:18px}body{background:white;color:#111}.card,details{box-shadow:none;break-inside:avoid}details:not([open])>.details-body{display:block}summary::after{display:none}}
+  </style>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<div class="topbar"><b>第12章 · 诱导公式</b><button class="btn" id="menuBtn" aria-label="打开目录">☰ 目录</button></div>
+<div class="layout">
+  <aside id="sidebar">
+    <div class="brand"><div class="brandmark">12</div><div><h1>诱导公式</h1><small>4 课时详细教程</small></div></div>
+    <input id="search" class="search" type="search" placeholder="搜索：弧度、象限、π/2…">
+    <nav id="nav">
+      <a href="#overview">学习路线</a>
+      <a href="#lesson1">第1课时　弧度制</a>
+      <a href="#lesson2">第2课时　任意角三角比</a>
+      <a href="#lesson3">第3课时　诱导公式（一）</a>
+      <a href="#lesson4">第4课时　诱导公式（二）</a>
+      <a href="#summary">公式总表</a>
+      <a href="#practice">分层练习</a>
+      <a href="#answers">答案与自测</a>
+    </nav>
+    <div class="side-tools">
+      <button class="btn" id="themeBtn">◐ 主题</button>
+      <button class="btn" id="fontBtn">A⁺ 字号</button>
+      <button class="btn" id="expandBtn">展开全部</button>
+      <button class="btn" onclick="window.print()">打印 / PDF</button>
+    </div>
+    <div class="progressBox"><b>学习进度 <span id="progressText">0%</span></b><div class="bar"><span id="progressBar"></span></div><small>勾选每课时末的“我已掌握”</small></div>
+  </aside>
+
+  <main id="main">
+    <header class="hero">
+      <div class="eyebrow">高一数学 · 必修第一册衔接</div>
+      <h2>第 12 章<br>诱导公式</h2>
+      <p>从“角如何旋转”到“任意大角怎样化成锐角”：用单位圆推导公式，不把口诀当作没有理由的记忆负担。</p>
+      <div class="badges"><span class="badge">4 课时</span><span class="badge">弧度制</span><span class="badge">任意角三角比</span><span class="badge">单位圆推导</span><span class="badge">分步例题</span><span class="badge">离线可用</span></div>
+    </header>
+
+    <div class="content">
+      <section id="overview" class="searchable">
+        <div class="section-head"><div class="num">0</div><div><h2>学习路线</h2><p>大纲中的两个小标题各安排 2 课时，共 4 课时。</p></div></div>
+        <div class="grid">
+          <article class="card lesson"><span class="label">课时 1–2</span><h3>弧度制与任意角的三角比</h3><p>先统一角的度量，再把三角函数定义在单位圆上。目标是能处理负角、超过一周的角和坐标型三角比问题。</p><p class="lesson-time">建议：概念 35 分钟＋例题 35 分钟＋练习 20 分钟 / 课时</p></article>
+          <article class="card lesson"><span class="label">课时 3–4</span><h3>诱导公式</h3><p>利用单位圆上点的对称关系推导公式；掌握“先化角、再定名、后定号”，并能化简、求值和解决综合问题。</p><p class="lesson-time">建议：推导 30 分钟＋例题 40 分钟＋练习 20 分钟 / 课时</p></article>
+        </div>
+        <div class="note"><b>先决知识：</b>锐角三角比、直角坐标系、特殊角 <span class="math">0、π/6、π/4、π/3、π/2</span> 的三角函数值。</div>
+      </section>
+
+      <section id="lesson1" class="searchable">
+        <div class="section-head"><div class="num">1</div><div><h2>第 1 课时：弧度制与任意角</h2><p>理解弧度的来源，熟练进行角度与弧度互化。</p></div></div>
+        <div class="grid">
+          <article class="card">
+            <span class="label">核心概念</span><h3>1. 任意角：旋转产生的量</h3>
+            <p>固定一条射线作为<strong>始边</strong>，绕端点旋转后得到<strong>终边</strong>。逆时针旋转规定为正角，顺时针旋转规定为负角；没有旋转是零角。</p>
+            <div class="formula" data-copy>与角 α 终边相同的全部角：β = α + 2kπ（k∈ℤ）<button class="copy" aria-label="复制公式">📋</button></div>
+            <p>同终边角的区别只是多转或少转了整数圈。因此，它们在单位圆上落到同一个点，三角函数值相同。</p>
+            <div class="warning"><b>易错：</b>“终边相同”不等于“角相等”。例如 <span class="math">30°、390°、−330°</span> 是三个不同的角，但终边相同。</div>
+          </article>
+          <article class="card">
+            <span class="label">为什么</span><h3>2. 为什么要用弧度？</h3>
+            <p>角度制把一周人为分成 360 份；弧度制直接比较“弧长”和“半径”，与圆本身的几何结构相连。</p>
+            <div class="formula" data-copy>θ = l/r　（弧度数 = 弧长 ÷ 半径）<button class="copy" aria-label="复制公式">📋</button></div>
+            <p>若弧长 <span class="math">l</span> 恰好等于半径 <span class="math">r</span>，圆心角就是 <strong>1 弧度</strong>。比值 <span class="math">l/r</span> 没有单位，所以弧度数本质上是一个实数。</p>
+            <div class="tip"><b>弧度更“自然”：</b>只有使用弧度时，才有简洁公式 <span class="math">l=rθ</span>，并且高等数学中 <span class="math">sin x</span> 的导数直接是 <span class="math">cos x</span>。</div>
+          </article>
+        </div>
+
+        <article class="card searchable" style="margin-top:16px">
+          <h3>3. 角度制与弧度制的桥梁</h3>
+          <div class="formula" data-copy>360° = 2π rad　⇒　180° = π rad<button class="copy" aria-label="复制公式">📋</button></div>
+          <div class="grid">
+            <div><h4>角度 → 弧度</h4><div class="formula" data-copy>α° = α·π/180 rad<button class="copy">📋</button></div><p>把“度数”乘以 <span class="math">π/180</span>。</p></div>
+            <div><h4>弧度 → 角度</h4><div class="formula" data-copy>θ rad = θ·180/π °<button class="copy">📋</button></div><p>把“弧度数”乘以 <span class="math">180/π</span>。</p></div>
+          </div>
+          <div class="table-wrap">
+            <table aria-label="特殊角度弧度对照表">
+              <tr><th>角度</th><td>0°</td><td>30°</td><td>45°</td><td>60°</td><td>90°</td><td>120°</td><td>135°</td><td>150°</td><td>180°</td><td>270°</td><td>360°</td></tr>
+              <tr><th>弧度</th><td>0</td><td>π/6</td><td>π/4</td><td>π/3</td><td>π/2</td><td>2π/3</td><td>3π/4</td><td>5π/6</td><td>π</td><td>3π/2</td><td>2π</td></tr>
+            </table>
+          </div>
+        </article>
+
+        <div class="grid" style="margin-top:16px">
+          <article class="card example">
+            <span class="label">例 1</span><p class="question">把 225° 化为弧度。</p>
+            <ol class="steps"><li>使用换算：<span class="math">225°×π/180</span>。</li><li>约分：<span class="math">225/180=5/4</span>。</li><li>所以 <span class="math">225°=5π/4</span>。</li></ol>
+            <div class="tip">检验：225° 比 180° 大、比 270° 小，因此应在 <span class="math">π</span> 与 <span class="math">3π/2</span> 之间；<span class="math">5π/4</span> 符合。</div>
+          </article>
+          <article class="card example">
+            <span class="label">例 2</span><p class="question">把 −7π/12 化为角度。</p>
+            <ol class="steps"><li>乘以 <span class="math">180/π</span>。</li><li><span class="math">−7π/12×180/π=−7×15</span>。</li><li>得到 <span class="math">−105°</span>。</li></ol>
+            <div class="note">负号表示顺时针旋转，不表示角的“大小不能存在”。</div>
+          </article>
+          <article class="card example">
+            <span class="label">例 3</span><p class="question">半径 6 cm 的圆中，圆心角为 5π/9，求弧长和扇形面积。</p>
+            <ol class="steps"><li><span class="math">l=rθ=6×5π/9=10π/3 cm</span>。</li><li><span class="math">S=½r²θ=½×36×5π/9=10π cm²</span>。</li></ol>
+            <div class="warning">公式中的 <span class="math">θ</span> 必须是<strong>弧度数</strong>。</div>
+          </article>
+          <article class="card">
+            <h3>弧长与扇形面积</h3>
+            <div class="formula" data-copy>l = rθ<button class="copy">📋</button></div>
+            <div class="formula" data-copy>S = ½r²θ = ½rl<button class="copy">📋</button></div>
+            <p>推导：整个圆的圆心角是 <span class="math">2π</span>，角 <span class="math">θ</span> 占整圆的比例是 <span class="math">θ/(2π)</span>。因此弧长为 <span class="math">2πr·θ/(2π)=rθ</span>；面积同理。</p>
+          </article>
+        </div>
+        <div class="card" style="margin-top:16px"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="l1"><span><b>我已掌握第 1 课时：</b>能解释 1 弧度，能互化角度与弧度，能求同终边角、弧长和扇形面积。</span></label></div>
+      </section>
+
+      <section id="lesson2" class="searchable">
+        <div class="section-head"><div class="num">2</div><div><h2>第 2 课时：任意角的三角比</h2><p>把锐角三角比推广到所有实数角。</p></div></div>
+        <article class="card">
+          <div class="unit-wrap">
+            <div>
+              <svg id="unitCircle" class="unit-svg" viewBox="0 0 440 440" role="img" aria-label="交互式单位圆">
+                <line x1="30" y1="220" x2="410" y2="220" stroke="currentColor" opacity=".35"/>
+                <line x1="220" y1="30" x2="220" y2="410" stroke="currentColor" opacity=".35"/>
+                <circle cx="220" cy="220" r="150" fill="none" stroke="currentColor" stroke-width="2" opacity=".55"/>
+                <path id="angleArc" d="" fill="none" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/>
+                <line id="radiusLine" x1="220" y1="220" x2="370" y2="220" stroke="#0d9488" stroke-width="4"/>
+                <line id="sinLine" x1="370" y1="220" x2="370" y2="220" stroke="#dc2626" stroke-width="4" stroke-dasharray="7 5"/>
+                <line id="cosLine" x1="220" y1="220" x2="370" y2="220" stroke="#2563eb" stroke-width="4" stroke-dasharray="7 5"/>
+                <circle id="pointP" cx="370" cy="220" r="7" fill="#f59e0b"/>
+                <text x="392" y="214" fill="currentColor">x</text><text x="228" y="42" fill="currentColor">y</text>
+                <text id="pointLabel" x="378" y="212" fill="currentColor" font-size="16">P</text>
+                <text x="284" y="245" fill="#2563eb" font-size="15">cos θ</text>
+                <text id="sinText" x="378" y="175" fill="#dc2626" font-size="15">sin θ</text>
+              </svg>
+            </div>
+            <div class="controls">
+              <span class="label">交互演示</span><h3>拖动角度，观察坐标与符号</h3>
+              <label for="angleSlider">θ = <span id="degreeText">30°</span> = <span id="radianText">π/6</span></label>
+              <input id="angleSlider" type="range" min="-360" max="720" value="30" step="1">
+              <div class="readout">
+                <div>所在象限<b id="quadText">第一象限</b></div>
+                <div>终边点 P<b id="coordText">(0.866, 0.500)</b></div>
+                <div>cos θ = x<b id="cosText">0.866</b></div>
+                <div>sin θ = y<b id="sinValueText">0.500</b></div>
+              </div>
+              <p class="note">单位圆半径为 1，因此点 <span class="math">P(x,y)</span> 的横坐标就是 <span class="math">cos θ</span>，纵坐标就是 <span class="math">sin θ</span>。</p>
+            </div>
+          </div>
+        </article>
+
+        <div class="grid" style="margin-top:16px">
+          <article class="card">
+            <h3>1. 定义：从直角三角形到坐标</h3>
+            <p>角 <span class="math">α</span> 的终边上取一点 <span class="math">P(x,y)</span>，令 <span class="math">r=√(x²+y²)&gt;0</span>，定义：</p>
+            <div class="formula" data-copy>sin α = y/r，cos α = x/r，tan α = y/x（x≠0）<button class="copy">📋</button></div>
+            <p>这个定义不要求 <span class="math">α</span> 是锐角，所以负角、钝角和大于一周的角都能处理。换成终边上任何一点，比值不变，因为相似三角形中对应边同比例缩放。</p>
+          </article>
+          <article class="card">
+            <h3>2. 三角函数值的符号</h3>
+            <div class="formula-map">
+              <div><b>第一象限</b><br><span class="math">sin＋ cos＋ tan＋</span></div>
+              <div><b>第二象限</b><br><span class="math">sin＋ cos− tan−</span></div>
+              <div><b>第三象限</b><br><span class="math">sin− cos− tan＋</span></div>
+              <div><b>第四象限</b><br><span class="math">sin− cos＋ tan−</span></div>
+            </div>
+            <p>原因不是口诀：<span class="math">sin α=y/r</span> 看纵坐标，<span class="math">cos α=x/r</span> 看横坐标，<span class="math">tan α=y/x</span> 看两者同号还是异号。</p>
+            <div class="tip"><b>记忆辅助：</b>一全正，二正弦，三正切，四余弦。</div>
+          </article>
+        </div>
+
+        <div class="grid" style="margin-top:16px">
+          <article class="card example"><span class="label">例 4</span><p class="question">角 α 的终边经过 P(−3,4)，求三个三角函数值。</p>
+            <ol class="steps"><li><span class="math">r=√[(-3)²+4²]=5</span>。</li><li><span class="math">sin α=y/r=4/5</span>。</li><li><span class="math">cos α=x/r=−3/5</span>。</li><li><span class="math">tan α=y/x=−4/3</span>。</li></ol>
+            <div class="note">点在第二象限，所以正弦为正、余弦与正切为负，与结果一致。</div>
+          </article>
+          <article class="card example"><span class="label">例 5</span><p class="question">求 13π/6 的正弦、余弦和正切。</p>
+            <ol class="steps"><li><span class="math">13π/6=2π+π/6</span>，与 <span class="math">π/6</span> 终边相同。</li><li>单位圆上对应点为 <span class="math">(√3/2,1/2)</span>。</li><li><span class="math">sin=1/2，cos=√3/2，tan=√3/3</span>。</li></ol>
+          </article>
+          <article class="card">
+            <h3>3. 两个基本关系</h3>
+            <div class="formula" data-copy>sin²α + cos²α = 1<button class="copy">📋</button></div>
+            <p>由 <span class="math">x²+y²=r²</span> 两边除以 <span class="math">r²</span> 得到。</p>
+            <div class="formula" data-copy>tan α = sin α / cos α（cos α≠0）<button class="copy">📋</button></div>
+            <p>因为 <span class="math">(y/r)/(x/r)=y/x</span>。</p>
+          </article>
+          <article class="card">
+            <h3>4. 解题自检</h3>
+            <ul><li>先确定终边或所在象限。</li><li>坐标型问题先算 <span class="math">r</span>。</li><li>分母为 0 时，正切没有定义。</li><li>结果符号必须与象限一致。</li><li><span class="math">sin²α+cos²α</span> 应等于 1。</li></ul>
+          </article>
+        </div>
+        <div class="card" style="margin-top:16px"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="l2"><span><b>我已掌握第 2 课时：</b>能用单位圆或终边点定义三角函数，能判断符号，并能验证基本关系。</span></label></div>
+      </section>
+
+      <section id="lesson3" class="searchable">
+        <div class="section-head"><div class="num">3</div><div><h2>第 3 课时：诱导公式（一）</h2><p>处理 −α、π±α、2π−α；核心是单位圆上的对称。</p></div></div>
+        <article class="card">
+          <h3>1. 诱导公式到底在“诱导”什么？</h3>
+          <p>把任意角的三角函数值，转化为一个较小角（通常是锐角）的三角函数值。变化过程中只需要处理两件事：</p>
+          <div class="grid">
+            <div class="note"><b>函数名称是否改变？</b><br>角中含 <span class="math">π</span> 的整数倍时，名称不变；本课全部属于“不变”。</div>
+            <div class="note"><b>结果符号是什么？</b><br>把 <span class="math">α</span> 暂看成第一象限锐角，判断原角终边落在哪个象限。</div>
+          </div>
+        </article>
+        <div class="grid" style="margin-top:16px">
+          <article class="card">
+            <h3>2. 关于 x 轴对称：−α</h3>
+            <p>若 <span class="math">α</span> 对应点是 <span class="math">(cosα,sinα)</span>，则 <span class="math">−α</span> 对应点是 <span class="math">(cosα,−sinα)</span>。</p>
+            <div class="formula" data-copy>sin(−α)=−sinα；cos(−α)=cosα；tan(−α)=−tanα<button class="copy">📋</button></div>
+            <p>因此正弦、正切是奇函数，余弦是偶函数。</p>
+          </article>
+          <article class="card">
+            <h3>3. 关于原点对称：π+α</h3>
+            <p>旋转半周后，坐标 <span class="math">(x,y)</span> 变为 <span class="math">(−x,−y)</span>。</p>
+            <div class="formula" data-copy>sin(π+α)=−sinα；cos(π+α)=−cosα；tan(π+α)=tanα<button class="copy">📋</button></div>
+            <p>正切是纵横坐标之比，两者同时变号，所以比值不变。</p>
+          </article>
+          <article class="card">
+            <h3>4. 关于 y 轴对称：π−α</h3>
+            <p>点 <span class="math">(x,y)</span> 关于 y 轴对称成为 <span class="math">(−x,y)</span>。</p>
+            <div class="formula" data-copy>sin(π−α)=sinα；cos(π−α)=−cosα；tan(π−α)=−tanα<button class="copy">📋</button></div>
+          </article>
+          <article class="card">
+            <h3>5. 第四象限：2π−α</h3>
+            <p><span class="math">2π−α</span> 与 <span class="math">−α</span> 终边相同，所以公式也相同。</p>
+            <div class="formula" data-copy>sin(2π−α)=−sinα；cos(2π−α)=cosα；tan(2π−α)=−tanα<button class="copy">📋</button></div>
+          </article>
+        </div>
+
+        <article class="card" style="margin-top:16px">
+          <h3>统一操作：先化角 → 再定名 → 后定号</h3>
+          <ol class="steps">
+            <li><b>化角：</b>先利用周期去掉整圈，使角靠近 <span class="math">0、π/2、π、3π/2、2π</span>。</li>
+            <li><b>定名：</b>本课角是 <span class="math">kπ±α</span>，函数名称不变。</li>
+            <li><b>定号：</b>把 <span class="math">α</span> 当作锐角，按原函数在原角象限中的符号决定正负。</li>
+            <li><b>代值：</b>最后才代入特殊角的三角函数值。</li>
+          </ol>
+        </article>
+
+        <div class="grid" style="margin-top:16px">
+          <article class="card example"><span class="label">例 6</span><p class="question">求 sin 765°。</p>
+            <ol class="steps"><li><span class="math">765°=720°+45°</span>，先去掉两整圈。</li><li><span class="math">sin765°=sin45°</span>。</li><li>所以结果为 <span class="math">√2/2</span>。</li></ol>
+          </article>
+          <article class="card example"><span class="label">例 7</span><p class="question">求 cos(−7π/6)。</p>
+            <ol class="steps"><li>余弦是偶函数：<span class="math">cos(−7π/6)=cos(7π/6)</span>。</li><li><span class="math">7π/6=π+π/6</span>，第三象限余弦为负。</li><li>结果为 <span class="math">−cos(π/6)=−√3/2</span>。</li></ol>
+          </article>
+          <article class="card example"><span class="label">例 8</span><p class="question">已知 cosα=−3/5，且 α 在第三象限，求 sin(π−α) 与 tan(π+α)。</p>
+            <ol class="steps"><li>第三象限正弦为负：<span class="math">sinα=−√(1−9/25)=−4/5</span>。</li><li><span class="math">sin(π−α)=sinα=−4/5</span>。</li><li><span class="math">tanα=sinα/cosα=4/3</span>。</li><li><span class="math">tan(π+α)=tanα=4/3</span>。</li></ol>
+          </article>
+          <article class="card">
+            <h3>常见错误</h3>
+            <div class="warning"><b>错误 1：</b><span class="math">sin(π−α)=−sinα</span>。<br>原因：机械地看到减号就加负号。正确符号要看 <span class="math">π−α</span> 在第二象限，正弦为正。</div>
+            <div class="warning"><b>错误 2：</b><span class="math">cos(−α)=−cosα</span>。<br>单位圆关于 x 轴对称时横坐标不变，所以余弦是偶函数。</div>
+          </article>
+        </div>
+        <div class="card" style="margin-top:16px"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="l3"><span><b>我已掌握第 3 课时：</b>能从坐标对称推导 −α、π±α、2π−α 的公式，并能按步骤求值。</span></label></div>
+      </section>
+
+      <section id="lesson4" class="searchable">
+        <div class="section-head"><div class="num">4</div><div><h2>第 4 课时：诱导公式（二）</h2><p>处理 π/2±α、3π/2±α，并理解“奇变偶不变”。</p></div></div>
+        <article class="card">
+          <div class="mnemonic">奇变偶不变，符号看象限</div>
+          <div class="grid" style="margin-top:14px">
+            <div><h3>“奇、偶”看什么？</h3><p>看角中 <span class="math">π/2</span> 的倍数。若是奇数倍，如 <span class="math">π/2、3π/2</span>，函数名称改变；若是偶数倍，如 <span class="math">0、π、2π</span>，名称不变。</p></div>
+            <div><h3>“变”怎样变？</h3><p><span class="math">sin ↔ cos</span>；<span class="math">tan ↔ cot</span>。这里 <span class="math">cotα=1/tanα=cosα/sinα</span>。变名来自坐标角色交换，不是随意规定。</p></div>
+          </div>
+          <div class="warning"><b>最关键的纠正：</b>“奇变偶不变”说的是 <span class="math">π/2</span> 倍数的奇偶，不是看 <span class="math">α</span> 的奇偶，也不是“奇函数不变”。符号必须看<strong>原函数</strong>在原角象限中的正负。</div>
+        </article>
+
+        <div class="grid" style="margin-top:16px">
+          <article class="card">
+            <h3>1. π/2−α</h3>
+            <p>角 <span class="math">α</span> 的点是 <span class="math">(cosα,sinα)</span>；角 <span class="math">π/2−α</span> 的点交换为 <span class="math">(sinα,cosα)</span>。</p>
+            <div class="formula" data-copy>sin(π/2−α)=cosα；cos(π/2−α)=sinα；tan(π/2−α)=cotα<button class="copy">📋</button></div>
+          </article>
+          <article class="card">
+            <h3>2. π/2+α</h3>
+            <p>若 <span class="math">α</span> 为锐角，原角在第二象限：正弦正、余弦负、正切负。</p>
+            <div class="formula" data-copy>sin(π/2+α)=cosα；cos(π/2+α)=−sinα；tan(π/2+α)=−cotα<button class="copy">📋</button></div>
+          </article>
+          <article class="card">
+            <h3>3. 3π/2−α</h3>
+            <p>原角在第三象限：正弦负、余弦负、正切正。</p>
+            <div class="formula" data-copy>sin(3π/2−α)=−cosα；cos(3π/2−α)=−sinα；tan(3π/2−α)=cotα<button class="copy">📋</button></div>
+          </article>
+          <article class="card">
+            <h3>4. 3π/2+α</h3>
+            <p>原角在第四象限：正弦负、余弦正、正切负。</p>
+            <div class="formula" data-copy>sin(3π/2+α)=−cosα；cos(3π/2+α)=sinα；tan(3π/2+α)=−cotα<button class="copy">📋</button></div>
+          </article>
+        </div>
+
+        <article class="card" style="margin-top:16px">
+          <h3>“符号看象限”的准确操作</h3>
+          <p>例如化简 <span class="math">cos(π/2+α)</span>：</p>
+          <ol class="steps"><li><b>奇变：</b><span class="math">π/2</span> 是 <span class="math">π/2</span> 的 1 倍，所以 <span class="math">cos</span> 变为 <span class="math">sin</span>。</li><li><b>看原函数：</b>假设 <span class="math">α</span> 是锐角，则 <span class="math">π/2+α</span> 在第二象限；原函数是余弦，第二象限余弦为负。</li><li>因此 <span class="math">cos(π/2+α)=−sinα</span>。</li></ol>
+          <div class="tip">不是看变换后的 <span class="math">sinα</span> 在第一象限为正；要看变换前的原函数 <span class="math">cos(π/2+α)</span> 在原角所在象限的符号。</div>
+        </article>
+
+        <div class="grid" style="margin-top:16px">
+          <article class="card example"><span class="label">例 9</span><p class="question">求 sin(π/2+5π/12)。</p>
+            <ol class="steps"><li><span class="math">π/2</span> 是奇数倍，<span class="math">sin</span> 变 <span class="math">cos</span>。</li><li>原角在第二象限，正弦为正，所以取正号。</li><li><span class="math">=cos(5π/12)=cos75°=(√6−√2)/4</span>。</li></ol>
+          </article>
+          <article class="card example"><span class="label">例 10</span><p class="question">求 cos(3π/2−π/6)。</p>
+            <ol class="steps"><li>奇变：<span class="math">cos</span> 变 <span class="math">sin</span>。</li><li><span class="math">3π/2−π/6=4π/3</span> 在第三象限，余弦为负。</li><li><span class="math">=−sin(π/6)=−1/2</span>。</li></ol>
+          </article>
+          <article class="card example"><span class="label">例 11</span><p class="question">化简 tan(5π/2+α)。</p>
+            <ol class="steps"><li><span class="math">5π/2=2π+π/2</span>，先去掉周期 <span class="math">2π</span>。</li><li><span class="math">tan(π/2+α)</span>：奇变为 <span class="math">cotα</span>。</li><li>原角在第二象限，正切为负，所以 <span class="math">=−cotα</span>。</li></ol>
+          </article>
+          <article class="card example"><span class="label">例 12</span><p class="question">求值：sin(7π/6)cos(−π/3)+cos(7π/6)sin(−π/3)。</p>
+            <ol class="steps"><li><span class="math">sin(7π/6)=−1/2，cos(7π/6)=−√3/2</span>。</li><li><span class="math">cos(−π/3)=1/2，sin(−π/3)=−√3/2</span>。</li><li>代入：<span class="math">−1/4+3/4=1/2</span>。</li></ol>
+            <div class="note">也可识别为 <span class="math">sin(7π/6−π/3)=sin(5π/6)=1/2</span>，这为下一章和差角公式作铺垫。</div>
+          </article>
+        </div>
+        <div class="card" style="margin-top:16px"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="l4"><span><b>我已掌握第 4 课时：</b>能准确解释“奇变偶不变，符号看象限”，并能处理 π/2、3π/2 附近的角。</span></label></div>
+      </section>
+
+      <section id="summary" class="searchable">
+        <div class="section-head"><div class="num">Σ</div><div><h2>诱导公式总表</h2><p>先理解对称关系，再用表格复习。</p></div></div>
+        <article class="card">
+          <div class="table-wrap">
+            <table>
+              <tr><th>角</th><th>sin</th><th>cos</th><th>tan</th><th>几何关系</th></tr>
+              <tr><td class="math">−α</td><td class="math">−sinα</td><td class="math">cosα</td><td class="math">−tanα</td><td>关于 x 轴对称</td></tr>
+              <tr><td class="math">π−α</td><td class="math">sinα</td><td class="math">−cosα</td><td class="math">−tanα</td><td>关于 y 轴对称</td></tr>
+              <tr><td class="math">π+α</td><td class="math">−sinα</td><td class="math">−cosα</td><td class="math">tanα</td><td>关于原点对称</td></tr>
+              <tr><td class="math">2π−α</td><td class="math">−sinα</td><td class="math">cosα</td><td class="math">−tanα</td><td>与 −α 同终边</td></tr>
+              <tr><td class="math">π/2−α</td><td class="math">cosα</td><td class="math">sinα</td><td class="math">cotα</td><td>坐标交换</td></tr>
+              <tr><td class="math">π/2+α</td><td class="math">cosα</td><td class="math">−sinα</td><td class="math">−cotα</td><td>交换并定号</td></tr>
+              <tr><td class="math">3π/2−α</td><td class="math">−cosα</td><td class="math">−sinα</td><td class="math">cotα</td><td>交换并定号</td></tr>
+              <tr><td class="math">3π/2+α</td><td class="math">−cosα</td><td class="math">sinα</td><td class="math">−cotα</td><td>交换并定号</td></tr>
+            </table>
+          </div>
+          <details>
+            <summary>进一步统一：kπ±α（适合提高）</summary>
+            <div class="details-body">
+              <div class="formula" data-copy>sin(kπ+α)=(−1)ᵏsinα；cos(kπ+α)=(−1)ᵏcosα；tan(kπ+α)=tanα<button class="copy">📋</button></div>
+              <div class="formula" data-copy>sin(kπ−α)=(−1)ᵏ⁺¹sinα；cos(kπ−α)=(−1)ᵏcosα；tan(kπ−α)=−tanα<button class="copy">📋</button></div>
+              <p>其中 <span class="math">k∈ℤ</span>。这些统一式适合验证结果；初学时仍建议画象限、逐步判断。</p>
+            </div>
+          </details>
+        </article>
+      </section>
+
+      <section id="practice" class="searchable">
+        <div class="section-head"><div class="num">练</div><div><h2>分层练习</h2><p>先独立完成，再展开答案。每题答案都给出关键思路。</p></div></div>
+        <article class="card">
+          <div class="exercise"><span class="level basic">基础 1</span>把 150° 化成弧度。<details class="answer"><summary>查看答案</summary><div class="details-body"><span class="math">150×π/180=5π/6</span>。</div></details></div>
+          <div class="exercise"><span class="level basic">基础 2</span>把 <span class="math">−11π/9</span> 化成角度。<details class="answer"><summary>查看答案</summary><div class="details-body"><span class="math">−11π/9×180/π=−220°</span>。</div></details></div>
+          <div class="exercise"><span class="level basic">基础 3</span>写出与 <span class="math">−5π/3</span> 终边相同且在 <span class="math">[0,2π)</span> 内的角。<details class="answer"><summary>查看答案</summary><div class="details-body">加一周：<span class="math">−5π/3+2π=π/3</span>。</div></details></div>
+          <div class="exercise"><span class="level basic">基础 4</span>半径为 8、圆心角为 <span class="math">3π/4</span>，求弧长与扇形面积。<details class="answer"><summary>查看答案</summary><div class="details-body"><span class="math">l=8×3π/4=6π</span>；<span class="math">S=½×8²×3π/4=24π</span>。</div></details></div>
+          <div class="exercise"><span class="level basic">基础 5</span>角 α 的终边经过 <span class="math">P(5,−12)</span>，求 <span class="math">sinα、cosα、tanα</span>。<details class="answer"><summary>查看答案</summary><div class="details-body"><span class="math">r=13</span>；<span class="math">sinα=−12/13，cosα=5/13，tanα=−12/5</span>。</div></details></div>
+          <div class="exercise"><span class="level basic">基础 6</span>求 <span class="math">sin(−π/6)、cos(−π/3)、tan(−π/4)</span>。<details class="answer"><summary>查看答案</summary><div class="details-body">分别为 <span class="math">−1/2、1/2、−1</span>。正弦、正切是奇函数；余弦是偶函数。</div></details></div>
+          <div class="exercise"><span class="level mid">提高 7</span>求 <span class="math">sin(5π/6)、cos(7π/6)、tan(11π/6)</span>。<details class="answer"><summary>查看答案</summary><div class="details-body"><span class="math">sin(π−π/6)=1/2</span>；<span class="math">cos(π+π/6)=−√3/2</span>；<span class="math">tan(2π−π/6)=−√3/3</span>。</div></details></div>
+          <div class="exercise"><span class="level mid">提高 8</span>化简 <span class="math">sin(π+α)+sin(π−α)</span>。<details class="answer"><summary>查看答案</summary><div class="details-body"><span class="math">−sinα+sinα=0</span>。</div></details></div>
+          <div class="exercise"><span class="level mid">提高 9</span>化简 <span class="math">cos(π/2+α)−sin(π+α)</span>。<details class="answer"><summary>查看答案</summary><div class="details-body"><span class="math">−sinα−(−sinα)=0</span>。</div></details></div>
+          <div class="exercise"><span class="level mid">提高 10</span>求 <span class="math">cos(3π/2−π/4)</span>。<details class="answer"><summary>查看答案</summary><div class="details-body"><span class="math">−sin(π/4)=−√2/2</span>。也可先算原角为 <span class="math">5π/4</span>。</div></details></div>
+          <div class="exercise"><span class="level mid">提高 11</span>已知 <span class="math">sinα=3/5</span> 且 α 在第二象限，求 <span class="math">cos(π+α)</span> 和 <span class="math">tan(π−α)</span>。<details class="answer"><summary>查看答案</summary><div class="details-body">第二象限 <span class="math">cosα=−4/5，tanα=−3/4</span>。故 <span class="math">cos(π+α)=−cosα=4/5</span>；<span class="math">tan(π−α)=−tanα=3/4</span>。</div></details></div>
+          <div class="exercise"><span class="level hard">挑战 12</span>不使用计算器，比较 <span class="math">sin100°、sin80°、cos10°</span> 的大小。<details class="answer"><summary>查看答案</summary><div class="details-body"><span class="math">sin100°=sin(180°−100°)=sin80°</span>；<span class="math">cos10°=sin(90°−10°)=sin80°</span>。三者相等。</div></details></div>
+          <div class="exercise"><span class="level hard">挑战 13</span>化简 <span class="math">[sin(π−α)cos(π+α)]/[tan(−α)]</span>。<details class="answer"><summary>查看答案</summary><div class="details-body">分子为 <span class="math">sinα·(−cosα)=−sinαcosα</span>；分母为 <span class="math">−tanα=−sinα/cosα</span>。在原式有定义的条件下，结果为 <span class="math">cos²α</span>。</div></details></div>
+          <div class="exercise"><span class="level hard">挑战 14</span>若 <span class="math">sin(π/2+α)=−4/5</span> 且 α 在第三象限，求 <span class="math">tanα</span>。<details class="answer"><summary>查看答案</summary><div class="details-body"><span class="math">sin(π/2+α)=cosα=−4/5</span>。第三象限 <span class="math">sinα=−3/5</span>，故 <span class="math">tanα=3/4</span>。</div></details></div>
+        </article>
+      </section>
+
+      <section id="answers" class="searchable">
+        <div class="section-head"><div class="num">测</div><div><h2>3 分钟自测</h2><p>选择答案后立即检查；刷新页面也会保留课时进度。</p></div></div>
+        <div class="grid">
+          <article class="card quiz" data-answer="b">
+            <h3>1. <span class="math">cos(π/2+α)</span> 等于？</h3>
+            <label class="quiz-option"><input type="radio" name="q1" value="a"> <span class="math">cosα</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="b"> <span class="math">−sinα</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="c"> <span class="math">sinα</span></label>
+            <button class="btn quizBtn">检查</button><div class="quiz-result" aria-live="polite"></div>
+          </article>
+          <article class="card quiz" data-answer="c">
+            <h3>2. <span class="math">sin(π−α)</span> 等于？</h3>
+            <label class="quiz-option"><input type="radio" name="q2" value="a"> <span class="math">−sinα</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="b"> <span class="math">cosα</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="c"> <span class="math">sinα</span></label>
+            <button class="btn quizBtn">检查</button><div class="quiz-result" aria-live="polite"></div>
+          </article>
+          <article class="card quiz" data-answer="a">
+            <h3>3. 与 <span class="math">−13π/6</span> 同终边且在 <span class="math">[0,2π)</span> 内的角是？</h3>
+            <label class="quiz-option"><input type="radio" name="q3" value="a"> <span class="math">11π/6</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="b"> <span class="math">π/6</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="c"> <span class="math">5π/6</span></label>
+            <button class="btn quizBtn">检查</button><div class="quiz-result" aria-live="polite"></div>
+          </article>
+          <article class="card">
+            <h3>考前检查清单</h3>
+            <label class="checkline"><input type="checkbox"><span>我能解释弧度，而不只是背 <span class="math">180°=π</span>。</span></label>
+            <label class="checkline"><input type="checkbox"><span>我能从终边点坐标写出三角比。</span></label>
+            <label class="checkline"><input type="checkbox"><span>我能画象限判断符号。</span></label>
+            <label class="checkline"><input type="checkbox"><span>我能准确解释口诀中的“奇偶”和“看象限”。</span></label>
+            <label class="checkline"><input type="checkbox"><span>我会先化角，再定名，最后定号。</span></label>
+          </article>
+        </div>
+      </section>
+    </div>
+    <footer class="footer">第 12 章 · 诱导公式｜单文件离线学习页</footer>
+  </main>
+</div>
+<div id="toast" class="toast" role="status">已复制</div>
+
+<script>
+(() => {
+  const $ = (s, p=document) => p.querySelector(s);
+  const $$ = (s, p=document) => [...p.querySelectorAll(s)];
+  const toast = msg => { const t=$('#toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1200); };
+
+  // Theme and font
+  const savedTheme = localStorage.getItem('ch12-theme');
+  if(savedTheme === 'dark' || (!savedTheme && matchMedia('(prefers-color-scheme: dark)').matches)) document.body.classList.add('dark');
+  $('#themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem('ch12-theme',document.body.classList.contains('dark')?'dark':'light')};
+  let fontScale=Number(localStorage.getItem('ch12-font')||1);
+  document.documentElement.style.fontSize=(fontScale*100)+'%';
+  $('#fontBtn').onclick=()=>{fontScale=fontScale>=1.2?.9:fontScale+.1;document.documentElement.style.fontSize=(fontScale*100)+'%';localStorage.setItem('ch12-font',fontScale)};
+
+  // Mobile menu
+  $('#menuBtn').onclick=()=>$('#sidebar').classList.toggle('open');
+  $$('#nav a').forEach(a=>a.onclick=()=>$('#sidebar').classList.remove('open'));
+
+  // Copy formula and double-click copy
+  $$('[data-copy]').forEach(el=>{
+    const copy=()=>navigator.clipboard.writeText(el.innerText.replace('📋','').trim()).then(()=>toast('公式已复制')).catch(()=>toast('请手动复制'));
+    $('.copy',el).onclick=e=>{e.stopPropagation();copy()};
+    el.ondblclick=copy;
+  });
+
+  // Search
+  $('#search').addEventListener('input',e=>{
+    const q=e.target.value.trim().toLowerCase();
+    $$('.searchable').forEach(el=>el.classList.toggle('hidden-by-search',q && !el.innerText.toLowerCase().includes(q)));
+  });
+
+  // Expand / collapse
+  let expanded=false;
+  $('#expandBtn').onclick=()=>{expanded=!expanded;$$('details').forEach(d=>d.open=expanded);$('#expandBtn').textContent=expanded?'收起全部':'展开全部'};
+
+  // Progress
+  const checks=$$('.progressCheck');
+  const updateProgress=()=>{
+    const done=checks.filter(c=>c.checked).length, pct=Math.round(done/checks.length*100);
+    $('#progressText').textContent=pct+'%';$('#progressBar').style.width=pct+'%';
+  };
+  checks.forEach(c=>{c.checked=localStorage.getItem('ch12-'+c.dataset.key)==='1';c.onchange=()=>{localStorage.setItem('ch12-'+c.dataset.key,c.checked?'1':'0');updateProgress()}});
+  updateProgress();
+
+  // Unit circle
+  const slider=$('#angleSlider'), cx=220,cy=220,R=150;
+  const clean=n=>Math.abs(n)<.0005?0:n;
+  const gcd=(a,b)=>b?gcd(b,a%b):Math.abs(a);
+  function radianLabel(deg){
+    if(deg===0)return '0';
+    const g=gcd(Math.abs(deg),180),n=deg/g,d=180/g;
+    const ns=n===1?'':n===-1?'−':String(n).replace('-','−');
+    return d===1?ns+'π':ns+'π/'+d;
+  }
+  function quadrant(d){
+    const n=((d%360)+360)%360;
+    if(n===0||n===90||n===180||n===270)return '坐标轴上';
+    if(n<90)return '第一象限';if(n<180)return '第二象限';if(n<270)return '第三象限';return '第四象限';
+  }
+  function updateCircle(){
+    const deg=Number(slider.value), norm=((deg%360)+360)%360, rad=norm*Math.PI/180;
+    const x=cx+R*Math.cos(rad), y=cy-R*Math.sin(rad);
+    $('#radiusLine').setAttribute('x2',x);$('#radiusLine').setAttribute('y2',y);
+    $('#pointP').setAttribute('cx',x);$('#pointP').setAttribute('cy',y);
+    $('#pointLabel').setAttribute('x',x+9);$('#pointLabel').setAttribute('y',y-8);
+    $('#cosLine').setAttribute('x2',x);$('#sinLine').setAttribute('x1',x);$('#sinLine').setAttribute('x2',x);$('#sinLine').setAttribute('y2',y);
+    $('#sinText').setAttribute('x',x+7);$('#sinText').setAttribute('y',(y+cy)/2);
+    const a0=-Math.PI/2, end=a0+norm*Math.PI/180, rr=48;
+    const sx=cx+rr*Math.cos(a0),sy=cy+rr*Math.sin(a0),ex=cx+rr*Math.cos(end),ey=cy+rr*Math.sin(end);
+    $('#angleArc').setAttribute('d',norm===0?'':`M ${sx} ${sy} A ${rr} ${rr} 0 ${norm>180?1:0} 1 ${ex} ${ey}`);
+    const c=clean(Math.cos(rad)),s=clean(Math.sin(rad));
+    $('#degreeText').textContent=deg+'°';$('#radianText').textContent=radianLabel(deg);
+    $('#quadText').textContent=quadrant(deg);$('#coordText').textContent=`(${c.toFixed(3)}, ${s.toFixed(3)})`;
+    $('#cosText').textContent=c.toFixed(3);$('#sinValueText').textContent=s.toFixed(3);
+  }
+  slider.oninput=updateCircle;updateCircle();
+
+  // Quiz
+  $$('.quizBtn').forEach(btn=>btn.onclick=()=>{
+    const box=btn.closest('.quiz'), chosen=$('input:checked',box), out=$('.quiz-result',box);
+    if(!chosen){out.textContent='请先选择一个答案。';out.style.color='var(--accent)';return}
+    const ok=chosen.value===box.dataset.answer;out.textContent=ok?'✓ 正确':'✗ 再看一次象限或单位圆。';out.style.color=ok?'var(--green)':'var(--red)';
+  });
+
+  // Active section
+  const links=$$('#nav a');
+  const obs=new IntersectionObserver(entries=>entries.forEach(en=>{
+    if(en.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id))}
+  }),{rootMargin:'-20% 0px -70% 0px'});
+  $$('main section').forEach(s=>obs.observe(s));
+})();
+</script>
+</body>
+</html>
