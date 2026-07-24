@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>小测4：对数与反函数 - 问题与详细解答</title>
+  <style>
+    :root{
+      --ink:#19324a;--muted:#5f7183;--paper:#fffdf8;--line:#dbe4e8;
+      --teal:#0f8b78;--teal2:#dff5ef;--orange:#ef8c3a;--orange2:#fff0df;
+      --blue:#2366a8;--blue2:#eaf3fb;--red:#b8493f;--shadow:0 12px 30px rgba(25,50,74,.10)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;color:var(--ink);background:
+      radial-gradient(circle at 0 0,#dff5ef 0,transparent 28rem),
+      linear-gradient(180deg,#f5faf9,#edf4f6 55%,#f8f5ee);
+      font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",system-ui,sans-serif;
+      line-height:1.75
+    }
+    a{color:inherit}
+    .hero{background:linear-gradient(125deg,#0b7567,#11a48c);color:#fff;padding:52px 20px 66px}
+    .hero-inner,.wrap{max-width:1060px;margin:auto}
+    .eyebrow{font-size:.86rem;letter-spacing:.12em;font-weight:800;opacity:.84}
+    h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.16;margin:.4rem 0 .8rem}
+    .hero p{max-width:760px;margin:0;font-size:1.05rem;opacity:.92}
+    .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+    .tag{padding:7px 13px;border:1px solid rgba(255,255,255,.42);border-radius:999px;background:rgba(255,255,255,.12)}
+    .wrap{padding:0 18px 64px;margin-top:-30px}
+    .toolbar{
+      position:sticky;top:8px;z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:9px;
+      padding:12px;margin-bottom:20px;background:rgba(255,255,255,.94);border:1px solid var(--line);
+      border-radius:16px;box-shadow:var(--shadow);backdrop-filter:blur(12px)
+    }
+    button,.jump{
+      border:0;border-radius:10px;padding:9px 13px;font:inherit;font-weight:700;cursor:pointer;
+      color:#fff;background:var(--teal);text-decoration:none
+    }
+    button.secondary,.jump.secondary{color:var(--ink);background:#edf2f4}
+    .toolbar .spacer{flex:1}
+    .progress{font-size:.9rem;color:var(--muted);font-weight:700}
+    section,.card{
+      background:var(--paper);border:1px solid var(--line);border-radius:18px;
+      box-shadow:var(--shadow);padding:clamp(18px,3vw,30px);margin:18px 0
+    }
+    h2{font-size:1.55rem;line-height:1.3;margin:0 0 16px}
+    h3{font-size:1.18rem;line-height:1.4;margin:0 0 12px}
+    .sub{color:var(--muted);margin-top:-8px}
+    .course-focus{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .focus{border-left:5px solid var(--teal);background:var(--teal2);border-radius:12px;padding:16px}
+    .focus:nth-child(2){border-color:var(--orange);background:var(--orange2)}
+    .focus strong{display:block;font-size:1.08rem}
+    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
+    table{width:100%;border-collapse:collapse;min-width:690px;background:#fff}
+    th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    th{background:#e8f5f2}
+    tr.relevant td{background:#fff4e8;font-weight:700}
+    .note{padding:13px 15px;border-radius:11px;background:var(--blue2);border-left:4px solid var(--blue)}
+    .formula{
+      display:block;margin:10px 0;padding:12px 14px;background:#f4f7f8;border:1px solid #e1e8eb;
+      border-radius:10px;font-family:"Cambria Math","Times New Roman",serif;font-size:1.08rem;overflow:auto
+    }
+    .answers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+    .answer-chip{padding:10px 8px;text-align:center;background:#f0f6f5;border:1px solid #d7e6e2;border-radius:10px}
+    .answer-chip b{color:var(--teal)}
+    .questions{display:grid;gap:17px}
+    details.question{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+    details.question[open]{border-color:#9fcfc5}
+    summary{
+      list-style:none;cursor:pointer;padding:20px 54px 20px 22px;font-weight:800;position:relative;
+      background:linear-gradient(90deg,#fff,#fbfdfc)
+    }
+    summary::-webkit-details-marker{display:none}
+    summary::after{content:"＋";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:1.45rem;color:var(--teal)}
+    details[open] summary::after{content:"−"}
+    .qbody{padding:0 22px 24px;border-top:1px solid var(--line)}
+    .problem{margin:18px 0;padding:15px;border-radius:11px;background:#fff9ee;border-left:4px solid var(--orange)}
+    .idea{margin:16px 0;padding:14px 16px;border-radius:11px;background:var(--teal2);border-left:4px solid var(--teal)}
+    .label{display:inline-block;margin-right:8px;padding:2px 9px;border-radius:999px;background:var(--teal);color:#fff;font-size:.86rem;font-weight:800}
+    .steps{counter-reset:step;margin:13px 0 0;padding:0;list-style:none}
+    .steps li{counter-increment:step;position:relative;padding:0 0 13px 42px}
+    .steps li::before{
+      content:counter(step);position:absolute;left:0;top:1px;width:28px;height:28px;border-radius:50%;
+      display:grid;place-items:center;background:var(--blue);color:#fff;font-size:.86rem;font-weight:800
+    }
+    .result{margin-top:8px;padding:13px 15px;border:1px solid #f0c79f;background:var(--orange2);border-radius:11px;font-weight:800}
+    .mistake{color:var(--red);font-weight:700}
+    footer{text-align:center;color:var(--muted);padding:22px 12px 50px}
+    .top-link{display:inline-block;margin-top:16px;color:var(--teal);font-weight:800}
+    @media(max-width:720px){
+      .hero{padding-top:38px}.course-focus{grid-template-columns:1fr}.answers{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .toolbar{position:static}.toolbar .spacer{display:none}.progress{width:100%}
+      summary{padding-left:17px}.qbody{padding-left:17px;padding-right:17px}
+    }
+    @media print{
+      body{background:#fff}.hero{padding:24px;background:#fff;color:#000;border-bottom:2px solid #000}
+      .wrap{margin-top:0;padding:0}.toolbar{display:none}section,.card,details.question{box-shadow:none;break-inside:avoid}
+      details.question>.qbody{display:block!important}.top-link,footer{display:none}
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">高一数学 SS 班 · 小测 4</div>
+      <h1>对数与反函数<br>问题与详细解答</h1>
+      <p>从 PDF 完整提取 10 组题，逐题给出解题思路、推导步骤、关键条件和最终结论。页面不加载外部公式库，下载后可直接离线打开。</p>
+      <div class="tags"><span class="tag">10 组题</span><span class="tag">11 个小问</span><span class="tag">详细步骤</span><span class="tag">离线单文件</span></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <nav class="toolbar" aria-label="页面工具">
+      <a class="jump" href="#outline">大纲定位</a>
+      <a class="jump secondary" href="#questions">进入题目</a>
+      <button type="button" onclick="setAll(true)">展开全部</button>
+      <button type="button" class="secondary" onclick="setAll(false)">收起全部</button>
+      <button type="button" class="secondary" onclick="window.print()">打印</button>
+      <span class="spacer"></span><span class="progress" id="progress">已展开 0 / 10</span>
+    </nav>
+
+    <section id="outline">
+      <h2>一、暑假大纲定位</h2>
+      <p class="sub">本测以第 10、11 课为主，同时调用函数单调性、均值不等式等先前知识。</p>
+      <div class="course-focus">
+        <div class="focus"><strong>第 10 课：对数与反函数</strong>对数运算（2） · 反函数（4） · 反函数方程解定理（6）</div>
+        <div class="focus"><strong>第 11 课：对数函数的性质</strong>对数的应用（3） · 对数函数的性质（3）</div>
+      </div>
+      <details style="margin-top:16px">
+        <summary style="border:1px solid var(--line);border-radius:12px">查看图片中提取的完整 14 课大纲</summary>
+        <div class="table-wrap" style="margin-top:10px">
+          <table>
+            <thead><tr><th>课次</th><th>大标题</th><th>小标题（难度）</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>集合与逻辑</td><td>集合的概念、子交并补（2）；命题与逻辑（3）；数域的概念与性质（4）；新高考新定义例题（5）</td></tr>
+              <tr><td>2</td><td>均值不等式</td><td>n 元均值不等式（3）；幂平均不等式（3）；均值不等式的配凑技巧（5）；重要代数思想（7）；对称性与齐次性（6）</td></tr>
+              <tr><td>3</td><td>柯西不等式</td><td>柯西不等式（4）；权方和不等式（3）；排序原理（4）；切比雪夫不等式（6）</td></tr>
+              <tr><td>4</td><td>不等式的证明与解</td><td>反证法（5）；放缩法（7）；构造法（7）</td></tr>
+              <tr><td>5</td><td>解不等式</td><td>二次不等式（3）；高次不等式（2）；绝对值不等式（2）；根式不等式（3）</td></tr>
+              <tr><td>6</td><td>函数的概念</td><td>映射（5）；函数的概念（3）；函数的初等运算（4）；简单的函数方程（6）</td></tr>
+              <tr><td>7</td><td>函数的单调性与奇偶性</td><td>双钩双撇函数（2）；函数的单调性（3）；函数的奇偶性（3）；分段与含参函数性质（4）</td></tr>
+              <tr><td>8</td><td>函数的对称性与周期性</td><td>函数的对称性（4）；函数的周期性（2）</td></tr>
+              <tr><td>9</td><td>幂函数与指数函数</td><td>基本初等函数（1）；幂函数（3）；指数函数（2）</td></tr>
+              <tr class="relevant"><td>10</td><td>对数与反函数</td><td>对数运算（2）；反函数（4）；反函数方程解定理（6）</td></tr>
+              <tr class="relevant"><td>11</td><td>对数函数的性质</td><td>对数的应用（3）；对数函数的性质（3）</td></tr>
+              <tr><td>12</td><td>诱导公式</td><td>弧度制与任意角的三角比（2）；诱导公式（2）</td></tr>
+              <tr><td>13</td><td>和差倍半角公式</td><td>和差角公式（2）；二倍角公式（2）；辅助角公式（3）；三倍角公式（2）</td></tr>
+              <tr><td>14</td><td>和差化积与积化和差</td><td>和差化积与积化和差公式（4）；万能公式（3）；结课测试</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <h2>二、解题工具速查</h2>
+      <div class="course-focus">
+        <div>
+          <h3>1. 对数运算</h3>
+          <span class="formula">log<sub>a</sub>(MN)=log<sub>a</sub>M+log<sub>a</sub>N；　log<sub>a</sub>(M/N)=log<sub>a</sub>M-log<sub>a</sub>N</span>
+          <span class="formula">log<sub>a</sub>b · log<sub>b</sub>c=log<sub>a</sub>c；　log<sub>a</sub>b=1/log<sub>b</sub>a</span>
+        </div>
+        <div>
+          <h3>2. 对数复合函数</h3>
+          <p>先保证真数大于 0，再判断“内层函数”和“外层对数函数”的单调方向。底数大于 1 时同向；底数在 (0,1) 时反向。</p>
+        </div>
+        <div>
+          <h3>3. 反函数</h3>
+          <p>严格单调函数可逆，并满足 <i>f</i><sup>-1</sup>(<i>f</i>(x))=x。函数与反函数的图像关于直线 y=x 对称。</p>
+        </div>
+        <div>
+          <h3>4. 参数题</h3>
+          <p>“在整个区间上有定义且单调”通常要同时检查：真数恒正、内层函数的单调方向、区间端点的极限或边界值。</p>
+        </div>
+      </div>
+      <p class="note"><b>重要：</b>对数函数的真数必须严格大于 0；但当题目区间是开区间时，区间端点处的真数可以等于 0，只要区间内部始终大于 0。</p>
+    </section>
+
+    <section>
+      <h2>三、答案速查</h2>
+      <div class="answers">
+        <div class="answer-chip"><b>1</b><br>-12</div>
+        <div class="answer-chip"><b>2</b><br>B</div>
+        <div class="answer-chip"><b>3</b><br>(-1,5)</div>
+        <div class="answer-chip"><b>4</b><br>8</div>
+        <div class="answer-chip"><b>5</b><br>6</div>
+        <div class="answer-chip"><b>6</b><br>[2-2√3,2]</div>
+        <div class="answer-chip"><b>7</b><br>见详解</div>
+        <div class="answer-chip"><b>8</b><br>[6,22]</div>
+        <div class="answer-chip"><b>9</b><br>2</div>
+        <div class="answer-chip"><b>10</b><br>2+log<sub>2</sub>5</div>
+      </div>
+    </section>
+
+    <div id="questions" class="questions">
+      <details class="question">
+        <summary>第 1 题　对数乘积的化简</summary>
+        <div class="qbody">
+          <div class="problem"><b>题目：</b>计算 log<sub>2</sub>(1/25) · log<sub>3</sub>(1/8) · log<sub>5</sub>(1/9)。</div>
+          <div class="idea"><span class="label">思路</span>把 25、8、9 写成幂，先提出负号和指数，再利用对数“首尾相接”的乘积关系。</div>
+          <ol class="steps">
+            <li>分别化简：
+              <span class="formula">log<sub>2</sub>(1/25)=-2log<sub>2</sub>5，　log<sub>3</sub>(1/8)=-3log<sub>3</sub>2，　log<sub>5</sub>(1/9)=-2log<sub>5</sub>3。</span>
+            </li>
+            <li>三个负数相乘为负，系数为 2×3×2=12，因此原式
+              <span class="formula">=-12(log<sub>2</sub>5 · log<sub>5</sub>3 · log<sub>3</sub>2)。</span>
+            </li>
+            <li>利用 log<sub>2</sub>5 · log<sub>5</sub>3=log<sub>2</sub>3，再乘 log<sub>3</sub>2，得到 1。</li>
+          </ol>
+          <div class="result">结论：原式 = -12。</div>
+        </div>
+      </details>
+
+      <details class="question">
+        <summary>第 2 题　比较 lg e、(lg e)² 与 (1/2)lg e</summary>
+        <div class="qbody">
+          <div class="problem"><b>题目：</b>设 a=lg e，b=(lg e)<sup>2</sup>，c=(1/2)lg e，比较 a、b、c 的大小。<br>A. a&gt;b&gt;c　B. a&gt;c&gt;b　C. c&gt;a&gt;b　D. c&gt;b&gt;a</div>
+          <div class="idea"><span class="label">思路</span>令 t=lg e。只需判断 t 与 1/2 的关系，再比较 t、t²、t/2。</div>
+          <ol class="steps">
+            <li>因为 1&lt;e&lt;10，所以 0&lt;t&lt;1。</li>
+            <li>又因为 e≈2.718&lt;√10，所以 lg e&lt;lg√10=1/2，即 0&lt;t&lt;1/2。</li>
+            <li>由 0&lt;t&lt;1 可得 t&gt;t²，所以 a&gt;b。</li>
+            <li>由 0&lt;t&lt;1/2 可得 t/2&gt;t²，因为 t/2-t²=t(1/2-t)&gt;0，所以 c&gt;b；同时显然 t&gt;t/2，所以 a&gt;c。</li>
+          </ol>
+          <div class="result">结论：a&gt;c&gt;b，选择 B。</div>
+        </div>
+      </details>
+
+      <details class="question">
+        <summary>第 3 题　对数复合函数的定义域、值域与单调区间</summary>
+        <div class="qbody">
+          <div class="problem"><b>题目：</b>求函数 y=log<sub>1/2</sub>(-x²+4x+5) 的定义域、值域、单调区间。</div>
+          <div class="idea"><span class="label">思路</span>先研究真数 g(x)=-x²+4x+5=9-(x-2)²，再结合底数 1/2 对应的对数函数严格递减。</div>
+          <ol class="steps">
+            <li>定义域要求真数大于 0：
+              <span class="formula">9-(x-2)²&gt;0 ⇔ (x-2)²&lt;9 ⇔ -1&lt;x&lt;5。</span>
+            </li>
+            <li>在定义域内，0&lt;g(x)≤9；最大值 9 在 x=2 处取得，而 x 趋近 -1 或 5 时，g(x) 趋近 0<sup>+</sup>。</li>
+            <li>因为 y=log<sub>1/2</sub>u 关于 u 严格递减，所以 u 最大时 y 最小：
+              <span class="formula">y<sub>min</sub>=log<sub>1/2</sub>9；当 u→0<sup>+</sup> 时，y→+∞。</span>
+              因此值域为 [log<sub>1/2</sub>9,+∞)。
+            </li>
+            <li>g(x) 在 (-1,2] 上递增、在 [2,5) 上递减；与递减的外层对数复合后方向相反。</li>
+          </ol>
+          <div class="result">结论：定义域 (-1,5)；值域 [log<sub>1/2</sub>9,+∞)；递减区间 (-1,2]，递增区间 [2,5)。</div>
+        </div>
+      </details>
+
+      <details class="question">
+        <summary>第 4 题　对数函数恒过定点与最值</summary>
+        <div class="qbody">
+          <div class="problem"><b>题目：</b>函数 y=log<sub>a</sub>(x+3)-1（a&gt;0，a≠1）的图像恒过定点 A。若 A 在直线 mx+ny+1=0 上，mn&gt;0，求 1/m+2/n 的最小值。</div>
+          <div class="idea"><span class="label">思路</span>令对数真数等于 1，找出与底数 a 无关的定点；再把直线条件转化为约束，用柯西不等式求最小值。</div>
+          <ol class="steps">
+            <li>当 x+3=1 时，log<sub>a</sub>1=0，与 a 无关。故 x=-2、y=-1，定点 A=(-2,-1)。</li>
+            <li>代入直线：
+              <span class="formula">-2m-n+1=0 ⇔ 2m+n=1。</span>
+              因为 mn&gt;0 且 2m+n=1&gt;0，所以 m&gt;0、n&gt;0。
+            </li>
+            <li>由柯西不等式：
+              <span class="formula">(1/m+2/n)(2m+n) ≥ (√2+√2)²=8。</span>
+              又 2m+n=1，所以 1/m+2/n≥8。
+            </li>
+            <li>当 m=1/4、n=1/2 时，2m+n=1，且 1/m+2/n=4+4=8，等号可以取得。</li>
+          </ol>
+          <div class="result">结论：最小值为 8。</div>
+        </div>
+      </details>
+
+      <details class="question">
+        <summary>第 5 题　互为反函数的方程根</summary>
+        <div class="qbody">
+          <div class="problem"><b>题目：</b>x<sub>1</sub> 是方程 x+lg x=6 的解，x<sub>2</sub> 是方程 x+10<sup>x</sup>=6 的解，求 x<sub>1</sub>+x<sub>2</sub>。</div>
+          <div class="idea"><span class="label">思路</span>把第一方程中的 lg x<sub>1</sub> 设为新变量，它恰好满足第二个方程。</div>
+          <ol class="steps">
+            <li>由 x<sub>1</sub>+lg x<sub>1</sub>=6，令 t=lg x<sub>1</sub>，则 x<sub>1</sub>=10<sup>t</sup>。</li>
+            <li>代回得到
+              <span class="formula">t+10<sup>t</sup>=6。</span>
+              这与 x<sub>2</sub> 的方程完全相同。
+            </li>
+            <li>函数 h(x)=x+10<sup>x</sup> 严格递增，所以方程至多有一个实数解。因此 x<sub>2</sub>=t=lg x<sub>1</sub>。</li>
+            <li>于是 x<sub>1</sub>+x<sub>2</sub>=x<sub>1</sub>+lg x<sub>1</sub>=6。</li>
+          </ol>
+          <div class="result">结论：x<sub>1</sub>+x<sub>2</sub>=6。</div>
+        </div>
+      </details>
+
+      <details class="question">
+        <summary>第 6 题　含参数对数函数在指定区间递增</summary>
+        <div class="qbody">
+          <div class="problem"><b>题目：</b>函数 y=log<sub>1/2</sub>(x²-ax-a) 在 (-∞,1-√3) 上是增函数，求 a 的取值范围。</div>
+          <div class="idea"><span class="label">思路</span>底数 1/2 使外层对数递减，因此真数二次函数必须在给定区间上递减；同时真数在整个区间内都要大于 0。</div>
+          <ol class="steps">
+            <li>记 g(x)=x²-ax-a，区间右端点 r=1-√3。由于外层 log<sub>1/2</sub>u 递减，要使复合函数递增，g(x) 必须在 (-∞,r) 上递减。</li>
+            <li>g'(x)=2x-a。要对所有 x&lt;r 都有 g'(x)&lt;0，只需并且必须使顶点横坐标 a/2 不在 r 的左侧：
+              <span class="formula">a/2≥r=1-√3 ⇔ a≥2-2√3。</span>
+            </li>
+            <li>在上述条件下，g 在 (-∞,r) 上递减，其下确界是右端极限 g(r)。要使区间内部真数恒正，需要 g(r)≥0：
+              <span class="formula">g(r)=r²-a(r+1)=4-2√3-a(2-√3)≥0。</span>
+            </li>
+            <li>因为 4-2√3=2(2-√3)，且 2-√3&gt;0，所以
+              <span class="formula">a≤2。</span>
+              当 a=2 时，g(r)=0；但 r 不属于开区间，且 x&lt;r 时 g(x)&gt;0，所以端点 2 可以保留。
+            </li>
+          </ol>
+          <div class="result">结论：a∈[2-2√3,2]。</div>
+        </div>
+      </details>
+
+      <details class="question">
+        <summary>第 7 题　用已知对数表示新对数（两问）</summary>
+        <div class="qbody">
+          <div class="problem"><b>题目：</b><br>（1）18<sup>a</sup>=9，18<sup>b</sup>=5，用 a、b 表示 log<sub>36</sub>45。<br>（2）log<sub>8</sub>3=a，log<sub>3</sub>5=b，用 a、b 表示 lg 5。</div>
+          <div class="idea"><span class="label">思路</span>统一使用自然对数或同一个“基本量”，把所有数的对数都化为 a、b 的倍数。</div>
+          <h3>（1）</h3>
+          <ol class="steps">
+            <li>由 18<sup>a</sup>=9、18<sup>b</sup>=5，得 ln9=a ln18、ln5=b ln18。</li>
+            <li>又 ln18=ln2+ln9，所以
+              <span class="formula">ln2=(1-a)ln18。</span>
+            </li>
+            <li>计算分子和分母：
+              <span class="formula">ln45=ln9+ln5=(a+b)ln18；<br>ln36=ln4+ln9=2ln2+ln9=(2-a)ln18。</span>
+            </li>
+            <li>换底得到 log<sub>36</sub>45=ln45/ln36=(a+b)/(2-a)。</li>
+          </ol>
+          <div class="result">（1）log<sub>36</sub>45=(a+b)/(2-a)。</div>
+          <h3 style="margin-top:20px">（2）</h3>
+          <ol class="steps">
+            <li>由 log<sub>8</sub>3=a，得 ln3=a ln8=3a ln2。</li>
+            <li>由 log<sub>3</sub>5=b，得 ln5=b ln3=3ab ln2。</li>
+            <li>因为 ln10=ln2+ln5=(1+3ab)ln2，所以
+              <span class="formula">lg5=ln5/ln10=3ab/(1+3ab)。</span>
+            </li>
+          </ol>
+          <div class="result">（2）lg5=3ab/(1+3ab)。</div>
+        </div>
+      </details>
+
+      <details class="question">
+        <summary>第 8 题　代换法求复合式值域</summary>
+        <div class="qbody">
+          <div class="problem"><b>题目：</b>y=[f(x)]²+f(x²)，其中 f(x)=2+log<sub>3</sub>x，x∈[1,9]，求 y 的值域。</div>
+          <div class="idea"><span class="label">思路</span>令 t=log<sub>3</sub>x，把所有含 x 的对数统一写成 t，原式变成区间上的二次函数。</div>
+          <ol class="steps">
+            <li>因为 x∈[1,9]，所以 t=log<sub>3</sub>x∈[0,2]。</li>
+            <li>有 f(x)=2+t，并且
+              <span class="formula">f(x²)=2+log<sub>3</sub>x²=2+2t。</span>
+            </li>
+            <li>因此
+              <span class="formula">y=(2+t)²+(2+2t)=t²+6t+6。</span>
+            </li>
+            <li>在 t∈[0,2] 上，二次函数 t²+6t+6 严格递增；故最小值在 t=0 取得，最大值在 t=2 取得：
+              <span class="formula">y<sub>min</sub>=6，　y<sub>max</sub>=4+12+6=22。</span>
+            </li>
+          </ol>
+          <div class="result">结论：值域为 [6,22]。</div>
+        </div>
+      </details>
+
+      <details class="question">
+        <summary>第 9 题　绝对值对数函数的四个等值点</summary>
+        <div class="qbody">
+          <div class="problem"><b>题目：</b>f(x)=|log<sub>a</sub>|1-x||（a&gt;0，a≠1）。若 x<sub>1</sub>&lt;x<sub>2</sub>&lt;x<sub>3</sub>&lt;x<sub>4</sub>，且四个函数值相等，求 1/x<sub>1</sub>+1/x<sub>2</sub>+1/x<sub>3</sub>+1/x<sub>4</sub>。</div>
+          <div class="idea"><span class="label">思路</span>设公共函数值为 k。外层绝对值产生两个互为倒数的真数，再由 |1-x| 产生关于 x=1 对称的两组根。</div>
+          <ol class="steps">
+            <li>设公共值为 k≥0，则
+              <span class="formula">|log<sub>a</sub>|1-x||=k ⇔ log<sub>a</sub>|1-x|=±k。</span>
+            </li>
+            <li>令 t=a<sup>k</sup>&gt;0，则 |1-x|=t 或 |1-x|=1/t。题设有四个不同的 x，所以 t≠1。</li>
+            <li>四个根组成两个对称根对：
+              <span class="formula">x=1±t，　x=1±1/t。</span>
+            </li>
+            <li>先分别求每对根的倒数和：
+              <span class="formula">1/(1-t)+1/(1+t)=2/(1-t²)，</span>
+              <span class="formula">1/(1-1/t)+1/(1+1/t)=2t²/(t²-1)。</span>
+            </li>
+            <li>两式相加：
+              <span class="formula">2/(1-t²)+2t²/(t²-1)=2。</span>
+            </li>
+          </ol>
+          <div class="result">结论：1/x<sub>1</sub>+1/x<sub>2</sub>+1/x<sub>3</sub>+1/x<sub>4</sub>=2。</div>
+        </div>
+      </details>
+
+      <details class="question">
+        <summary>第 10 题　奇偶性、反函数与区间最值</summary>
+        <div class="qbody">
+          <div class="problem"><b>题目：</b>已知 f(x)=ax+log<sub>2</sub>(2<sup>x</sup>+1)，a∈R。<br>（1）根据 a 的取值讨论 f(x) 的奇偶性，并说明理由。<br>（2）已知 a&gt;0，f 的反函数为 f<sup>-1</sup>。若 y=f(x)+f<sup>-1</sup>(x) 在 [1,2] 上的最小值为 1+log<sub>2</sub>3，求 f(x) 在 [1,2] 上的最大值。</div>
+          <div class="idea"><span class="label">思路</span>（1）利用 log<sub>2</sub>(2<sup>-x</sup>+1)=log<sub>2</sub>(2<sup>x</sup>+1)-x；（2）证明 f 与 f<sup>-1</sup> 都递增，因此和函数在左端点取最小值。</div>
+          <h3>（1）讨论奇偶性</h3>
+          <ol class="steps">
+            <li>函数定义域为 R，关于原点对称。计算：
+              <span class="formula">log<sub>2</sub>(2<sup>-x</sup>+1)=log<sub>2</sub>[(2<sup>x</sup>+1)/2<sup>x</sup>]=log<sub>2</sub>(2<sup>x</sup>+1)-x。</span>
+            </li>
+            <li>所以
+              <span class="formula">f(-x)=-(a+1)x+log<sub>2</sub>(2<sup>x</sup>+1)。</span>
+            </li>
+            <li>若 f 为偶函数，则 f(-x)=f(x)，比较一次项系数得
+              <span class="formula">-(a+1)=a ⇔ a=-1/2。</span>
+              当 a=-1/2 时等式确实对所有 x 成立。
+            </li>
+            <li>无论 a 取何值，f(0)=log<sub>2</sub>2=1。奇函数必须满足 f(0)=0，因此不存在使 f 为奇函数的 a。</li>
+          </ol>
+          <div class="result">（1）a=-1/2 时 f 为偶函数；其余 a 时 f 既不是奇函数也不是偶函数；任何 a 都不能使 f 成为奇函数。</div>
+          <h3 style="margin-top:20px">（2）求最大值</h3>
+          <ol class="steps">
+            <li>a&gt;0 时，ax 与 log<sub>2</sub>(2<sup>x</sup>+1) 都严格递增，所以 f 严格递增；其反函数 f<sup>-1</sup> 也严格递增。</li>
+            <li>因此 H(x)=f(x)+f<sup>-1</sup>(x) 在 [1,2] 上严格递增，最小值在 x=1 处取得：
+              <span class="formula">H<sub>min</sub>=f(1)+f<sup>-1</sup>(1)。</span>
+            </li>
+            <li>注意 f(0)=1，所以 f<sup>-1</sup>(1)=0；又 f(1)=a+log<sub>2</sub>3。</li>
+            <li>根据已知最小值：
+              <span class="formula">a+log<sub>2</sub>3=1+log<sub>2</sub>3，</span>
+              得 a=1。
+            </li>
+            <li>当 a=1 时，f 在 [1,2] 上递增，所以最大值在 x=2 处取得：
+              <span class="formula">f(2)=2+log<sub>2</sub>(2²+1)=2+log<sub>2</sub>5。</span>
+            </li>
+          </ol>
+          <div class="result">（2）f(x) 在 [1,2] 上的最大值为 2+log<sub>2</sub>5。</div>
+        </div>
+      </details>
+    </div>
+
+    <section>
+      <h2>四、易错点总结</h2>
+      <ul>
+        <li><span class="mistake">第 3、6 题：</span>不要只判断单调性而忘记“真数 &gt; 0”。</li>
+        <li><span class="mistake">第 3 题：</span>底数 1/2 在 (0,1)，外层对数函数递减，复合后的单调方向要反转。</li>
+        <li><span class="mistake">第 6 题：</span>区间右端点不包含，因此端点处真数等于 0 仍可能满足区间内部有定义。</li>
+        <li><span class="mistake">第 9 题：</span>|log u|=k 要同时考虑 log u=k 与 log u=-k。</li>
+        <li><span class="mistake">第 10 题：</span>判断奇函数时先看 f(0)；这里 f(0)=1，立刻排除奇函数。</li>
+      </ul>
+      <a class="top-link" href="#top">返回顶部 ↑</a>
+    </section>
+  </main>
+
+  <footer>小测 4 · 对数与反函数综合练习 · 离线学习版</footer>
+  <script>
+    const questions=[...document.querySelectorAll('details.question')];
+    function updateProgress(){
+      const open=questions.filter(x=>x.open).length;
+      document.getElementById('progress').textContent=`已展开 ${open} / ${questions.length}`;
+    }
+    function setAll(value){questions.forEach(x=>x.open=value);updateProgress()}
+    questions.forEach(x=>x.addEventListener('toggle',updateProgress));
+    window.addEventListener('beforeprint',()=>questions.forEach(x=>x.open=true));
+    updateProgress();
+  </script>
+</body>
+</html>
