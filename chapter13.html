@@ -81,6 +81,21 @@
     .viz{display:grid;grid-template-columns:minmax(320px,1.1fr) minmax(260px,.9fr);gap:18px;align-items:center}
     .vizbox{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:14px}
     .vizbox svg{width:100%;height:auto;display:block}.controls label{display:block;font-weight:800;margin-top:8px}.controls input[type=range]{width:100%;accent-color:var(--brand)}
+    .proof-card{margin-top:16px;border-top:4px solid var(--brand2)}
+    .proof-card .proof-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+    .proof-card .proof-title h3{margin:0}
+    .method-tag{display:inline-grid;place-items:center;min-width:72px;padding:4px 10px;border-radius:99px;background:var(--formula);border:1px solid var(--formula-line);color:var(--brand);font-size:12px;font-weight:900}
+    .proof-layout{display:grid;grid-template-columns:minmax(300px,1.05fr) minmax(300px,.95fr);gap:18px;align-items:start}
+    .proof-figure{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:12px}
+    .proof-figure svg{display:block;width:100%;height:auto}
+    .proof-figure figcaption{margin-top:8px;color:var(--muted);font-size:13px;text-align:center}
+    .proof-equations{min-width:0}
+    .equation-line{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;padding:7px 10px;margin:6px 0;border-left:3px solid var(--formula-line);background:color-mix(in srgb,var(--formula) 72%,transparent);border-radius:0 8px 8px 0;overflow:auto}
+    .method-compare{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+    .method-compare div{padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--panel2)}
+    .method-compare b{display:block;color:var(--brand);margin-bottom:4px}
+    .svg-text{fill:currentColor;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif}
+    .svg-math{fill:currentColor;font:italic 16px "Cambria Math","Times New Roman",serif}
     .readout{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px}.readout div{background:var(--panel2);padding:10px;border-radius:10px}.readout b{display:block;color:var(--brand);font-size:17px}
     .formula-map{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.formula-map div{padding:13px 8px;border:1px solid var(--line);border-radius:12px;text-align:center;background:var(--panel2)}
     .exercise{padding:14px 0;border-bottom:1px dashed var(--line)}.exercise:last-child{border-bottom:0}.level{display:inline-block;padding:2px 8px;border-radius:99px;font-size:12px;font-weight:800;margin-right:6px}.basic{background:#dcfce7;color:#166534}.mid{background:#dbeafe;color:#1e40af}.hard{background:#ffedd5;color:#9a3412}
@@ -93,8 +108,9 @@
     @media(max-width:900px){
       .layout{display:block}.topbar{display:flex;position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--panel) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:10px 14px;justify-content:space-between;align-items:center}
       .topbar b{color:var(--brand)}aside{position:fixed;left:0;top:0;transform:translateX(-105%);transition:.25s;width:min(88vw,320px);box-shadow:var(--shadow)}aside.open{transform:none}
-      .hero{padding-top:38px}.grid,.grid3,.viz{grid-template-columns:1fr}.formula-map{grid-template-columns:1fr}
+      .hero{padding-top:38px}.grid,.grid3,.viz,.proof-layout{grid-template-columns:1fr}.formula-map{grid-template-columns:1fr}
     }
+    @media(max-width:700px){.method-compare{grid-template-columns:1fr}}
     @media(max-width:560px){.hero{padding-left:20px;padding-right:20px}.content{padding-left:15px;padding-right:15px}.card{padding:16px}.readout{grid-template-columns:1fr}.section-head h2{font-size:23px}.num{width:42px;height:42px}.formula{font-size:17px}.badges{gap:6px}}
     @media print{aside,.topbar,.copy,.side-tools,.search,.toast{display:none!important}.layout{display:block}.hero{padding:24px;background:white}.content{max-width:none;padding:18px}body{background:white;color:#111}.card,details{box-shadow:none;break-inside:avoid}details:not([open])>.details-body{display:block}summary::after{display:none}}
   </style>
@@ -135,7 +151,7 @@
       <div class="eyebrow">高一数学 · 三角恒等变换核心章</div>
       <h2>第 13 章<br>和差倍半角公式</h2>
       <p>不把十几个公式当成孤立口诀：从一个核心公式出发，建立“和差角 → 二倍角 → 半角 → 辅助角 → 三倍角”的推导网络。</p>
-      <div class="badges"><span class="badge">9 课时</span><span class="badge">完整推导</span><span class="badge">18 道例题</span><span class="badge">21 道分层练习</span><span class="badge">交互验证</span><span class="badge">离线可用</span></div>
+      <div class="badges"><span class="badge">9 课时</span><span class="badge">3 种和差角推导</span><span class="badge">18 道例题</span><span class="badge">21 道分层练习</span><span class="badge">交互验证</span><span class="badge">离线可用</span></div>
     </header>
 
     <div class="content">
@@ -170,12 +186,176 @@
             <div class="tip"><b>结构记忆：</b>正弦公式“正余＋余正”，符号与括号相同；余弦公式“余余∓正正”，符号与括号相反。</div>
           </article>
           <article class="card">
-            <span class="label">推导</span><h3>从余弦差角公式出发</h3>
+            <span class="label">方法一 · 最简洁</span><h3>向量点积法</h3>
             <p>单位圆上两点 <span class="math">P(cosα, sinα)</span>、<span class="math">Q(cosβ, sinβ)</span> 的夹角为 <span class="math">α－β</span>。两个单位向量的点积一方面等于夹角余弦，另一方面等于坐标乘积之和：</p>
             <div class="formula center">cos(α－β)＝cosα cosβ＋sinα sinβ</div>
             <p>令 <span class="math">β→－β</span>，利用 <span class="math">cos(－β)=cosβ，sin(－β)=－sinβ</span>，得到余弦和角公式；再利用 <span class="math">sinθ=cos(π/2－θ)</span> 得到正弦公式。</p>
           </article>
         </div>
+
+        <article class="card proof-card">
+          <div class="proof-title"><span class="method-tag">新增方法二</span><h3>单位圆两点距离不变法</h3></div>
+          <p>这个方法只用到单位圆、坐标距离公式和“旋转不改变长度”。它与原图中的 <span class="math">PQ＝RS</span> 完全对应。</p>
+          <div class="proof-layout">
+            <figure class="proof-figure">
+              <svg viewBox="0 0 920 390" role="img" aria-labelledby="distanceProofTitle distanceProofDesc">
+                <title id="distanceProofTitle">利用单位圆上的弦长推导余弦差角公式</title>
+                <desc id="distanceProofDesc">左图为单位圆上角度分别为A和B的点P和Q；将图形旋转负B后，Q转到S点，P转到角度A减B的R点，因此弦PQ与弦RS等长。</desc>
+                <defs>
+                  <marker id="arrowGray" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#8b5cf6"/></marker>
+                </defs>
+                <g>
+                  <line x1="70" y1="200" x2="370" y2="200" stroke="currentColor" opacity=".35"/>
+                  <line x1="220" y1="50" x2="220" y2="350" stroke="currentColor" opacity=".35"/>
+                  <circle cx="220" cy="200" r="112" fill="none" stroke="currentColor" opacity=".58" stroke-width="2"/>
+                  <line x1="220" y1="200" x2="164" y2="103" stroke="#2563eb" stroke-width="3"/>
+                  <line x1="220" y1="200" x2="312" y2="136" stroke="#f59e0b" stroke-width="3"/>
+                  <line x1="164" y1="103" x2="312" y2="136" stroke="#8b5cf6" stroke-width="4"/>
+                  <circle cx="164" cy="103" r="6" fill="#2563eb"/><circle cx="312" cy="136" r="6" fill="#f59e0b"/>
+                  <path d="M268 166 A58 58 0 0 0 191 150" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+                  <text x="139" y="88" class="svg-math">P(cos A, sin A)</text>
+                  <text x="293" y="119" class="svg-math">Q(cos B, sin B)</text>
+                  <text x="189" y="224" class="svg-text">O</text>
+                  <text x="185" y="159" class="svg-math">A−B</text>
+                  <text x="190" y="335" class="svg-text">旋转前</text>
+                  <text x="225" y="124" class="svg-math" fill="#8b5cf6">PQ</text>
+                </g>
+                <path d="M402 200 C430 157,455 157,483 200" fill="none" stroke="#8b5cf6" stroke-width="3" marker-end="url(#arrowGray)"/>
+                <text x="397" y="144" class="svg-text">整体旋转 −B</text>
+                <g>
+                  <line x1="550" y1="200" x2="850" y2="200" stroke="currentColor" opacity=".35"/>
+                  <line x1="700" y1="50" x2="700" y2="350" stroke="currentColor" opacity=".35"/>
+                  <circle cx="700" cy="200" r="112" fill="none" stroke="currentColor" opacity=".58" stroke-width="2"/>
+                  <line x1="700" y1="200" x2="710" y2="88" stroke="#2563eb" stroke-width="3"/>
+                  <line x1="700" y1="200" x2="812" y2="200" stroke="#f59e0b" stroke-width="3"/>
+                  <line x1="710" y1="88" x2="812" y2="200" stroke="#8b5cf6" stroke-width="4"/>
+                  <circle cx="710" cy="88" r="6" fill="#2563eb"/><circle cx="812" cy="200" r="6" fill="#f59e0b"/>
+                  <path d="M750 200 A50 50 0 0 0 704 150" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+                  <text x="716" y="73" class="svg-math">R(cos(A−B), sin(A−B))</text>
+                  <text x="820" y="207" class="svg-math">S(1, 0)</text>
+                  <text x="676" y="224" class="svg-text">O</text>
+                  <text x="720" y="168" class="svg-math">A−B</text>
+                  <text x="670" y="335" class="svg-text">旋转后</text>
+                  <text x="765" y="137" class="svg-math" fill="#8b5cf6">RS</text>
+                </g>
+                <text x="350" y="374" class="svg-text">旋转保持弦长：PQ＝RS</text>
+              </svg>
+              <figcaption>把两点同时旋转 <span class="math">−B</span>：<span class="math">Q→S(1,0)</span>，<span class="math">P→R(cos(A−B),sin(A−B))</span>。</figcaption>
+            </figure>
+            <div class="proof-equations">
+              <h4>第 1 步：分别写出两条弦长的平方</h4>
+              <div class="equation-line">PQ²＝(cos A−cos B)²＋(sin A−sin B)²</div>
+              <div class="equation-line">RS²＝[cos(A−B)−1]²＋sin²(A−B)</div>
+              <h4>第 2 步：展开并用 sin²x＋cos²x＝1</h4>
+              <div class="equation-line">PQ²＝2−2cos A cos B−2sin A sin B</div>
+              <div class="equation-line">RS²＝2−2cos(A−B)</div>
+              <h4>第 3 步：由 PQ²＝RS² 得</h4>
+              <div class="formula center">cos(A−B)＝cos A cos B＋sin A sin B</div>
+              <div class="note"><b>核心理由：</b>不是因为两张图“看起来一样”，而是刚性旋转保持任意两点之间的距离，所以 <span class="math">PQ＝RS</span>。</div>
+            </div>
+          </div>
+          <details>
+            <summary>继续推出另外三个公式</summary>
+            <div class="details-body">
+              <h4>① 把 B 换成 −B，得到余弦和角公式</h4>
+              <div class="equation-line">cos[A−(−B)]＝cos A cos(−B)＋sin A sin(−B)</div>
+              <div class="equation-line">cos(A＋B)＝cos A cos B−sin A sin B</div>
+              <h4>② 用余函数关系推出正弦和角公式</h4>
+              <div class="equation-line">sin(A＋B)＝cos[π/2−(A＋B)]＝cos[(π/2−A)−B]</div>
+              <div class="equation-line">＝cos(π/2−A)cos B＋sin(π/2−A)sin B</div>
+              <div class="equation-line">＝sin A cos B＋cos A sin B</div>
+              <h4>③ 再把 B 换成 −B</h4>
+              <div class="equation-line">sin(A−B)＝sin A cos B−cos A sin B</div>
+            </div>
+          </details>
+        </article>
+
+        <article class="card proof-card">
+          <div class="proof-title"><span class="method-tag">新增方法三</span><h3>直角三角形的边长投影法</h3></div>
+          <p>这个方法把手绘图中的各段长度重新整理为“先沿斜方向分解，再向坐标轴投影”。图中先假设 <span class="math">A、B、A＋B</span> 都是锐角，便于看图；用有向长度理解后，结论对任意角仍成立。</p>
+          <div class="proof-layout">
+            <figure class="proof-figure">
+              <svg viewBox="0 0 760 455" role="img" aria-labelledby="projectionProofTitle projectionProofDesc">
+                <title id="projectionProofTitle">用直角三角形投影推导正弦和角与余弦和角公式</title>
+                <desc id="projectionProofDesc">单位线段OP与横轴夹角为A加B，OU与横轴夹角为A，三角形OUP在U处为直角。OU等于余弦B，UP等于正弦B，再把两段分别投影到横轴和纵轴。</desc>
+                <defs>
+                  <marker id="arrowBlue" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2563eb"/></marker>
+                  <marker id="arrowOrange" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f59e0b"/></marker>
+                </defs>
+                <line x1="55" y1="382" x2="716" y2="382" stroke="currentColor" stroke-width="2" marker-end="url(#arrowBlue)"/>
+                <line x1="82" y1="414" x2="82" y2="36" stroke="currentColor" stroke-width="2" marker-end="url(#arrowBlue)"/>
+                <line x1="82" y1="382" x2="277" y2="113" stroke="#8b5cf6" stroke-width="5"/>
+                <line x1="82" y1="382" x2="344" y2="242" stroke="#2563eb" stroke-width="5"/>
+                <line x1="344" y1="242" x2="277" y2="113" stroke="#f59e0b" stroke-width="5"/>
+                <line x1="277" y1="113" x2="277" y2="382" stroke="currentColor" opacity=".38" stroke-dasharray="7 6"/>
+                <line x1="344" y1="242" x2="344" y2="382" stroke="currentColor" opacity=".38" stroke-dasharray="7 6"/>
+                <line x1="277" y1="242" x2="344" y2="242" stroke="#f59e0b" opacity=".68" stroke-dasharray="6 5"/>
+                <path d="M113 382 A31 31 0 0 0 109 367" fill="none" stroke="#2563eb" stroke-width="2"/>
+                <path d="M126 359 A52 52 0 0 0 112 340" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+                <path d="M325 252 l-10 -19 l19 -10" fill="none" stroke="currentColor" stroke-width="2"/>
+                <circle cx="82" cy="382" r="5" fill="currentColor"/><circle cx="344" cy="242" r="5" fill="#2563eb"/><circle cx="277" cy="113" r="5" fill="#8b5cf6"/>
+                <text x="63" y="405" class="svg-text">O</text><text x="351" y="240" class="svg-text">U</text><text x="260" y="96" class="svg-text">P</text>
+                <text x="118" y="373" class="svg-math" fill="#2563eb">A</text><text x="125" y="342" class="svg-math" fill="#8b5cf6">A＋B</text>
+                <text x="301" y="211" class="svg-math" fill="#f59e0b">B</text>
+                <text x="168" y="222" class="svg-math" fill="#8b5cf6">OP＝1</text>
+                <text x="206" y="294" class="svg-math" fill="#2563eb">OU＝cos B</text>
+                <text x="307" y="162" class="svg-math" fill="#f59e0b">UP＝sin B</text>
+                <text x="136" y="424" class="svg-math">cos B cos A</text>
+                <line x1="82" y1="397" x2="344" y2="397" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+                <text x="278" y="342" class="svg-math" fill="#f59e0b">sin B sin A</text>
+                <line x1="344" y1="354" x2="277" y2="354" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrowOrange)"/>
+                <text x="358" y="322" class="svg-math" fill="#2563eb">cos B sin A</text>
+                <line x1="360" y1="382" x2="360" y2="242" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+                <text x="219" y="180" class="svg-math" fill="#f59e0b">sin B cos A</text>
+                <line x1="262" y1="242" x2="262" y2="113" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrowOrange)"/>
+                <rect x="430" y="75" width="286" height="222" rx="15" fill="none" stroke="currentColor" opacity=".25"/>
+                <text x="451" y="105" class="svg-text">横向分量</text>
+                <text x="451" y="136" class="svg-math" fill="#2563eb">OU：＋cos B cos A</text>
+                <text x="451" y="167" class="svg-math" fill="#f59e0b">UP：−sin B sin A</text>
+                <text x="451" y="205" class="svg-text">纵向分量</text>
+                <text x="451" y="236" class="svg-math" fill="#2563eb">OU：＋cos B sin A</text>
+                <text x="451" y="267" class="svg-math" fill="#f59e0b">UP：＋sin B cos A</text>
+                <text x="487" y="342" class="svg-text">横向左移，所以减；</text>
+                <text x="487" y="370" class="svg-text">纵向同为向上，所以加。</text>
+              </svg>
+              <figcaption><span class="math">OU⊥UP</span>，且 <span class="math">∠POU＝B</span>。蓝色为 <span class="math">OU</span> 的投影，橙色为 <span class="math">UP</span> 的投影。</figcaption>
+            </figure>
+            <div class="proof-equations">
+              <h4>第 1 步：在直角三角形 OUP 中</h4>
+              <p>取 <span class="math">OP＝1</span>，因为 <span class="math">∠POU＝B</span>：</p>
+              <div class="equation-line">OU＝OP·cos B＝cos B</div>
+              <div class="equation-line">UP＝OP·sin B＝sin B</div>
+              <h4>第 2 步：把 OU 投影到横、纵轴</h4>
+              <div class="equation-line">横向：cos B cos A　　纵向：cos B sin A</div>
+              <h4>第 3 步：把 UP 投影到横、纵轴</h4>
+              <p><span class="math">UP</span> 与 <span class="math">OU</span> 垂直，所以它与横轴的方向角是 <span class="math">90°＋A</span>：</p>
+              <div class="equation-line">横向：−sin B sin A　　纵向：sin B cos A</div>
+              <h4>第 4 步：同方向分量相加</h4>
+              <p>点 <span class="math">P</span> 在单位圆上，且 <span class="math">∠POx＝A＋B</span>，因此它的横、纵坐标分别是 <span class="math">cos(A＋B)</span>、<span class="math">sin(A＋B)</span>：</p>
+              <div class="formula">cos(A＋B)＝cos A cos B−sin A sin B</div>
+              <div class="formula">sin(A＋B)＝sin A cos B＋cos A sin B</div>
+              <div class="tip"><b>看图记号：</b>橙色段 <span class="math">UP</span> 向左、向上，所以横向贡献带负号，纵向贡献带正号。这正是“余弦和角用减、正弦和角用加”的几何原因。</div>
+            </div>
+          </div>
+          <details>
+            <summary>如何由和角公式得到差角公式？</summary>
+            <div class="details-body">
+              <p>在两条和角公式中把 <span class="math">B</span> 换成 <span class="math">−B</span>，再用 <span class="math">cos(−B)=cos B</span>、<span class="math">sin(−B)=−sin B</span>：</p>
+              <div class="equation-line">cos(A−B)＝cos A cos B＋sin A sin B</div>
+              <div class="equation-line">sin(A−B)＝sin A cos B−cos A sin B</div>
+            </div>
+          </details>
+        </article>
+
+        <article class="card" style="margin-top:16px">
+          <h3>三种推导方法怎样选择？</h3>
+          <div class="method-compare">
+            <div><b>方法一：向量点积</b>步骤最短、适用于任意角；需要先理解向量夹角与点积。</div>
+            <div><b>方法二：距离不变</b>只依赖坐标距离和旋转，代数展开较多，但逻辑非常扎实。</div>
+            <div><b>方法三：边长投影</b>最直观地解释加减号；画图时先取锐角，再推广到有向长度。</div>
+          </div>
+        </article>
+
         <div class="grid" style="margin-top:16px">
           <article class="card example"><span class="label">例 1</span><p class="question">求 sin15° 的精确值。</p>
             <ol class="steps"><li>拆成特殊角：<span class="math">15°＝45°－30°</span>。</li><li>用正弦差角：<span class="math">sin15°＝sin45°cos30°－cos45°sin30°</span>。</li><li>代入：<span class="math">＝√2/2·√3/2－√2/2·1/2＝(√6－√2)/4</span>。</li></ol>
@@ -205,7 +385,7 @@
             </div>
           </div>
         </article>
-        <div class="card" style="margin-top:16px"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="c13l1"><span><b>我已掌握：</b>能写出并解释四个正余弦和差角公式，能计算 15°、75° 等非特殊角。</span></label></div>
+        <div class="card" style="margin-top:16px"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="c13l1"><span><b>我已掌握：</b>能用向量、距离不变或边长投影解释和差角公式，能计算 15°、75° 等非特殊角。</span></label></div>
       </section>
 
       <section id="lesson2" class="searchable">
