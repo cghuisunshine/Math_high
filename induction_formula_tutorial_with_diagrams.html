@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第12章 诱导公式——图形示意增强版</title>
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #667085;
+      --line: #d9e2f0;
+      --blue: #2563eb;
+      --blue2: #eff6ff;
+      --green2: #ecfdf3;
+      --orange2: #fff7ed;
+      --purple2: #f5f3ff;
+      --yellow2: #fffbeb;
+      --red2: #fef2f2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.8;
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 22px; }
+    .hero {
+      background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 60%, #60a5fa 100%);
+      color: white;
+      padding: 30px 28px;
+      border-radius: 22px;
+      box-shadow: 0 18px 40px rgba(37,99,235,.24);
+    }
+    .hero h1 { margin: 0 0 8px; font-size: 2.15rem; }
+    .hero p { margin: 8px 0; }
+    .chips span {
+      display: inline-block;
+      margin: 6px 8px 0 0;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.25);
+      font-size: .95rem;
+    }
+    .btns { margin-top: 16px; }
+    button {
+      border: none;
+      background: white;
+      color: #1d4ed8;
+      border-radius: 10px;
+      padding: 10px 16px;
+      margin-right: 10px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: .98rem;
+      font-weight: 600;
+    }
+    button.secondary { background: rgba(255,255,255,.16); color: white; border: 1px solid rgba(255,255,255,.35); }
+    .card {
+      background: var(--card);
+      margin-top: 20px;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, .06);
+      border: 1px solid var(--line);
+    }
+    h2 { margin-top: 0; padding-left: 12px; border-left: 5px solid var(--blue); font-size: 1.55rem; }
+    h3 { color: #1d4ed8; margin-top: 1.2em; }
+    h4 { margin: .8em 0 .35em; }
+    p { margin: .5em 0; }
+    .muted { color: var(--muted); }
+    .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 18px; }
+    .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .box, .note, .tip, .warn, .proof, .example, .exercise { border-radius: 14px; padding: 16px 18px; border: 1px solid var(--line); margin: 12px 0; }
+    .note { background: var(--blue2); }
+    .tip { background: var(--green2); }
+    .warn { background: var(--red2); }
+    .proof { background: var(--purple2); }
+    .example { background: var(--orange2); }
+    .exercise { background: #f8fafc; }
+    .formula { background: #f8fafc; border: 1px dashed #c7d2fe; border-radius: 12px; padding: 12px 14px; margin: 10px 0; overflow-x: auto; font-family: 'Times New Roman', Georgia, serif; font-size: 1.08rem; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+    th, td { border: 1px solid var(--line); padding: 10px 12px; text-align: center; vertical-align: top; }
+    th { background: #eef2ff; }
+    .toc a { display: inline-block; margin: 8px 10px 0 0; padding: 8px 12px; border-radius: 999px; text-decoration: none; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    details { background: white; border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; margin: 10px 0; }
+    summary { cursor: pointer; color: #1d4ed8; font-weight: 700; }
+    .img-outline { max-width: 100%; display: block; margin: 12px auto; border: 1px solid var(--line); border-radius: 12px; background: white; }
+    .diagram { background: white; border: 1px solid var(--line); border-radius: 16px; padding: 12px; }
+    .diagram svg { width: 100%; height: auto; display: block; }
+    .caption { color: var(--muted); font-size: .94rem; margin-top: 8px; }
+    .step { background: var(--yellow2); border-left: 4px solid #f59e0b; padding: 10px 12px; border-radius: 10px; margin: 10px 0; }
+    .footer { text-align: center; color: var(--muted); padding: 28px 8px 8px; }
+    @media print {
+      body { background: white; }
+      .wrap { max-width: none; padding: 0; }
+      .card, .hero { box-shadow: none; }
+      button { display: none; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <h1>第12章：诱导公式（图形示意增强版）</h1>
+    <p>在原有教程基础上，加入了更直观的 <strong>图形示意</strong>、更清楚的 <strong>解释步骤</strong> 和更容易理解的 <strong>解题流程</strong>。</p>
+    <div class="chips">
+      <span>弧度制</span><span>任意角</span><span>单位圆</span><span>象限符号</span><span>诱导公式</span><span>例题与练习</span>
+    </div>
+    <div class="btns">
+      <button onclick="window.print()">打印 / 导出 PDF</button>
+      <button class="secondary" onclick="toggleAll(true)">展开全部答案</button>
+      <button class="secondary" onclick="toggleAll(false)">收起全部答案</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>一、原始大纲</h2>
+    <p class="muted">根据你提供的图片扩展而成：</p>
+    <img class="img-outline" src="data:image/png;base64,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isIb3Z+AXF8ICAEhIAS+SGCUCoivbR5Det+qVSoTXAkgsJoiA9SngABq0KA+1fy9RogbbRB5AfL48WMKCPjI2dkaNqxPP/yQjetN33CdixdO69nTTNu1c6xh8OABlClTYKQH1Bf8sQC/tD6WjnDJWL1qBW3ctJmqVa3MVl9LfaVeCAgB6wmIwms9MxkhBISAEBACUUxAU3ZxWS38l7YEtLm6dNJOQ338Utpfw4mQRjg00qypcfSG0IzR+kDpNQxZptXLUQgIgfATkE1r4WcoMwgBISAEhIAQEAJCQAjYMAFReG34w5GlCQEhIASEgBAQAkJACISfgCi84WcoMwgBISAEhIAQEAJCQAjYMAFReG34w5GlCQEhIASEgBAQAkJACISfgCi84WcoMwgBISAEhIAQEAJCQAjYMAFReG34w5GlCQEhIASEgBAQAkJACISfgCi84WcoMwgBISAEhIAQEAJCQAjYMAFReG34w5GlCQEhIASEgBAQAkJACISfgCi84WcoMwgBISAEhIAQEAJCQAjYMAFReG34w5GlCQEhIASEgBAQAkJACISfgCi84WcoMwgBISAEhIAQEAJCQAjYMAFReG34w5GlCQEhIASEgBAQAkJACISfQKx/lVgzzSTvedZ0l75CQAgIASEgBISAEBACQiDCCDg5NbN6rrhWj/g8wLlV47AO/erGTZ+zmFzaNf/q7ktuSAjYMoEpM+eTm1MLW16irE0ICAEhECIBGBHl/7EQEQVrDKvhVVwagqGUCiEgBISAEBACQkAICIGviYAovF/Tpyn3IgSEgBAQAkJACAgBIRCMgCi8wZBIhRAQAkJACAgBISAEhMDXROD/qPX65yZCQc8AAAAASUVORK5CYII=" alt="原始大纲" />
+    <table>
+      <tr><th>章</th><th>主题</th><th>子内容</th><th>课时</th></tr>
+      <tr><td>12</td><td>诱导公式</td><td>弧度制与任意角的三角比</td><td>2</td></tr>
+      <tr><td>12</td><td>诱导公式</td><td>诱导公式</td><td>2</td></tr>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>二、学习主线：这一章到底在学什么？</h2>
+    <div class="step"><strong>主线1：</strong> 先认识任意角和弧度制，知道角不再只局限于 0° 到 180°。</div>
+    <div class="step"><strong>主线2：</strong> 再借助坐标系和单位圆，理解 sin、cos、tan 为什么可以表示任意角。</div>
+    <div class="step"><strong>主线3：</strong> 最后学习诱导公式，把“复杂角”化成“熟悉的锐角”，快速求值。</div>
+    <div class="note"><strong>一句话概括：</strong> 本章的核心就是：<strong>把大角、负角、特殊形式的角，转化成熟悉的小锐角来计算。</strong></div>
+  </section>
+
+  <section class="card" id="part1">
+    <h2>三、弧度制与任意角的三角比</h2>
+    <div class="toc">
+      <a href="#any-angle">任意角</a>
+      <a href="#radian">弧度制</a>
+      <a href="#unit-circle">单位圆定义</a>
+      <a href="#signs">象限符号</a>
+      <a href="#basic-examples">基础例题</a>
+    </div>
+
+    <h3 id="any-angle">1. 任意角：角可以比 360° 更大，也可以是负的</h3>
+    <p>在平面直角坐标系中，通常把正 x 轴作为角的 <strong>始边</strong>。从始边转到终边，得到一个角。</p>
+    <ul>
+      <li><strong>逆时针旋转</strong>：得到正角。</li>
+      <li><strong>顺时针旋转</strong>：得到负角。</li>
+      <li><strong>转一整圈后再继续转</strong>：可以得到大于 360° 的角。</li>
+    </ul>
+    <div class="grid2">
+      <div class="diagram">
+        <svg viewBox="0 0 340 260" aria-label="任意角示意图">
+          <defs>
+            <marker id="arrowA" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#2563eb"/></marker>
+            <marker id="arrowB" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#ef4444"/></marker>
+          </defs>
+          <line x1="30" y1="130" x2="310" y2="130" stroke="#94a3b8" stroke-width="2"/>
+          <line x1="170" y1="240" x2="170" y2="20" stroke="#94a3b8" stroke-width="2"/>
+          <text x="315" y="135" font-size="14" fill="#475569">x</text>
+          <text x="175" y="20" font-size="14" fill="#475569">y</text>
+          <circle cx="170" cy="130" r="4" fill="#111827"/>
+          <line x1="170" y1="130" x2="285" y2="130" stroke="#111827" stroke-width="3" marker-end="url(#arrowA)"/>
+          <text x="245" y="120" font-size="13">始边</text>
+          <line x1="170" y1="130" x2="245" y2="55" stroke="#2563eb" stroke-width="3" marker-end="url(#arrowA)"/>
+          <text x="252" y="58" font-size="13" fill="#2563eb">正角 α</text>
+          <path d="M215 130 A45 45 0 0 0 200 99" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrowA)"/>
+          <line x1="170" y1="130" x2="255" y2="185" stroke="#ef4444" stroke-width="3" marker-end="url(#arrowB)"/>
+          <text x="260" y="190" font-size="13" fill="#ef4444">负角 β</text>
+          <path d="M217 130 A47 47 0 0 1 205 157" fill="none" stroke="#ef4444" stroke-width="2.5" marker-end="url(#arrowB)"/>
+          <text x="18" y="245" font-size="13" fill="#475569">逆时针：正角；顺时针：负角</text>
+        </svg>
+        <div class="caption">图1：任意角示意图——同一个始边，可以转出正角、负角和超过一周的角。</div>
+      </div>
+      <div>
+        <div class="note">
+          <h4>终边相同角</h4>
+          <p>如果两个角转完后，<strong>终边落在同一条射线</strong> 上，那么它们叫作终边相同的角。</p>
+          <div class="formula">β = α + k·360°（k∈Z）<br/>或 β = α + 2kπ（k∈Z）</div>
+          <p>例如：</p>
+          <ul>
+            <li>30°、390°、−330° 终边相同；</li>
+            <li>π/6、13π/6、−11π/6 终边相同。</li>
+          </ul>
+        </div>
+        <div class="tip"><strong>理解重点：</strong> 三角函数值只与<strong>终边位置</strong>有关，所以终边相同的角，三角函数值也相同。</div>
+      </div>
+    </div>
+
+    <h3 id="radian">2. 弧度制：为什么 180° 等于 π？</h3>
+    <p>弧度制不是“另一套难记的单位”，而是由圆本身自然产生的角度单位。</p>
+    <div class="grid2">
+      <div class="diagram">
+        <svg viewBox="0 0 360 300" aria-label="弧度制示意图">
+          <defs><marker id="arrowRad" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#2563eb"/></marker></defs>
+          <circle cx="160" cy="150" r="100" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+          <line x1="160" y1="150" x2="260" y2="150" stroke="#111827" stroke-width="3"/>
+          <line x1="160" y1="150" x2="231" y2="79" stroke="#111827" stroke-width="3"/>
+          <path d="M260 150 A100 100 0 0 0 231 79" fill="none" stroke="#2563eb" stroke-width="6"/>
+          <path d="M200 150 A40 40 0 0 0 188 122" fill="none" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrowRad)"/>
+          <circle cx="160" cy="150" r="4" fill="#111827"/>
+          <text x="152" y="145" font-size="12">O</text>
+          <text x="208" y="142" font-size="14">r</text>
+          <text x="194" y="108" font-size="14">r</text>
+          <text x="262" y="154" font-size="12">A</text>
+          <text x="236" y="75" font-size="12">B</text>
+          <text x="238" y="117" font-size="14" fill="#2563eb">弧长 l</text>
+          <text x="190" y="128" font-size="14" fill="#f59e0b">α</text>
+          <text x="25" y="270" font-size="14">定义：α（弧度）= 弧长 l ÷ 半径 r</text>
+          <text x="25" y="290" font-size="14">当 l = r 时，α = 1（弧度）</text>
+        </svg>
+        <div class="caption">图2：弧度制的本质——角的大小 = 弧长 ÷ 半径。</div>
+      </div>
+      <div>
+        <div class="proof">
+          <h4>推导：180° = π</h4>
+          <p>整圆一周的弧长是 <strong>2πr</strong>，所以整圆对应的弧度数是：</p>
+          <div class="formula">2πr / r = 2π</div>
+          <p>也就是说：</p>
+          <div class="formula">360° = 2π</div>
+          <p>两边同时除以 2：</p>
+          <div class="formula">180° = π</div>
+        </div>
+        <div class="note">
+          <h4>常用互化公式</h4>
+          <div class="formula">1° = π/180（弧度）<br/>1（弧度） = 180°/π</div>
+          <p>所以：</p>
+          <ul>
+            <li>角度 → 弧度：乘 <strong>π/180</strong></li>
+            <li>弧度 → 角度：乘 <strong>180/π</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <table>
+      <tr><th>角度</th><th>弧度</th><th>角度</th><th>弧度</th></tr>
+      <tr><td>30°</td><td>π/6</td><td>45°</td><td>π/4</td></tr>
+      <tr><td>60°</td><td>π/3</td><td>90°</td><td>π/2</td></tr>
+      <tr><td>120°</td><td>2π/3</td><td>135°</td><td>3π/4</td></tr>
+      <tr><td>150°</td><td>5π/6</td><td>180°</td><td>π</td></tr>
+      <tr><td>270°</td><td>3π/2</td><td>360°</td><td>2π</td></tr>
+    </table>
+
+    <h3 id="unit-circle">3. 任意角的三角比：为什么单位圆最重要？</h3>
+    <p>设角 α 的终边上一点 P(x, y)，点 P 到原点的距离为 r，则：</p>
+    <div class="formula">sinα = y/r，cosα = x/r，tanα = y/x（x ≠ 0）</div>
+    <p>如果选取 <strong>单位圆</strong>（即 r = 1），就会变得非常简单：</p>
+    <div class="formula">P(cosα, sinα)</div>
+    <div class="grid2">
+      <div class="diagram">
+        <svg viewBox="0 0 360 300" aria-label="单位圆中的三角函数">
+          <defs><marker id="arrowUC" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#2563eb"/></marker></defs>
+          <line x1="30" y1="150" x2="330" y2="150" stroke="#94a3b8" stroke-width="2"/>
+          <line x1="180" y1="270" x2="180" y2="30" stroke="#94a3b8" stroke-width="2"/>
+          <circle cx="180" cy="150" r="100" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+          <line x1="180" y1="150" x2="260" y2="90" stroke="#2563eb" stroke-width="3" marker-end="url(#arrowUC)"/>
+          <line x1="260" y1="90" x2="260" y2="150" stroke="#10b981" stroke-width="2.5" stroke-dasharray="6 5"/>
+          <line x1="180" y1="150" x2="260" y2="150" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="6 5"/>
+          <circle cx="260" cy="90" r="4" fill="#111827"/>
+          <circle cx="180" cy="150" r="4" fill="#111827"/>
+          <path d="M220 150 A40 40 0 0 0 212 126" fill="none" stroke="#ef4444" stroke-width="2.5"/>
+          <text x="205" y="130" font-size="13" fill="#ef4444">α</text>
+          <text x="265" y="92" font-size="13">P(cosα, sinα)</text>
+          <text x="215" y="114" font-size="13" fill="#2563eb">r=1</text>
+          <text x="212" y="168" font-size="13" fill="#f59e0b">cosα</text>
+          <text x="268" y="126" font-size="13" fill="#10b981">sinα</text>
+          <text x="333" y="154" font-size="13">x</text>
+          <text x="185" y="28" font-size="13">y</text>
+        </svg>
+        <div class="caption">图3：在单位圆上，横坐标就是 cosα，纵坐标就是 sinα。</div>
+      </div>
+      <div>
+        <div class="note"><h4>最关键的一句话</h4><p><strong>单位圆上点的横坐标 = cosα，纵坐标 = sinα。</strong></p><p>所以很多诱导公式，其实就是看图形对称以后，坐标怎么变。</p></div>
+        <div class="tip"><h4>为什么 tanα = y/x？</h4><p>因为：</p><div class="formula">tanα = sinα / cosα = (y/r) / (x/r) = y/x</div><p>因此，当 <strong>x = 0</strong> 时，tanα 没有意义。</p></div>
+      </div>
+    </div>
+
+    <h3 id="signs">4. 各象限符号：先看象限，再定正负</h3>
+    <div class="grid2">
+      <div class="diagram">
+        <svg viewBox="0 0 360 320" aria-label="四象限符号图">
+          <line x1="30" y1="160" x2="330" y2="160" stroke="#475569" stroke-width="2"/>
+          <line x1="180" y1="300" x2="180" y2="20" stroke="#475569" stroke-width="2"/>
+          <text x="290" y="82" font-size="18" fill="#16a34a">Ⅰ：sin +  cos +  tan +</text>
+          <text x="46" y="82" font-size="18" fill="#2563eb">Ⅱ：sin +  cos −  tan −</text>
+          <text x="48" y="255" font-size="18" fill="#ef4444">Ⅲ：sin −  cos −  tan +</text>
+          <text x="290" y="255" font-size="18" fill="#f59e0b">Ⅳ：sin −  cos +  tan −</text>
+          <text x="335" y="165" font-size="13">x</text>
+          <text x="185" y="18" font-size="13">y</text>
+          <circle cx="180" cy="160" r="4" fill="#111827"/>
+        </svg>
+        <div class="caption">图4：四象限符号图。</div>
+      </div>
+      <div>
+        <div class="note"><h4>记忆口诀</h4><p><strong>一全正，二正弦，三正切，四余弦。</strong></p><ul><li>第一象限：三个都正；</li><li>第二象限：只有 sin 正；</li><li>第三象限：只有 tan 正；</li><li>第四象限：只有 cos 正。</li></ul></div>
+        <div class="warn"><h4>最常见失分点</h4><ol><li>会化角，但最后符号写反。</li><li>把 330° 看成 cos 为负，实际上它在第四象限，cos 为正。</li><li>忘记 tan 的符号是由 sin 和 cos 共同决定的。</li></ol></div>
+      </div>
+    </div>
+
+    <h3 id="basic-examples">5. 基础例题</h3>
+    <div class="example"><h4>例1：把下列角度化成弧度：60°，225°，−150°</h4><details open><summary>查看解析</summary><div class="step">角度化弧度：统一乘 <strong>π/180</strong></div><ul><li>60° = 60×π/180 = <strong>π/3</strong></li><li>225° = 225×π/180 = <strong>5π/4</strong></li><li>−150° = −150×π/180 = <strong>−5π/6</strong></li></ul></details></div>
+    <div class="example"><h4>例2：求 tan225°</h4><details><summary>查看解析</summary><div class="step">先把角写成熟悉形式：225° = 180° + 45°</div><p>第三象限中 tan 为正，所以：</p><div class="formula">tan225° = tan(180°+45°) = tan45° = 1</div></details></div>
+    <div class="example"><h4>例3：求 sin(−30°)、cos330°</h4><details><summary>查看解析</summary><p>（1）负角先看奇偶性：</p><div class="formula">sin(−30°) = −sin30° = −1/2</div><p>（2）330° = 360° − 30°，在第四象限，cos 为正：</p><div class="formula">cos330° = cos(360°−30°) = cos30° = √3/2</div></details></div>
+  </section>
+
+  <section class="card" id="part2">
+    <h2>四、诱导公式</h2>
+    <div class="toc"><a href="#what-is">什么是诱导公式</a><a href="#rule">奇变偶不变</a><a href="#table-all">公式总表</a><a href="#symmetry">图形推导</a><a href="#examples2">典型例题</a></div>
+
+    <h3 id="what-is">1. 什么是诱导公式？</h3>
+    <p>诱导公式就是把<strong>任意角</strong>的三角函数，转化为<strong>锐角</strong>的三角函数。</p>
+    <div class="note"><p>比如：</p><div class="formula">sin150° = sin(180°−30°) = sin30° = 1/2</div><p>原来不会直接求的 150°，被转化成会求的 30°。</p></div>
+
+    <h3 id="rule">2. 最重要的口诀：奇变偶不变，符号看象限</h3>
+    <div class="grid2">
+      <div class="tip"><h4>“奇变偶不变”是什么意思？</h4><p>当角写成 <strong>k×90° ± α</strong> 的形式时：</p><ul><li><strong>k 是偶数</strong>（0、2、4……）：函数名称不变；</li><li><strong>k 是奇数</strong>（1、3、5……）：函数名称改变。</li></ul><p>例如：</p><ul><li>sin(180°−α)：180° = 2×90°，2 是偶数，所以 <strong>sin 不变</strong>；</li><li>sin(90°+α)：90° = 1×90°，1 是奇数，所以 <strong>sin 变 cos</strong>。</li></ul></div>
+      <div class="tip"><h4>“符号看象限”是什么意思？</h4><p>先确定角在哪个象限，再决定最终符号。</p><p>例如：</p><ul><li>cos(180°−α)：第二象限，cos 为负，所以结果是 <strong>−cosα</strong>；</li><li>sin(90°+α)：第二象限，sin 为正，所以结果是 <strong>+cosα</strong>。</li></ul></div>
+    </div>
+    <div class="diagram">
+      <svg viewBox="0 0 900 180" aria-label="解题流程图">
+        <rect x="20" y="35" width="180" height="70" rx="14" fill="#eff6ff" stroke="#2563eb"/>
+        <text x="110" y="67" text-anchor="middle" font-size="20" fill="#1d4ed8">第1步</text>
+        <text x="110" y="93" text-anchor="middle" font-size="16">把角写成 k×90° ± α</text>
+        <line x1="200" y1="70" x2="255" y2="70" stroke="#94a3b8" stroke-width="3"/><polygon points="255,70 244,64 244,76" fill="#94a3b8"/>
+        <rect x="265" y="35" width="180" height="70" rx="14" fill="#ecfdf3" stroke="#10b981"/>
+        <text x="355" y="67" text-anchor="middle" font-size="20" fill="#047857">第2步</text>
+        <text x="355" y="93" text-anchor="middle" font-size="16">判断奇变还是偶不变</text>
+        <line x1="445" y1="70" x2="500" y2="70" stroke="#94a3b8" stroke-width="3"/><polygon points="500,70 489,64 489,76" fill="#94a3b8"/>
+        <rect x="510" y="35" width="180" height="70" rx="14" fill="#fff7ed" stroke="#f59e0b"/>
+        <text x="600" y="67" text-anchor="middle" font-size="20" fill="#b45309">第3步</text>
+        <text x="600" y="93" text-anchor="middle" font-size="16">看角所在象限定符号</text>
+        <line x1="690" y1="70" x2="745" y2="70" stroke="#94a3b8" stroke-width="3"/><polygon points="745,70 734,64 734,76" fill="#94a3b8"/>
+        <rect x="755" y="35" width="125" height="70" rx="14" fill="#f5f3ff" stroke="#8b5cf6"/>
+        <text x="817" y="67" text-anchor="middle" font-size="20" fill="#7c3aed">第4步</text>
+        <text x="817" y="93" text-anchor="middle" font-size="16">代入锐角值</text>
+      </svg>
+      <div class="caption">图5：诱导公式解题流程图。</div>
+    </div>
+
+    <h3 id="table-all">3. 常用诱导公式总表</h3>
+    <table>
+      <tr><th>角的形式</th><th>sin</th><th>cos</th><th>tan</th><th>说明</th></tr>
+      <tr><td>−α</td><td>−sinα</td><td>cosα</td><td>−tanα</td><td>利用奇偶性</td></tr>
+      <tr><td>180°−α（π−α）</td><td>sinα</td><td>−cosα</td><td>−tanα</td><td>第二象限</td></tr>
+      <tr><td>180°+α（π+α）</td><td>−sinα</td><td>−cosα</td><td>tanα</td><td>第三象限</td></tr>
+      <tr><td>360°−α（2π−α）</td><td>−sinα</td><td>cosα</td><td>−tanα</td><td>第四象限</td></tr>
+      <tr><td>90°−α（π/2−α）</td><td>cosα</td><td>sinα</td><td>cotα</td><td>奇变</td></tr>
+      <tr><td>90°+α（π/2+α）</td><td>cosα</td><td>−sinα</td><td>−cotα</td><td>奇变，第二象限</td></tr>
+      <tr><td>270°−α（3π/2−α）</td><td>−cosα</td><td>−sinα</td><td>cotα</td><td>奇变，第三象限</td></tr>
+      <tr><td>270°+α（3π/2+α）</td><td>−cosα</td><td>sinα</td><td>−cotα</td><td>奇变，第四象限</td></tr>
+    </table>
+
+    <h3 id="symmetry">4. 用图形看懂诱导公式</h3>
+    <div class="grid2">
+      <div class="diagram"><svg viewBox="0 0 360 320" aria-label="π-α 对称图"><line x1="30" y1="160" x2="330" y2="160" stroke="#94a3b8" stroke-width="2"/><line x1="180" y1="300" x2="180" y2="20" stroke="#94a3b8" stroke-width="2"/><circle cx="180" cy="160" r="110" fill="#f8fafc" stroke="#475569" stroke-width="2"/><line x1="180" y1="160" x2="266.7" y2="110" stroke="#2563eb" stroke-width="3"/><line x1="180" y1="160" x2="93.3" y2="110" stroke="#ef4444" stroke-width="3"/><circle cx="266.7" cy="110" r="4" fill="#2563eb"/><circle cx="93.3" cy="110" r="4" fill="#ef4444"/><text x="270" y="109" font-size="13" fill="#2563eb">P(cosα, sinα)</text><text x="24" y="109" font-size="13" fill="#ef4444">Q(−cosα, sinα)</text><text x="238" y="136" font-size="13">α</text><text x="121" y="136" font-size="13">π−α</text><text x="42" y="286" font-size="14">关于 y 轴对称：纵坐标不变，横坐标变号</text></svg><div class="caption">图6：π−α 与 α 关于 y 轴对称，所以 sin 不变，cos 变号。</div></div>
+      <div class="proof"><h4>由图得到</h4><div class="formula">sin(π−α)=sinα<br/>cos(π−α)=−cosα<br/>tan(π−α)=−tanα</div><p><strong>为什么？</strong></p><ul><li>纵坐标没变，所以 sin 不变；</li><li>横坐标变成相反数，所以 cos 变号；</li><li>tan = sin/cos，因此也变号。</li></ul></div>
+    </div>
+    <div class="grid2">
+      <div class="diagram"><svg viewBox="0 0 360 320" aria-label="π+α 对称图"><line x1="30" y1="160" x2="330" y2="160" stroke="#94a3b8" stroke-width="2"/><line x1="180" y1="300" x2="180" y2="20" stroke="#94a3b8" stroke-width="2"/><circle cx="180" cy="160" r="110" fill="#f8fafc" stroke="#475569" stroke-width="2"/><line x1="180" y1="160" x2="266.7" y2="110" stroke="#2563eb" stroke-width="3"/><line x1="180" y1="160" x2="93.3" y2="210" stroke="#ef4444" stroke-width="3"/><circle cx="266.7" cy="110" r="4" fill="#2563eb"/><circle cx="93.3" cy="210" r="4" fill="#ef4444"/><text x="270" y="109" font-size="13" fill="#2563eb">P(cosα, sinα)</text><text x="20" y="223" font-size="13" fill="#ef4444">Q(−cosα, −sinα)</text><text x="236" y="137" font-size="13">α</text><text x="114" y="200" font-size="13">π+α</text><text x="48" y="286" font-size="14">关于原点中心对称：横纵坐标都变号</text></svg><div class="caption">图7：π+α 与 α 关于原点中心对称，所以 sin、cos 都变号。</div></div>
+      <div class="proof"><h4>由图得到</h4><div class="formula">sin(π+α)=−sinα<br/>cos(π+α)=−cosα<br/>tan(π+α)=tanα</div><p><strong>为什么 tan 不变？</strong></p><div class="formula">tan(π+α) = (−sinα)/(−cosα) = tanα</div></div>
+    </div>
+    <div class="grid2">
+      <div class="diagram"><svg viewBox="0 0 360 320" aria-label="π/2-α 余角图"><line x1="30" y1="160" x2="330" y2="160" stroke="#94a3b8" stroke-width="2"/><line x1="180" y1="300" x2="180" y2="20" stroke="#94a3b8" stroke-width="2"/><circle cx="180" cy="160" r="110" fill="#f8fafc" stroke="#475569" stroke-width="2"/><line x1="180" y1="160" x2="266.7" y2="110" stroke="#2563eb" stroke-width="3"/><line x1="180" y1="160" x2="230" y2="73.3" stroke="#ef4444" stroke-width="3"/><circle cx="266.7" cy="110" r="4" fill="#2563eb"/><circle cx="230" cy="73.3" r="4" fill="#ef4444"/><text x="270" y="109" font-size="13" fill="#2563eb">P(cosα, sinα)</text><text x="234" y="71" font-size="13" fill="#ef4444">R(sinα, cosα)</text><text x="214" y="136" font-size="13">α</text><text x="196" y="95" font-size="13">π/2−α</text><text x="46" y="286" font-size="14">余角关系：横纵坐标交换</text></svg><div class="caption">图8：π/2−α 是 α 的余角，因此 sin 与 cos 交换。</div></div>
+      <div class="proof"><h4>由图得到</h4><div class="formula">sin(π/2−α)=cosα<br/>cos(π/2−α)=sinα</div><p>这就是为什么涉及 90° 时，经常会“变名”。</p></div>
+    </div>
+
+    <h3 id="examples2">5. 典型例题（按步骤解释更清晰）</h3>
+    <div class="example"><h4>例4：求 sin150°，cos150°，tan150°</h4><details open><summary>查看分步解析</summary><div class="step"><strong>第1步：</strong> 150° = 180° − 30°</div><div class="step"><strong>第2步：</strong> 180° 是偶数个 90°，所以函数名称不变</div><div class="step"><strong>第3步：</strong> 150° 在第二象限，sin 正，cos 负，tan 负</div><div class="formula">sin150° = sin30° = 1/2</div><div class="formula">cos150° = −cos30° = −√3/2</div><div class="formula">tan150° = −tan30° = −√3/3</div></details></div>
+    <div class="example"><h4>例5：求 sin210°，cos210°，tan210°</h4><details><summary>查看分步解析</summary><div class="step"><strong>第1步：</strong> 210° = 180° + 30°</div><div class="step"><strong>第2步：</strong> 180° 是偶数个 90°，函数名称不变</div><div class="step"><strong>第3步：</strong> 210° 在第三象限，sin 负，cos 负，tan 正</div><div class="formula">sin210° = −sin30° = −1/2</div><div class="formula">cos210° = −cos30° = −√3/2</div><div class="formula">tan210° = tan30° = √3/3</div></details></div>
+    <div class="example"><h4>例6：化简 sin(90°+α)</h4><details><summary>查看分步解析</summary><div class="step"><strong>第1步：</strong> 90° 是 1 个 90°，属于奇数，所以要“变名”</div><div class="step"><strong>第2步：</strong> sin 变成 cos</div><div class="step"><strong>第3步：</strong> 若 α 为锐角，则 90°+α 在第二象限，sin 为正</div><div class="formula">sin(90°+α)=cosα</div></details></div>
+    <div class="example"><h4>例7：化简 cos(270°−α)</h4><details><summary>查看分步解析</summary><div class="step"><strong>第1步：</strong> 270° = 3×90°，3 是奇数，所以要“变名”</div><div class="step"><strong>第2步：</strong> cos 变成 sin</div><div class="step"><strong>第3步：</strong> 270°−α 在第三象限，cos 为负</div><div class="formula">cos(270°−α)=−sinα</div></details></div>
+  </section>
+
+  <section class="card">
+    <h2>五、练习题</h2>
+    <p>建议先独立完成，再展开答案对照。答案也保留了较清楚的说明。</p>
+    <div class="exercise"><h3>A组：基础练习</h3><ol><li>将下列角度化成弧度：120°，300°，−225°。</li><li>将下列弧度化成角度：π/3，5π/3，−7π/6。</li><li>写出与 45° 终边相同的所有角。</li><li>求 sin135°。</li><li>求 cos240°。</li><li>求 tan315°。</li></ol><details><summary>查看 A组答案</summary><ol><li>120° = 2π/3，300° = 5π/3，−225° = −5π/4。</li><li>π/3 = 60°，5π/3 = 300°，−7π/6 = −210°。</li><li>45° + k·360°（k∈Z）或 π/4 + 2kπ。</li><li>135° = 180° − 45°，第二象限 sin 为正，所以 sin135° = √2/2。</li><li>240° = 180° + 60°，第三象限 cos 为负，所以 cos240° = −1/2。</li><li>315° = 360° − 45°，第四象限 tan 为负，所以 tan315° = −1。</li></ol></details></div>
+    <div class="exercise"><h3>B组：提高练习</h3><ol start="7"><li>求 sin225°，cos225°，tan225°。</li><li>求 sin(−150°)，cos(−150°)。</li><li>化简：sin(180°+α)，cos(180°−α)，tan(360°−α)。</li><li>化简：sin(90°−α)+cos(90°−α)。</li><li>已知 sinα=3/5，且 α 在第二象限，求 cosα 与 tanα。</li><li>已知 cosα=−4/5，且 α 在第三象限，求 sinα 与 tanα。</li></ol><details><summary>查看 B组答案</summary><ol start="7"><li>225° = 180° + 45°，第三象限：sin225° = −√2/2，cos225° = −√2/2，tan225° = 1。</li><li>sin(−150°) = −sin150° = −1/2；cos(−150°) = cos150° = −√3/2。</li><li>sin(180°+α)=−sinα；cos(180°−α)=−cosα；tan(360°−α)=−tanα。</li><li>sin(90°−α)+cos(90°−α)=cosα+sinα。</li><li>cos²α = 1−sin²α = 1−9/25 = 16/25，所以 |cosα| = 4/5。第二象限 cos<0，因此 cosα = −4/5；tanα = (3/5)/(−4/5)=−3/4。</li><li>sin²α = 1−cos²α = 1−16/25 = 9/25，所以 |sinα|=3/5。第三象限 sin<0，因此 sinα = −3/5；tanα = (−3/5)/(−4/5)=3/4。</li></ol></details></div>
+    <div class="exercise"><h3>C组：综合练习</h3><ol start="13"><li>证明：sin(π+α)=−sinα。</li><li>证明：cos(π−α)=−cosα。</li><li>若 tanα=2，求 tan(π+α) 与 tan(2π−α)。</li><li>求值：sin750°、cos(−420°)、tan1110°。</li><li>化简：sin(270°+α)+cos(180°−α)。</li><li>若 θ 与 −30° 终边相同，求 sinθ、cosθ、tanθ。</li></ol><details><summary>查看 C组答案</summary><ol start="13"><li>由图7，角 π+α 与 α 关于原点中心对称，所以纵坐标变为相反数，故 sin(π+α)=−sinα。</li><li>由图6，角 π−α 与 α 关于 y 轴对称，所以横坐标变为相反数，故 cos(π−α)=−cosα。</li><li>tan(π+α)=tanα=2；tan(2π−α)=−tanα=−2。</li><li>sin750° = sin(720°+30°)=1/2；cos(−420°)=cos(−60°)=1/2；tan1110°=tan(1080°+30°)=√3/3。</li><li>sin(270°+α)+cos(180°−α)=−cosα−cosα = −2cosα。</li><li>终边相同的角三角函数值相同，所以 sinθ = −1/2，cosθ = √3/2，tanθ = −√3/3。</li></ol></details></div>
+  </section>
+
+  <section class="card">
+    <h2>六、最后总结：做题时最稳妥的方法</h2>
+    <div class="grid3">
+      <div class="note"><h4>步骤1</h4><p>把角改写成<br/><strong>0°、90°、180°、270°、360° ± α</strong> 的形式。</p></div>
+      <div class="note"><h4>步骤2</h4><p>看这个基准角是几个 90°，判断是<br/><strong>奇变</strong> 还是 <strong>偶不变</strong>。</p></div>
+      <div class="note"><h4>步骤3</h4><p>看原角所在象限，决定最终符号。</p></div>
+      <div class="note"><h4>步骤4</h4><p>把结果化成熟悉的锐角函数值，如 30°、45°、60°。</p></div>
+      <div class="tip"><h4>重点记忆</h4><p><strong>一全正，二正弦，三正切，四余弦。</strong></p></div>
+      <div class="tip"><h4>核心思想</h4><p><strong>复杂角 → 熟悉角</strong></p></div>
+    </div>
+  </section>
+
+  <div class="footer">这是本地可打开的 HTML 文件（增强版）。<br/>如果你需要，我还可以继续帮你做：<strong>加入单位圆动画版</strong>、<strong>只保留讲解版</strong>、<strong>课堂测试版</strong>。</div>
+</div>
+<script>
+function toggleAll(open) { document.querySelectorAll('details').forEach(d => d.open = open); }
+</script>
+</body>
+</html>
