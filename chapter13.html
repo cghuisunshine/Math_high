@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>第13章 和差倍半角公式｜9课时详细教程</title>
+  <style>
+    :root{
+      --bg:#f6f8fc;--panel:#fff;--panel2:#f1f5fb;--text:#172033;--muted:#5f6b7c;
+      --line:#dce3ee;--brand:#6d28d9;--brand2:#8b5cf6;--accent:#f59e0b;
+      --blue:#2563eb;--red:#dc2626;--green:#15803d;--shadow:0 10px 30px rgba(21,38,65,.09);
+      --radius:18px;--formula:#f3efff;--formula-line:#d9c9ff;--side:300px;
+    }
+    body.dark{
+      --bg:#0d1020;--panel:#171a2d;--panel2:#20253b;--text:#edf0fa;--muted:#b1b8cc;
+      --line:#343a55;--brand:#c4b5fd;--brand2:#a78bfa;--accent:#fbbf24;
+      --blue:#93c5fd;--red:#fca5a5;--green:#86efac;--shadow:0 12px 36px rgba(0,0,0,.3);
+      --formula:#211c3d;--formula-line:#51428a;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.78}
+    button,input,select{font:inherit}a{color:inherit}
+    .skip{position:absolute;left:-9999px}.skip:focus{left:12px;top:12px;z-index:100;background:var(--panel);padding:8px 12px;border-radius:8px}
+    .layout{display:grid;grid-template-columns:var(--side) minmax(0,1fr);min-height:100vh}
+    aside{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--line);padding:22px 18px;z-index:20}
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:18px}
+    .brandmark{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;color:white;font-weight:900;font-size:20px;background:linear-gradient(135deg,#6d28d9,#a78bfa);box-shadow:var(--shadow)}
+    .brand h1{font-size:18px;margin:0;line-height:1.25}.brand small{color:var(--muted)}
+    .search{width:100%;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:10px 12px;border-radius:12px;outline:none}
+    .search:focus{border-color:var(--brand2);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand2) 20%,transparent)}
+    nav{margin:15px 0}nav a{display:block;text-decoration:none;padding:7px 10px;border-radius:10px;color:var(--muted);font-size:13px}
+    nav a:hover,nav a.active{background:var(--panel2);color:var(--brand);font-weight:700}
+    .side-tools{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:8px 10px;border-radius:10px;cursor:pointer}
+    .btn:hover{border-color:var(--brand2);color:var(--brand)}
+    .progressBox{margin-top:16px;padding:12px;background:var(--panel2);border-radius:13px;font-size:13px}
+    .bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:8px}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:.3s}
+    main{min-width:0}
+    .hero{padding:58px max(5vw,28px) 42px;background:
+      radial-gradient(circle at 86% 12%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 27%),
+      radial-gradient(circle at 72% 70%,color-mix(in srgb,var(--brand2) 16%,transparent),transparent 35%),
+      linear-gradient(145deg,var(--panel),var(--bg));border-bottom:1px solid var(--line)}
+    .eyebrow{color:var(--brand);font-weight:800;letter-spacing:.08em;font-size:13px}
+    .hero h2{font-size:clamp(34px,5vw,62px);line-height:1.12;margin:14px 0 12px;letter-spacing:-.04em}
+    .hero p{max-width:830px;color:var(--muted);font-size:18px;margin:0}
+    .badges{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}.badge{padding:7px 11px;border-radius:99px;background:var(--panel);border:1px solid var(--line);font-size:13px;box-shadow:0 4px 12px rgba(30,50,80,.05)}
+    .content{max-width:1160px;margin:auto;padding:32px max(4vw,22px) 80px}
+    section{scroll-margin-top:20px;margin:0 0 38px}
+    .section-head{display:flex;gap:14px;align-items:flex-start;margin:10px 0 18px}
+    .num{flex:none;width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:var(--brand);color:var(--bg);font-weight:900}
+    .section-head h2{margin:0;font-size:27px}.section-head p{margin:3px 0 0;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 10px;font-size:19px}.card h4{margin:17px 0 7px}.card p:last-child{margin-bottom:0}
+    .label{font-size:12px;font-weight:900;letter-spacing:.08em;color:var(--brand)}
+    .lesson{position:relative;overflow:hidden}.lesson::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--brand2)}
+    .lesson-time{color:var(--muted);font-size:13px}
+    .math,.formula{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif}
+    .formula{position:relative;background:var(--formula);border:1px solid var(--formula-line);border-left:5px solid var(--blue);border-radius:12px;padding:14px 48px 14px 16px;margin:12px 0;font-size:clamp(17px,2.1vw,21px);overflow:auto;white-space:nowrap}
+    .formula.center{text-align:center;font-size:clamp(20px,2.6vw,27px)}
+    .copy{position:absolute;right:8px;top:8px;border:0;background:transparent;color:var(--muted);cursor:pointer;font-family:inherit;font-size:16px}
+    .note,.warning,.tip{border-radius:12px;padding:13px 15px;margin:12px 0}
+    .note{background:color-mix(in srgb,var(--blue) 9%,var(--panel));border-left:4px solid var(--blue)}
+    .warning{background:color-mix(in srgb,var(--red) 9%,var(--panel));border-left:4px solid var(--red)}
+    .tip{background:color-mix(in srgb,var(--green) 9%,var(--panel));border-left:4px solid var(--green)}
+    table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:var(--panel);font-size:15px}
+    th,td{padding:11px 12px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+    th{background:var(--panel2);font-weight:800}tr:last-child td{border-bottom:0}th:last-child,td:last-child{border-right:0}
+    .table-wrap{overflow:auto}
+    details{border:1px solid var(--line);border-radius:13px;background:var(--panel);margin:10px 0;overflow:hidden}
+    summary{cursor:pointer;padding:13px 16px;font-weight:800;background:var(--panel2);list-style:none}
+    summary::-webkit-details-marker{display:none}summary::after{content:"＋";float:right;color:var(--brand)}details[open] summary::after{content:"－"}
+    .details-body{padding:4px 16px 16px}
+    .steps{counter-reset:step;list-style:none;padding:0}.steps li{counter-increment:step;position:relative;padding:0 0 14px 46px;min-height:36px}
+    .steps li::before{content:counter(step);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--brand);color:var(--bg);font-weight:900}
+    .example{border-top:4px solid var(--accent)}.example .question{font-weight:800;font-size:17px}
+    .checkline{display:flex;gap:10px;align-items:flex-start;margin:8px 0}.checkline input{margin-top:7px;accent-color:var(--brand)}
+    .viz{display:grid;grid-template-columns:minmax(320px,1.1fr) minmax(260px,.9fr);gap:18px;align-items:center}
+    .vizbox{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:14px}
+    .vizbox svg{width:100%;height:auto;display:block}.controls label{display:block;font-weight:800;margin-top:8px}.controls input[type=range]{width:100%;accent-color:var(--brand)}
+    .readout{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px}.readout div{background:var(--panel2);padding:10px;border-radius:10px}.readout b{display:block;color:var(--brand);font-size:17px}
+    .formula-map{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.formula-map div{padding:13px 8px;border:1px solid var(--line);border-radius:12px;text-align:center;background:var(--panel2)}
+    .exercise{padding:14px 0;border-bottom:1px dashed var(--line)}.exercise:last-child{border-bottom:0}.level{display:inline-block;padding:2px 8px;border-radius:99px;font-size:12px;font-weight:800;margin-right:6px}.basic{background:#dcfce7;color:#166534}.mid{background:#dbeafe;color:#1e40af}.hard{background:#ffedd5;color:#9a3412}
+    .answer{margin-top:9px}.answer summary{background:transparent;color:var(--brand);padding:7px 0}.answer .details-body{padding:0 0 8px}
+    .quiz-option{display:block;border:1px solid var(--line);border-radius:10px;padding:9px 11px;margin:7px 0;cursor:pointer}.quiz-option:hover{border-color:var(--brand2)}.quiz-result{font-weight:800;margin-top:9px}
+    .flow{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}.flow span{padding:10px 13px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);font-weight:700}.flow i{color:var(--brand);font-style:normal;font-size:22px}
+    .footer{text-align:center;color:var(--muted);padding:30px}.topbar{display:none}
+    mark{background:#fde68a;color:#3b2f0b;border-radius:3px;padding:0 2px}.hidden-by-search{display:none!important}
+    .toast{position:fixed;right:22px;bottom:22px;background:#111827;color:#fff;padding:10px 15px;border-radius:10px;opacity:0;transform:translateY(15px);transition:.25s;pointer-events:none;z-index:99}.toast.show{opacity:1;transform:none}
+    @media(max-width:900px){
+      .layout{display:block}.topbar{display:flex;position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--panel) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:10px 14px;justify-content:space-between;align-items:center}
+      .topbar b{color:var(--brand)}aside{position:fixed;left:0;top:0;transform:translateX(-105%);transition:.25s;width:min(88vw,320px);box-shadow:var(--shadow)}aside.open{transform:none}
+      .hero{padding-top:38px}.grid,.grid3,.viz{grid-template-columns:1fr}.formula-map{grid-template-columns:1fr}
+    }
+    @media(max-width:560px){.hero{padding-left:20px;padding-right:20px}.content{padding-left:15px;padding-right:15px}.card{padding:16px}.readout{grid-template-columns:1fr}.section-head h2{font-size:23px}.num{width:42px;height:42px}.formula{font-size:17px}.badges{gap:6px}}
+    @media print{aside,.topbar,.copy,.side-tools,.search,.toast{display:none!important}.layout{display:block}.hero{padding:24px;background:white}.content{max-width:none;padding:18px}body{background:white;color:#111}.card,details{box-shadow:none;break-inside:avoid}details:not([open])>.details-body{display:block}summary::after{display:none}}
+  </style>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<div class="topbar"><b>第13章 · 和差倍半角公式</b><button class="btn" id="menuBtn" aria-label="打开目录">☰ 目录</button></div>
+<div class="layout">
+  <aside id="sidebar">
+    <div class="brand"><div class="brandmark">13</div><div><h1>和差倍半角公式</h1><small>9 课时详细教程</small></div></div>
+    <input id="search" class="search" type="search" placeholder="搜索：和角、二倍角、辅助角…">
+    <nav id="nav">
+      <a href="#overview">学习路线</a>
+      <a href="#lesson1">第1课时　和差角推导</a>
+      <a href="#lesson2">第2课时　和差角应用</a>
+      <a href="#lesson3">第3课时　二倍角</a>
+      <a href="#lesson4">第4课时　半角与变式</a>
+      <a href="#lesson5">第5课时　辅助角基础</a>
+      <a href="#lesson6">第6课时　最值与值域</a>
+      <a href="#lesson7">第7课时　方程与参数</a>
+      <a href="#lesson8">第8课时　三倍角推导</a>
+      <a href="#lesson9">第9课时　三倍角应用</a>
+      <a href="#summary">公式总表</a>
+      <a href="#practice">分层练习</a>
+      <a href="#quiz">即时自测</a>
+    </nav>
+    <div class="side-tools">
+      <button class="btn" id="themeBtn">◐ 主题</button>
+      <button class="btn" id="fontBtn">A⁺ 字号</button>
+      <button class="btn" id="expandBtn">展开全部</button>
+      <button class="btn" onclick="window.print()">打印 / PDF</button>
+    </div>
+    <div class="progressBox"><b>学习进度 <span id="progressText">0%</span></b><div class="bar"><span id="progressBar"></span></div><small>勾选每课时末的“我已掌握”</small></div>
+  </aside>
+
+  <main id="main">
+    <header class="hero">
+      <div class="eyebrow">高一数学 · 三角恒等变换核心章</div>
+      <h2>第 13 章<br>和差倍半角公式</h2>
+      <p>不把十几个公式当成孤立口诀：从一个核心公式出发，建立“和差角 → 二倍角 → 半角 → 辅助角 → 三倍角”的推导网络。</p>
+      <div class="badges"><span class="badge">9 课时</span><span class="badge">完整推导</span><span class="badge">18 道例题</span><span class="badge">21 道分层练习</span><span class="badge">交互验证</span><span class="badge">离线可用</span></div>
+    </header>
+
+    <div class="content">
+      <section id="overview" class="searchable">
+        <div class="section-head"><div class="num">0</div><div><h2>学习路线与大纲对应</h2><p>严格对应图片中的第 13 章：2＋2＋3＋2，共 9 课时。</p></div></div>
+        <div class="table-wrap">
+          <table aria-label="第13章课时安排">
+            <tr><th>大纲小标题</th><th>课时</th><th>本教程安排</th><th>核心目标</th></tr>
+            <tr><td>和差角公式</td><td>2</td><td>第 1–2 课时</td><td>推导、求值、化简、证明</td></tr>
+            <tr><td>二倍角公式</td><td>2</td><td>第 3–4 课时</td><td>二倍角、降幂、半角、升降次</td></tr>
+            <tr><td>辅助角公式</td><td>3</td><td>第 5–7 课时</td><td>合一、最值、值域、方程、参数</td></tr>
+            <tr><td>三倍角公式</td><td>2</td><td>第 8–9 课时</td><td>推导、化简、三次式与综合应用</td></tr>
+          </table>
+        </div>
+        <article class="card" style="margin-top:16px">
+          <h3>全章只需要抓住一条主线</h3>
+          <div class="flow"><span>和差角公式</span><i>→</i><span>令 β＝α</span><i>→</i><span>二倍角</span><i>→</i><span>反解</span><i>→</i><span>半角 / 降幂</span></div>
+          <div class="flow" style="margin-top:10px"><span>a sin x＋b cos x</span><i>→</i><span>配成和角</span><i>→</i><span>一个三角函数</span><i>→</i><span>最值 / 方程</span></div>
+          <div class="note"><b>先决知识：</b>任意角三角函数、诱导公式、特殊角三角函数值，以及各象限的符号。</div>
+        </article>
+      </section>
+
+      <section id="lesson1" class="searchable">
+        <div class="section-head"><div class="num">1</div><div><h2>第 1 课时：和差角公式的来源</h2><p>先理解“为什么”，再记忆公式的结构。</p></div></div>
+        <div class="grid">
+          <article class="card">
+            <span class="label">核心公式</span><h3>正弦、余弦的和差</h3>
+            <div class="formula" data-copy>sin(α＋β)＝sinα cosβ＋cosα sinβ<button class="copy">📋</button></div>
+            <div class="formula" data-copy>sin(α－β)＝sinα cosβ－cosα sinβ<button class="copy">📋</button></div>
+            <div class="formula" data-copy>cos(α＋β)＝cosα cosβ－sinα sinβ<button class="copy">📋</button></div>
+            <div class="formula" data-copy>cos(α－β)＝cosα cosβ＋sinα sinβ<button class="copy">📋</button></div>
+            <div class="tip"><b>结构记忆：</b>正弦公式“正余＋余正”，符号与括号相同；余弦公式“余余∓正正”，符号与括号相反。</div>
+          </article>
+          <article class="card">
+            <span class="label">推导</span><h3>从余弦差角公式出发</h3>
+            <p>单位圆上两点 <span class="math">P(cosα, sinα)</span>、<span class="math">Q(cosβ, sinβ)</span> 的夹角为 <span class="math">α－β</span>。两个单位向量的点积一方面等于夹角余弦，另一方面等于坐标乘积之和：</p>
+            <div class="formula center">cos(α－β)＝cosα cosβ＋sinα sinβ</div>
+            <p>令 <span class="math">β→－β</span>，利用 <span class="math">cos(－β)=cosβ，sin(－β)=－sinβ</span>，得到余弦和角公式；再利用 <span class="math">sinθ=cos(π/2－θ)</span> 得到正弦公式。</p>
+          </article>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <article class="card example"><span class="label">例 1</span><p class="question">求 sin15° 的精确值。</p>
+            <ol class="steps"><li>拆成特殊角：<span class="math">15°＝45°－30°</span>。</li><li>用正弦差角：<span class="math">sin15°＝sin45°cos30°－cos45°sin30°</span>。</li><li>代入：<span class="math">＝√2/2·√3/2－√2/2·1/2＝(√6－√2)/4</span>。</li></ol>
+          </article>
+          <article class="card example"><span class="label">例 2</span><p class="question">求 cos75° 的精确值，并说明符号是否合理。</p>
+            <ol class="steps"><li><span class="math">75°＝45°＋30°</span>。</li><li><span class="math">cos75°＝cos45°cos30°－sin45°sin30°</span>。</li><li><span class="math">＝(√6－√2)/4</span>。75° 在第一象限，结果为正，合理。</li></ol>
+          </article>
+        </div>
+        <article class="card" style="margin-top:16px">
+          <h3>交互验证：改变 α、β，看公式左右是否相等</h3>
+          <div class="viz">
+            <div class="vizbox">
+              <svg viewBox="0 0 420 320" role="img" aria-label="和角公式单位圆验证">
+                <line x1="30" y1="160" x2="390" y2="160" stroke="currentColor" opacity=".3"/><line x1="210" y1="15" x2="210" y2="305" stroke="currentColor" opacity=".3"/>
+                <circle cx="210" cy="160" r="125" fill="none" stroke="currentColor" opacity=".5"/>
+                <line id="lineA" x1="210" y1="160" x2="335" y2="160" stroke="#2563eb" stroke-width="4"/>
+                <line id="lineAB" x1="210" y1="160" x2="335" y2="160" stroke="#f59e0b" stroke-width="4"/>
+                <circle id="pointAB" cx="335" cy="160" r="7" fill="#f59e0b"/>
+                <text id="labelA" x="300" y="145" fill="#2563eb">α</text><text id="labelAB" x="290" y="120" fill="#b45309">α＋β</text>
+              </svg>
+            </div>
+            <div class="controls">
+              <label>α＝<span id="alphaText">35°</span></label><input id="alphaRange" type="range" min="-180" max="180" value="35">
+              <label>β＝<span id="betaText">25°</span></label><input id="betaRange" type="range" min="-180" max="180" value="25">
+              <div class="readout"><div>左边 <b id="sumLeft">0.8660</b><small>sin(α＋β)</small></div><div>右边 <b id="sumRight">0.8660</b><small>sinαcosβ＋cosαsinβ</small></div></div>
+              <div class="tip" id="sumStatus">两边相等（显示值精确到 4 位小数）</div>
+            </div>
+          </div>
+        </article>
+        <div class="card" style="margin-top:16px"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="c13l1"><span><b>我已掌握：</b>能写出并解释四个正余弦和差角公式，能计算 15°、75° 等非特殊角。</span></label></div>
+      </section>
+
+      <section id="lesson2" class="searchable">
+        <div class="section-head"><div class="num">2</div><div><h2>第 2 课时：正切和差与综合应用</h2><p>从 sin/cos 相除得到 tan，并练习整体识别。</p></div></div>
+        <div class="grid">
+          <article class="card">
+            <h3>正切和差公式</h3>
+            <div class="formula" data-copy>tan(α＋β)＝(tanα＋tanβ)/(1－tanα tanβ)<button class="copy">📋</button></div>
+            <div class="formula" data-copy>tan(α－β)＝(tanα－tanβ)/(1＋tanα tanβ)<button class="copy">📋</button></div>
+            <p>推导时将 <span class="math">sin(α＋β)/cos(α＋β)</span> 的分子、分母同除以 <span class="math">cosαcosβ</span>。</p>
+            <div class="warning"><b>定义域：</b>不仅公式分母不能为 0，原式中的 <span class="math">tanα、tanβ、tan(α±β)</span> 也必须有意义。解题时不可机械套式。</div>
+          </article>
+          <article class="card">
+            <h3>整体识别：不要急着展开</h3>
+            <div class="formula">sinα cosβ＋cosα sinβ＝sin(α＋β)</div>
+            <div class="formula">cosα cosβ＋sinα sinβ＝cos(α－β)</div>
+            <div class="formula">tanα＋tanβ＝tan(α＋β)(1－tanα tanβ)</div>
+            <p>看到“正余交叉”想到正弦；看到“同名相乘”想到余弦；看到正切分式先检查分母和定义域。</p>
+          </article>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <article class="card example"><span class="label">例 3</span><p class="question">求 tan105° 的精确值。</p>
+            <ol class="steps"><li><span class="math">105°＝60°＋45°</span>。</li><li><span class="math">tan105°＝(√3＋1)/(1－√3)</span>。</li><li>分母有理化得 <span class="math">tan105°＝－(2＋√3)</span>。</li><li>105° 在第二象限，正切为负，符号正确。</li></ol>
+          </article>
+          <article class="card example"><span class="label">例 4</span><p class="question">已知 tanα＝1/2，tanβ＝1/3，求 tan(α＋β)。</p>
+            <ol class="steps"><li>检查 <span class="math">1－tanαtanβ＝1－1/6≠0</span>。</li><li><span class="math">tan(α＋β)＝(1/2＋1/3)/(1－1/6)</span>。</li><li><span class="math">＝(5/6)/(5/6)＝1</span>。</li></ol>
+          </article>
+        </div>
+        <details><summary>拓展证明：若 A＋B＋C＝π，证明 tanA＋tanB＋tanC＝tanA tanB tanC</summary><div class="details-body"><p>因为 <span class="math">A＋B＝π－C</span>，故 <span class="math">tan(A＋B)=－tanC</span>。代入正切和角公式：</p><p class="math">(tanA＋tanB)/(1－tanAtanB)=－tanC</p><p>交叉相乘并移项，即得结论。前提是有关正切均有意义；不能忽略定义域。</p></div></details>
+        <div class="card"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="c13l2"><span><b>我已掌握：</b>能使用正切和差公式，并能把展开式整体还原为某个角的三角函数。</span></label></div>
+      </section>
+
+      <section id="lesson3" class="searchable">
+        <div class="section-head"><div class="num">3</div><div><h2>第 3 课时：二倍角公式</h2><p>令和角公式中的 β＝α，获得最常用的升次与降次工具。</p></div></div>
+        <div class="grid">
+          <article class="card">
+            <h3>三个二倍角公式</h3>
+            <div class="formula center">sin2x＝2sinx cosx</div>
+            <div class="formula center">cos2x＝cos²x－sin²x</div>
+            <div class="formula center">tan2x＝2tanx/(1－tan²x)</div>
+            <p>二倍角不是“角乘 2 后，函数值也乘 2”。例如通常 <span class="math">sin2x≠2sinx</span>，正确式子多了 <span class="math">cosx</span>。</p>
+          </article>
+          <article class="card">
+            <h3>余弦二倍角的三种面貌</h3>
+            <div class="formula">cos2x＝cos²x－sin²x</div>
+            <div class="formula">cos2x＝2cos²x－1</div>
+            <div class="formula">cos2x＝1－2sin²x</div>
+            <p>选择标准：题目只有 <span class="math">sinx</span> 就用第三式；只有 <span class="math">cosx</span> 就用第二式；正弦余弦都有时常用第一式。</p>
+          </article>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <article class="card example"><span class="label">例 5</span><p class="question">已知 sinx＝3/5，x∈(π/2,π)，求 sin2x、cos2x、tan2x。</p>
+            <ol class="steps"><li>x 在第二象限，所以 <span class="math">cosx＝－4/5，tanx＝－3/4</span>。</li><li><span class="math">sin2x＝2·3/5·(－4/5)＝－24/25</span>。</li><li><span class="math">cos2x＝1－2·9/25＝7/25</span>。</li><li><span class="math">tan2x＝sin2x/cos2x＝－24/7</span>。</li></ol>
+          </article>
+          <article class="card example"><span class="label">例 6</span><p class="question">化简 (1－cos2x)/sin2x。</p>
+            <ol class="steps"><li><span class="math">1－cos2x＝2sin²x</span>。</li><li><span class="math">sin2x＝2sinxcosx</span>。</li><li>当原式有意义时，原式 <span class="math">＝tanx</span>。</li></ol>
+            <div class="warning">约去 <span class="math">2sinx</span> 前，要知道原式已有 <span class="math">sin2x≠0</span>，因此此处 <span class="math">sinx≠0</span>。</div>
+          </article>
+        </div>
+        <div class="card" style="margin-top:16px"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="c13l3"><span><b>我已掌握：</b>能根据已知条件选择合适的二倍角形式，并注意象限和定义域。</span></label></div>
+      </section>
+
+      <section id="lesson4" class="searchable">
+        <div class="section-head"><div class="num">4</div><div><h2>第 4 课时：半角、降幂与万能代换</h2><p>标题中的“半角”来自对二倍角公式的反解。</p></div></div>
+        <div class="grid">
+          <article class="card">
+            <h3>半角公式与符号</h3>
+            <div class="formula">sin²(x/2)＝(1－cosx)/2</div>
+            <div class="formula">cos²(x/2)＝(1＋cosx)/2</div>
+            <div class="formula">tan(x/2)＝sinx/(1＋cosx)＝(1－cosx)/sinx</div>
+            <div class="formula">sin(x/2)＝±√[(1－cosx)/2]，cos(x/2)＝±√[(1＋cosx)/2]</div>
+            <div class="warning"><b>根号前的正负号由 x/2 所在象限决定</b>，不是由 x 的象限直接决定，也不能一律取正。</div>
+          </article>
+          <article class="card">
+            <h3>升幂与降幂</h3>
+            <div class="formula">sin²x＝(1－cos2x)/2</div>
+            <div class="formula">cos²x＝(1＋cos2x)/2</div>
+            <div class="formula">sinx cosx＝(1/2)sin2x</div>
+            <p>“平方 → 一次”叫降幂，但角变成 2x；“乘积 → 单个三角函数”也常用于积分、求和与最值。</p>
+            <div class="tip"><b>万能代换：</b>令 <span class="math">t＝tan(x/2)</span>，则 <span class="math">sinx＝2t/(1＋t²)，cosx＝(1－t²)/(1＋t²)</span>。本章只需理解来源，复杂方程中再使用。</div>
+          </article>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <article class="card example"><span class="label">例 7</span><p class="question">求 cos15° 的精确值（用半角公式）。</p>
+            <ol class="steps"><li><span class="math">15°＝30°/2</span>，且 15° 在第一象限，取正号。</li><li><span class="math">cos15°＝√[(1＋cos30°)/2]</span>。</li><li><span class="math">＝√[(2＋√3)/4]＝√(2＋√3)/2＝(√6＋√2)/4</span>。</li></ol>
+          </article>
+          <article class="card example"><span class="label">例 8</span><p class="question">化简 (sinx)/(1＋cosx)。</p>
+            <ol class="steps"><li>分子分母同乘 <span class="math">1－cosx</span>。</li><li><span class="math">＝sinx(1－cosx)/(1－cos²x)</span>。</li><li><span class="math">＝(1－cosx)/sinx＝tan(x/2)</span>（在原式有意义的范围内）。</li></ol>
+          </article>
+        </div>
+        <div class="card" style="margin-top:16px"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="c13l4"><span><b>我已掌握：</b>能从二倍角反解出半角公式，能判断根号前符号，能完成基本升降幂。</span></label></div>
+      </section>
+
+      <section id="lesson5" class="searchable">
+        <div class="section-head"><div class="num">5</div><div><h2>第 5 课时：辅助角公式基础</h2><p>把两个同频三角函数合成为一个。</p></div></div>
+        <div class="grid">
+          <article class="card">
+            <h3>标准合成</h3>
+            <div class="formula center">a sinx＋b cosx＝R sin(x＋φ)</div>
+            <div class="formula">R＝√(a²＋b²)，cosφ＝a/R，sinφ＝b/R</div>
+            <p>因为 <span class="math">Rsin(x＋φ)=Rcosφ·sinx＋Rsinφ·cosx</span>，比较系数就得到上述条件。辅助角 <span class="math">φ</span> 的象限由 <span class="math">(a,b)</span> 的符号共同决定。</p>
+            <div class="tip">也可写成 <span class="math">Rcos(x－θ)</span>；只要展开后系数正确即可。考试中选自己最顺手的一种。</div>
+          </article>
+          <article class="card">
+            <h3>常用特例</h3>
+            <div class="formula">sinx＋cosx＝√2 sin(x＋π/4)</div>
+            <div class="formula">sinx－cosx＝√2 sin(x－π/4)</div>
+            <div class="formula">√3 sinx＋cosx＝2sin(x＋π/6)</div>
+            <div class="formula">sinx＋√3 cosx＝2sin(x＋π/3)</div>
+            <p>最常见错误是把 <span class="math">a、b</span> 与 <span class="math">sinφ、cosφ</span> 对错位置。每次展开检查最快。</p>
+          </article>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <article class="card example"><span class="label">例 9</span><p class="question">把 3sinx＋4cosx 化为一个三角函数。</p>
+            <ol class="steps"><li><span class="math">R＝√(3²＋4²)＝5</span>。</li><li>取 <span class="math">cosφ＝3/5，sinφ＝4/5</span>，φ 在第一象限。</li><li><span class="math">3sinx＋4cosx＝5sin(x＋φ)</span>。</li><li>展开检验：<span class="math">5cosφ＝3，5sinφ＝4</span>。</li></ol>
+          </article>
+          <article class="card example"><span class="label">例 10</span><p class="question">化简 sinx－√3cosx。</p>
+            <ol class="steps"><li><span class="math">R＝2</span>。</li><li>需要 <span class="math">cosφ＝1/2，sinφ＝－√3/2</span>，可取 <span class="math">φ＝－π/3</span>。</li><li>所以原式 <span class="math">＝2sin(x－π/3)</span>。</li></ol>
+          </article>
+        </div>
+        <article class="card" style="margin-top:16px">
+          <h3>交互实验：输入系数，观察振幅和相位</h3>
+          <div class="viz">
+            <div class="vizbox"><svg id="waveSvg" viewBox="0 0 520 280" role="img" aria-label="辅助角公式函数图像"><line x1="20" y1="140" x2="500" y2="140" stroke="currentColor" opacity=".35"/><line x1="260" y1="20" x2="260" y2="260" stroke="currentColor" opacity=".35"/><path id="wavePath" fill="none" stroke="#8b5cf6" stroke-width="4"/><line id="topAmp" x1="20" y1="50" x2="500" y2="50" stroke="#f59e0b" stroke-dasharray="7 6"/><line id="botAmp" x1="20" y1="230" x2="500" y2="230" stroke="#f59e0b" stroke-dasharray="7 6"/></svg></div>
+            <div class="controls">
+              <label>a＝<span id="aText">3</span></label><input id="aRange" type="range" min="-5" max="5" step=".5" value="3">
+              <label>b＝<span id="bText">4</span></label><input id="bRange" type="range" min="-5" max="5" step=".5" value="4">
+              <div class="readout"><div>振幅 R<b id="rText">5.000</b></div><div>辅助角 φ<b id="phiText">53.13°</b></div></div>
+              <div class="formula" id="auxFormula">3sinx＋4cosx＝5sin(x＋53.13°)</div>
+              <div class="tip" id="rangeText">值域：[−5，5]</div>
+            </div>
+          </div>
+        </article>
+        <div class="card" style="margin-top:16px"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="c13l5"><span><b>我已掌握：</b>能正确求 R 和辅助角，并通过展开检查合成结果。</span></label></div>
+      </section>
+
+      <section id="lesson6" class="searchable">
+        <div class="section-head"><div class="num">6</div><div><h2>第 6 课时：辅助角求最值、值域</h2><p>合成后利用 −1≤sinθ≤1。</p></div></div>
+        <div class="grid">
+          <article class="card">
+            <h3>无区间限制</h3>
+            <div class="formula">−√(a²＋b²) ≤ a sinx＋b cosx ≤ √(a²＋b²)</div>
+            <p>因此最大值为 <span class="math">R</span>，最小值为 <span class="math">－R</span>。等号分别在 <span class="math">sin(x＋φ)=1</span> 与 <span class="math">－1</span> 时取得。</p>
+            <div class="warning">若 x 有范围限制，<span class="math">x＋φ</span> 可能到不了使正弦等于 ±1 的角，不能直接写 ±R。</div>
+          </article>
+          <article class="card">
+            <h3>有区间限制：三步法</h3>
+            <ol class="steps"><li>先合成 <span class="math">Rsin(x＋φ)</span>。</li><li>把 x 的区间平移成 <span class="math">x＋φ</span> 的区间。</li><li>在新角区间上判断正弦的最大、最小值。</li></ol>
+          </article>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <article class="card example"><span class="label">例 11</span><p class="question">求 y＝sinx＋√3cosx＋2 的值域。</p>
+            <ol class="steps"><li><span class="math">sinx＋√3cosx＝2sin(x＋π/3)</span>。</li><li><span class="math">−1≤sin(x＋π/3)≤1</span>。</li><li><span class="math">−2≤2sin(x＋π/3)≤2</span>。</li><li>加 2，得值域 <span class="math">[0,4]</span>。</li></ol>
+          </article>
+          <article class="card example"><span class="label">例 12</span><p class="question">x∈[0,π/2]，求 sinx＋cosx 的最大、最小值。</p>
+            <ol class="steps"><li><span class="math">sinx＋cosx＝√2sin(x＋π/4)</span>。</li><li><span class="math">x＋π/4∈[π/4,3π/4]</span>。</li><li>该区间正弦最大值 1，在 <span class="math">x＝π/4</span> 取得；最小值为 <span class="math">√2/2</span>，在两端点取得。</li><li>故原式最大值 <span class="math">√2</span>，最小值 1。</li></ol>
+          </article>
+        </div>
+        <div class="card" style="margin-top:16px"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="c13l6"><span><b>我已掌握：</b>能区分全体实数上的最值和限定区间内的最值。</span></label></div>
+      </section>
+
+      <section id="lesson7" class="searchable">
+        <div class="section-head"><div class="num">7</div><div><h2>第 7 课时：辅助角解方程与参数问题</h2><p>先“合一”，再按一个三角函数处理。</p></div></div>
+        <div class="grid">
+          <article class="card">
+            <h3>方程基本流程</h3>
+            <div class="flow"><span>合成 Rsin(x＋φ)</span><i>→</i><span>检查 |c|≤R</span><i>→</i><span>解基本方程</span><i>→</i><span>筛选区间</span></div>
+            <p>方程 <span class="math">a sinx＋b cosx＝c</span> 有实数解的充要条件是 <span class="math">|c|≤√(a²＋b²)</span>。</p>
+          </article>
+          <article class="card">
+            <h3>参数存在性</h3>
+            <p>若要使 <span class="math">a sinx＋b cosx＝m</span> 有解，就把问题转化为“水平线 y=m 是否与振幅为 R 的正弦曲线相交”。</p>
+            <div class="formula center">有解 ⇔ −R≤m≤R</div>
+            <p>若要求对任意 x 恒成立，则通常比较整个函数的最小值或最大值，而不是只看某一个 x。</p>
+          </article>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <article class="card example"><span class="label">例 13</span><p class="question">解方程 √3sinx＋cosx＝1，x∈[0,2π)。</p>
+            <ol class="steps"><li>左边合成：<span class="math">2sin(x＋π/6)＝1</span>。</li><li><span class="math">sin(x＋π/6)＝1/2</span>。</li><li><span class="math">x＋π/6＝π/6＋2kπ</span> 或 <span class="math">5π/6＋2kπ</span>。</li><li><span class="math">x＝2kπ</span> 或 <span class="math">2π/3＋2kπ</span>；筛选得 <span class="math">x＝0，2π/3</span>。</li></ol>
+          </article>
+          <article class="card example"><span class="label">例 14</span><p class="question">关于 x 的方程 3sinx＋4cosx＝m 有解，求 m 的范围。</p>
+            <ol class="steps"><li>左边振幅 <span class="math">R＝5</span>。</li><li>因此左边的值域为 <span class="math">[−5,5]</span>。</li><li>方程有解当且仅当 <span class="math">m∈[−5,5]</span>。</li></ol>
+          </article>
+        </div>
+        <div class="card" style="margin-top:16px"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="c13l7"><span><b>我已掌握：</b>能用辅助角解方程、筛选区间，并判断含参数方程是否有解。</span></label></div>
+      </section>
+
+      <section id="lesson8" class="searchable">
+        <div class="section-head"><div class="num">8</div><div><h2>第 8 课时：三倍角公式的推导</h2><p>把 3x 看成 2x＋x，再用和角和二倍角。</p></div></div>
+        <div class="grid">
+          <article class="card">
+            <h3>正弦三倍角</h3>
+            <p class="math">sin3x＝sin(2x＋x)</p>
+            <p class="math">＝sin2x cosx＋cos2x sinx</p>
+            <p class="math">＝2sinx cos²x＋(1－2sin²x)sinx</p>
+            <div class="formula center">sin3x＝3sinx－4sin³x</div>
+          </article>
+          <article class="card">
+            <h3>余弦与正切三倍角</h3>
+            <p class="math">cos3x＝cos(2x＋x)＝cos2x cosx－sin2x sinx</p>
+            <div class="formula center">cos3x＝4cos³x－3cosx</div>
+            <div class="formula center">tan3x＝(3tanx－tan³x)/(1－3tan²x)</div>
+            <div class="warning">正切公式仍有定义域限制。分母为 0 时，右式无意义；同时还要保证有关正切存在。</div>
+          </article>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <article class="card example"><span class="label">例 15</span><p class="question">不用和角公式，求 sin18° 满足的三次关系。</p>
+            <ol class="steps"><li>令 <span class="math">x＝18°</span>，则 <span class="math">3x＝54°</span>。</li><li><span class="math">sin54°＝cos36°</span>，而 <span class="math">sin54°＝3sin18°－4sin³18°</span>。</li><li>因此 <span class="math">3s－4s³＝cos36°</span>，其中 <span class="math">s＝sin18°</span>。这展示了三倍角把三次式与一个三角函数联系起来。</li></ol>
+          </article>
+          <article class="card example"><span class="label">例 16</span><p class="question">把 4cos³x－3cosx 化简。</p>
+            <ol class="steps"><li>识别余弦三倍角的系数结构 <span class="math">4u³－3u</span>。</li><li>令 <span class="math">u＝cosx</span>。</li><li>原式直接等于 <span class="math">cos3x</span>。</li></ol>
+          </article>
+        </div>
+        <div class="card" style="margin-top:16px"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="c13l8"><span><b>我已掌握：</b>能从 3x＝2x＋x 推导三倍角公式，并能识别对应三次式。</span></label></div>
+      </section>
+
+      <section id="lesson9" class="searchable">
+        <div class="section-head"><div class="num">9</div><div><h2>第 9 课时：三倍角的应用</h2><p>在化简、方程和三次式之间灵活切换。</p></div></div>
+        <div class="grid">
+          <article class="card">
+            <h3>识别模板</h3>
+            <div class="formula">3sinx－4sin³x＝sin3x</div>
+            <div class="formula">4cos³x－3cosx＝cos3x</div>
+            <div class="formula">3t－t³＝(1－3t²)tan3x（t＝tanx）</div>
+            <p>当题目出现三次项和一次项时，先观察系数是否能通过提取常数变成上述模板。</p>
+          </article>
+          <article class="card">
+            <h3>解方程的策略</h3>
+            <p>例如 <span class="math">4cos³x－3cosx＝c</span> 可化为 <span class="math">cos3x＝c</span>。先解 3x 的基本三角方程，再除以 3，最后按原区间筛选。</p>
+            <div class="warning">从 3x 回到 x 后，周期也要除以 3。漏解通常发生在没有完整写出 3x 的通解。</div>
+          </article>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <article class="card example"><span class="label">例 17</span><p class="question">解 4cos³x－3cosx＝0，x∈[0,2π)。</p>
+            <ol class="steps"><li>左边等于 <span class="math">cos3x</span>，故 <span class="math">cos3x＝0</span>。</li><li><span class="math">3x＝π/2＋kπ</span>。</li><li><span class="math">x＝π/6＋kπ/3</span>。</li><li>筛选 <span class="math">k＝0,1,2,3,4,5</span>，得 <span class="math">x＝π/6,π/2,5π/6,7π/6,3π/2,11π/6</span>。</li></ol>
+          </article>
+          <article class="card example"><span class="label">例 18</span><p class="question">已知 cosx＝1/3，求 cos3x。</p>
+            <ol class="steps"><li>直接使用 <span class="math">cos3x＝4cos³x－3cosx</span>。</li><li><span class="math">＝4·(1/3)³－3·(1/3)</span>。</li><li><span class="math">＝4/27－1＝−23/27</span>。</li></ol>
+          </article>
+        </div>
+        <div class="card" style="margin-top:16px"><label class="checkline"><input class="progressCheck" type="checkbox" data-key="c13l9"><span><b>我已掌握：</b>能把三次式还原成三倍角，并能完整求解限定区间内的方程。</span></label></div>
+      </section>
+
+      <section id="summary" class="searchable">
+        <div class="section-head"><div class="num">Σ</div><div><h2>公式总表与选式指南</h2><p>先判断“题目要把几个角变成几个角”，再选公式。</p></div></div>
+        <div class="formula-map">
+          <div><b>两个角 → 一个角</b><br><span class="math">和差角、辅助角</span></div>
+          <div><b>一个角 → 两倍角</b><br><span class="math">二倍角、升降幂</span></div>
+          <div><b>一个角 → 三倍角</b><br><span class="math">三倍角、三次式</span></div>
+        </div>
+        <div class="table-wrap" style="margin-top:16px">
+          <table>
+            <tr><th>类别</th><th>公式</th><th>典型用途</th></tr>
+            <tr><td>正弦和差</td><td class="math">sin(α±β)=sinαcosβ±cosαsinβ</td><td>非特殊角求值、展开与合并</td></tr>
+            <tr><td>余弦和差</td><td class="math">cos(α±β)=cosαcosβ∓sinαsinβ</td><td>求值、向量夹角、证明</td></tr>
+            <tr><td>正切和差</td><td class="math">tan(α±β)=(tanα±tanβ)/(1∓tanαtanβ)</td><td>正切求值、三角形角关系</td></tr>
+            <tr><td>二倍角</td><td class="math">sin2x=2sinxcosx；cos2x=2cos²x−1=1−2sin²x；tan2x=2tanx/(1−tan²x)</td><td>升次、降次、统一角</td></tr>
+            <tr><td>半角</td><td class="math">sin²(x/2)=(1−cosx)/2；cos²(x/2)=(1＋cosx)/2</td><td>半角求值、根式化简</td></tr>
+            <tr><td>辅助角</td><td class="math">asinx＋bcosx=√(a²＋b²)sin(x＋φ)</td><td>最值、值域、方程、参数</td></tr>
+            <tr><td>三倍角</td><td class="math">sin3x=3sinx−4sin³x；cos3x=4cos³x−3cosx</td><td>三次式、方程、精确值</td></tr>
+          </table>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <div class="note"><b>检查 1：符号。</b>用象限或取简单角代入。例如令 β＝0，和差公式应退化为原函数。</div>
+          <div class="note"><b>检查 2：定义域。</b>涉及 tan、分式、约分、开方时必须检查。</div>
+          <div class="note"><b>检查 3：角的范围。</b>半角正负、区间最值和方程筛选都依赖范围。</div>
+          <div class="note"><b>检查 4：展开验算。</b>辅助角合成后展开一次，核对两个系数。</div>
+        </div>
+      </section>
+
+      <section id="practice" class="searchable">
+        <div class="section-head"><div class="num">练</div><div><h2>21 道分层练习</h2><p>先独立完成，再展开“思路与答案”。</p></div></div>
+        <article class="card">
+          <h3>基础层：公式与直接计算</h3>
+          <div class="exercise"><span class="level basic">基础 1</span>求 sin75°。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">sin(45°＋30°)=(√6＋√2)/4</span>。</div></details></div>
+          <div class="exercise"><span class="level basic">基础 2</span>求 cos15°。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">cos(45°−30°)=(√6＋√2)/4</span>。</div></details></div>
+          <div class="exercise"><span class="level basic">基础 3</span>求 tan15°。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">tan(45°−30°)=2−√3</span>。</div></details></div>
+          <div class="exercise"><span class="level basic">基础 4</span>已知 sinx＝5/13，x 为锐角，求 sin2x。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">cosx=12/13</span>，故 <span class="math">sin2x=120/169</span>。</div></details></div>
+          <div class="exercise"><span class="level basic">基础 5</span>把 cos²x 降幂。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">cos²x=(1＋cos2x)/2</span>。</div></details></div>
+          <div class="exercise"><span class="level basic">基础 6</span>把 5sinx＋12cosx 合成为一个三角函数。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">R=13</span>，取 <span class="math">cosφ=5/13，sinφ=12/13</span>，结果为 <span class="math">13sin(x＋φ)</span>。</div></details></div>
+          <div class="exercise"><span class="level basic">基础 7</span>化简 3sinx−4sin³x。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">sin3x</span>。</div></details></div>
+        </article>
+        <article class="card" style="margin-top:16px">
+          <h3>提高层：化简、最值与方程</h3>
+          <div class="exercise"><span class="level mid">提高 1</span>已知 tanα＝2，tanβ＝3，求 tan(α＋β)。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">(2＋3)/(1−6)=−1</span>。</div></details></div>
+          <div class="exercise"><span class="level mid">提高 2</span>化简 (sin2x)/(1＋cos2x)。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">2sinxcosx/(2cos²x)=tanx</span>，须在原式有意义的范围内。</div></details></div>
+          <div class="exercise"><span class="level mid">提高 3</span>若 cosx＝−3/5 且 x∈(π,3π/2)，求 cos(x/2)。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">x/2∈(π/2,3π/4)</span>，余弦为负；<span class="math">cos(x/2)=−√[(1＋cosx)/2]=−√5/5</span>。</div></details></div>
+          <div class="exercise"><span class="level mid">提高 4</span>求 2sinx−2cosx 的最大值。<details class="answer"><summary>思路与答案</summary><div class="details-body">振幅 <span class="math">√(2²＋(−2)²)=2√2</span>，故最大值 <span class="math">2√2</span>。</div></details></div>
+          <div class="exercise"><span class="level mid">提高 5</span>求 y＝3sinx＋4cosx−1 的值域。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">3sinx＋4cosx∈[−5,5]</span>，故 <span class="math">y∈[−6,4]</span>。</div></details></div>
+          <div class="exercise"><span class="level mid">提高 6</span>解 sinx＋cosx＝0，x∈[0,2π)。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">√2sin(x＋π/4)=0</span>，得 <span class="math">x=3π/4,7π/4</span>。</div></details></div>
+          <div class="exercise"><span class="level mid">提高 7</span>已知 sinx＝1/2，求 sin3x。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">sin3x=3/2−4·1/8=1</span>。</div></details></div>
+        </article>
+        <article class="card" style="margin-top:16px">
+          <h3>挑战层：综合与参数</h3>
+          <div class="exercise"><span class="level hard">挑战 1</span>证明 cos(α＋β)cos(α−β)＝cos²α−sin²β。<details class="answer"><summary>思路与答案</summary><div class="details-body">分别展开两个余弦后相乘，中间交叉项抵消；或令 <span class="math">u=α＋β,v=α−β</span> 后使用积化和差（第14章）。直接展开得 <span class="math">cos²αcos²β−sin²αsin²β=cos²α−sin²β</span>。</div></details></div>
+          <div class="exercise"><span class="level hard">挑战 2</span>若 α、β 均为锐角，tanα＝1/2，tanβ＝1/3，判断 α＋β。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">tan(α＋β)=1</span>，且 <span class="math">α＋β∈(0,π)</span>、两角较小，所以 <span class="math">α＋β=π/4</span>。</div></details></div>
+          <div class="exercise"><span class="level hard">挑战 3</span>x∈[0,π/2]，求 3sinx＋4cosx 的最大值与最小值。<details class="answer"><summary>思路与答案</summary><div class="details-body">合成为 <span class="math">5sin(x＋φ)</span>，其中 <span class="math">cosφ=3/5,sinφ=4/5</span>。区间包含使正弦为 1 的角（<span class="math">x=π/2−φ</span>），最大值 5；端点值分别为 4、3，最小值 3。</div></details></div>
+          <div class="exercise"><span class="level hard">挑战 4</span>方程 asin x＋bcos x＝2 对任意实数 a,b 不一定有解。写出有解条件。<details class="answer"><summary>思路与答案</summary><div class="details-body">左边振幅为 <span class="math">√(a²＋b²)</span>，故有解条件为 <span class="math">√(a²＋b²)≥2</span>，即 <span class="math">a²＋b²≥4</span>。</div></details></div>
+          <div class="exercise"><span class="level hard">挑战 5</span>解 3sinx−4sin³x＝1，x∈[0,2π)。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">sin3x=1</span>，故 <span class="math">3x=π/2＋2kπ</span>，<span class="math">x=π/6＋2kπ/3</span>。筛选得 <span class="math">x=π/6,5π/6,3π/2</span>。</div></details></div>
+          <div class="exercise"><span class="level hard">挑战 6</span>求 1＋cos2x＋sin2x 的最大值。<details class="answer"><summary>思路与答案</summary><div class="details-body"><span class="math">cos2x＋sin2x=√2sin(2x＋π/4)</span>，最大值为 <span class="math">√2</span>，故原式最大值 <span class="math">1＋√2</span>。</div></details></div>
+          <div class="exercise"><span class="level hard">挑战 7</span>证明 tanx＋tan(π/3−x)＋tan(π/3) 等于三者之积（各项有意义）。<details class="answer"><summary>思路与答案</summary><div class="details-body">三角形型恒等式：三角之和为 <span class="math">π</span>，套用第 2 课时拓展证明，结论成立。</div></details></div>
+        </article>
+      </section>
+
+      <section id="quiz" class="searchable">
+        <div class="section-head"><div class="num">测</div><div><h2>即时自测</h2><p>8 题自动评分；答案与学习进度只保存在当前设备。</p></div></div>
+        <form id="quizForm" class="card">
+          <div class="quizQ" data-answer="b"><h3>1. cos(α＋β) 等于：</h3><label class="quiz-option"><input type="radio" name="q1" value="a"> cosαcosβ＋sinαsinβ</label><label class="quiz-option"><input type="radio" name="q1" value="b"> cosαcosβ－sinαsinβ</label><label class="quiz-option"><input type="radio" name="q1" value="c"> sinαcosβ＋cosαsinβ</label><div class="quiz-result"></div></div>
+          <div class="quizQ" data-answer="c"><h3>2. sin2x 等于：</h3><label class="quiz-option"><input type="radio" name="q2" value="a"> 2sinx</label><label class="quiz-option"><input type="radio" name="q2" value="b"> sin²x－cos²x</label><label class="quiz-option"><input type="radio" name="q2" value="c"> 2sinxcosx</label><div class="quiz-result"></div></div>
+          <div class="quizQ" data-answer="a"><h3>3. sin²(x/2) 等于：</h3><label class="quiz-option"><input type="radio" name="q3" value="a"> (1－cosx)/2</label><label class="quiz-option"><input type="radio" name="q3" value="b"> (1＋cosx)/2</label><label class="quiz-option"><input type="radio" name="q3" value="c"> 1－cos²x</label><div class="quiz-result"></div></div>
+          <div class="quizQ" data-answer="c"><h3>4. 3sinx＋4cosx 的最大值是：</h3><label class="quiz-option"><input type="radio" name="q4" value="a"> 4</label><label class="quiz-option"><input type="radio" name="q4" value="b"> 7</label><label class="quiz-option"><input type="radio" name="q4" value="c"> 5</label><div class="quiz-result"></div></div>
+          <div class="quizQ" data-answer="b"><h3>5. cos3x 等于：</h3><label class="quiz-option"><input type="radio" name="q5" value="a"> 3cosx－4cos³x</label><label class="quiz-option"><input type="radio" name="q5" value="b"> 4cos³x－3cosx</label><label class="quiz-option"><input type="radio" name="q5" value="c"> cos³x－3cosx</label><div class="quiz-result"></div></div>
+          <div class="quizQ" data-answer="a"><h3>6. 若方程 3sinx＋4cosx＝m 有解，则：</h3><label class="quiz-option"><input type="radio" name="q6" value="a"> |m|≤5</label><label class="quiz-option"><input type="radio" name="q6" value="b"> |m|≤7</label><label class="quiz-option"><input type="radio" name="q6" value="c"> m≥5</label><div class="quiz-result"></div></div>
+          <div class="quizQ" data-answer="c"><h3>7. 半角公式开根号时，正负号由什么决定？</h3><label class="quiz-option"><input type="radio" name="q7" value="a"> x 的奇偶性</label><label class="quiz-option"><input type="radio" name="q7" value="b"> 一律取正</label><label class="quiz-option"><input type="radio" name="q7" value="c"> x/2 所在象限</label><div class="quiz-result"></div></div>
+          <div class="quizQ" data-answer="b"><h3>8. sinx＋cosx 的最小值（x∈R）是：</h3><label class="quiz-option"><input type="radio" name="q8" value="a"> −1</label><label class="quiz-option"><input type="radio" name="q8" value="b"> −√2</label><label class="quiz-option"><input type="radio" name="q8" value="c"> 0</label><div class="quiz-result"></div></div>
+          <button type="submit" class="btn" style="margin-top:16px;background:var(--brand);color:var(--bg);font-weight:900">提交并评分</button>
+          <button type="button" class="btn" id="resetQuiz">重做</button>
+          <div id="score" class="formula center" style="display:none"></div>
+        </form>
+      </section>
+
+      <section class="searchable">
+        <div class="section-head"><div class="num">✓</div><div><h2>章末检查清单</h2><p>如果下面 6 项都能独立完成，就已经掌握本章主干。</p></div></div>
+        <div class="card grid">
+          <label class="checkline"><input type="checkbox"><span>能不看书写出和差角公式，并用 β＝0 检查。</span></label>
+          <label class="checkline"><input type="checkbox"><span>能根据已知 sin 或 cos 选择合适的二倍角形式。</span></label>
+          <label class="checkline"><input type="checkbox"><span>半角开根号时，会根据 x/2 的象限定号。</span></label>
+          <label class="checkline"><input type="checkbox"><span>能把 asin x＋bcos x 正确合成并展开验算。</span></label>
+          <label class="checkline"><input type="checkbox"><span>区间有限制时，会先平移角的范围再求最值。</span></label>
+          <label class="checkline"><input type="checkbox"><span>能识别 3sinx−4sin³x 与 4cos³x−3cosx。</span></label>
+        </div>
+      </section>
+    </div>
+    <footer class="footer">第 13 章 · 和差倍半角公式｜单文件离线教程</footer>
+  </main>
+</div>
+<div id="toast" class="toast">已复制</div>
+<script>
+(() => {
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const store = {
+    get(k,d){try{return JSON.parse(localStorage.getItem(k)) ?? d}catch{return d}},
+    set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
+  };
+  if(store.get("c13-dark",false)) document.body.classList.add("dark");
+  $("#themeBtn").onclick=()=>{document.body.classList.toggle("dark");store.set("c13-dark",document.body.classList.contains("dark"))};
+  let large=store.get("c13-large",false);
+  const applyFont=()=>document.documentElement.style.fontSize=large?"18px":"16px"; applyFont();
+  $("#fontBtn").onclick=()=>{large=!large;applyFont();store.set("c13-large",large)};
+  $("#menuBtn").onclick=()=>$("#sidebar").classList.toggle("open");
+  $$("#nav a").forEach(a=>a.onclick=()=>$("#sidebar").classList.remove("open"));
+  let expanded=false;
+  $("#expandBtn").onclick=()=>{expanded=!expanded;$$("details").forEach(d=>d.open=expanded);$("#expandBtn").textContent=expanded?"收起全部":"展开全部"};
+
+  const toast=msg=>{const t=$("#toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1300)};
+  $$(".copy").forEach(btn=>btn.onclick=async e=>{
+    e.stopPropagation(); const box=btn.closest("[data-copy]")||btn.parentElement;
+    const text=box.textContent.replace("📋","").trim();
+    try{await navigator.clipboard.writeText(text);toast("公式已复制")}catch{toast("长按公式可复制")}
+  });
+
+  const saved=store.get("c13-progress",{});
+  const updateProgress=()=>{
+    const checks=$$(".progressCheck"),done=checks.filter(c=>c.checked).length,p=Math.round(done/checks.length*100);
+    $("#progressText").textContent=p+"%";$("#progressBar").style.width=p+"%";
+  };
+  $$(".progressCheck").forEach(c=>{c.checked=!!saved[c.dataset.key];c.onchange=()=>{saved[c.dataset.key]=c.checked;store.set("c13-progress",saved);updateProgress()}});
+  updateProgress();
+
+  $("#search").addEventListener("input",e=>{
+    const q=e.target.value.trim().toLowerCase();
+    $$(".searchable").forEach(el=>{
+      el.classList.toggle("hidden-by-search",q && !el.textContent.toLowerCase().includes(q));
+    });
+  });
+
+  const deg=x=>x*Math.PI/180;
+  function point(angle,r=125){return [210+r*Math.cos(deg(angle)),160-r*Math.sin(deg(angle))]}
+  function updateSum(){
+    const a=+$("#alphaRange").value,b=+$("#betaRange").value;
+    $("#alphaText").textContent=a+"°";$("#betaText").textContent=b+"°";
+    const pa=point(a),pab=point(a+b);
+    $("#lineA").setAttribute("x2",pa[0]);$("#lineA").setAttribute("y2",pa[1]);
+    $("#lineAB").setAttribute("x2",pab[0]);$("#lineAB").setAttribute("y2",pab[1]);
+    $("#pointAB").setAttribute("cx",pab[0]);$("#pointAB").setAttribute("cy",pab[1]);
+    $("#labelA").setAttribute("x",pa[0]+8);$("#labelA").setAttribute("y",pa[1]-5);
+    $("#labelAB").setAttribute("x",pab[0]+8);$("#labelAB").setAttribute("y",pab[1]-5);
+    const left=Math.sin(deg(a+b)),right=Math.sin(deg(a))*Math.cos(deg(b))+Math.cos(deg(a))*Math.sin(deg(b));
+    $("#sumLeft").textContent=left.toFixed(4);$("#sumRight").textContent=right.toFixed(4);
+    $("#sumStatus").textContent=Math.abs(left-right)<1e-10?"两边相等（显示值精确到 4 位小数）":"请检查公式";
+  }
+  $("#alphaRange").oninput=$("#betaRange").oninput=updateSum;updateSum();
+
+  function fmt(n){return Math.abs(n)<1e-10?"0":Number(n.toFixed(2)).toString()}
+  function updateAux(){
+    const a=+$("#aRange").value,b=+$("#bRange").value,R=Math.hypot(a,b),phi=R?Math.atan2(b,a):0;
+    $("#aText").textContent=fmt(a);$("#bText").textContent=fmt(b);$("#rText").textContent=R.toFixed(3);$("#phiText").textContent=(phi*180/Math.PI).toFixed(2)+"°";
+    const sign=phi>=0?"＋":"－",ph=Math.abs(phi*180/Math.PI).toFixed(2);
+    $("#auxFormula").textContent=`${fmt(a)}sinx${b>=0?"＋":"－"}${fmt(Math.abs(b))}cosx＝${R.toFixed(3)}sin(x${sign}${ph}°)`;
+    $("#rangeText").textContent=`值域：[−${R.toFixed(3)}，${R.toFixed(3)}]`;
+    const path=[];for(let i=0;i<=480;i++){const x=-Math.PI+2*Math.PI*i/480,y=R?((a*Math.sin(x)+b*Math.cos(x))/R):0;path.push(`${i?"L":"M"} ${20+i} ${140-90*y}`)}
+    $("#wavePath").setAttribute("d",path.join(" "));
+    const amp=R?90:0;$("#topAmp").setAttribute("y1",140-amp);$("#topAmp").setAttribute("y2",140-amp);$("#botAmp").setAttribute("y1",140+amp);$("#botAmp").setAttribute("y2",140+amp);
+  }
+  $("#aRange").oninput=$("#bRange").oninput=updateAux;updateAux();
+
+  $("#quizForm").addEventListener("submit",e=>{
+    e.preventDefault();let correct=0;
+    $$(".quizQ").forEach((q,i)=>{
+      const pick=q.querySelector("input:checked"),ok=pick&&pick.value===q.dataset.answer;
+      if(ok) correct++;q.querySelector(".quiz-result").textContent=pick?(ok?"✓ 正确":"✗ 再检查本章公式"):"未作答";
+      q.querySelector(".quiz-result").style.color=ok?"var(--green)":"var(--red)";
+    });
+    const score=$("#score");score.style.display="block";score.textContent=`得分：${correct} / 8${correct===8?"　太棒了，主干知识已掌握！":correct>=6?"　基础很好，复习错题即可。":"　建议回到公式总表并重做例题。"}`;
+    score.scrollIntoView({behavior:"smooth",block:"center"});
+  });
+  $("#resetQuiz").onclick=()=>{$$("#quizForm input").forEach(i=>i.checked=false);$$(".quiz-result").forEach(r=>r.textContent="");$("#score").style.display="none"};
+
+  const sections=$$("main section[id]"),links=$$("#nav a");
+  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+e.target.id))}}),{rootMargin:"-20% 0px -70% 0px"});
+  sections.forEach(s=>observer.observe(s));
+})();
+</script>
+</body>
+</html>
