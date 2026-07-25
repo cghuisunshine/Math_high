@@ -469,8 +469,14 @@
 
               <h4>（2）平方差恒等式</h4>
               <p>证明：<span class="math">(1−tan²x)²=(sec²x−2tanx)(sec²x+2tanx)</span>。</p>
-              <div class="idea"><span class="label">思路：</span>右边是平方差，先展开为 <span class="math">sec⁴x−4tan²x</span>，再用 <span class="math">sec²x=1+tan²x</span>。</div>
+              <div class="idea"><span class="label">思路：</span>先从 <span class="math">secx</span> 的定义推出 <span class="math">sec²x=1+tan²x</span>。再利用右边的平方差结构展开、代入化简。</div>
               <ol class="steps">
+                <li><strong>定义与基本关系：</strong>当 <span class="math">cosx≠0</span> 时，正割函数定义为
+                  <span class="display">secx=<span class="frac"><span>1</span><span>cosx</span></span>，　tanx=<span class="frac"><span>sinx</span><span>cosx</span></span>。</span>
+                  由 <span class="math">sin²x+cos²x=1</span> 得
+                  <span class="display">(secx)²=<span class="frac"><span>1</span><span>cos²x</span></span>=<span class="frac"><span>sin²x+cos²x</span><span>cos²x</span></span>=1+<span class="frac"><span>sin²x</span><span>cos²x</span></span>=1+(tanx)²。</span>
+                  即 <span class="math">sec²x=1+tan²x</span>。
+                </li>
                 <li>从右边出发：
                   <span class="display">(sec²x−2tanx)(sec²x+2tanx)=sec⁴x−4tan²x。</span>
                 </li>
@@ -492,12 +498,17 @@
               <p>若 <span class="math">tanθ、cotθ</span> 是方程 <span class="math">2x²−2kx=3−k²</span> 的两个实根，且 <span class="math">π&lt;θ&lt;5π/4</span>，求 <span class="math">cosθ−sinθ</span>。</p>
               <div class="idea"><span class="label">思路：</span>把方程移项后用韦达定理。根的积恒为 <span class="math">tanθ·cotθ=1</span>，先求 <span class="math">k</span>；根的和可化为 <span class="math">1/(sinθcosθ)</span>。最后平方求值，再由角的范围判定正负。</div>
               <ol class="steps">
+                <li><strong>余切的定义：</strong>当 <span class="math">sinθ≠0</span> 时，
+                  <span class="display">cotθ=<span class="frac"><span>cosθ</span><span>sinθ</span></span>。</span>
+                  同时，<span class="math">tanθ=sinθ/cosθ</span> 要求 <span class="math">cosθ≠0</span>。本题中 <span class="math">tanθ</span> 与 <span class="math">cotθ</span> 都是方程的实根，所以两者均有意义，从而
+                  <span class="display">tanθ·cotθ=<span class="frac"><span>sinθ</span><span>cosθ</span></span>·<span class="frac"><span>cosθ</span><span>sinθ</span></span>=1。</span>
+                </li>
                 <li>方程化为
                   <span class="display">2x²−2kx+k²−3=0。</span>
                 </li>
                 <li>由韦达定理，两个根的积为
                   <span class="display">tanθ·cotθ=<span class="frac"><span>k²−3</span><span>2</span></span>。</span>
-                  由于 <span class="math">tanθ·cotθ=1</span>，所以
+                  由上面的定义可知 <span class="math">tanθ·cotθ=1</span>，所以
                   <span class="display">(k²−3)/2=1　⇒　k²=5。</span>
                 </li>
                 <li>根的和为 <span class="math">k</span>：
