@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>第14课｜和差化积、积化和差与万能公式</title>
+  <style>
+    :root{
+      --ink:#18233a;--muted:#5e6b82;--paper:#fffdf8;--panel:#ffffff;
+      --navy:#172554;--blue:#2563eb;--cyan:#0891b2;--gold:#d97706;
+      --green:#15803d;--red:#c2410c;--line:#dbe4f0;--soft:#f1f5f9;
+      --shadow:0 14px 40px rgba(23,37,84,.10)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;color:var(--ink);background:
+      radial-gradient(circle at 10% 0,#dbeafe 0,transparent 25rem),
+      linear-gradient(180deg,#f8fbff,#fffdf8 38rem);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",
+      "Microsoft YaHei",Arial,sans-serif;line-height:1.75}
+    a{color:inherit}.wrap{max-width:1120px;margin:auto;padding:0 22px}
+    header{padding:58px 0 38px;background:linear-gradient(135deg,#172554 0,#1e3a8a 58%,#0e7490 100%);color:white}
+    .eyebrow{display:inline-block;padding:5px 12px;border:1px solid #ffffff70;border-radius:99px;font-size:.88rem;letter-spacing:.08em}
+    h1{font-size:clamp(2rem,5vw,3.45rem);line-height:1.15;margin:18px 0 14px}
+    header p{max-width:760px;margin:0;color:#dbeafe;font-size:1.08rem}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+    button,.button{border:0;border-radius:10px;padding:10px 15px;font-weight:700;cursor:pointer;background:#fff;color:var(--navy);box-shadow:0 4px 15px #0002}
+    button.secondary{background:#ffffff18;color:#fff;border:1px solid #ffffff55}
+    nav{position:sticky;top:0;z-index:10;background:#fffffff2;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    nav .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:9px;padding-bottom:9px}
+    nav a{white-space:nowrap;text-decoration:none;padding:7px 11px;border-radius:8px;font-size:.92rem;color:#334155}
+    nav a:hover{background:#dbeafe;color:#1d4ed8}
+    main{padding:28px 0 72px}
+    section{scroll-margin-top:72px;margin:22px 0;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,38px);box-shadow:var(--shadow)}
+    h2{margin:0 0 18px;font-size:1.75rem;color:var(--navy);line-height:1.3}
+    h3{margin:28px 0 10px;color:#1e3a8a;font-size:1.26rem}
+    h4{margin:18px 0 7px;color:#334155}
+    p{margin:.65em 0}
+    .lead{font-size:1.06rem;color:#334155}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fff}
+    .card h3,.card h4{margin-top:0}
+    .kicker{font-size:.79rem;color:var(--blue);font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    table{width:100%;border-collapse:collapse;margin:14px 0}
+    th,td{border:1px solid #cbd5e1;padding:11px;text-align:left;vertical-align:top}
+    th{background:#eaf2ff;color:#1e3a8a}
+    .formula{margin:14px 0;padding:15px 18px;border-left:5px solid var(--blue);background:#eff6ff;border-radius:0 12px 12px 0;font-family:"Times New Roman","Songti SC",serif;font-size:1.08rem;overflow-x:auto}
+    .formula strong{color:#1d4ed8}
+    .formula.center{text-align:center;font-size:1.18rem}
+    .derive{counter-reset:step;margin:14px 0;padding:4px 0}
+    .step{position:relative;margin:12px 0;padding:12px 14px 12px 48px;background:#f8fafc;border-radius:12px}
+    .step:before{counter-increment:step;content:counter(step);position:absolute;left:13px;top:12px;width:25px;height:25px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:white;font-weight:800;font-size:.82rem}
+    .note,.warning,.success{padding:14px 16px;border-radius:12px;margin:14px 0}
+    .note{background:#ecfeff;border:1px solid #a5f3fc}
+    .warning{background:#fff7ed;border:1px solid #fed7aa}
+    .success{background:#f0fdf4;border:1px solid #bbf7d0}
+    .tag{display:inline-block;padding:2px 9px;border-radius:99px;background:#dbeafe;color:#1d4ed8;font-size:.8rem;font-weight:800;margin-right:6px}
+    details{border:1px solid var(--line);border-radius:14px;margin:14px 0;overflow:hidden;background:#fff}
+    summary{cursor:pointer;padding:16px 18px;font-weight:800;color:#172554;background:#f8fafc;list-style:none}
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:"＋";float:right;color:var(--blue)}
+    details[open] summary:after{content:"－"}
+    .answer{padding:4px 18px 19px}
+    .answer h4{display:inline-block;padding:2px 8px;border-radius:6px;background:#e0f2fe;color:#075985}
+    .result{padding:11px 14px;border-radius:10px;background:#f0fdf4;border-left:4px solid var(--green);font-weight:700}
+    .toc-list{columns:2;column-gap:30px}.toc-list a{display:block;padding:5px 0;color:#1d4ed8;text-decoration:none}
+    .test-q{padding:15px 0;border-bottom:1px dashed #cbd5e1}.test-q:last-child{border-bottom:0}
+    .checklist{padding-left:1.25rem}.checklist li{margin:6px 0}
+    .small{font-size:.9rem;color:var(--muted)}
+    footer{text-align:center;color:var(--muted);padding:0 20px 38px}
+    @media(max-width:760px){
+      header{padding:42px 0 30px}.grid,.grid.three{grid-template-columns:1fr}
+      .toc-list{columns:1}.wrap{padding-left:14px;padding-right:14px}
+      section{border-radius:14px;padding:20px 16px}th,td{padding:8px;font-size:.9rem}
+    }
+    @media print{
+      body{background:#fff;font-size:11pt}.wrap{max-width:none}header{padding:25px;background:#fff;color:#000;border-bottom:2px solid #000}
+      header p{color:#333}nav,.actions,footer{display:none!important}main{padding:0}
+      section{box-shadow:none;border:0;border-radius:0;padding:18px 0;margin:0;break-inside:auto}
+      details{break-inside:avoid}details:not([open])>.answer{display:block!important}summary:after{display:none}
+      .formula,.note,.warning,.success,.step{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="eyebrow">高一数学 SS 班 · 暑假大纲 · 第 14 课</span>
+    <h1>和差化积、积化和差<br>与万能公式</h1>
+    <p>从和差角公式出发，完整建立“积 ↔ 和差”的双向变形体系；用半角正切代换统一表示三角函数，并通过典型例题、易错辨析与结课测试形成可操作的解题方法。</p>
+    <div class="actions">
+      <button onclick="toggleAll(true)">展开全部解答</button>
+      <button class="secondary" onclick="toggleAll(false)">收起全部解答</button>
+      <button class="secondary" onclick="window.print()">打印 / 保存 PDF</button>
+    </div>
+  </div>
+</header>
+<nav>
+  <div class="wrap">
+    <a href="#outline">大纲</a><a href="#foundation">知识准备</a>
+    <a href="#product-to-sum">积化和差</a><a href="#sum-to-product">和差化积</a>
+    <a href="#universal">万能公式</a><a href="#examples">典型例题</a>
+    <a href="#test">结课测试</a><a href="#answers">测试答案</a>
+  </div>
+</nav>
+<main class="wrap">
+
+<section id="outline">
+  <h2>一、图片大纲提取与学习目标</h2>
+  <table>
+    <thead><tr><th>课次</th><th>大标题</th><th>小标题</th><th>课时 / 难度标注</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="3">14</td><td rowspan="3"><strong>和差化积与积化和差</strong></td><td>和差化积与积化和差公式</td><td>4</td></tr>
+      <tr><td>万能公式</td><td>3</td></tr>
+      <tr><td>结课测试</td><td>7</td></tr>
+    </tbody>
+  </table>
+  <div class="grid three">
+    <div class="card"><div class="kicker">目标 1</div><h3>会推导</h3><p>能从正弦、余弦和差公式推导八条变形公式，而不是机械背诵。</p></div>
+    <div class="card"><div class="kicker">目标 2</div><h3>会选择</h3><p>看到“乘积、和差、半角正切”时，能判断何时化积、何时化和差、何时设参数。</p></div>
+    <div class="card"><div class="kicker">目标 3</div><h3>会验根</h3><p>掌握万能公式的适用范围，避免因半角正切不存在而漏解。</p></div>
+  </div>
+  <div class="note"><strong>说明：</strong>大纲图片没有附带教材练习题。后文题目均为围绕大纲设计的<strong>配套例题</strong>和<strong>结课自测</strong>，用于理解公式和练习方法。</div>
+</section>
+
+<section id="foundation">
+  <h2>二、推导起点：和差角公式</h2>
+  <p class="lead">本课的所有公式都可以追溯到下面四条基本公式。后文每次变形都会注明使用了哪一条。</p>
+  <div class="grid">
+    <div class="formula"><strong>余弦公式</strong><br>
+      cos(α+β)=cosα cosβ−sinα sinβ<br>
+      cos(α−β)=cosα cosβ+sinα sinβ
+    </div>
+    <div class="formula"><strong>正弦公式</strong><br>
+      sin(α+β)=sinα cosβ+cosα sinβ<br>
+      sin(α−β)=sinα cosβ−cosα sinβ
+    </div>
+  </div>
+  <h3>两种核心操作</h3>
+  <table>
+    <thead><tr><th>操作</th><th>消去的项</th><th>得到的结构</th></tr></thead>
+    <tbody>
+      <tr><td>把两个公式相加</td><td>符号相反的项</td><td>“两个三角函数的和”或“一种乘积”</td></tr>
+      <tr><td>把两个公式相减</td><td>符号相同的项</td><td>“两个三角函数的差”或“一种乘积”</td></tr>
+    </tbody>
+  </table>
+  <div class="warning"><strong>角度单位：</strong>公式对角度制和弧度制都成立，但同一道题中必须统一单位。</div>
+</section>
+
+<section id="product-to-sum">
+  <h2>三、积化和差公式：把乘法变成加减法</h2>
+  <p>“积化和差”适用于 <strong>sinα·cosβ、cosα·sinβ、cosα·cosβ、sinα·sinβ</strong> 这四种乘积。</p>
+
+  <h3>1. 推导 sinα cosβ 与 cosα sinβ</h3>
+  <div class="derive">
+    <div class="step">写出正弦和角、差角公式：
+      <div class="formula">sin(α+β)=sinα cosβ+cosα sinβ<br>sin(α−β)=sinα cosβ−cosα sinβ</div>
+    </div>
+    <div class="step">两式相加，cosα sinβ 被消去：
+      <div class="formula">sin(α+β)+sin(α−β)=2sinα cosβ</div>
+    </div>
+    <div class="step">两边除以 2：
+      <div class="formula center"><strong>sinα cosβ=[sin(α+β)+sin(α−β)]/2</strong></div>
+    </div>
+    <div class="step">第一式减第二式，sinα cosβ 被消去：
+      <div class="formula center"><strong>cosα sinβ=[sin(α+β)−sin(α−β)]/2</strong></div>
+    </div>
+  </div>
+
+  <h3>2. 推导 cosα cosβ 与 sinα sinβ</h3>
+  <div class="derive">
+    <div class="step">写出余弦和角、差角公式：
+      <div class="formula">cos(α+β)=cosα cosβ−sinα sinβ<br>cos(α−β)=cosα cosβ+sinα sinβ</div>
+    </div>
+    <div class="step">两式相加，再除以 2：
+      <div class="formula center"><strong>cosα cosβ=[cos(α+β)+cos(α−β)]/2</strong></div>
+    </div>
+    <div class="step">用“差角式减和角式”，再除以 2：
+      <div class="formula center"><strong>sinα sinβ=[cos(α−β)−cos(α+β)]/2</strong></div>
+    </div>
+  </div>
+
+  <h3>3. 四条公式总表</h3>
+  <table>
+    <thead><tr><th>原乘积</th><th>化为和差</th><th>记忆重点</th></tr></thead>
+    <tbody>
+      <tr><td>sinα cosβ</td><td>[sin(α+β)+sin(α−β)]/2</td><td>正弦，和与差相加</td></tr>
+      <tr><td>cosα sinβ</td><td>[sin(α+β)−sin(α−β)]/2</td><td>正弦，和减差</td></tr>
+      <tr><td>cosα cosβ</td><td>[cos(α+β)+cos(α−β)]/2</td><td>余弦，两项相加</td></tr>
+      <tr><td>sinα sinβ</td><td>[cos(α−β)−cos(α+β)]/2</td><td>余弦，“差角在前”</td></tr>
+    </tbody>
+  </table>
+  <div class="warning"><strong>最常见符号错误：</strong>sinα sinβ 的结果不是“和角减差角”，而是 <strong>cos(α−β)−cos(α+β)</strong>。可令 α=β 检验：左边 sin²α≥0，右边应为 [1−cos2α]/2≥0。</div>
+</section>
+
+<section id="sum-to-product">
+  <h2>四、和差化积公式：把加减法变成乘法</h2>
+  <p class="lead">这里不是重新创造公式，而是对积化和差公式作一次可逆的变量代换。</p>
+
+  <h3>1. 中间角代换为什么有效</h3>
+  <p>设原来的两个角为 A、B。令：</p>
+  <div class="formula center">α=(A+B)/2，β=(A−B)/2</div>
+  <p>则：</p>
+  <div class="formula center">α+β=A，α−β=B</div>
+  <p>因此，积化和差公式中的 α+β、α−β 可以恰好替换成 A、B。</p>
+
+  <h3>2. 四条公式逐一推导</h3>
+  <div class="derive">
+    <div class="step">由 2sinα cosβ=sin(α+β)+sin(α−β)，代入中间角：
+      <div class="formula center"><strong>sinA+sinB=2sin[(A+B)/2] cos[(A−B)/2]</strong></div>
+    </div>
+    <div class="step">由 2cosα sinβ=sin(α+β)−sin(α−β)：
+      <div class="formula center"><strong>sinA−sinB=2cos[(A+B)/2] sin[(A−B)/2]</strong></div>
+    </div>
+    <div class="step">由 2cosα cosβ=cos(α+β)+cos(α−β)：
+      <div class="formula center"><strong>cosA+cosB=2cos[(A+B)/2] cos[(A−B)/2]</strong></div>
+    </div>
+    <div class="step">由 −2sinα sinβ=cos(α+β)−cos(α−β)：
+      <div class="formula center"><strong>cosA−cosB=−2sin[(A+B)/2] sin[(A−B)/2]</strong></div>
+    </div>
+  </div>
+
+  <h3>3. 结构记忆</h3>
+  <div class="grid">
+    <div class="card"><h4>正弦和差</h4><p>结果是“正弦 × 余弦”。</p><p><strong>和：</strong>sin 中间和角，cos 中间差角。</p><p><strong>差：</strong>cos 中间和角，sin 中间差角。</p></div>
+    <div class="card"><h4>余弦和差</h4><p>结果是“同名函数相乘”。</p><p><strong>和：</strong>2cos·cos。</p><p><strong>差：</strong>−2sin·sin，前面多一个负号。</p></div>
+  </div>
+  <div class="note"><strong>快速自检：</strong>令 A=B。此时 sinA−sinB=0、cosA−cosB=0，公式右边都含 sin[(A−B)/2]=sin0=0，结构正确。</div>
+
+  <h3>4. 什么时候优先和差化积</h3>
+  <ul class="checklist">
+    <li>两个三角函数相加或相减，角度有明显的“平均数”。</li>
+    <li>解方程时，希望把“和为零”改写为“若干因子乘积为零”。</li>
+    <li>证明恒等式时，需要制造相同因子或约分。</li>
+    <li>求最值时，化出单个三角函数与常数的乘积。</li>
+  </ul>
+</section>
+
+<section id="universal">
+  <h2>五、万能公式：半角正切代换</h2>
+  <p>令 <strong>t=tan(x/2)</strong>，就能把 sinx、cosx、tanx 都表示成 t 的有理式。这就是“万能公式”。</p>
+
+  <h3>1. sinx 的推导</h3>
+  <div class="derive">
+    <div class="step">由二倍角公式：sinx=2sin(x/2)cos(x/2)。</div>
+    <div class="step">分子、分母同时除以 cos²(x/2)：
+      <div class="formula">sinx = [2sin(x/2)cos(x/2)] / [sin²(x/2)+cos²(x/2)]<br>
+      = [2tan(x/2)] / [1+tan²(x/2)]</div>
+    </div>
+    <div class="step">代入 t=tan(x/2)：
+      <div class="formula center"><strong>sinx=2t/(1+t²)</strong></div>
+    </div>
+  </div>
+
+  <h3>2. cosx 的推导</h3>
+  <div class="derive">
+    <div class="step">由 cosx=cos²(x/2)−sin²(x/2)。</div>
+    <div class="step">分子、分母同时除以 cos²(x/2)：
+      <div class="formula">cosx = [cos²(x/2)−sin²(x/2)] / [cos²(x/2)+sin²(x/2)]<br>
+      = [1−tan²(x/2)]/[1+tan²(x/2)]</div>
+    </div>
+    <div class="step">代入 t：
+      <div class="formula center"><strong>cosx=(1−t²)/(1+t²)</strong></div>
+    </div>
+  </div>
+
+  <h3>3. tanx 的推导</h3>
+  <div class="derive">
+    <div class="step">在 cosx≠0 时，tanx=sinx/cosx。</div>
+    <div class="step">把上面两式相除：
+      <div class="formula center"><strong>tanx=2t/(1−t²)</strong></div>
+    </div>
+  </div>
+
+  <h3>4. 公式总表与适用条件</h3>
+  <table>
+    <thead><tr><th>公式</th><th>条件</th></tr></thead>
+    <tbody>
+      <tr><td>t=tan(x/2)</td><td>x≠(2k+1)π，k∈ℤ</td></tr>
+      <tr><td>sinx=2t/(1+t²)</td><td>在 t 有定义时成立</td></tr>
+      <tr><td>cosx=(1−t²)/(1+t²)</td><td>在 t 有定义时成立</td></tr>
+      <tr><td>tanx=2t/(1−t²)</td><td>还需 cosx≠0，即 t≠±1</td></tr>
+    </tbody>
+  </table>
+  <div class="warning"><strong>重要：万能公式不是无条件“万能”。</strong>当 x=(2k+1)π 时，tan(x/2) 不存在。用 t 代换解方程前，应先把这些角代回原方程检查，否则可能漏解。</div>
+
+  <h3>5. 单位圆中的几何解释</h3>
+  <p>单位圆上角 x 对应点 P(cosx,sinx)。把直线斜率参数取为 t=tan(x/2)，可得到圆上的有理参数：</p>
+  <div class="formula center">P = ((1−t²)/(1+t²)，2t/(1+t²))</div>
+  <p>检验它确实在单位圆上：</p>
+  <div class="formula">[(1−t²)/(1+t²)]²+[2t/(1+t²)]²<br>
+  =[(1−2t²+t⁴)+4t²]/(1+t²)²<br>
+  =(1+2t²+t⁴)/(1+t²)²=1。</div>
+  <p>这也解释了为什么万能公式能够把三角函数问题转成代数分式问题。</p>
+</section>
+
+<section id="examples">
+  <h2>六、配套例题：思路与详细步骤</h2>
+
+  <details>
+    <summary>例题 1｜积化和差求精确值：求 sin75°·cos15°</summary>
+    <div class="answer">
+      <h4>思路</h4><p>题目是 sinα cosβ 型乘积，直接使用积化和差。</p>
+      <h4>详细步骤</h4>
+      <div class="formula">sin75°cos15°=[sin(75°+15°)+sin(75°−15°)]/2</div>
+      <p>= [sin90°+sin60°]/2</p>
+      <p>= [1+√3/2]/2=(2+√3)/4。</p>
+      <p class="result">结论：sin75°·cos15°=(2+√3)/4。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>例题 2｜和差化积求精确值：求 cos75°+cos15°</summary>
+    <div class="answer">
+      <h4>思路</h4><p>两个余弦相加，化为 2cos·cos。</p>
+      <h4>详细步骤</h4>
+      <div class="formula">cos75°+cos15°=2cos[(75°+15°)/2]cos[(75°−15°)/2]</div>
+      <p>=2cos45°cos30°</p>
+      <p>=2×(√2/2)×(√3/2)=√6/2。</p>
+      <p class="result">结论：cos75°+cos15°=√6/2。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>例题 3｜解三角方程：在 [0,2π) 内解 cos3x+cosx=0</summary>
+    <div class="answer">
+      <h4>思路</h4><p>“和等于零”适合先和差化积，再利用“乘积为零”。</p>
+      <h4>详细步骤</h4>
+      <p>由余弦和公式：</p>
+      <div class="formula">cos3x+cosx=2cos[(3x+x)/2]cos[(3x−x)/2]=2cos2x·cosx</div>
+      <p>所以 2cos2x·cosx=0，即：</p>
+      <p>① cos2x=0 ⇒ 2x=π/2+kπ ⇒ x=π/4+kπ/2。</p>
+      <p>在 [0,2π) 内得到 x=π/4，3π/4，5π/4，7π/4。</p>
+      <p>② cosx=0 ⇒ x=π/2+kπ。</p>
+      <p>在 [0,2π) 内得到 x=π/2，3π/2。</p>
+      <p>两组没有重复。</p>
+      <p class="result">结论：x∈{π/4，π/2，3π/4，5π/4，3π/2，7π/4}。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>例题 4｜恒等式变形：化简 sinx+sin3x+sin5x</summary>
+    <div class="answer">
+      <h4>思路</h4><p>首尾两项 sinx 与 sin5x 关于 3x 对称，先将它们配对化积。</p>
+      <h4>详细步骤</h4>
+      <div class="formula">sinx+sin5x=2sin[(x+5x)/2]cos[(x−5x)/2]</div>
+      <p>=2sin3x·cos(−2x)=2sin3x·cos2x。</p>
+      <p>再加上中间项：</p>
+      <div class="formula">sinx+sin3x+sin5x=2sin3x cos2x+sin3x<br>=sin3x(1+2cos2x)</div>
+      <p class="result">结论：原式=sin3x(1+2cos2x)。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>例题 5｜证明恒等式：(sinA+sinB)/(cosA+cosB)=tan[(A+B)/2]</summary>
+    <div class="answer">
+      <h4>思路</h4><p>分子、分母分别和差化积，再约去共同因子。</p>
+      <h4>详细步骤</h4>
+      <p>在原式有意义且 cos[(A−B)/2]≠0 时：</p>
+      <div class="formula">(sinA+sinB)/(cosA+cosB)<br>
+      ={2sin[(A+B)/2]cos[(A−B)/2]} / {2cos[(A+B)/2]cos[(A−B)/2]}<br>
+      =tan[(A+B)/2]。</div>
+      <p class="result">结论：恒等式成立；证明时必须保留原式有意义的条件。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>例题 6｜万能公式直接计算：已知 tan(x/2)=1/3，求 sinx、cosx、tanx</summary>
+    <div class="answer">
+      <h4>思路</h4><p>令 t=1/3，直接代入三条万能公式。</p>
+      <h4>详细步骤</h4>
+      <div class="formula">sinx=2t/(1+t²)=(2/3)/(1+1/9)=(2/3)/(10/9)=3/5。</div>
+      <div class="formula">cosx=(1−t²)/(1+t²)=(1−1/9)/(1+1/9)=(8/9)/(10/9)=4/5。</div>
+      <div class="formula">tanx=2t/(1−t²)=(2/3)/(1−1/9)=(2/3)/(8/9)=3/4。</div>
+      <p class="success">检验：(3/5)²+(4/5)²=1，且 (3/5)/(4/5)=3/4，结果一致。</p>
+      <p class="result">结论：sinx=3/5，cosx=4/5，tanx=3/4。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>例题 7｜万能代换化简：用 t=tan(x/2) 表示 (1−sinx)/cosx</summary>
+    <div class="answer">
+      <h4>思路</h4><p>分别代入 sinx、cosx，再因式分解并约分。</p>
+      <h4>详细步骤</h4>
+      <div class="formula">(1−sinx)/cosx<br>
+      ={1−2t/(1+t²)} / {(1−t²)/(1+t²)}<br>
+      =[(1+t²−2t)/(1+t²)]·[(1+t²)/(1−t²)]<br>
+      =(1−t)²/[(1−t)(1+t)]<br>
+      =(1−t)/(1+t)。</div>
+      <p>由于原式要求 cosx≠0，所以 t≠±1；约分时也正好要求 t≠1。</p>
+      <p class="result">结论：(1−sinx)/cosx=(1−t)/(1+t)，其中 t=tan(x/2)，并保留原式定义条件。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>例题 8｜防漏解：在 [0,2π) 内解 sinx=√3(1+cosx)</summary>
+    <div class="answer">
+      <h4>思路</h4><p>万能代换会排除 x=π，因此先检查这个特殊角，再对其余角使用 t 代换。</p>
+      <h4>详细步骤</h4>
+      <p><strong>第一步：检查被代换排除的角。</strong> x=π 时，左边 sinπ=0，右边 √3(1+cosπ)=0，所以 x=π 是解。</p>
+      <p><strong>第二步：设 t=tan(x/2)。</strong> 对 x≠π，代入：</p>
+      <div class="formula">2t/(1+t²)=√3[1+(1−t²)/(1+t²)]<br>
+      2t/(1+t²)=2√3/(1+t²)</div>
+      <p>因为 1+t²&gt;0，所以 2t=2√3，得到 t=√3。</p>
+      <p>tan(x/2)=√3。由于 x/2∈[0,π)，得到 x/2=π/3，即 x=2π/3。</p>
+      <p class="result">结论：x=2π/3 或 x=π。若忘记先检查 x=π，就会漏掉一个解。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>例题 9｜求最值：求 y=sinx+sin(x+2π/3) 的最大值与最小值</summary>
+    <div class="answer">
+      <h4>思路</h4><p>两个正弦相加，和差化积后只剩一个余弦因子是常数。</p>
+      <h4>详细步骤</h4>
+      <div class="formula">y=2sin[(x+x+2π/3)/2]cos[(x−x−2π/3)/2]</div>
+      <p>=2sin(x+π/3)cos(−π/3)</p>
+      <p>=2sin(x+π/3)·(1/2)=sin(x+π/3)。</p>
+      <p>因为 −1≤sin(x+π/3)≤1，且上下界都能取到：</p>
+      <p class="result">结论：最大值为 1，最小值为 −1。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>例题 10｜连续乘积：化简 8sinx·sin2x·sin4x</summary>
+    <div class="answer">
+      <h4>思路</h4><p>直接逐次积化和差会较繁。利用 2sinθ cosθ=sin2θ，先人为补出 cosx，再连锁消去。</p>
+      <h4>详细步骤</h4>
+      <p>两边乘以 cosx：</p>
+      <div class="formula">8sinx sin2x sin4x cosx<br>
+      =4(sin2x)²sin4x<br>
+      =2(1−cos4x)sin4x<br>
+      =2sin4x−sin8x。</div>
+      <p>因此，在 cosx≠0 时：</p>
+      <div class="formula">8sinx sin2x sin4x=(2sin4x−sin8x)/cosx。</div>
+      <p>更经典的连续乘积恒等式是：</p>
+      <div class="formula">8sinx cosx cos2x cos4x=sin8x。</div>
+      <p>它由 2sinx cosx=sin2x 连续使用三次立即得到。</p>
+      <p class="result">结论：遇到倍角连续乘积时，优先寻找 2sinθcosθ 的链式结构。</p>
+    </div>
+  </details>
+</section>
+
+<section id="test">
+  <h2>七、结课测试</h2>
+  <p class="lead">建议限时 35 分钟。先独立完成，再展开下一节答案。</p>
+  <div class="test-q"><span class="tag">基础</span><strong>1.</strong> 将 sin5x·cos2x 化为和差。</div>
+  <div class="test-q"><span class="tag">基础</span><strong>2.</strong> 将 cos7x−cos3x 化为乘积。</div>
+  <div class="test-q"><span class="tag">计算</span><strong>3.</strong> 求 sin105°+sin15° 的精确值。</div>
+  <div class="test-q"><span class="tag">计算</span><strong>4.</strong> 求 cos20°cos40°cos80° 的值。</div>
+  <div class="test-q"><span class="tag">方程</span><strong>5.</strong> 在 [0,2π) 内解 sin3x−sinx=0。</div>
+  <div class="test-q"><span class="tag">证明</span><strong>6.</strong> 证明：sinx+sin3x=2sin2x cosx。</div>
+  <div class="test-q"><span class="tag">万能公式</span><strong>7.</strong> 已知 tan(x/2)=−2，求 sinx 与 cosx。</div>
+  <div class="test-q"><span class="tag">化简</span><strong>8.</strong> 设 t=tan(x/2)，用 t 表示 (1+sinx)/(1−sinx)。</div>
+  <div class="test-q"><span class="tag">防漏解</span><strong>9.</strong> 在 [0,2π) 内解 sinx=1+cosx。</div>
+  <div class="test-q"><span class="tag">综合</span><strong>10.</strong> 求函数 y=cosx+cos(x+π/2) 的最大值、最小值。</div>
+</section>
+
+<section id="answers">
+  <h2>八、结课测试详细答案</h2>
+  <details>
+    <summary>第 1 题答案</summary>
+    <div class="answer">
+      <h4>思路</h4><p>识别为 sinα cosβ。</p>
+      <div class="formula">sin5x cos2x=[sin(7x)+sin(3x)]/2。</div>
+      <p class="result">答案：[sin7x+sin3x]/2。</p>
+    </div>
+  </details>
+  <details>
+    <summary>第 2 题答案</summary>
+    <div class="answer">
+      <h4>思路</h4><p>使用 cosA−cosB 的和差化积公式。</p>
+      <div class="formula">cos7x−cos3x=−2sin[(7x+3x)/2]sin[(7x−3x)/2]<br>=−2sin5x sin2x。</div>
+      <p class="result">答案：−2sin5x·sin2x。</p>
+    </div>
+  </details>
+  <details>
+    <summary>第 3 题答案</summary>
+    <div class="answer">
+      <div class="formula">sin105°+sin15°=2sin60°cos45°<br>=2×(√3/2)×(√2/2)=√6/2。</div>
+      <p class="result">答案：√6/2。</p>
+    </div>
+  </details>
+  <details>
+    <summary>第 4 题答案</summary>
+    <div class="answer">
+      <h4>思路</h4><p>利用 sin2θ=2sinθcosθ 连续制造倍角。</p>
+      <p>令 P=cos20°cos40°cos80°。两边乘 8sin20°：</p>
+      <div class="formula">8sin20°P<br>=4sin40°cos40°cos80°<br>=2sin80°cos80°<br>=sin160°=sin20°。</div>
+      <p>sin20°≠0，所以 8P=1。</p>
+      <p class="result">答案：P=1/8。</p>
+    </div>
+  </details>
+  <details>
+    <summary>第 5 题答案</summary>
+    <div class="answer">
+      <div class="formula">sin3x−sinx=2cos2x·sinx=0。</div>
+      <p>① sinx=0 ⇒ x=0，π；</p>
+      <p>② cos2x=0 ⇒ x=π/4，3π/4，5π/4，7π/4。</p>
+      <p class="result">答案：x∈{0，π/4，3π/4，π，5π/4，7π/4}。</p>
+    </div>
+  </details>
+  <details>
+    <summary>第 6 题答案</summary>
+    <div class="answer">
+      <p>由正弦和差化积：</p>
+      <div class="formula">sinx+sin3x=2sin[(x+3x)/2]cos[(x−3x)/2]<br>
+      =2sin2x cos(−x)=2sin2x cosx。</div>
+      <p>因为 cos(−x)=cosx，故等式成立。</p>
+    </div>
+  </details>
+  <details>
+    <summary>第 7 题答案</summary>
+    <div class="answer">
+      <p>令 t=−2：</p>
+      <div class="formula">sinx=2t/(1+t²)=−4/5；<br>cosx=(1−t²)/(1+t²)=−3/5。</div>
+      <p class="result">答案：sinx=−4/5，cosx=−3/5。</p>
+    </div>
+  </details>
+  <details>
+    <summary>第 8 题答案</summary>
+    <div class="answer">
+      <div class="formula">(1+sinx)/(1−sinx)<br>
+      =[1+2t/(1+t²)]/[1−2t/(1+t²)]<br>
+      =(1+t²+2t)/(1+t²−2t)<br>
+      =(1+t)²/(1−t)²。</div>
+      <p class="result">答案：[(1+t)/(1−t)]²，并保留原式有意义的条件 t≠1。</p>
+    </div>
+  </details>
+  <details>
+    <summary>第 9 题答案</summary>
+    <div class="answer">
+      <h4>思路</h4><p>先检查 t=tan(x/2) 排除的 x=π。</p>
+      <p>x=π 时，0=1−1，成立。</p>
+      <p>其余角代入万能公式：</p>
+      <div class="formula">2t/(1+t²)=1+(1−t²)/(1+t²)=2/(1+t²)</div>
+      <p>所以 t=1，tan(x/2)=1。在 x/2∈[0,π) 内，x/2=π/4，故 x=π/2。</p>
+      <p class="result">答案：x=π/2 或 π。</p>
+    </div>
+  </details>
+  <details>
+    <summary>第 10 题答案</summary>
+    <div class="answer">
+      <div class="formula">y=2cos[(x+x+π/2)/2]cos[(x−x−π/2)/2]<br>
+      =2cos(x+π/4)cos(−π/4)<br>=√2 cos(x+π/4)。</div>
+      <p>因为 −1≤cos(x+π/4)≤1：</p>
+      <p class="result">最大值为 √2，最小值为 −√2。</p>
+    </div>
+  </details>
+</section>
+
+<section>
+  <h2>九、方法总结与易错清单</h2>
+  <table>
+    <thead><tr><th>看到的结构</th><th>优先方法</th><th>目的</th></tr></thead>
+    <tbody>
+      <tr><td>两个三角函数相乘</td><td>积化和差</td><td>便于求值、求和、比较</td></tr>
+      <tr><td>同名函数相加减</td><td>和差化积</td><td>制造乘积为零、提取共同结构</td></tr>
+      <tr><td>同时含 sinx、cosx，且式子较复杂</td><td>t=tan(x/2)</td><td>转化为关于 t 的有理式或代数方程</td></tr>
+      <tr><td>角度成倍增长</td><td>寻找 2sinθcosθ=sin2θ</td><td>形成连续消去</td></tr>
+    </tbody>
+  </table>
+  <ul class="checklist">
+    <li><strong>符号：</strong>cosA−cosB 前有负号；sinαsinβ 是“差角余弦减和角余弦”。</li>
+    <li><strong>半角：</strong>和差化积中的两个新角必须同时除以 2。</li>
+    <li><strong>偶函数：</strong>cos(−θ)=cosθ；<strong>奇函数：</strong>sin(−θ)=−sinθ。</li>
+    <li><strong>定义域：</strong>约分前写清因子不为零；解方程后回代检验。</li>
+    <li><strong>万能代换：</strong>先检查 x=(2k+1)π，防止漏解。</li>
+  </ul>
+  <div class="success"><strong>最终学习标准：</strong>你不仅能写出公式，还能回答“它从哪来、为什么这样配角、什么时候用、用了会不会漏解”。做到这四点，才算真正掌握本课。</div>
+</section>
+</main>
+<footer>第 14 课离线教程 · 单文件 HTML · 可直接双击打开</footer>
+<script>
+  function toggleAll(open){
+    document.querySelectorAll('details').forEach(function(item){item.open=open});
+  }
+  window.addEventListener('beforeprint',function(){
+    document.querySelectorAll('details').forEach(function(item){item.open=true});
+  });
+</script>
+</body>
+</html>
