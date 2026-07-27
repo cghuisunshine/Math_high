@@ -547,7 +547,7 @@
           <div class="question"><b>题目：</b>成本 <span class="math">C=3+x</span>（万元），销售收入
             <span class="math">S=3x+18/(x-8)+5（0&lt;x&lt;6）；S=14（x≥6）</span>。<br>
             （Ⅰ）把利润表示为 <span class="math">x</span> 的函数；（Ⅱ）求最大利润及对应产量。</div>
-          <div class="idea"><span class="label">思路</span>利润 <span class="math">P=S-C</span>。对两段分别求最大值，再比较。第一段既可用导数判断单调性，也可令 <span class="math">t=8-x</span>，使用均值不等式或配方求最大值。</div>
+          <div class="idea"><span class="label">思路</span>利润 <span class="math">P=S-C</span>。对两段分别求最大值，再比较。第一段既可用导数判断单调性，也可令 <span class="math">t=8-x</span>，使用均值不等式、配方法或万能 <span class="math">k</span> 法求最大值。</div>
           <div class="step"><span class="label">（Ⅰ）利润函数</span>
             <p>当 <span class="math">0&lt;x&lt;6</span>：</p>
             <p class="math">P(x)=3x+18/(x-8)+5-(3+x)=2x+18/(x-8)+2。</p>
@@ -582,7 +582,7 @@
             <p>第二段 <span class="math">P(x)=11-x</span> 在 <span class="math">x≥6</span> 时的最大值为 <span class="math">P(6)=5</span> 万元，小于 <span class="math">6</span> 万元。</p>
             <div class="answer">当 <span class="math">x=5</span> 时，利润取得最大值 <span class="math">6</span> 万元，最优点为 <span class="math">(x，P)=(5，6)</span>。</div>
           </div>
-          <div class="step"><span class="label">解法二：万能 k 法</span>
+          <div class="step"><span class="label">解法二：配方法（构造非负项法）</span>
             <p>同样令 <span class="math">t=8-x</span>，则 <span class="math">2&lt;t&lt;8</span>，第一段利润函数为</p>
             <p class="math">P=18-2t-18/t。</p>
             <p>将它整理成“常数减去非负项”的形式：</p>
@@ -599,11 +599,30 @@
             <p>第二段的最大利润为 <span class="math">P(6)=5</span> 万元，因此全局最大利润仍为 <span class="math">6</span> 万元。</p>
             <div class="answer">当 <span class="math">x=5</span> 时，利润取得最大值 <span class="math">6</span> 万元，最优点为 <span class="math">(x，P)=(5，6)</span>。</div>
           </div>
-          <div class="note"><span class="label">两种方法为什么等价</span>
-            <p>均值不等式法得到 <span class="math">2t+18/t≥12</span>；万能 <span class="math">k</span> 法得到</p>
+          <div class="step"><span class="label">解法三：万能 k 法（判别式法）</span>
+            <p>“问谁设谁”：要求利润 <span class="math">P</span> 的最大值，就令第一段利润 <span class="math">P=k</span>。由</p>
+            <p class="math">k=18-2t-18/t，2&lt;t&lt;8，</p>
+            <p>且 <span class="math">t&gt;0</span>，两边乘以 <span class="math">t</span>，整理得关于 <span class="math">t</span> 的一元二次方程：</p>
+            <p class="math">2t²+(k-18)t+18=0。</p>
+            <p>该方程必须有实数解，所以判别式满足</p>
+            <p class="math">Δ=(k-18)²-4·2·18≥0，</p>
+            <p class="math">即 (k-18)²-144≥0。</p>
+            <p>解得</p>
+            <p class="math">k≤6 或 k≥30。</p>
+            <p>另一方面，因为 <span class="math">t&gt;0</span>，所以 <span class="math">2t&gt;0</span> 且 <span class="math">18/t&gt;0</span>，从而</p>
+            <p class="math">k=18-2t-18/t&lt;18。</p>
+            <p>因此 <span class="math">k≥30</span> 不可能，只能有 <span class="math">k≤6</span>。</p>
+            <p>当 <span class="math">k=6</span> 时，判别式等于 <span class="math">0</span>，方程有重根：</p>
+            <p class="math">t=-(k-18)/(2·2)=(18-6)/4=3。</p>
+            <p><span class="math">t=3</span> 满足 <span class="math">2&lt;t&lt;8</span>，于是</p>
+            <p class="math">x=8-t=5。</p>
+            <p>第二段的最大利润为 <span class="math">P(6)=5</span> 万元，小于 <span class="math">6</span> 万元。</p>
+            <div class="answer">当 <span class="math">x=5</span> 时，利润取得最大值 <span class="math">6</span> 万元，最优点为 <span class="math">(x，P)=(5，6)</span>。</div>
+          </div>
+          <div class="note"><span class="label">均值不等式法与配方法为什么等价</span>
+            <p>均值不等式法得到 <span class="math">2t+18/t≥12</span>；配方法得到</p>
             <p class="math">2t+18/t-12=2(t-3)²/t≥0。</p>
             <p>把第二个不等式移项，就得到 <span class="math">2t+18/t≥12</span>，因此两种方法本质上使用的是同一个不等式。</p>
-            <p>万能 <span class="math">k</span> 法的核心形式是 <span class="math">P=k-非负项</span>。因为“非负项 <span class="math">≥0</span>”，所以 <span class="math">P≤k</span>；当非负项等于 <span class="math">0</span> 时，<span class="math">P</span> 取得最大值 <span class="math">k</span>。</p>
           </div>
         </div>
       </details>
