@@ -547,7 +547,7 @@
           <div class="question"><b>题目：</b>成本 <span class="math">C=3+x</span>（万元），销售收入
             <span class="math">S=3x+18/(x-8)+5（0&lt;x&lt;6）；S=14（x≥6）</span>。<br>
             （Ⅰ）把利润表示为 <span class="math">x</span> 的函数；（Ⅱ）求最大利润及对应产量。</div>
-          <div class="idea"><span class="label">思路</span>利润 <span class="math">P=S-C</span>。对两段分别求最大值，再比较。第一段可用导数判断在 <span class="math">x=5</span> 处先增后减。</div>
+          <div class="idea"><span class="label">思路</span>利润 <span class="math">P=S-C</span>。对两段分别求最大值，再比较。第一段既可用导数判断单调性，也可令 <span class="math">t=8-x</span>，使用均值不等式或配方求最大值。</div>
           <div class="step"><span class="label">（Ⅰ）利润函数</span>
             <p>当 <span class="math">0&lt;x&lt;6</span>：</p>
             <p class="math">P(x)=3x+18/(x-8)+5-(3+x)=2x+18/(x-8)+2。</p>
@@ -555,7 +555,7 @@
             <p class="math">P(x)=14-(3+x)=11-x。</p>
             <div class="answer">利润函数为 <span class="math">P(x)={2x+18/(x-8)+2，0&lt;x&lt;6；11-x，x≥6}</span>。</div>
           </div>
-          <div class="step"><span class="label">（Ⅱ）求最大值</span>
+          <div class="step"><span class="label">（Ⅱ）求最大值：导数法</span>
             <p>第一段求导：</p>
             <p class="math">P′(x)=2-18/(x-8)²。</p>
             <p>在 <span class="math">0&lt;x&lt;6</span> 内，令导数为 0：</p>
@@ -566,7 +566,45 @@
             <p>比较 <span class="math">6&gt;5</span>，全局最大值来自第一段。</p>
             <div class="answer">生产量为 <span class="math">5</span> 千件时利润最大，最大利润为 <span class="math">6</span> 万元。</div>
           </div>
-          <div class="note"><span class="label">无导数思路</span>也可把第一段与 <span class="math">P(5)=6</span> 作差并因式分解验证 <span class="math">P(x)≤6</span>；本页采用导数是为了更清晰地展示“先增后减”。</div>
+          <div class="step"><span class="label">解法一：均值不等式法</span>
+            <p>在 <span class="math">0&lt;x&lt;6</span> 时，利润函数为</p>
+            <p class="math">P(x)=2x+2-18/(8-x)。</p>
+            <p>令 <span class="math">t=8-x</span>。因为 <span class="math">0&lt;x&lt;6</span>，所以 <span class="math">2&lt;t&lt;8</span>，利润函数可化为</p>
+            <p class="math">P=18-2t-18/t。</p>
+            <p>由于 <span class="math">t&gt;0</span>，根据均值不等式，</p>
+            <p class="math">2t+18/t ≥ 2√[(2t)(18/t)] = 2√36 = 12。</p>
+            <p>所以</p>
+            <p class="math">P=18-(2t+18/t) ≤ 18-12=6。</p>
+            <p>因此，第一段利润的最大值不超过 <span class="math">6</span> 万元。当均值不等式取等号时，</p>
+            <p class="math">2t=18/t ⇒ 2t²=18 ⇒ t²=9。</p>
+            <p>因为 <span class="math">t&gt;0</span>，所以 <span class="math">t=3</span>。又因为 <span class="math">t=8-x</span>，所以</p>
+            <p class="math">8-x=3 ⇒ x=5。</p>
+            <p>第二段 <span class="math">P(x)=11-x</span> 在 <span class="math">x≥6</span> 时的最大值为 <span class="math">P(6)=5</span> 万元，小于 <span class="math">6</span> 万元。</p>
+            <div class="answer">当 <span class="math">x=5</span> 时，利润取得最大值 <span class="math">6</span> 万元，最优点为 <span class="math">(x，P)=(5，6)</span>。</div>
+          </div>
+          <div class="step"><span class="label">解法二：万能 k 法</span>
+            <p>同样令 <span class="math">t=8-x</span>，则 <span class="math">2&lt;t&lt;8</span>，第一段利润函数为</p>
+            <p class="math">P=18-2t-18/t。</p>
+            <p>将它整理成“常数减去非负项”的形式：</p>
+            <p class="math">P=6-(2t+18/t-12)。</p>
+            <p>括号内继续化简：</p>
+            <p class="math">2t+18/t-12 = 2(t+9/t-6)</p>
+            <p class="math">=2·(t²-6t+9)/t = 2(t-3)²/t。</p>
+            <p>所以</p>
+            <p class="math">P=6-2(t-3)²/t。</p>
+            <p>因为 <span class="math">t&gt;0</span> 且 <span class="math">(t-3)²≥0</span>，所以</p>
+            <p class="math">2(t-3)²/t ≥ 0，</p>
+            <p>从而 <span class="math">P≤6</span>。当 <span class="math">(t-3)²=0</span>，即 <span class="math">t=3</span> 时取等号。于是</p>
+            <p class="math">x=8-3=5。</p>
+            <p>第二段的最大利润为 <span class="math">P(6)=5</span> 万元，因此全局最大利润仍为 <span class="math">6</span> 万元。</p>
+            <div class="answer">当 <span class="math">x=5</span> 时，利润取得最大值 <span class="math">6</span> 万元，最优点为 <span class="math">(x，P)=(5，6)</span>。</div>
+          </div>
+          <div class="note"><span class="label">两种方法为什么等价</span>
+            <p>均值不等式法得到 <span class="math">2t+18/t≥12</span>；万能 <span class="math">k</span> 法得到</p>
+            <p class="math">2t+18/t-12=2(t-3)²/t≥0。</p>
+            <p>把第二个不等式移项，就得到 <span class="math">2t+18/t≥12</span>，因此两种方法本质上使用的是同一个不等式。</p>
+            <p>万能 <span class="math">k</span> 法的核心形式是 <span class="math">P=k-非负项</span>。因为“非负项 <span class="math">≥0</span>”，所以 <span class="math">P≤k</span>；当非负项等于 <span class="math">0</span> 时，<span class="math">P</span> 取得最大值 <span class="math">k</span>。</p>
+          </div>
         </div>
       </details>
 
