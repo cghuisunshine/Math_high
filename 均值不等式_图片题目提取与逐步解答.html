@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="从 6024–6029 六张照片中提取的均值不等式与最值问题，含完整逐步解答。">
+  <title>均值不等式：题目提取与逐步解答</title>
+  <style>
+    :root{
+      --bg:#faf8f5;
+      --panel:#ffffff;
+      --text:#352b24;
+      --muted:#766a61;
+      --accent:#9a4f16;
+      --border:#ddd5cd;
+      --soft:#f4efe9;
+      --green:#27705a;
+      --green-soft:#e9f3ee;
+      --red:#a13f36;
+      --red-soft:#f8ece9;
+      --yellow:#f7f0dc;
+      --code:#2d2824;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:"Avenir Next","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+      font-size:15.5px;
+      line-height:1.72;
+    }
+    button,input{font:inherit}
+    button{color:inherit}
+    a{color:var(--accent)}
+    :focus-visible{outline:3px solid rgba(154,79,22,.28);outline-offset:2px}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      min-height:56px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:8px 18px;
+      background:rgba(250,248,245,.97);
+      border-bottom:1px solid var(--border);
+    }
+    .page-title{font-size:17px;font-weight:700;line-height:1.3}
+    .page-subtitle{font-size:12.5px;color:var(--muted)}
+    .actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+    .btn{
+      border:1px solid #cfc4ba;
+      border-radius:6px;
+      padding:6px 10px;
+      background:var(--panel);
+      cursor:pointer;
+    }
+    .btn:hover{background:var(--soft);border-color:#b8aa9e}
+    .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+    .btn.primary:hover{background:#81400f}
+
+    .layout{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:calc(100vh - 57px)}
+    .sidebar{
+      position:sticky;
+      top:57px;
+      height:calc(100vh - 57px);
+      overflow:auto;
+      padding:18px 14px 30px;
+      background:#f5f1ec;
+      border-right:1px solid var(--border);
+    }
+    .sidebar.hidden{display:none}
+    .layout.sidebar-hidden{grid-template-columns:minmax(0,1fr)}
+    .search-label{display:block;font-size:13px;font-weight:650;margin-bottom:6px}
+    .search-row{display:flex;gap:6px}
+    #searchInput{
+      width:100%;
+      min-width:0;
+      border:1px solid #cfc4ba;
+      border-radius:6px;
+      padding:8px 9px;
+      background:#fff;
+      color:var(--text);
+    }
+    .clear-btn{width:36px;border:1px solid #cfc4ba;border-radius:6px;background:#fff;cursor:pointer}
+    .toc-title{margin:20px 4px 8px;font-size:14px}
+    .toc-list{list-style:none;padding:0;margin:0}
+    .toc-list li{margin:2px 0}
+    .toc-list li.hidden{display:none}
+    .toc-list a{
+      display:block;
+      padding:7px 9px;
+      border-left:3px solid transparent;
+      color:var(--text);
+      text-decoration:none;
+      font-size:13.5px;
+    }
+    .toc-list a:hover{background:#ebe5de}
+    .toc-list a.active{border-left-color:var(--accent);background:#eee5dc;color:#713809;font-weight:650}
+    .sidebar-note{margin:16px 8px 0;color:var(--muted);font-size:12px}
+
+    main{min-width:0;padding:26px 28px 64px}
+    .content{max-width:1020px;margin:0 auto}
+    .intro{padding:0 0 22px;border-bottom:1px solid var(--border);margin-bottom:18px}
+    h1{font-size:clamp(25px,4vw,36px);line-height:1.25;margin:0 0 9px;letter-spacing:-.02em}
+    .intro p{max-width:780px;margin:0;color:var(--muted)}
+    .source-line{margin-top:10px;font-size:13px;color:var(--muted)}
+
+    details.section{
+      margin:0 0 12px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      background:var(--panel);
+      overflow:hidden;
+    }
+    details.section>summary{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      cursor:pointer;
+      list-style:none;
+      padding:15px 18px;
+      font-weight:720;
+      border-bottom:1px solid transparent;
+      user-select:none;
+    }
+    details.section>summary::-webkit-details-marker{display:none}
+    details.section>summary::after{content:"+";margin-left:auto;color:var(--muted);font-size:20px;font-weight:400}
+    details.section[open]>summary{border-bottom-color:var(--border)}
+    details.section[open]>summary::after{content:"−"}
+    .section-letter{
+      display:inline-flex;
+      width:27px;
+      height:27px;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      border:1px solid #c6b9ad;
+      border-radius:5px;
+      color:var(--accent);
+      font-size:13px;
+    }
+    .section-body{padding:18px}
+    .section-body> :first-child{margin-top:0}
+    .section-body> :last-child{margin-bottom:0}
+    h2,h3,h4{line-height:1.35}
+    h2{font-size:20px;margin:26px 0 12px}
+    h3{font-size:17px;margin:24px 0 10px}
+    h4{font-size:15px;margin:18px 0 8px}
+    p{margin:8px 0}
+    ul,ol{padding-left:24px}
+    li+li{margin-top:5px}
+
+    .box{
+      margin:12px 0;
+      padding:13px 15px;
+      border:1px solid var(--border);
+      border-left-width:4px;
+      border-radius:7px;
+      background:#fff;
+    }
+    .box-title{font-weight:720;margin-bottom:6px}
+    .definition{border-left-color:var(--green);background:var(--green-soft)}
+    .theorem{border-left-color:var(--accent);background:var(--yellow)}
+    .trap{border-left-color:var(--red);background:var(--red-soft)}
+    .note{border-left-color:#7c7067;background:var(--soft)}
+    .problem{border-left-color:#5e554e;background:#fbfaf8}
+    .result{border-left-color:var(--green);background:var(--green-soft);font-weight:650}
+    .method{font-size:13px;color:var(--muted);margin-bottom:8px}
+
+    .formula{
+      position:relative;
+      margin:10px 0;
+      padding:11px 38px 11px 13px;
+      border:1px solid #d8cec4;
+      border-radius:6px;
+      background:#fbfaf8;
+      color:var(--code);
+      font-family:"Iowan Old Style","STIX Two Text","Times New Roman",serif;
+      font-size:16px;
+      line-height:1.65;
+      overflow:auto;
+      white-space:pre-wrap;
+      word-break:break-word;
+      cursor:copy;
+    }
+    .formula::after{content:"双击复制";position:absolute;right:8px;top:6px;font-family:"Avenir Next","PingFang SC",sans-serif;font-size:10px;color:#9a8d82}
+    .steps{margin:10px 0 16px;padding-left:25px}
+    .steps li{padding-left:3px}
+    .steps strong{color:#67401f}
+    .solution{
+      margin:10px 0 18px;
+      border:1px solid #ded5cc;
+      border-radius:7px;
+      background:#fff;
+    }
+    .solution>summary{cursor:pointer;padding:10px 13px;font-weight:680;list-style:none;background:#f8f5f1}
+    .solution>summary::-webkit-details-marker{display:none}
+    .solution>summary::before{content:"▸";display:inline-block;margin-right:7px;color:var(--accent)}
+    .solution[open]>summary::before{content:"▾"}
+    .solution-content{padding:5px 14px 14px}
+
+    .answer-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+    .answer-table th,.answer-table td{padding:9px 10px;border:1px solid var(--border);text-align:left;vertical-align:top}
+    .answer-table th{background:#f2ede7;font-weight:700}
+    .answer-table tr:hover td{background:#fcfaf7}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .checklist{list-style:none;padding:0}
+    .checklist li{position:relative;padding-left:26px;margin:8px 0}
+    .checklist li::before{content:"☐";position:absolute;left:0;color:var(--green);font-size:17px}
+    .hl{background:#f3dcae!important;box-shadow:0 0 0 2px #e2b969 inset}
+    mark{background:#f3dcae;color:inherit}
+    .copy-toast{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:50;
+      padding:9px 12px;
+      border:1px solid #3e6458;
+      border-radius:6px;
+      background:#244d40;
+      color:#fff;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .15s ease;
+    }
+    .copy-toast.show{opacity:1}
+    .no-results{display:none;margin-top:10px;color:var(--red);font-size:13px}
+    .no-results.show{display:block}
+
+    @media(max-width:820px){
+      .topbar{align-items:flex-start;padding:9px 12px}
+      .page-subtitle{display:none}
+      .actions .btn:not(.primary){display:none}
+      .layout{display:block}
+      .sidebar{position:fixed;z-index:18;top:57px;left:0;width:280px;max-width:86vw;height:calc(100vh - 57px);box-shadow:4px 0 8px rgba(57,44,34,.1)}
+      .sidebar.hidden{display:none}
+      main{padding:20px 14px 48px}
+      .two-col{grid-template-columns:1fr}
+      .section-body{padding:14px}
+      details.section>summary{padding:13px 14px}
+    }
+    @media(min-width:821px){
+      #toggleSidebarMobile{display:none}
+    }
+    @media print{
+      .topbar,.sidebar,.copy-toast{display:none!important}
+      .layout{display:block}
+      body{background:#fff;color:#000;font-size:11pt}
+      main{padding:0}
+      .content{max-width:none}
+      details.section{break-inside:avoid;border-color:#aaa}
+      details.section>summary{font-size:14pt}
+      details.section:not([open])>.section-body{display:block}
+      .solution:not([open])>.solution-content{display:block}
+      .formula::after{display:none}
+      .box,.formula{background:#fff!important}
+    }
+  </style>
+
+  <!--
+  ====================================================
+  PART A — CANONICAL TUTORIAL (MARKDOWN)
+  ====================================================
+
+  # 均值不等式：图片题目提取与逐步解答
+
+  ## A. 题目提取
+  来源为 6024.JPG 至 6029.JPG。内容包含例题 6 至 9、课后练习 1 至 10，主题是用基本不等式求最值。页面完整保留定义域、变形、等号条件和最终答案。
+
+  ## B. 核心工具
+  对正数，x+y ≥ 2√xy；n 个正数的算术平均数不小于几何平均数。Cauchy Engel 形式为 Σ(uᵢ²/vᵢ) ≥ (Σuᵢ)²/(Σvᵢ)。所有最值题都必须核对等号条件。
+
+  ## C. 例题 6
+  (1) 令 t=b²，配方得 y²=25/16-(t-3/2)²/4，最大值 5/4。
+  (2) k²=1+2√xy/(x+y) ≤ 2，最大值 √2。
+  (3) (x+y)(y+z)=xz+1/(xz) ≥ 2，最小值 2。
+
+  ## D. 例题 7 至 9
+  例 7 最小值 25/2。例 8 四问答案依次为 3、(3/2)∛36、2/27、32√3/3。例 9 两问答案为 2 和 27/1024。
+
+  ## E. 课后练习 1 至 6
+  答案依次是 3、(3/2)(√2-1)、2√2、9、(a+b)²、9。每题都通过换元、配凑或 Cauchy 将变量放入可控制的正数和中。
+
+  ## F. 课后练习 7 至 9
+  第 7 题比较符号为严格大于；第 8 题最小值 16；第 9 题 a=nⁿ。
+
+  ## G. 阅读题 10 与推广
+  阅读材料的基础问题最大值为 √6。更一般地，当 a+b=1 时，√(na+1)+√(nb+1) ≤ √(2n+4)。三元情形 a+b+c=1 时，上界为 √(3n+9)。等号分别在变量均分时取得。
+
+  ## H. 误区与应试策略
+  常见错误是忽略正数条件、忘记平方后开方、只给上界却不验证等号可同时成立。策略是先看定义域，再识别乘积或和的结构，最后解等号条件。
+  -->
+
+  <script type="application/json" id="studyPageStructure">
+  {
+    "title": "均值不等式：题目提取与逐步解答",
+    "subject": "math",
+    "language": "zh-CN",
+    "sources": ["6024.JPG", "6025.JPG", "6026.JPG", "6027.JPG", "6028.JPG", "6029.JPG"],
+    "sections": [
+      {"id":"section-a","letter":"A","title":"题目提取与答案速查","items":["example-6","example-7","example-8","example-9","exercise-1-10"]},
+      {"id":"section-b","letter":"B","title":"核心工具与使用条件","items":["am-gm","cauchy","completing-square","equality"]},
+      {"id":"section-c","letter":"C","title":"例题 6 逐步解答","items":["ex6-1","ex6-2","ex6-3"]},
+      {"id":"section-d","letter":"D","title":"例题 7–9 逐步解答","items":["ex7","ex8-1","ex8-2","ex8-3","ex8-4","ex9-1","ex9-2"]},
+      {"id":"section-e","letter":"E","title":"课后练习 1–6","items":["p1","p2","p3","p4","p5","p6"]},
+      {"id":"section-f","letter":"F","title":"课后练习 7–9","items":["p7","p8","p9"]},
+      {"id":"section-g","letter":"G","title":"阅读题 10 与一般推广","items":["p10-reading","p10-i","p10-ii","p10-iii"]},
+      {"id":"section-h","letter":"H","title":"常见误区与应试策略","items":["mistakes","checklist"]}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="page-title">均值不等式·全解</div>
+      <div class="page-subtitle">6 张照片·例题 6–9·课后练习 1–10</div>
+    </div>
+    <div class="actions">
+      <button class="btn primary" id="toggleSidebarMobile" type="button">目录</button>
+      <button class="btn" id="toggleSidebar" type="button">隐藏目录</button>
+      <button class="btn" id="expandAll" type="button">全部展开</button>
+      <button class="btn" id="collapseAll" type="button">全部折叠</button>
+      <button class="btn" id="printPage" type="button">打印</button>
+    </div>
+  </header>
+
+  <div class="layout" id="layout">
+    <aside class="sidebar" id="sidebar" aria-label="页面目录">
+      <label class="search-label" for="searchInput">搜索章节</label>
+      <div class="search-row">
+        <input id="searchInput" type="search" placeholder="例如：第 8 题、Cauchy" autocomplete="off">
+        <button class="clear-btn" id="clearSearch" type="button" aria-label="清除搜索">×</button>
+      </div>
+      <nav aria-label="目录">
+        <div class="toc-title">内容</div>
+        <ul class="toc-list" id="tocList">
+          <li data-toc-item><a data-toc-link href="#section-a">A　题目与答案速查</a></li>
+          <li data-toc-item><a data-toc-link href="#section-b">B　核心工具</a></li>
+          <li data-toc-item><a data-toc-link href="#section-c">C　例题 6</a></li>
+          <li data-toc-item><a data-toc-link href="#section-d">D　例题 7–9</a></li>
+          <li data-toc-item><a data-toc-link href="#section-e">E　课后 1–6</a></li>
+          <li data-toc-item><a data-toc-link href="#section-f">F　课后 7–9</a></li>
+          <li data-toc-item><a data-toc-link href="#section-g">G　阅读题 10</a></li>
+          <li data-toc-item><a data-toc-link href="#section-h">H　误区与策略</a></li>
+        </ul>
+        <div class="no-results" id="noResults">未找到匹配章节。</div>
+      </nav>
+      <p class="sidebar-note">公式框可双击复制。打印时会自动展示全部内容。</p>
+    </aside>
+
+    <main>
+      <div class="content">
+        <section class="intro" aria-labelledby="mainTitle">
+          <h1 id="mainTitle">均值不等式：题目提取与逐步解答</h1>
+          <p>本页按照照片中的页码与题号整理，以“定义域 → 结构变形 → 不等式 → 等号条件”为统一解题线索。手写答案中未完成的步骤已补齐，并对每个最值的可取性进行核对。</p>
+          <div class="source-line">图片：6024.JPG、6025.JPG、6026.JPG、6027.JPG、6028.JPG、6029.JPG</div>
+        </section>
+
+        <details class="section" id="section-a" data-title="题目提取 答案速查" open>
+          <summary><span class="section-letter">A</span><span>题目提取与答案速查</span></summary>
+          <div class="section-body">
+            <div class="box note">
+              <div class="box-title">符号说明</div>
+              <p>照片中 R<sup>+</sup> 按正数处理；“非负实数”则包含 0。凡涉及分母，还需满足分母不为 0。</p>
+            </div>
+            <div class="answer-table-wrap">
+              <table class="answer-table">
+                <thead><tr><th>来源</th><th>提取的题目</th><th>答案</th><th>等号条件</th></tr></thead>
+                <tbody>
+                  <tr><td>6024·例6(1)</td><td>a,b&gt;0，a²+b²/4=1，求 y=a√(1+b²) 最大值</td><td>5/4</td><td>a²=5/8，b²=3/2</td></tr>
+                  <tr><td>6024·例6(2)</td><td>x,y&gt;0，√x+√y=k√(x+y)，求 k 最大值</td><td>√2</td><td>x=y</td></tr>
+                  <tr><td>6024·例6(3)</td><td>xyz(x+y+z)=1，求 (x+y)(y+z) 最小值</td><td>2</td><td>xz=1 且 y(x+y+z)=1</td></tr>
+                  <tr><td>6024·例7</td><td>a,b&gt;0，a+b=1，求 (a+1/a)²+(b+1/b)² 最小值</td><td>25/2</td><td>a=b=1/2</td></tr>
+                  <tr><td>6026·例8</td><td>(1) 2x+1/x²；(2) 2x²+3/x；(3) x²y；(4) 6x(4-x²)</td><td>3；(3/2)∛36；2/27；32√3/3</td><td>见详解</td></tr>
+                  <tr><td>6025·例9</td><td>(1) c/a+a/(b+c)+b/c 最小值；(2) x₁x₂²x₃+x₁x₂x₃² 最大值</td><td>2；27/1024</td><td>b=0,c=a；x₁=1/4,x₂=x₃=3/8</td></tr>
+                  <tr><td>6027·课后1–6</td><td>六道填空最值题</td><td>3；(3/2)(√2−1)；2√2；9；(a+b)²；9</td><td>见详解</td></tr>
+                  <tr><td>6028·课后7–9</td><td>比较符号；双变量最值；推广中的 a</td><td>&gt;；16；nⁿ</td><td>见详解</td></tr>
+                  <tr><td>6029·课后10</td><td>阅读材料、根式和的最大值及二元、三元推广</td><td>√6；2√2；√10；√(2n+4)；√(3n+9)</td><td>变量均分</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+
+        <details class="section" id="section-b" data-title="核心工具 均值不等式 Cauchy 配方">
+          <summary><span class="section-letter">B</span><span>核心工具与使用条件</span></summary>
+          <div class="section-body">
+            <div class="box definition">
+              <div class="box-title">算术平均数 ≥ 几何平均数（AM–GM）</div>
+              <div class="formula" data-copy>x₁,x₂,…,xₙ &gt; 0 时：
+(x₁+x₂+⋯+xₙ)/n ≥ ⁿ√(x₁x₂⋯xₙ)
+当且仅当 x₁=x₂=⋯=xₙ 时取等号。</div>
+              <p>特别地，x+y≥2√xy，x+1/x≥2（x&gt;0）。</p>
+            </div>
+            <div class="box theorem">
+              <div class="box-title">均值链</div>
+              <div class="formula" data-copy>n/(1/a₁+⋯+1/aₙ) ≤ ⁿ√(a₁⋯aₙ) ≤ (a₁+⋯+aₙ)/n ≤ √[(a₁²+⋯+aₙ²)/n]</div>
+              <p>四种平均数从左到右依次为：调和平均、几何平均、算术平均、平方平均。等号在所有 aᵢ 相等时成立。</p>
+            </div>
+            <div class="box theorem">
+              <div class="box-title">Cauchy 不等式的 Engel 形式</div>
+              <div class="formula" data-copy>v₁,…,vₙ &gt; 0 时：
+u₁²/v₁ + u₂²/v₂ + ⋯ + uₙ²/vₙ ≥ (u₁+u₂+⋯+uₙ)²/(v₁+v₂+⋯+vₙ)</div>
+              <p>典型用法：a²/x+b²/(1−x)≥(a+b)²。</p>
+            </div>
+            <div class="two-col">
+              <div class="box note">
+                <div class="box-title">配方法</div>
+                <p>当表达式是关于 t 的二次式，配成 A−B(t−t₀)² 可直接读出最大值。但必须检查 t₀ 在定义域内。</p>
+              </div>
+              <div class="box trap">
+                <div class="box-title">等号条件不能省</div>
+                <p>不等式只给出上界或下界。只有当等号条件与原条件能同时满足时，这个界才是真正的最值。</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="section" id="section-c" data-title="例题 6 配方 根式 乘积约束">
+          <summary><span class="section-letter">C</span><span>例题 6 逐步解答</span></summary>
+          <div class="section-body">
+            <h2 id="ex6-1">例 6（1）含参乘积的最大值</h2>
+            <div class="box problem"><strong>题目：</strong>已知 a,b&gt;0，且 a²+b²/4=1，求 y=a√(1+b²) 的最大值。</div>
+            <details class="solution" open>
+              <summary>查看逐步解答</summary>
+              <div class="solution-content">
+                <div class="method">方法：先平方消去根号，再换元配方。</div>
+                <ol class="steps">
+                  <li>因为 a,b,y 都为正数，比较 y 与比较 y² 等价。由约束得 a²=1−b²/4。</li>
+                  <li>令 t=b²。由 a&gt;0 知 0&lt;t&lt;4。</li>
+                  <li>展开并配方：</li>
+                </ol>
+                <div class="formula" data-copy>y²=a²(1+b²)
+=(1−t/4)(1+t)
+=1+3t/4−t²/4
+=25/16−(1/4)(t−3/2)²
+≤25/16</div>
+                <ol class="steps" start="4">
+                  <li>t=3/2 在定义域内，所以上界可取。此时 b²=3/2，a²=1−3/8=5/8。</li>
+                  <li>y&gt;0，因此从 y²≤25/16 得 y≤5/4。</li>
+                </ol>
+                <div class="box result">最大值：y<sub>max</sub>=5/4。等号在 a=√(5/8)，b=√(3/2) 时取得。</div>
+              </div>
+            </details>
+
+            <h2 id="ex6-2">例 6（2）根式和的比值</h2>
+            <div class="box problem"><strong>题目：</strong>已知 x,y&gt;0，且 √x+√y=k√(x+y)，求 k 的最大值。</div>
+            <details class="solution" open>
+              <summary>查看逐步解答</summary>
+              <div class="solution-content">
+                <ol class="steps">
+                  <li>两边都为正数，可以平方：</li>
+                </ol>
+                <div class="formula" data-copy>k²=(√x+√y)²/(x+y)
+=1+2√(xy)/(x+y)</div>
+                <ol class="steps" start="2">
+                  <li>由 x+y≥2√xy，得 2√xy/(x+y)≤1。</li>
+                  <li>所以 k²≤2。由 k&gt;0，得 k≤√2。</li>
+                  <li>当 x=y 时，x+y=2√xy，等号成立。</li>
+                </ol>
+                <div class="box result">最大值：k<sub>max</sub>=√2，当 x=y 时取得。</div>
+              </div>
+            </details>
+
+            <h2 id="ex6-3">例 6（3）利用约束消去三个变量</h2>
+            <div class="box problem"><strong>题目：</strong>已知 x,y,z&gt;0，且 xyz(x+y+z)=1，求 (x+y)(y+z) 的最小值。</div>
+            <details class="solution" open>
+              <summary>查看逐步解答</summary>
+              <div class="solution-content">
+                <ol class="steps">
+                  <li>先展开目标式，刻意凑出 x+y+z：</li>
+                </ol>
+                <div class="formula" data-copy>(x+y)(y+z)
+=xy+xz+y²+yz
+=xz+y(x+y+z)</div>
+                <ol class="steps" start="2">
+                  <li>由 xyz(x+y+z)=1，两边除以 xz&gt;0：</li>
+                </ol>
+                <div class="formula" data-copy>y(x+y+z)=1/(xz)</div>
+                <ol class="steps" start="3">
+                  <li>代回目标式，只剩一个正数 xz：</li>
+                </ol>
+                <div class="formula" data-copy>(x+y)(y+z)=xz+1/(xz)≥2</div>
+                <ol class="steps" start="4">
+                  <li>等号要求 xz=1。例如取 x=z=1，再由 y(y+2)=1 得 y=√2−1&gt;0，故等号确实可取。</li>
+                </ol>
+                <div class="box result">最小值为 2。一组取等值是 (x,y,z)=(1,√2−1,1)。</div>
+              </div>
+            </details>
+          </div>
+        </details>
+
+        <details class="section" id="section-d" data-title="例题 7 8 9 均值不等式 加权">
+          <summary><span class="section-letter">D</span><span>例题 7–9 逐步解答</span></summary>
+          <div class="section-body">
+            <h2 id="ex7">例 7　对称式的最小值</h2>
+            <div class="box problem"><strong>题目：</strong>已知 a,b&gt;0，a+b=1，求 (a+1/a)²+(b+1/b)² 的最小值。</div>
+            <details class="solution" open>
+              <summary>查看逐步解答</summary>
+              <div class="solution-content">
+                <ol class="steps">
+                  <li>展开平方：</li>
+                </ol>
+                <div class="formula" data-copy>E=(a+1/a)²+(b+1/b)²
+=a²+b²+1/a²+1/b²+4</div>
+                <ol class="steps" start="2">
+                  <li>由 a+b=1，得 a²+b²≥(a+b)²/2=1/2。</li>
+                  <li>又有 1/a+1/b=(a+b)/(ab)=1/(ab)。由 ab≤1/4，得 1/a+1/b≥4。</li>
+                  <li>对 1/a 与 1/b 再用平方和估计：</li>
+                </ol>
+                <div class="formula" data-copy>1/a²+1/b² ≥ (1/a+1/b)²/2 ≥ 4²/2=8</div>
+                <ol class="steps" start="5">
+                  <li>所以 E≥1/2+8+4=25/2。两处等号都要求 a=b，与 a+b=1 联立得 a=b=1/2。</li>
+                </ol>
+                <div class="box result">最小值为 25/2，当 a=b=1/2 时取得。</div>
+              </div>
+            </details>
+
+            <h2>例 8　算术平均数与几何平均数</h2>
+            <h3 id="ex8-1">（1）y=2x+1/x²，x&gt;0</h3>
+            <details class="solution" open>
+              <summary>逐步解答</summary>
+              <div class="solution-content">
+                <p>将 2x 拆成 x+x，得到三个乘积固定的正数：</p>
+                <div class="formula" data-copy>y=x+x+1/x² ≥ 3·∛(x·x·1/x²)=3</div>
+                <p>等号要求 x=1/x²，即 x=1。</p>
+                <div class="box result">最小值为 3，当 x=1 时取得。</div>
+              </div>
+            </details>
+
+            <h3 id="ex8-2">（2）y=2x²+3/x，x&gt;0</h3>
+            <details class="solution" open>
+              <summary>逐步解答</summary>
+              <div class="solution-content">
+                <p>为使三个因子的乘积与 x 无关，把 3/x 平分成两项：</p>
+                <div class="formula" data-copy>y=2x²+3/(2x)+3/(2x)
+≥3·∛[2x²·3/(2x)·3/(2x)]
+=3·∛(9/2)
+=(3/2)∛36</div>
+                <p>等号要求 2x²=3/(2x)，即 x³=3/4。</p>
+                <div class="box result">最小值为 (3/2)∛36，当 x=∛(3/4) 时取得。</div>
+              </div>
+            </details>
+
+            <h3 id="ex8-3">（3）x+2y=1，x,y&gt;0，求 x²y 最大值</h3>
+            <details class="solution" open>
+              <summary>逐步解答</summary>
+              <div class="solution-content">
+                <p>目标中 x 出现两次，所以把 x 拆为相等的两份：</p>
+                <div class="formula" data-copy>x/2+x/2+2y=1
+≥3·∛[(x/2)(x/2)(2y)]
+=3·∛(x²y/2)</div>
+                <p>两边立方得 1≥27x²y/2，因此 x²y≤2/27。</p>
+                <p>等号要求 x/2=2y=1/3，故 x=2/3，y=1/6。</p>
+                <div class="box result">最大值为 2/27。</div>
+              </div>
+            </details>
+
+            <h3 id="ex8-4">（4）0&lt;x&lt;2，求 6x(4−x²) 最大值</h3>
+            <details class="solution" open>
+              <summary>逐步解答</summary>
+              <div class="solution-content">
+                <ol class="steps">
+                  <li>令 t=x²，则 0&lt;t&lt;4。所求式为 6√t(4−t)。</li>
+                  <li>对三个正数 t、(4−t)/2、(4−t)/2 用 AM–GM：</li>
+                </ol>
+                <div class="formula" data-copy>t+(4−t)/2+(4−t)/2=4
+
+t(4−t)²/4 ≤ (4/3)³
+
+√t(4−t) ≤ 16/(3√3)</div>
+                <ol class="steps" start="3">
+                  <li>乘以 6：6x(4−x²)≤32/√3=32√3/3。</li>
+                  <li>等号要求 t=(4−t)/2，得 t=4/3，x=2√3/3。</li>
+                </ol>
+                <div class="box result">最大值为 32√3/3，当 x=2√3/3 时取得。</div>
+              </div>
+            </details>
+
+            <h2>例 9　换元与分步估计</h2>
+            <h3 id="ex9-1">（1）三个分式的最小值</h3>
+            <div class="box problem"><strong>题目：</strong>设 a,b,c 为非负实数，求 c/a+a/(b+c)+b/c 的最小值。由分母知 a,c&gt;0，b≥0。</div>
+            <details class="solution" open>
+              <summary>逐步解答</summary>
+              <div class="solution-content">
+                <ol class="steps">
+                  <li>令 u=c/a&gt;0，v=b/c≥0。因为 b+c=c(v+1)，所以：</li>
+                </ol>
+                <div class="formula" data-copy>c/a+a/(b+c)+b/c
+=u+1/[u(v+1)]+v</div>
+                <ol class="steps" start="2">
+                  <li>固定 v，对前两项用 AM–GM：</li>
+                </ol>
+                <div class="formula" data-copy>u+1/[u(v+1)] ≥ 2/√(v+1)</div>
+                <ol class="steps" start="3">
+                  <li>令 t=√(v+1)≥1，则 v=t²−1。因此：</li>
+                </ol>
+                <div class="formula" data-copy>原式 ≥ t²−1+2/t
+
+t²−1+2/t−2
+=t²−3+2/t
+=(t−1)²(t+2)/t
+≥0</div>
+                <ol class="steps" start="4">
+                  <li>所以原式≥2。等号要求 t=1，即 v=0、b=0；同时 u=1/√(v+1)=1，即 c=a。</li>
+                </ol>
+                <div class="box result">最小值为 2，当 b=0 且 c=a&gt;0 时取得。</div>
+              </div>
+            </details>
+
+            <h3 id="ex9-2">（2）三元齐次式的最大值</h3>
+            <div class="box problem"><strong>题目：</strong>x₁,x₂,x₃&gt;0，x₁+x₂+x₃=1，求 x₁x₂²x₃+x₁x₂x₃² 的最大值。</div>
+            <details class="solution" open>
+              <summary>逐步解答</summary>
+              <div class="solution-content">
+                <ol class="steps">
+                  <li>提取公因式：</li>
+                </ol>
+                <div class="formula" data-copy>F=x₁x₂x₃(x₂+x₃)
+=x₁x₂x₃(1−x₁)</div>
+                <ol class="steps" start="2">
+                  <li>对固定的 x₁，x₂+x₃=1−x₁，于是 x₂x₃≤(1−x₁)²/4。</li>
+                  <li>所以 F≤x₁(1−x₁)³/4。为估计后者，对四个和为 1 的数使用 AM–GM：</li>
+                </ol>
+                <div class="formula" data-copy>x₁+(1−x₁)/3+(1−x₁)/3+(1−x₁)/3=1
+
+x₁[(1−x₁)/3]³ ≤ (1/4)⁴
+
+x₁(1−x₁)³ ≤ 27/256</div>
+                <ol class="steps" start="4">
+                  <li>因此 F≤27/1024。等号要求 x₁=1/4，x₂=x₃，且 x₂+x₃=3/4，即 x₂=x₃=3/8。</li>
+                </ol>
+                <div class="box result">最大值为 27/1024，当 (x₁,x₂,x₃)=(1/4,3/8,3/8) 时取得。</div>
+              </div>
+            </details>
+          </div>
+        </details>
+
+        <details class="section" id="section-e" data-title="课后练习 1 2 3 4 5 6 最值">
+          <summary><span class="section-letter">E</span><span>课后练习 1–6</span></summary>
+          <div class="section-body">
+            <h2 id="p1">第 1 题　分式换元</h2>
+            <div class="box problem"><strong>题目：</strong>若 x&gt;2，求 (x²−3x+3)/(x−2) 的最小值。</div>
+            <details class="solution" open><summary>逐步解答</summary><div class="solution-content">
+              <p>先做多项式除法：</p>
+              <div class="formula" data-copy>(x²−3x+3)/(x−2)=x−1+1/(x−2)</div>
+              <p>令 t=x−2&gt;0，则 x−1=t+1。</p>
+              <div class="formula" data-copy>原式=t+1+1/t ≥ 1+2=3</div>
+              <p>等号在 t=1，即 x=3 时取得。</p>
+              <div class="box result">最小值为 3。</div>
+            </div></details>
+
+            <h2 id="p2">第 2 题　分式函数的最大值</h2>
+            <div class="box problem"><strong>题目：</strong>若 x&gt;0，求 3x/(x²+2x+2) 的最大值。</div>
+            <details class="solution" open><summary>逐步解答</summary><div class="solution-content">
+              <p>分子分母同除以 x&gt;0：</p>
+              <div class="formula" data-copy>3x/(x²+2x+2)=3/(x+2+2/x)</div>
+              <p>由 x+2/x≥2√2，分母≥2+2√2。分母越小，原正分式越大。</p>
+              <div class="formula" data-copy>原式 ≤ 3/(2+2√2)=3(√2−1)/2</div>
+              <p>等号在 x=2/x，即 x=√2 时取得。</p>
+              <div class="box result">最大值为 (3/2)(√2−1)。</div>
+            </div></details>
+
+            <h2 id="p3">第 3 题　用差作新变量</h2>
+            <div class="box problem"><strong>题目：</strong>已知 x&gt;y&gt;0 且 xy=1，求 (x²+y²)/(x−y) 的最小值。</div>
+            <details class="solution" open><summary>逐步解答</summary><div class="solution-content">
+              <p>令 d=x−y&gt;0。由 xy=1：</p>
+              <div class="formula" data-copy>x²+y²=(x−y)²+2xy=d²+2
+
+(x²+y²)/(x−y)=d+2/d ≥ 2√2</div>
+              <p>等号在 d=√2 时取得。与 xy=1 联立可得 x=(√6+√2)/2，y=(√6−√2)/2，符合 x&gt;y&gt;0。</p>
+              <div class="box result">最小值为 2√2。</div>
+            </div></details>
+
+            <h2 id="p4">第 4 题　倒数和</h2>
+            <div class="box problem"><strong>题目：</strong>正数 a,b,c 满足 a+b+c=1，求 1/a+1/b+1/c 的最小值。</div>
+            <details class="solution" open><summary>逐步解答</summary><div class="solution-content">
+              <p>由 Cauchy 不等式：</p>
+              <div class="formula" data-copy>(1/a+1/b+1/c)(a+b+c) ≥ (1+1+1)²=9</div>
+              <p>由 a+b+c=1，得 1/a+1/b+1/c≥9。等号在 a=b=c=1/3 时成立。</p>
+              <div class="box result">最小值为 9。</div>
+            </div></details>
+
+            <h2 id="p5">第 5 题　Cauchy 的标准形</h2>
+            <div class="box problem"><strong>题目：</strong>0&lt;x&lt;1，a,b&gt;0，求 a²/x+b²/(1−x) 的最小值。</div>
+            <details class="solution" open><summary>逐步解答</summary><div class="solution-content">
+              <div class="formula" data-copy>a²/x+b²/(1−x)
+≥(a+b)²/[x+(1−x)]
+=(a+b)²</div>
+              <p>等号条件为 a/x=b/(1−x)，解得 x=a/(a+b)，的确落在 (0,1) 内。</p>
+              <div class="box result">最小值为 (a+b)²。</div>
+            </div></details>
+
+            <h2 id="p6">第 6 题　整体换元</h2>
+            <div class="box problem"><strong>题目：</strong>设 a,b,c&gt;0，求 (a+b+c)[4/(a+b)+1/c] 的最小值。</div>
+            <details class="solution" open><summary>逐步解答</summary><div class="solution-content">
+              <p>令 p=a+b&gt;0。展开：</p>
+              <div class="formula" data-copy>(p+c)(4/p+1/c)
+=4+1+4c/p+p/c
+=5+4c/p+p/c</div>
+              <p>令 t=p/c&gt;0，则 4c/p+p/c=4/t+t≥4。</p>
+              <div class="formula" data-copy>原式 ≥ 5+2√4=9</div>
+              <p>等号要求 t=2，即 a+b=2c。</p>
+              <div class="box result">最小值为 9。</div>
+            </div></details>
+          </div>
+        </details>
+
+        <details class="section" id="section-f" data-title="课后练习 7 8 9 比较符号 推广">
+          <summary><span class="section-letter">F</span><span>课后练习 7–9</span></summary>
+          <div class="section-body">
+            <h2 id="p7">第 7 题　判断比较符号</h2>
+            <div class="box problem"><strong>题目：</strong>若 a&gt;b&gt;c，则 1/(a−b)+1/(b−c) 　　3/(a−c)。（填比较符号）</div>
+            <details class="solution" open><summary>逐步解答</summary><div class="solution-content">
+              <p>令 p=a−b&gt;0，q=b−c&gt;0，则 p+q=a−c。由 Cauchy 或调和平均不等式：</p>
+              <div class="formula" data-copy>1/(a−b)+1/(b−c)
+=1/p+1/q
+≥4/(p+q)
+=4/(a−c)
+&gt;3/(a−c)</div>
+              <p>最后一步严格大于成立，因为 a−c&gt;0 且 4&gt;3。</p>
+              <div class="box result">应填“&gt;”。</div>
+            </div></details>
+
+            <h2 id="p8">第 8 题　先控制乘积，再用 AM–GM</h2>
+            <div class="box problem"><strong>题目：</strong>若 a&gt;b&gt;0，求 a²+16/[b(a−b)] 的最小值。</div>
+            <details class="solution" open><summary>逐步解答</summary><div class="solution-content">
+              <ol class="steps">
+                <li>对固定的 a，b 与 a−b 是两个和为 a 的正数，因此：</li>
+              </ol>
+              <div class="formula" data-copy>b(a−b) ≤ [b+(a−b)]²/4=a²/4</div>
+              <ol class="steps" start="2">
+                <li>取倒数时不等号方向改变：16/[b(a−b)]≥64/a²。</li>
+                <li>于是：</li>
+              </ol>
+              <div class="formula" data-copy>a²+16/[b(a−b)]
+≥a²+64/a²
+≥2√64=16</div>
+              <ol class="steps" start="4">
+                <li>第一次等号要求 b=a−b，即 b=a/2；第二次等号要求 a²=64/a²，即 a⁴=64。</li>
+                <li>取正值得 a=2√2，b=√2，符合 a&gt;b&gt;0。</li>
+              </ol>
+              <div class="box result">最小值为 16。</div>
+            </div></details>
+
+            <h2 id="p9">第 9 题　从特例推广到 n</h2>
+            <div class="box problem"><strong>题目：</strong>已知 x&gt;0，由 x+1/x≥2，x+4/x²≥3，…，推广到 x+a/xⁿ≥n+1（n∈N<sup>*</sup>），求 a。</div>
+            <details class="solution" open><summary>逐步解答</summary><div class="solution-content">
+              <p>要用 n+1 个正数的 AM–GM，把 x 平均拆成 n 份：</p>
+              <div class="formula" data-copy>x+nⁿ/xⁿ
+=x/n+x/n+⋯+x/n+nⁿ/xⁿ
+≥(n+1)ⁿ⁺¹√[(x/n)ⁿ·nⁿ/xⁿ]
+=n+1</div>
+              <p>根号中的乘积正好为 1，因此与原式比较得 a=nⁿ。等号在 x/n=nⁿ/xⁿ，即 x=n 时取得。</p>
+              <div class="box result">a=nⁿ。</div>
+            </div></details>
+          </div>
+        </details>
+
+        <details class="section" id="section-g" data-title="阅读题 10 根式 二元 三元 一般推广">
+          <summary><span class="section-letter">G</span><span>阅读题 10 与一般推广</span></summary>
+          <div class="section-body">
+            <div class="box note">
+              <div class="box-title">原文方法的核心</div>
+              <p>已知 a,b&gt;0 且 a+b=1。对称性提示最值可能在 a=b=1/2 取得。但“猜到”不是证明：要把猜到的目标值作为配凑因子，用 2√(uv)≤u+v 给出严格上界。</p>
+            </div>
+
+            <h2 id="p10-reading">阅读材料　先猜后证</h2>
+            <div class="box problem"><strong>题目：</strong>设 a,b&gt;0，a+b=1，求 √(a+1)+√(b+1) 的最大值。</div>
+            <details class="solution" open><summary>逐步解答</summary><div class="solution-content">
+              <ol class="steps">
+                <li>式子与条件关于 a,b 对称，先猜测 a=b=1/2。此时每个根式为 √(3/2)，和为 √6。</li>
+                <li>为证明这是全局上界，将每个根式乘以猜测点的值 √(3/2)，再用 2√(uv)≤u+v：</li>
+              </ol>
+              <div class="formula" data-copy>√(a+1)·√(3/2) ≤ [(a+1)+3/2]/2
+√(b+1)·√(3/2) ≤ [(b+1)+3/2]/2</div>
+              <ol class="steps" start="3">
+                <li>相加并代入 a+b=1：</li>
+              </ol>
+              <div class="formula" data-copy>[√(a+1)+√(b+1)]√(3/2)
+≤[(a+b)+2+3]/2=3
+
+√(a+1)+√(b+1) ≤ 3/√(3/2)=√6</div>
+              <p>等号要求 a+1=b+1=3/2，所以 a=b=1/2。</p>
+              <div class="box result">最大值为 √6，当 a=b=1/2 时取得。</div>
+            </div></details>
+
+            <h2 id="p10-i">（I）仿照阅读材料</h2>
+            <h3>（1）求 √(2a+1)+√(2b+1) 的最大值</h3>
+            <details class="solution" open><summary>逐步解答</summary><div class="solution-content">
+              <p>当 a=b=1/2 时，每个根式都等于 √2。因此用 √2 作配凑因子：</p>
+              <div class="formula" data-copy>√(2a+1)·√2 ≤ [(2a+1)+2]/2=(2a+3)/2
+√(2b+1)·√2 ≤ [(2b+1)+2]/2=(2b+3)/2</div>
+              <p>两式相加，并使用 a+b=1：</p>
+              <div class="formula" data-copy>[√(2a+1)+√(2b+1)]√2
+≤[2(a+b)+6]/2=4</div>
+              <div class="formula" data-copy>√(2a+1)+√(2b+1) ≤ 2√2</div>
+              <p>等号要求 2a+1=2 且 2b+1=2，即 a=b=1/2。</p>
+              <div class="box result">最大值为 2√2。</div>
+            </div></details>
+
+            <h3>（2）求 √(3a+1)+√(3b+1) 的最大值</h3>
+            <details class="solution" open><summary>逐步解答</summary><div class="solution-content">
+              <p>当 a=b=1/2 时，根号内为 5/2，因此乘以 √(5/2) 后使用 2√(uv)≤u+v：</p>
+              <div class="formula" data-copy>√(3a+1)·√(5/2) ≤ [(3a+1)+5/2]/2
+√(3b+1)·√(5/2) ≤ [(3b+1)+5/2]/2</div>
+              <p>相加得：</p>
+              <div class="formula" data-copy>[√(3a+1)+√(3b+1)]√(5/2)
+≤[3(a+b)+2+5]/2=5
+
+√(3a+1)+√(3b+1)≤5/√(5/2)=√10</div>
+              <div class="box result">最大值为 √10，当 a=b=1/2 时取得。</div>
+            </div></details>
+
+            <h2 id="p10-ii">（II）推广到二元一般式</h2>
+            <div class="box problem"><strong>结论：</strong>若 n&gt;0，a,b&gt;0，a+b=1，则 √(na+1)+√(nb+1)≤√(2n+4)。</div>
+            <details class="solution" open><summary>推导过程</summary><div class="solution-content">
+              <ol class="steps">
+                <li>在 a=b=1/2 时，两个根式内都是 n/2+1。记 r=√(n/2+1)=√[(n+2)/2]。</li>
+                <li>分别用 2√(uv)≤u+v：</li>
+              </ol>
+              <div class="formula" data-copy>r√(na+1) ≤ [r²+(na+1)]/2
+r√(nb+1) ≤ [r²+(nb+1)]/2</div>
+              <ol class="steps" start="3">
+                <li>相加并代入 a+b=1 与 2r²=n+2：</li>
+              </ol>
+              <div class="formula" data-copy>r[√(na+1)+√(nb+1)]
+≤[2r²+n(a+b)+2]/2
+=n+2</div>
+              <ol class="steps" start="4">
+                <li>因为 r&gt;0，两边除以 r：</li>
+              </ol>
+              <div class="formula" data-copy>√(na+1)+√(nb+1)
+≤(n+2)/√[(n+2)/2]
+=√(2n+4)</div>
+              <p>等号要求 na+1=r²=nb+1，因为 n&gt;0，所以 a=b=1/2。</p>
+              <div class="box result">二元一般结论：最大值为 √(2n+4)。</div>
+            </div></details>
+
+            <h2 id="p10-iii">（III）三元类似结论</h2>
+            <div class="box problem"><strong>题目：</strong>若 n&gt;0，a,b,c&gt;0，a+b+c=1，写出与（II）类似的结论。</div>
+            <details class="solution" open><summary>结论与验证</summary><div class="solution-content">
+              <p>在均分点 a=b=c=1/3，每个根式为 √(n/3+1)。因此类似地有：</p>
+              <div class="formula" data-copy>√(na+1)+√(nb+1)+√(nc+1) ≤ √(3n+9)</div>
+              <p>快速验证：令 r=√[(n+3)/3]，把三个不等式 r√(na+1)≤[r²+(na+1)]/2 相加，右边为 n+3，再除以 r 即得上式。</p>
+              <p>等号在 a=b=c=1/3 时取得。</p>
+              <div class="box result">三元结论：最大值为 √(3n+9)。</div>
+            </div></details>
+
+            <div class="box theorem">
+              <div class="box-title">更一般的 m 元形式</div>
+              <div class="formula" data-copy>若 x₁+⋯+xₘ=1，xᵢ&gt;0，n&gt;0，则
+√(nx₁+1)+⋯+√(nxₘ+1) ≤ √[m(n+m)]
+等号在 x₁=⋯=xₘ=1/m 时取得。</div>
+              <p>二元取 m=2，三元取 m=3，与上面的结论完全一致。</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="section" id="section-h" data-title="常见误区 应试策略 检查">
+          <summary><span class="section-letter">H</span><span>常见误区与应试策略</span></summary>
+          <div class="section-body">
+            <div class="two-col">
+              <div class="box trap">
+                <div class="box-title">误区 1：忽略正数条件</div>
+                <p>AM–GM 要求参与运算的各项为非负数，常用的取倒数形式还要求严格大于 0。如果先换元，必须立即写出新变量的范围。</p>
+              </div>
+              <div class="box trap">
+                <div class="box-title">误区 2：平方后忘记开方</div>
+                <p>例 6(1) 得到的是 y²≤25/16，由于 y&gt;0，最后答案是 y≤5/4，不是 25/16。</p>
+              </div>
+              <div class="box trap">
+                <div class="box-title">误区 3：只求出界，没有检查可取</div>
+                <p>例 6(3) 中 xz+1/(xz)≥2 只说明下界是 2。还要给出一组满足原条件的等号值，才能确认最小值确实是 2。</p>
+              </div>
+              <div class="box trap">
+                <div class="box-title">误区 4：对称性代替证明</div>
+                <p>对称只能用来猜测 a=b 可能取到最值。阅读题 10 仍需通过 2√(uv)≤u+v 或 Cauchy 给出全局上界。</p>
+              </div>
+            </div>
+            <h2 id="exam-checklist">考场上的 6 步检查表</h2>
+            <ul class="checklist">
+              <li>写定义域：正数、分母不为 0、根号内非负。</li>
+              <li>看目标是“和定求积”还是“积定求和”。</li>
+              <li>根据幂次拆项，使参与 AM–GM 的各项乘积与变量无关。</li>
+              <li>有分式平方和时，优先尝试 Cauchy。</li>
+              <li>把所有等号条件联立，检查是否冲突。</li>
+              <li>最终答案写清“最值”和“取等值”，若问比较符号，要区分 ≥ 与 &gt;。</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </main>
+  </div>
+
+  <div class="copy-toast" id="copyToast" role="status" aria-live="polite">已复制公式</div>
+
+  <script>
+    (function(){
+      const layout=document.getElementById('layout');
+      const sidebar=document.getElementById('sidebar');
+      const toggleSidebar=document.getElementById('toggleSidebar');
+      const toggleSidebarMobile=document.getElementById('toggleSidebarMobile');
+      const expandAll=document.getElementById('expandAll');
+      const collapseAll=document.getElementById('collapseAll');
+      const printPage=document.getElementById('printPage');
+      const searchInput=document.getElementById('searchInput');
+      const clearSearch=document.getElementById('clearSearch');
+      const noResults=document.getElementById('noResults');
+      const copyToast=document.getElementById('copyToast');
+      const sections=Array.from(document.querySelectorAll('details.section'));
+      const tocItems=Array.from(document.querySelectorAll('[data-toc-item]'));
+
+      function setSidebar(hidden){
+        sidebar.classList.toggle('hidden',hidden);
+        layout.classList.toggle('sidebar-hidden',hidden);
+        toggleSidebar.textContent=hidden?'显示目录':'隐藏目录';
+      }
+      toggleSidebar.addEventListener('click',()=>setSidebar(!sidebar.classList.contains('hidden')));
+      toggleSidebarMobile.addEventListener('click',()=>setSidebar(!sidebar.classList.contains('hidden')));
+      expandAll.addEventListener('click',()=>sections.forEach(section=>section.open=true));
+      collapseAll.addEventListener('click',()=>sections.forEach(section=>section.open=false));
+      printPage.addEventListener('click',()=>window.print());
+
+      document.addEventListener('click',event=>{
+        const link=event.target.closest('[data-toc-link]');
+        if(!link)return;
+        const target=document.querySelector(link.getAttribute('href'));
+        if(!target)return;
+        event.preventDefault();
+        target.open=true;
+        target.scrollIntoView({behavior:'smooth',block:'start'});
+        history.replaceState(null,'',link.getAttribute('href'));
+        document.querySelectorAll('[data-toc-link]').forEach(item=>item.classList.toggle('active',item===link));
+        if(window.innerWidth<=820)setSidebar(true);
+      });
+
+      function applySearch(){
+        const term=searchInput.value.trim().toLowerCase();
+        let matches=0;
+        document.querySelectorAll('.hl').forEach(el=>el.classList.remove('hl'));
+        tocItems.forEach((item,index)=>{
+          const section=sections[index];
+          const haystack=(item.textContent+' '+(section?.dataset.title||'')).toLowerCase();
+          const matched=!term||haystack.includes(term);
+          item.classList.toggle('hidden',!matched);
+          if(term&&matched){
+            matches++;
+            section.querySelector('summary')?.classList.add('hl');
+          }
+        });
+        noResults.classList.toggle('show',Boolean(term)&&matches===0);
+      }
+      searchInput.addEventListener('input',applySearch);
+      clearSearch.addEventListener('click',()=>{
+        searchInput.value='';
+        applySearch();
+        searchInput.focus();
+      });
+
+      async function copyText(text){
+        try{
+          await navigator.clipboard.writeText(text);
+        }catch(error){
+          const area=document.createElement('textarea');
+          area.value=text;
+          area.setAttribute('readonly','');
+          area.style.position='fixed';
+          area.style.left='-9999px';
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand('copy');
+          area.remove();
+        }
+        copyToast.classList.add('show');
+        window.setTimeout(()=>copyToast.classList.remove('show'),1200);
+      }
+      document.addEventListener('dblclick',event=>{
+        const target=event.target.closest('[data-copy]');
+        if(target)copyText(target.innerText.trim());
+      });
+
+      const observer=new IntersectionObserver(entries=>{
+        const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+        if(!visible)return;
+        document.querySelectorAll('[data-toc-link]').forEach(link=>{
+          link.classList.toggle('active',link.getAttribute('href')==='#'+visible.target.id);
+        });
+      },{rootMargin:'-15% 0px -70% 0px',threshold:[0,.25,.5]});
+      sections.forEach(section=>observer.observe(section));
+
+      window.addEventListener('beforeprint',()=>{
+        sections.forEach(section=>section.open=true);
+        document.querySelectorAll('details.solution').forEach(solution=>solution.open=true);
+      });
+      if(window.innerWidth<=820)setSidebar(true);
+    })();
+  </script>
+</body>
+</html>
