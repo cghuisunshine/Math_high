@@ -584,6 +584,67 @@ t(4−t)²/4 ≤ (4/3)³
               </div>
             </details>
 
+            <details class="solution" open>
+              <summary>解法二：待定系数配凑</summary>
+              <div class="solution-content">
+                <p>设把三个因数调整为</p>
+                <div class="formula" data-copy>x，b(2−x)，c(2+x)，</div>
+                <p>其中 b,c&gt;0 是待定常数。</p>
+                <p>为了使用均值不等式，需要同时满足：</p>
+                <ol class="steps">
+                  <li>三项之和与 x 无关；</li>
+                  <li>最大值处三项相等。</li>
+                </ol>
+                <p>先由等号条件，用 x 表示 b,c：</p>
+                <div class="formula" data-copy>x=b(2−x)=c(2+x)
+
+b=x/(2−x)，c=x/(2+x)</div>
+                <p>另一方面，</p>
+                <div class="formula" data-copy>x+b(2−x)+c(2+x)
+=(1−b+c)x+2b+2c</div>
+                <p>要使它与 x 无关，必须有</p>
+                <div class="formula" data-copy>1−b+c=0，
+即 b−c=1。</div>
+                <p>代入刚才的 b,c：</p>
+                <div class="formula" data-copy>x/(2−x)−x/(2+x)=1
+
+x[(2+x)−(2−x)]/[(2−x)(2+x)]=1
+
+2x²/(4−x²)=1</div>
+                <p>因此</p>
+                <div class="formula" data-copy>2x²=4−x²
+⇒ 3x²=4。</div>
+                <p>因为 0&lt;x&lt;2，所以</p>
+                <div class="formula" data-copy>x=2/√3=2√3/3。</div>
+                <p>再求 b,c：</p>
+                <div class="formula" data-copy>b=x/(2−x)
+=(2/√3)/(2−2/√3)
+=1/(√3−1)
+=(√3+1)/2，
+
+c=x/(2+x)
+=(2/√3)/(2+2/√3)
+=1/(√3+1)
+=(√3−1)/2。</div>
+                <p>于是</p>
+                <div class="formula" data-copy>b+c=√3，bc=1/2。</div>
+                <p>由均值不等式，</p>
+                <div class="formula" data-copy>x·b(2−x)·c(2+x)
+≤{[x+b(2−x)+c(2+x)]/3}³
+=(2√3/3)³。</div>
+                <p>又因为</p>
+                <div class="formula" data-copy>x·b(2−x)·c(2+x)
+=bc·x(4−x²)
+=(1/2)x(4−x²)，</div>
+                <p>所以</p>
+                <div class="formula" data-copy>6x(4−x²)
+=12x·b(2−x)·c(2+x)
+≤12(2√3/3)³
+=32√3/3。</div>
+                <div class="box result">最大值为 32√3/3，当 x=2√3/3 时等号成立。</div>
+              </div>
+            </details>
+
             <h2>例 9　换元与分步估计</h2>
             <h3 id="ex9-1">（1）三个分式的最小值</h3>
             <div class="box problem"><strong>题目：</strong>设 a,b,c 为非负实数，求 c/a+a/(b+c)+b/c 的最小值。由分母知 a,c&gt;0，b≥0。</div>
