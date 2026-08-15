@@ -661,17 +661,24 @@ c=x/(2+x)
                 </ol>
                 <div class="formula" data-copy>u+1/[u(v+1)] ≥ 2/√(v+1)</div>
                 <ol class="steps" start="3">
-                  <li>令 t=√(v+1)≥1，则 v=t²−1。因此：</li>
+                  <li>令 t=√(v+1)≥1，则 v=t²−1。因为 t≥1&gt;0，所以：</li>
                 </ol>
                 <div class="formula" data-copy>原式 ≥ t²−1+2/t
 
-t²−1+2/t−2
-=t²−3+2/t
-=(t−1)²(t+2)/t
-≥0</div>
-                <ol class="steps" start="4">
-                  <li>所以原式≥2。等号要求 t=1，即 v=0、b=0；同时 u=1/√(v+1)=1，即 c=a。</li>
-                </ol>
+t²−1+2/t
+=(t²+1/t+1/t)−1</div>
+                <p>对三个正数</p>
+                <div class="formula" data-copy>t²，1/t，1/t</div>
+                <p>使用均值不等式：</p>
+                <div class="formula" data-copy>t²+1/t+1/t
+≥3∛(t²·1/t·1/t)
+=3。</div>
+                <p>因此</p>
+                <div class="formula" data-copy>t²−1+2/t≥3−1=2。</div>
+                <p>等号成立的条件是</p>
+                <div class="formula" data-copy>t²=1/t，
+即 t³=1 ⇒ t=1。</div>
+                <p>所以原式的最小值为 2，当 t=1 时取得。此时 v=0，即 b=0；要使第 2 步也取等号，还需 u=1/√(v+1)=1，即 c=a。</p>
                 <div class="box result">最小值为 2，当 b=0 且 c=a&gt;0 时取得。</div>
               </div>
             </details>
