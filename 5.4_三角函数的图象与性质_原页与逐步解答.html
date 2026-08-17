@@ -10,8 +10,10 @@
     button,input{font:inherit} a{color:var(--accent)}
     .top{position:sticky;top:0;z-index:20;display:flex;gap:.65rem;align-items:center;padding:.7rem 1rem;border-bottom:1px solid var(--line);background:#fffdf8}
     .brand{font-weight:760;margin-right:auto}.btn{border:1px solid var(--line);background:#fff;padding:.48rem .72rem;border-radius:6px;cursor:pointer}.btn:hover{border-color:var(--accent);color:var(--accent)}
+    .nav-toggle{display:grid;place-items:center;width:2.25rem;height:2.25rem;padding:0;border:0;border-radius:6px;background:transparent;color:var(--ink);cursor:pointer}.nav-toggle:hover{background:var(--code)}.nav-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.nav-toggle svg{width:1.25rem;height:1.25rem;stroke:currentColor}
     .layout{display:grid;grid-template-columns:270px minmax(0,900px);gap:2rem;max-width:1240px;margin:auto;padding:1.5rem}
     aside{position:sticky;top:70px;align-self:start;max-height:calc(100vh - 90px);overflow:auto;padding-right:.5rem} aside input{width:100%;padding:.65rem .7rem;border:1px solid var(--line);border-radius:6px;background:#fff} nav{margin-top:1rem} nav a{display:block;padding:.35rem .5rem;color:var(--ink);text-decoration:none;border-left:2px solid transparent} nav a:hover{color:var(--accent);border-left-color:var(--accent)}
+    body.nav-collapsed .layout{grid-template-columns:minmax(0,900px);max-width:948px}body.nav-collapsed aside{display:none}
     main{min-width:0}.hero{padding:2rem 0 1.25rem;border-bottom:1px solid var(--line)}h1{font-size:clamp(1.9rem,4vw,2.6rem);line-height:1.08;letter-spacing:-.04em;margin:0 0 .7rem;max-width:760px}h2{font-size:1.65rem;margin:2.5rem 0 1rem}h3{font-size:1.16rem;margin:.4rem 0}.eyebrow{color:var(--accent2);font-weight:760;letter-spacing:.06em}.lead{font-size:1.08rem;color:#465048;max-width:720px}.meta{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}.tag{border:1px solid var(--line);padding:.25rem .55rem;border-radius:999px;background:#fff;font-size:.88rem}
     .note{border-left:4px solid var(--accent);background:var(--soft);padding:.85rem 1rem;margin:1rem 0}.warn{border-left-color:var(--accent2);background:#f8ece7}.formula{background:var(--code);border:1px solid var(--line);padding:.7rem .85rem;margin:.7rem 0;font-family:"STIX Two Math","Times New Roman",serif;overflow:auto;cursor:copy}.formula.copied{outline:2px solid var(--accent)}
     details.card,details.page{border:1px solid var(--line);background:var(--panel);margin:.75rem 0}summary{cursor:pointer;padding:.85rem 1rem;font-weight:740;list-style:none}summary::-webkit-details-marker{display:none}summary::before{content:"＋";display:inline-block;width:1.35rem;color:var(--accent)}details[open]>summary::before{content:"−"}.body{padding:0 1rem 1.1rem}.q{color:#3d463f;border-left:3px solid #b9b3a6;padding-left:.8rem}.answer{color:var(--accent2);font-weight:760}.steps{margin:.45rem 0 0;padding-left:1.25rem}.steps li{margin:.32rem 0}
@@ -45,9 +47,9 @@ H. Exercise 5.4: questions 1–19 with step-by-step solutions.
 <script type="application/json" id="outline-json">
 {"title":"5.4 三角函数的图象与性质","source":{"pdfPages":"203–221","bookPages":"196–214","count":19},"sections":["原始页面","例题1–6","练习：图象","练习：周期与奇偶性","练习：单调性与最值","练习：正切函数","习题5.4（1–19）"]}
 </script>
-<header class="top"><div class="brand">5.4 原页与逐步解答</div><button class="btn" id="expand">全部展开</button><button class="btn" id="collapse">全部折叠</button><button class="btn" onclick="print()">打印</button></header>
+<header class="top"><button class="nav-toggle" id="nav-toggle" type="button" aria-controls="page-navigation" aria-expanded="true" aria-label="隐藏导航栏" title="隐藏导航栏"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="2" stroke-width="1.7"/><path d="M9 4v16" stroke-width="1.7"/></svg></button><div class="brand">5.4 原页与逐步解答</div><button class="btn" id="expand">全部展开</button><button class="btn" id="collapse">全部折叠</button><button class="btn" onclick="print()">打印</button></header>
 <div class="layout">
-  <aside><input id="search" type="search" placeholder="搜索题号、公式或关键词…"><nav>
+  <aside id="page-navigation"><input id="search" type="search" placeholder="搜索题号、公式或关键词…"><nav>
     <a href="#overview">范围说明</a><a href="#original">原始页面</a><a href="#methods">知识与方法</a><a href="#examples">课本例题</a><a href="#practice-a">图象练习</a><a href="#practice-b">周期与奇偶</a><a href="#practice-c">单调性与最值</a><a href="#practice-d">正切练习</a><a href="#exercise">习题 5.4</a>
   </nav></aside>
   <main>
@@ -148,6 +150,22 @@ H. Exercise 5.4: questions 1–19 with step-by-step solutions.
   </main>
 </div>
 <script>
+  const navToggle=document.getElementById('nav-toggle');
+  const navStorageKey='math-high-navigation-collapsed';
+  function setNavigationCollapsed(collapsed){
+    document.body.classList.toggle('nav-collapsed',collapsed);
+    navToggle.setAttribute('aria-expanded',String(!collapsed));
+    navToggle.setAttribute('aria-label',collapsed?'显示导航栏':'隐藏导航栏');
+    navToggle.title=collapsed?'显示导航栏':'隐藏导航栏';
+  }
+  let savedNavigationState=false;
+  try{savedNavigationState=localStorage.getItem(navStorageKey)==='true'}catch(error){}
+  setNavigationCollapsed(savedNavigationState);
+  navToggle.addEventListener('click',()=>{
+    const collapsed=!document.body.classList.contains('nav-collapsed');
+    setNavigationCollapsed(collapsed);
+    try{localStorage.setItem(navStorageKey,String(collapsed))}catch(error){}
+  });
   const cards=[...document.querySelectorAll('details')];
   document.getElementById('expand').onclick=()=>cards.forEach(x=>x.open=true);
   document.getElementById('collapse').onclick=()=>cards.forEach(x=>x.open=false);
